@@ -1203,6 +1203,19 @@ class gazcanvas
         this.targetSize = new Size(0,0);
     }
 
+    clip_start(){
+        Canvas.ctx().save();
+    }
+
+    clip_rect(r){
+        Canvas.ctx().rect(r.x,r.y,r.w, r.h);
+        Canvas.ctx().clip();
+    }
+
+    clip_end(){
+        Canvas.ctx().restore();
+    }
+
     update()
     {
         this.currentScreenSize = new Size(window.innerWidth, window.innerHeight);

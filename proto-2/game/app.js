@@ -129,7 +129,7 @@ class ARSINOEGame extends AppBase
 
             GAZCanvas.Sprite(this.image, new Rect(offset.x + 46, offset.y + 48, 175, 125));
 
-            let text = this.format_desc(card_info['desc'], 55);
+            let text = this.format_desc(card_info['desc'], 50);
             GAZCanvas.Text(10, text, new Vector2(offset.x + 270 / 2, offset.y + 190), 'rgb(0,0,0)', 'center', 'roboto', '');
 
             let y = offset.y + 190 + ((text.split('\n').length) * 12) - 10;
@@ -183,9 +183,14 @@ class ARSINOEGame extends AppBase
     {
         super.draw();
 
-        for(let i=0;i<4;i++) {
+        GAZCanvas.clip_start();
+        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
+
+        for(let i=0;i<6;i++) {
             this.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i+this.first_intervention);
         }
+
+        GAZCanvas.clip_end();
 
         for(let i=0;i<5;i++) {
             this.draw_card(new Vector2(80 + (i * (270 + 10)), 70 +410), i+4);
