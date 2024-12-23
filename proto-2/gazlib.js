@@ -1049,16 +1049,23 @@ class baseCanvas
 
             inJustification - 'start', 'left', 'centre', 'end', 'right'
      */
-    Text(inSize,inString,inPos,inColour,inJustification,font)
+    Text(inSize,inString,inPos,inColour,inJustification,font, font_style)
     {
+        let context_font = '';
+        this.ctx().font = '';
+        if (font_style !== undefined){
+            context_font += font_style + ' ';
+        }
+
         if(font == undefined)
         {
-            this.ctx().font = inSize +"px san-serif";
+            font = "san-serif";
         }
-        else
-        {
-            this.ctx().font = inSize +"px "+font;//Archivo Black";
-        }
+
+        context_font += inSize +"px";
+        context_font += " " + font;//Archivo Black";
+
+        this.ctx().font = context_font;
 
         if(inJustification == undefined)
         {
@@ -1272,14 +1279,14 @@ class gazcanvas
 
             inJustification - 'start', 'left', 'centre', 'end', 'right'
      */
-    Text(inSize,inString,inPos,inColour,inJustification,font)
+    Text(inSize,inString,inPos,inColour,inJustification,font, font_style)
     {
         let r = new Rect();
 
         r.set(inPos.x,inPos.y,inSize,inSize);
         r = this.toScreenSpace(r);
 
-        Canvas.Text(r.h, inString, new Vector2(r.x,r.y),inColour,inJustification,font);
+        Canvas.Text(r.h, inString, new Vector2(r.x,r.y),inColour,inJustification,font, font_style);
     }
 
     /*
@@ -1988,6 +1995,7 @@ class AppBase
 {
     constructor()
     {
+        this.letterboxColour = 'rgb(32,32,32)';
     }
 
     oneTimeInit(refWidth, refHeight)
@@ -2026,8 +2034,7 @@ class AppBase
 
             Input.update();
 
-            let letterboxColour = 'rgb(32,32,32)';
-            Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight),letterboxColour);
+            Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight),this.letterboxColour);
 
             appInst.update();
             appInst.draw();
