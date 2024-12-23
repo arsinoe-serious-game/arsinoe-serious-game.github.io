@@ -2034,12 +2034,12 @@ class AppBase
 
             Input.update();
 
-            Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight),this.letterboxColour);
+            Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight),appInst.letterboxColour);
 
             appInst.update();
             appInst.draw();
 
-            GAZCanvas.drawLetterbox(letterboxColour);
+            GAZCanvas.drawLetterbox(appInst.letterboxColour);
         },17);
     }
 }
