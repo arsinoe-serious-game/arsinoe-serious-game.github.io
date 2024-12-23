@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fredboard</title>
+    <script src="gazlib.js"></script>
+
+
+    <script src="game/button.js"></script>
+    <script src="game/app.js"></script>
+
+    <!--https://fonts.google.com/-->
+    <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+</html>
+
+<script>
+    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+    document.body.scroll = "no"; // ie only
+    document.body.style.padding = 0;
+    document.body.style.margin = 0;
+
+    appInst.Run();
+</script>
