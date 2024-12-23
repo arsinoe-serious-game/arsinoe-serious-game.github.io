@@ -5,18 +5,70 @@ class ARSINOEGame extends AppBase
         super();
 
         this.image = new Image();
+
+        this.buttons = {};
+        this.first_intervention = 0;
+    }
+
+    prev_interventon(b){
+        console.log('prev');
+
+        this.first_intervention -= 1;
+
+        if (this.first_intervention == 0){
+            this.buttons['prev_intervention'].active = false;
+        }
+
+        if (this.first_intervention < interventions.length){
+            this.buttons['next_intervention'].active = true;
+        }
+    }
+
+    next_interventon(b){
+        console.log('next');
+
+        this.first_intervention += 1;
+
+        if (this.first_intervention > 0){
+            this.buttons['prev_intervention'].active = true;
+        }
+
+        if (this.first_intervention >= interventions.length){
+            this.buttons['next_intervention'].active = false;
+        }
     }
     
     oneTimeInit()
     {
+        let self = this;
+
         super.oneTimeInit(1600,900);
 
         this.image.src = "assets/interventions/intervention-0.png";
+
+        this.buttons['prev_intervention'] = new ButtonBase(new Rect(10,200, 50,100));
+        this.buttons['prev_intervention'].active = false;
+        this.buttons['prev_intervention'].label = 'PREV';
+        this.buttons['prev_intervention'].on_click = function (d) {
+                self.prev_interventon(d);
+            };
+
+
+        this.buttons['next_intervention'] = new ButtonBase(new Rect(1200,200, 50,100));
+        this.buttons['next_intervention'].active = true;
+        this.buttons['next_intervention'].label = 'NEXT';
+        this.buttons['next_intervention'].on_click = function (d) {
+                self.next_interventon();
+            };
     }
     
     update()
     {
         super.update();
+
+        for (const [key, value] of Object.entries(this.buttons)) {
+                this.buttons[key].update();
+        }
     }
 
     format_desc(in_str, max_chars){
@@ -42,67 +94,89 @@ class ARSINOEGame extends AppBase
 
     draw_card(offset, card_index){
 
-        let card_info = interventions[card_index];
+        if (card_index < interventions.length) {
+            let card_info = interventions[card_index];
+            let bg_col = 'rgb(127,127,127)';
 
-        GAZCanvas.Rect(new Rect(offset.x, offset.y, 270,395), 'rgb(255,255,255)');
+            if (card_info['type'] == 'ET'){
+                bg_col = 'rgb(0,255,0)';
+            }
 
-        let max_line_length = 20;
-        if (card_info['name'].length > max_line_length) {
-            GAZCanvas.Text(15, this.format_desc(card_info['name'].toUpperCase(),max_line_length), new Vector2(offset.x + 270 / 2, offset.y + 20-2), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-        }else {
-            GAZCanvas.Text(20, card_info['name'].toUpperCase(), new Vector2(offset.x + 270 / 2, offset.y + 20), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            if (card_info['type'] == 'BD'){
+                bg_col = 'rgb(255,255,0)';
+            }
+
+            if (card_info['type'] == 'DP'){
+                bg_col = 'rgb(0,255,255)';
+            }
+
+            if (card_info['type'] == 'FP'){
+                bg_col = 'rgb(255,0,255)';
+            }
+
+
+            GAZCanvas.Rect(new Rect(offset.x, offset.y, 270, 395), bg_col);
+
+            let max_line_length = 20;
+
+            let title = card_info['type'] + ':' + card_info['name'].toUpperCase();
+
+            if (title.length > max_line_length) {
+                GAZCanvas.Text(15, this.format_desc(title, max_line_length), new Vector2(offset.x + 270 / 2, offset.y + 20 - 2), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            } else {
+                GAZCanvas.Text(20, title, new Vector2(offset.x + 270 / 2, offset.y + 20), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            }
+
+            GAZCanvas.Sprite(this.image, new Rect(offset.x + 46, offset.y + 48, 175, 125));
+
+            let text = this.format_desc(card_info['desc'], 55);
+            GAZCanvas.Text(10, text, new Vector2(offset.x + 270 / 2, offset.y + 190), 'rgb(0,0,0)', 'center', 'roboto', '');
+
+            let y = offset.y + 190 + ((text.split('\n').length) * 12) - 10;
+
+            y += 5;
+
+            GAZCanvas.Text(10, "Positives", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            y += 12;
+            GAZCanvas.Text(10, "1.Minimise flooding risk to the coast road community", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+            GAZCanvas.Text(10, "2.Reduce clean-up costs", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+            GAZCanvas.Text(10, "3.Increase investment into the area", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+
+            y += 5;
+            GAZCanvas.Text(10, "Potential Issues", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            y += 12;
+            GAZCanvas.Text(10, "1.Disruption during building works", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+            GAZCanvas.Text(10, "2.May ruin the view of the bay", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+            GAZCanvas.Text(10, "3.Only protects locally", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+            y += 12;
+
+
+            y = offset.y + 333 + 18;
+            GAZCanvas.Rect(new Rect(offset.x + 25, y, 222, 16), 'rgb(28,96,126)');
+
+
+            y += 8 + 1;
+            GAZCanvas.Text(10, "EP", new Vector2(offset.x + 43, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, "BP", new Vector2(offset.x + 91, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, "FP", new Vector2(offset.x + 138, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, "DP", new Vector2(offset.x + 181, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, "TP", new Vector2(offset.x + 226, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+
+
+            y += 8;
+            GAZCanvas.Rect(new Rect(offset.x + 25, y, 222, 16), 'rgb(210,210,210)');
+            y += 8;
+            GAZCanvas.Text(10, card_info['EP'], new Vector2(offset.x + 43, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, card_info['BP'], new Vector2(offset.x + 91, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, card_info['FP'], new Vector2(offset.x + 138, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, card_info['DP'], new Vector2(offset.x + 181, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, card_info['TP'], new Vector2(offset.x + 226, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
         }
-
-        GAZCanvas.Sprite(this.image, new Rect(offset.x+46, offset.y+48, 175,125));
-
-        let text = this.format_desc(card_info['desc'], 55);
-        GAZCanvas.Text(10, text, new Vector2(offset.x + 270/2, offset.y+190), 'rgb(0,0,0)','center', 'roboto', '');
-
-        let y = offset.y+190+ ((text.split('\n').length) * 12) - 10;
-
-        y+=5;
-
-        GAZCanvas.Text(10, "Positives", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', 'bold');
-        y += 12;
-        GAZCanvas.Text(10, "1.Minimise flooding risk to the coast road community", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-        GAZCanvas.Text(10, "2.Reduce clean-up costs", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-        GAZCanvas.Text(10, "3.Increase investment into the area", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-
-        y+=5;
-        GAZCanvas.Text(10, "Potential Issues", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', 'bold');
-        y += 12;
-        GAZCanvas.Text(10, "1.Disruption during building works", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-        GAZCanvas.Text(10, "2.May ruin the view of the bay", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-        GAZCanvas.Text(10, "3.Only protects locally", new Vector2(offset.x + 26, y), 'rgb(0,0,0)','left', 'roboto', '');
-        y += 12;
-
-        
-        y = offset.y+333 +18;
-        GAZCanvas.Rect(new Rect(offset.x+25, y, 222,16), 'rgb(28,96,126)');
-
-
-        y+=8 +1;
-        GAZCanvas.Text(10, "EP", new Vector2(offset.x + 43, y), 'rgb(255,255,255)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, "BP", new Vector2(offset.x + 91, y), 'rgb(255,255,255)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, "FP", new Vector2(offset.x + 138, y), 'rgb(255,255,255)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, "DP", new Vector2(offset.x + 181, y), 'rgb(255,255,255)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, "TP", new Vector2(offset.x + 226, y), 'rgb(255,255,255)','center', 'roboto', 'bold');
-
-
-
-        y += 8;
-        GAZCanvas.Rect(new Rect(offset.x+25, y, 222,16), 'rgb(210,210,210)');
-        y += 8;
-        GAZCanvas.Text(10, card_info['EP'], new Vector2(offset.x + 43, y), 'rgb(0,0,0)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, card_info['BP'], new Vector2(offset.x + 91, y), 'rgb(0,0,0)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, card_info['FP'], new Vector2(offset.x + 138, y), 'rgb(0,0,0)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, card_info['DP'], new Vector2(offset.x + 181, y), 'rgb(0,0,0)','center', 'roboto', 'bold');
-        GAZCanvas.Text(10, card_info['TP'], new Vector2(offset.x + 226, y), 'rgb(0,0,0)','center', 'roboto', 'bold');
     }
     
     draw()
@@ -110,11 +184,15 @@ class ARSINOEGame extends AppBase
         super.draw();
 
         for(let i=0;i<4;i++) {
-            this.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i);
+            this.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i+this.first_intervention);
         }
 
         for(let i=0;i<5;i++) {
             this.draw_card(new Vector2(80 + (i * (270 + 10)), 70 +410), i+4);
+        }
+
+        for (const [key, value] of Object.entries(this.buttons)) {
+            this.buttons[key].draw();
         }
 
 

@@ -2043,3 +2043,78 @@ class AppBase
         },17);
     }
 }
+
+/*
+    ButtonBase - base button class
+ */
+class ButtonBase extends Rect
+{
+    constructor(inRect)
+    {
+        super(inRect.x,inRect.y,inRect.w,inRect.h);
+        this.active = false;
+        this.selected = false;
+        this.label = 'set label text';
+
+        this.font_family = '';
+        this.font_size = 24;
+        this.font_style = '';
+
+        this.on_click = undefined;
+
+    }
+
+    get_button_color(){
+
+        if(this.active === false){
+            return 'rgb(255,127,127)';
+        }
+
+        if(this.selected === true) {
+            return 'rgb(127,127,255)';
+        }
+
+        if (this.isInMe(Input.mouseLogicalPos) === true)
+        {
+            return 'rgb(0,255,255)';
+        }
+
+        return 'rgb(0,255,0)';
+    }
+
+    get_text_color(){
+        return 'rgb(255,255,255)';
+    }
+
+    get_label()
+    {
+        return this.label;
+    }
+
+    isInRect(pos)
+    {
+        if(this.active === false)
+        {
+            return false;
+        }
+        return this.isInMe(pos);
+    }
+
+    update(){
+        if (Input.currentMouseState === INPUT_PRESSED){
+            if (this.isInRect(Input.mouseLogicalPos)){
+                if(this.on_click !== undefined){
+                    this.on_click(this);
+                }
+            }
+        }
+    }
+
+    draw()
+    {
+        GAZCanvas.Rect(this, this.get_button_color());
+
+        let pos = this.getCentre();
+        GAZCanvas.Text(this.font_size,this.get_label(), pos,this.get_text_color(),'center',this.font_family, this.font_style);
+    }
+}
