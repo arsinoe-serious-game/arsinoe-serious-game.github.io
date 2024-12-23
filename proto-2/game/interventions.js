@@ -12,7 +12,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Out-of-town shopping",
+        "name": "Approve out-of-town shopping resort",
         "desc": "Municipality has been approached by a retail company to develop a large out-of-town retail and lesiure park on unsued land.This will create local jobs and stimulate the economy, but the build will adversely impact BD and large car parks are likely to be a flooding risk",
         "EP": "4",
         "BP": "-1",
@@ -32,7 +32,7 @@ let interventions =
     },
     {
         "type": "BD",
-        "name": "mono-farm",
+        "name": "Approve a monofarm",
         "desc": "Minicipality has been approached by a commercial farm conglomorate to develop a super-farm on unused farmland. The farm will use modern methods to optimise crop production. This may impact the local environment and may have an adverse impact on local water supply, though it will create local jobs and stimulate the economy.",
         "EP": "3",
         "BP": "-1",
@@ -42,7 +42,7 @@ let interventions =
     },
     {
         "type": "BD",
-        "name": "protect local crops",
+        "name": "Protect local crops",
         "desc": "This is the Sardinia durum wheat scheme.Should strengthen the local farming community and protect local crop types",
         "EP": "2",
         "BP": "2",
@@ -52,7 +52,7 @@ let interventions =
     },
     {
         "type": "ET",
-        "name": "Fire breaks",
+        "name": "Construct Fire breaks",
         "desc": "Municipality is looking to support installing fire breaks in the dry hinterland to stop the frequent heat-induced forest and scrub fires from becoming epidemic and uncontrollable. Doing this will reduce the associated costs of clean-up after a fire and should promote biodiversity as less of the land will be fire damaged",
         "EP": "2",
         "BP": "1",
@@ -62,7 +62,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Sea wall",
+        "name": "Build a sea wall",
         "desc": "Municipality has been approached to support the development of a sea wall to lessen the impact of costal overtopping during winter storms. The wall should reduce flooding and reduce the cost of post-flood clean-up and rebuilding",
         "EP": "2",
         "BP": "0",
@@ -72,7 +72,7 @@ let interventions =
     },
     {
         "type": "DP",
-        "name": "Smart irrigation",
+        "name": "Develop Smart irrigation",
         "desc": "The municipality is looking to work with local market gardeners to install smart irrigation systems to reduce water consumptions by providing fertigation-on-demand. This will also reduce agricultural flooding as water will be more controlled",
         "EP": "2",
         "BP": "0",
@@ -112,7 +112,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Remove links course flood protection",
+        "name": "Remove flood protection",
         "desc": "The municipality will stop flood protecting the old sea-side golf course and return it to nature. This will free up finance for other uses. Returning the course to nature will promote biodiversity as it becomes a wetland.",
         "EP": "1",
         "BP": "2",
@@ -132,7 +132,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Beaver-based flood protection",
+        "name": "Beaver flood protection",
         "desc": "Municipality has been approached by a university to host a beaver land management project,  in which beavers will build natural flood defences. Introducing beavers is likely to negatively impact local biodiversity, but managing water should reduce the cost of flood clean-ups.",
         "EP": "1",
         "BP": "-1",
