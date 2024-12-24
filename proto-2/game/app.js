@@ -1,5 +1,12 @@
 class ARSINOEGame extends AppBase
 {
+    /*
+        EP - Economic protection
+        BP - Bio (diversity) protection
+        FP - Flood protection
+        DP - Drought protection
+        HP - Heat protection
+     */
     constructor()
     {
         super();
@@ -119,7 +126,8 @@ class ARSINOEGame extends AppBase
 
             let max_line_length = 20;
 
-            let title = card_info['type'] + ':' + card_info['name'].toUpperCase();
+            //let title = card_info['type'] + ':' + card_info['name'].toUpperCase();
+            let title = card_info['name'].toUpperCase();
 
             if (title.length > max_line_length) {
                 GAZCanvas.Text(15, this.format_desc(title, max_line_length), new Vector2(offset.x + 270 / 2, offset.y + 20 - 2), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
@@ -129,31 +137,38 @@ class ARSINOEGame extends AppBase
 
             GAZCanvas.Sprite(this.image, new Rect(offset.x + 46, offset.y + 48, 175, 125));
 
-            let text = this.format_desc(card_info['desc'], 50);
-            GAZCanvas.Text(10, text, new Vector2(offset.x + 270 / 2, offset.y + 190), 'rgb(0,0,0)', 'center', 'roboto', '');
+            let y = offset.y + 190;
 
-            let y = offset.y + 190 + ((text.split('\n').length) * 12) - 10;
+            max_line_length = 50;
 
-            y += 5;
+            let text = this.format_desc(card_info['desc'], max_line_length);
+            GAZCanvas.Text(10, text, new Vector2(offset.x + 270 / 2, y), 'rgb(0,0,0)', 'center', 'roboto', '');
+
+            y += ((text.split('\n').length) * 12);
+
+            y += 7;
 
             GAZCanvas.Text(10, "Positives", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
             y += 12;
-            GAZCanvas.Text(10, "1.Minimise flooding risk to the coast road community", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
-            GAZCanvas.Text(10, "2.Reduce clean-up costs", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
-            GAZCanvas.Text(10, "3.Increase investment into the area", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
+
+            for(let p=0;p<3;p++) {
+                text = (p + 1).toString() + '.';
+                text += this.format_desc(card_info['pos-' + (p + 1).toString()], max_line_length);
+                GAZCanvas.Text(10, text, new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+                y +=((text.split('\n').length) * 12);
+            }
 
             y += 5;
+
             GAZCanvas.Text(10, "Potential Issues", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
             y += 12;
-            GAZCanvas.Text(10, "1.Disruption during building works", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
-            GAZCanvas.Text(10, "2.May ruin the view of the bay", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
-            GAZCanvas.Text(10, "3.Only protects locally", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-            y += 12;
+
+            for(let p=0;p<3;p++) {
+                text = (p + 1).toString() + '.';
+                text += this.format_desc(card_info['neg-' + (p + 1).toString()], max_line_length);
+                GAZCanvas.Text(10, text, new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
+                y +=((text.split('\n').length) * 12);
+            }
 
 
             y = offset.y + 333 + 18;
@@ -165,7 +180,7 @@ class ARSINOEGame extends AppBase
             GAZCanvas.Text(10, "BP", new Vector2(offset.x + 91, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
             GAZCanvas.Text(10, "FP", new Vector2(offset.x + 138, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
             GAZCanvas.Text(10, "DP", new Vector2(offset.x + 181, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, "TP", new Vector2(offset.x + 226, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, "HP", new Vector2(offset.x + 226, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
 
 
             y += 8;
@@ -175,7 +190,7 @@ class ARSINOEGame extends AppBase
             GAZCanvas.Text(10, card_info['BP'], new Vector2(offset.x + 91, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
             GAZCanvas.Text(10, card_info['FP'], new Vector2(offset.x + 138, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
             GAZCanvas.Text(10, card_info['DP'], new Vector2(offset.x + 181, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, card_info['TP'], new Vector2(offset.x + 226, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
+            GAZCanvas.Text(10, card_info['HP'], new Vector2(offset.x + 226, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
         }
     }
     
@@ -186,7 +201,7 @@ class ARSINOEGame extends AppBase
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
 
-        for(let i=0;i<6;i++) {
+        for(let i=0;i<4;i++) {
             this.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i+this.first_intervention);
         }
 
