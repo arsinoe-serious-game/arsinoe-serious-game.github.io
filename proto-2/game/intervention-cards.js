@@ -1,4 +1,4 @@
-let interventions =
+let intervention_cards = 
 [
     {
         "type": "BD",
@@ -89,7 +89,7 @@ let interventions =
         "FP": "0",
         "DP": "0",
         "HP": "0",
-        "pos-1": "pos-1",
+        "pos-1": "pos-1\r",
         "pos-2": "pos-2",
         "pos-3": "pos-3",
         "neg-1": "neg-1",
@@ -142,7 +142,7 @@ let interventions =
     },
     {
         "type": "DP",
-        "name": "Approve a golf resort",
+        "name": "Approve a golf resort development",
         "desc": "Municipality has been approached by a premier resort developer to build a golf course resort on unused land. ",
         "EP": "5",
         "BP": "-1",
@@ -151,10 +151,10 @@ let interventions =
         "HP": "0",
         "pos-1": "Create local jobs",
         "pos-2": "Stimulate the local economy",
-        "pos-3": "pos-3",
-        "neg-1": "neg-1",
-        "neg-2": "neg-2",
-        "neg-3": "neg-3",
+        "pos-3": "Create a high-class destination attraction",
+        "neg-1": "Course requires significant water resources",
+        "neg-2": "Manicured greens negatively impact biodiversity",
+        "neg-3": "Landscaping may lead to flood risks",
         "outcome-bad": "out-1",
         "outcome-ok": "out-2",
         "outcome-good": "out-3",
@@ -203,7 +203,7 @@ let interventions =
     {
         "type": "DP",
         "name": "Create a drought dashboard",
-        "desc": "As per CS5. Municipality will install a platform to monitor climate data in order to better understand drought events. This will cost opex to run",
+        "desc": "As per CS5. Municipality will install a platform to monitor climate data in order to better understand drought events.",
         "EP": "-1",
         "BP": "0",
         "FP": "0",
@@ -243,7 +243,7 @@ let interventions =
     {
         "type": "DP",
         "name": "Install smart water meters",
-        "desc": "The municipality is looking to install smart water meters,allowing customers to view consumptionand highlight leaks within their houses.",
+        "desc": "The municipality is looking to install smart water meters,allowing customers to view consumption and highlight leaks within their houses.",
         "EP": "2",
         "BP": "0",
         "FP": "0",
@@ -292,7 +292,7 @@ let interventions =
         "pos-1": "Minimise flooding risk to the coast road community",
         "pos-2": "Reduce post-flood clean-up costs",
         "pos-3": "Increase investment into the area",
-        "neg-1": "Disruption during building works",
+        "neg-1": "Disruption during building works\r",
         "neg-2": "May ruin the view of the bay",
         "neg-3": "Only protects locally",
         "outcome-bad": "The project is a disaster! Residents of nearby cliff heights raise a long and costly legal objections as their district is being allowed to erode into the sea, resulting in the project being substaintially delayed. ",
@@ -352,7 +352,7 @@ let interventions =
         "pos-1": "Spend limited budgets where they can have the biggest impact",
         "pos-2": "Creation of a wildlife wetland",
         "pos-3": "Reduce motor traffic by the seaside",
-        "neg-1": "Seen as abandoning parts of the town to nature",
+        "neg-1": "Seen as abandoning parts of the town to nature\r",
         "neg-2": "Anger from golfers",
         "neg-3": "Course will be an eyesore whilst wetland is established",
         "outcome-bad": "As the golf course returns to nature, the town is hit by a \u2018once in a generation\u2019 storm with extreme tides that rush over the course and undermine the mainline rail track, causing it to be out of use for six months.",
@@ -363,7 +363,7 @@ let interventions =
     {
         "type": "FP",
         "name": "Create a  flood support website",
-        "desc": "As per CS6. Municipality will install a platform to support citizens with support and guidance for flooding. This will cost opex to run, but will provide flood protection support",
+        "desc": "As per CS6. Municipality will install a platform to support citizens with support and guidance for flooding.",
         "EP": "-1",
         "BP": "0",
         "FP": "2",
@@ -412,7 +412,7 @@ let interventions =
         "pos-1": "Reduces flooding to the downstream neighbourhoods",
         "pos-2": "Increased biodiversity",
         "pos-3": "Creation of new recreational activities",
-        "neg-1": "Disruption during flooding",
+        "neg-1": "Disruption during flooding\r",
         "neg-2": "Loss of land to farmers",
         "neg-3": "Flooding",
         "outcome-bad": "The project is a disaster! There was a major flood event, and a much larger area of land was flooded. Many farmer's land has been destroyed and polluted waters flow through the town. ",
@@ -472,7 +472,7 @@ let interventions =
         "pos-1": "Provide insulation to buildings and reduce urban temperatures ",
         "pos-2": "Increased Biodiversity and human wellbeing ",
         "pos-3": "Attenuate rainwater and remove air pollutants",
-        "neg-1": "Traffic Disruption due to supplies needed",
+        "neg-1": "Traffic Disruption due to supplies needed\r\r",
         "neg-2": "Increased fire risk if green wall dies. ",
         "neg-3": "Require ongoing maintenance",
         "outcome-bad": "The green walls have not been adequately maintained. Clogged drainage systems have led to sewage overflows and spills and created a right old stink in and around the buildings.",
@@ -483,7 +483,7 @@ let interventions =
     {
         "type": "HP",
         "name": "Create a heat  knowledge base",
-        "desc": "Municipality will install a citizen knowledge base to provide helpful support for dealing with prolonged high temperatures. This will cost opex to run",
+        "desc": "Municipality will install a citizen knowledge base to provide helpful support for dealing with prolonged high temperatures.",
         "EP": "-1",
         "BP": "0",
         "FP": "0",
@@ -560,5 +560,5 @@ let interventions =
         "outcome-good": "out-3",
         "outcome-great": "out-4"
     }
-]
-;
+];
+

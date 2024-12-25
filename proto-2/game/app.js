@@ -17,34 +17,14 @@ class ARSINOEGame extends AppBase
         this.first_intervention = 0;
     }
 
-    prev_interventon(b){
-        console.log('prev');
+    on_interventon_button(b, step){
 
-        this.first_intervention -= 1;
+        this.first_intervention += step;
 
-        if (this.first_intervention == 0){
-            this.buttons['prev_intervention'].active = false;
-        }
-
-        if (this.first_intervention < interventions.length){
-            this.buttons['next_intervention'].active = true;
-        }
+        this.buttons['prev_intervention'].active = this.first_intervention > 0;
+        this.buttons['next_intervention'].active = (this.first_intervention+step < intervention_cards.length);
     }
 
-    next_interventon(b){
-        console.log('next');
-
-        this.first_intervention += 1;
-
-        if (this.first_intervention > 0){
-            this.buttons['prev_intervention'].active = true;
-        }
-
-        if (this.first_intervention >= interventions.length){
-            this.buttons['next_intervention'].active = false;
-        }
-    }
-    
     oneTimeInit()
     {
         let self = this;
@@ -57,7 +37,7 @@ class ARSINOEGame extends AppBase
         this.buttons['prev_intervention'].active = false;
         this.buttons['prev_intervention'].label = 'PREV';
         this.buttons['prev_intervention'].on_click = function (d) {
-                self.prev_interventon(d);
+                self.on_interventon_button(d, -4);
             };
 
 
@@ -65,7 +45,7 @@ class ARSINOEGame extends AppBase
         this.buttons['next_intervention'].active = true;
         this.buttons['next_intervention'].label = 'NEXT';
         this.buttons['next_intervention'].on_click = function (d) {
-                self.next_interventon();
+                self.on_interventon_button(d, 4);
             };
     }
     
@@ -101,8 +81,8 @@ class ARSINOEGame extends AppBase
 
     draw_card(offset, card_index){
 
-        if (card_index < interventions.length) {
-            let card_info = interventions[card_index];
+        if (card_index < intervention_cards.length) {
+            let card_info = intervention_cards[card_index];
             let bg_col = 'rgb(127,127,127)';
 
             if (card_info['type'] == 'ET'){
