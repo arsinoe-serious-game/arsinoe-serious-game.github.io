@@ -62,7 +62,7 @@ let interventions =
     },
     {
         "type": "BD",
-        "name": "Commission a biodiversity digital twin",
+        "name": "Create a biodiversity digital twin",
         "desc": "Add a digital twin to do digital twin stuff",
         "EP": "-1",
         "BP": "3",
@@ -82,7 +82,7 @@ let interventions =
     },
     {
         "type": "BD",
-        "name": "Commission a biodiversity knowledge base",
+        "name": "Create a biodiversity knowledge base",
         "desc": "This sounds like MINKA, but is part of the Sardinia farmer dashboard - although that's ET rather than BD",
         "EP": "-1",
         "BP": "2",
@@ -202,7 +202,7 @@ let interventions =
     },
     {
         "type": "DP",
-        "name": "Commission a drought dashboard",
+        "name": "Create a drought dashboard",
         "desc": "As per CS5. Municipality will install a platform to monitor climate data in order to better understand drought events. This will cost opex to run",
         "EP": "-1",
         "BP": "0",
@@ -222,7 +222,7 @@ let interventions =
     },
     {
         "type": "DP",
-        "name": "Commission a drought digital twin",
+        "name": "Create a drought digital twin",
         "desc": "Municipality will install a climate / drought / land use modelling digital twin to evaluate the likelihood and impact of drought scenarios, allowing the town to better prepare for dry periods and long-term planning for drought resilience.",
         "EP": "-1",
         "BP": "0",
@@ -362,7 +362,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Commission a  flood support website",
+        "name": "Create a  flood support website",
         "desc": "As per CS6. Municipality will install a platform to support citizens with support and guidance for flooding. This will cost opex to run, but will provide flood protection support",
         "EP": "-1",
         "BP": "0",
@@ -382,7 +382,7 @@ let interventions =
     },
     {
         "type": "FP",
-        "name": "Commission a flooding digital twin",
+        "name": "Create a flooding digital twin",
         "desc": "As per CS6, CS8. Municipality will install a flood modelling digital twin to evaluate the likelihood and impact of potential flooding events, allowing the town to better prepare for flooding and long-term planning for flood resillience.",
         "EP": "-1",
         "BP": "0",
@@ -482,7 +482,7 @@ let interventions =
     },
     {
         "type": "HP",
-        "name": "Commission a heat  knowledge base",
+        "name": "Create a heat  knowledge base",
         "desc": "Municipality will install a citizen knowledge base to provide helpful support for dealing with prolonged high temperatures. This will cost opex to run",
         "EP": "-1",
         "BP": "0",
@@ -502,7 +502,7 @@ let interventions =
     },
     {
         "type": "HP",
-        "name": "Commission a heat digital twin",
+        "name": "Create a heat digital twin",
         "desc": "Municipality will install a climate / temperature / land use modelling digital twin to evaluate the likelihood and impact of  extreme temperature scenarios, allowing the town to better prepare for very hot periods and long-term planning for heat resillience.",
         "EP": "-1",
         "BP": "0",

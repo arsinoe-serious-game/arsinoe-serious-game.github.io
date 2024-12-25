@@ -124,7 +124,7 @@ class ARSINOEGame extends AppBase
 
             GAZCanvas.Rect(new Rect(offset.x, offset.y, 270, 395), bg_col);
 
-            let max_line_length = 20;
+            let max_line_length = 22;
 
             //let title = card_info['type'] + ':' + card_info['name'].toUpperCase();
             let title = card_info['name'].toUpperCase();
