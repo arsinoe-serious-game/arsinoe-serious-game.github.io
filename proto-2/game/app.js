@@ -14,6 +14,10 @@ class ModelBase{
         this.selected_interventions = [];
 
         this.random = new Random(123456);
+        this.random = new Random(new Date().getTime() / 1000);
+
+        this.players = [];
+        this.current_mayor = '';
     }
 
     on_new_game(){
@@ -25,7 +29,26 @@ class ModelBase{
 
         this.round = 0;
         this.selected_interventions = [];
+
+        this.players = [];
+
+        for(let i=1;i<5;i++){
+            this.players.push('player-'+i.toString());
+        }
+
+        this.select_mayor();
     }
+
+    select_mayor(){
+        let new_mayor = '';
+
+        do{
+            new_mayor = this.random.getChoice(this.players);
+        }while(new_mayor == this.current_mayor);
+
+        this.current_mayor = new_mayor;
+    }
+
 
     get_intervention_card(entry){
         return intervention_cards[entry];

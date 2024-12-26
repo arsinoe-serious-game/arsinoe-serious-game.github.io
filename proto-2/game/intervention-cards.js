@@ -1,7 +1,7 @@
 let intervention_cards = 
 [
     {
-        "type": "BD",
+        "type": "BP",
         "name": "Approve a fish farm",
         "desc": "Municipality has been approached by an offshore fish-farm. The farm will use modern methods to optimise fish yields. ",
         "EP": "2",
@@ -21,7 +21,7 @@ let intervention_cards =
         "outcome-great": "The fish farming has been a great success! Many more people can afford to have locally supplied fresh fish, saving air miles. The income from the farming has been put back into the local community in educating local fishermen on sustainable fishing practice"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "Approve a monofarm",
         "desc": "Municipality has been approached by a commercial farm conglomerate to develop a super-farm on unused farmland. The farm will use modern methods to optimise crop production. ",
         "EP": "3",
@@ -41,7 +41,7 @@ let intervention_cards =
         "outcome-great": "out-4"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "citizen MINKA",
         "desc": "This is MINKA",
         "EP": "0",
@@ -61,7 +61,7 @@ let intervention_cards =
         "outcome-great": "out-4"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "Create a biodiversity digital twin",
         "desc": "Add a digital twin to do digital twin stuff",
         "EP": "-1",
@@ -81,7 +81,7 @@ let intervention_cards =
         "outcome-great": "out-4"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "Create a biodiversity knowledge base",
         "desc": "This sounds like MINKA, but is part of the Sardinia farmer dashboard - although that's ET rather than BD",
         "EP": "-1",
@@ -101,7 +101,7 @@ let intervention_cards =
         "outcome-great": "out-4"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "Protect local biodiversity",
         "desc": "This sounds like MINKA",
         "EP": "0",
@@ -121,7 +121,7 @@ let intervention_cards =
         "outcome-great": "out-4"
     },
     {
-        "type": "BD",
+        "type": "BP",
         "name": "protect local crops",
         "desc": "This is the Sardinia durum wheat scheme. Should strengthen the local farming community and protect local crop types",
         "EP": "2",
@@ -282,7 +282,7 @@ let intervention_cards =
     },
     {
         "type": "FP",
-        "name": "Approve construction of  sea wall",
+        "name": "Approve construction of a sea wall",
         "desc": "The coast road community is plagued by coastal overtopping, causing disruption to the main coast road and flooding local shops and houses. A sea wall should reduce this almost yearly event.",
         "EP": "2",
         "BP": "0",
@@ -362,7 +362,7 @@ let intervention_cards =
     },
     {
         "type": "FP",
-        "name": "Create a  flood support website",
+        "name": "Create a flood support website",
         "desc": "As per CS6. Municipality will install a platform to support citizens with support and guidance for flooding.",
         "EP": "-1",
         "BP": "0",
@@ -503,7 +503,7 @@ let intervention_cards =
     {
         "type": "HP",
         "name": "Create a heat digital twin",
-        "desc": "Municipality will install a climate / temperature / land use modelling digital twin to evaluate the likelihood and impact of  extreme temperature scenarios, allowing the town to better prepare for very hot periods and long-term planning for heat resillience.",
+        "desc": "Municipality will install a climate modelling digital twin to evaluate the likelihood and impact of  extreme temperature scenarios, allowing the town to better prepare for very hot periods and long-term planning for heat resillience.",
         "EP": "-1",
         "BP": "0",
         "FP": "0",

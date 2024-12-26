@@ -136,7 +136,7 @@ class GameState_SimpleGame extends StateMachineState
                 case 'init':
                     appInst.model.on_new_game();
                     for(let round=0;round < 4;round++){
-                        console.log('Round:' + round.toString()+ ' of 4. deck size:' +appInst.model.current_deck.length.toString() );
+                        console.log('Round:' + round.toString()+ ' of 4. deck size:' +appInst.model.current_deck.length.toString() +' Mayor:'+ appInst.model.current_mayor );
 
                         if (appInst.model.selected_interventions.length > 0) {
                             let text = 'Selected Interventions';
@@ -166,7 +166,7 @@ class GameState_SimpleGame extends StateMachineState
 
                             let entry = current_options[i];
 
-                            text += (i + 1).toString() + '. ';
+                            text += '\t' + (i + 1).toString() + '. ';
 
                             if (false) {
                                 text += str(entry) + ' ';
@@ -180,11 +180,66 @@ class GameState_SimpleGame extends StateMachineState
 
                         console.log(text);
 
-                        let selected_intervention = current_options[Math.floor(Math.random()*current_options.length)];
+                        let selected_intervention = appInst.model.random.getChoice(current_options);
 
                         console.log('You selected: ' + appInst.model.get_intervention_card(selected_intervention)['name']);
 
                         appInst.model.select_intervention(selected_intervention);
+
+                        text = '';
+                        for(let i=0;i<100;i++){
+                            text += appInst.model.random.getInt(1,6+1).toString();
+                            text += '\n';
+                        }
+
+                       // console.log(text);
+
+                        //do response!
+                        let outcome = appInst.model.random.getInt(1,6+1);
+                        let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-bad'];
+
+                        let have_an_election = false;
+
+                        if (outcome == 1){
+                            outcome_response = 'BAD:'+outcome_response +'\n' + 'The citizens demand a new mayor!';
+                            have_an_election = true;
+                        }
+
+                        if (outcome >1 && outcome< 4 ){
+                            outcome_response = 'OK:'+appInst.model.get_intervention_card(selected_intervention)['outcome-ok'];
+                        }
+
+                        if (outcome >3 && outcome< 6 ){
+                            outcome_response = 'GOOD:'+appInst.model.get_intervention_card(selected_intervention)['outcome-good'];
+                        }
+
+                        if (outcome == 6){
+                            outcome_response = 'GREAT:'+appInst.model.get_intervention_card(selected_intervention)['outcome-great'];
+                        }
+
+                        text = '\n';
+                        text +='Implementation Outcome: ' + outcome.toString();
+                        text +='\n';
+                        text += outcome_response;
+                        text +='\n';
+
+                        console.log(text);
+
+                        if (have_an_election){
+                            text = '';
+
+                            text +='Mayor: ' + appInst.model.current_mayor +' has been voted out';
+                            text += '\n';
+
+                            appInst.model.select_mayor();
+                            text += appInst.model.current_mayor + ' is the new mayor';
+                            text += '\n';
+
+                            text += '\n';
+                            console.log(text);
+
+                        }
+
                     }
                     //do protection events
                     //appInst.model.selected_interventions = [0,1,2,3];

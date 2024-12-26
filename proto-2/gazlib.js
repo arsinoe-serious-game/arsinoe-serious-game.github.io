@@ -39,7 +39,7 @@ class Random {
     getInt(min, max) {
         if (min == max) return min;
         var val = this.next() % 10000;
-        return Math.floor(((val / 10000.0) * (max - min)) + min);
+        return Math.floor(((val / 10000.0) * ((max) - min)) + min);
     }
 
     getFloat(min, max) {
