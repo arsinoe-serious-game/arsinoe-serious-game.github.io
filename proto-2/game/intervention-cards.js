@@ -322,7 +322,7 @@ let intervention_cards =
     },
     {
         "type": "FP",
-        "name": "Approved nature-based flood protection",
+        "name": "Approve nature-based flood protection",
         "desc": "Municipality has been approached by a university to host a beaver land management project to help control the river and reduce flooding ",
         "EP": "1",
         "BP": "-1",
@@ -342,7 +342,7 @@ let intervention_cards =
     },
     {
         "type": "FP",
-        "name": "Cease protection of seaside golf course",
+        "name": "Return seaside golf course to sea",
         "desc": "The municipality will stop flood protecting the old sea-side golf course and return it to nature. This will free up finance for other uses. Returning the course to nature will promote biodiversity as it becomes a wetland.",
         "EP": "1",
         "BP": "2",
@@ -482,7 +482,7 @@ let intervention_cards =
     },
     {
         "type": "HP",
-        "name": "Create a heat  knowledge base",
+        "name": "Create a heat knowledge base",
         "desc": "Municipality will install a citizen knowledge base to provide helpful support for dealing with prolonged high temperatures.",
         "EP": "-1",
         "BP": "0",

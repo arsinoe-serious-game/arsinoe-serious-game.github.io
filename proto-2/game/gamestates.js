@@ -136,13 +136,27 @@ class GameState_SimpleGame extends StateMachineState
                 case 'init':
                     appInst.model.on_new_game();
                     for(let round=0;round < 4;round++){
-                        console.log('Round:' + round.toString());
+                        console.log('Round:' + round.toString()+ ' of 4. deck size:' +appInst.model.current_deck.length.toString() );
 
-                        print('Round ' + str(round + 1) + ' of ' + str(4) + ' deck size:' + str(len(self.current_deck)))
                         if (appInst.model.selected_interventions.length > 0) {
-                            print('Interventions selected');
-                            self.print_selected_interventions();
+                            let text = 'Selected Interventions';
+                            text +='\n';
+
+                            for(let i=0;i< appInst.model.selected_interventions.length;i++) {
+                                let card = appInst.model.selected_interventions[i];
+                                text += '\t'+ appInst.model.card_to_string(appInst.model.get_intervention_card(card));
+                                text +='\n';
+                            }
+
+                            text +='\n';
+
+                            console.log(text);
                         }
+
+                        let text = '';
+                        text +='\n';
+                        text += 'Current Intervention options';
+                        text +='\n';
 
 
 
@@ -152,34 +166,71 @@ class GameState_SimpleGame extends StateMachineState
 
                             let entry = current_options[i];
 
-                            let text = '';
-
-                            text += (i+1).toString() + '. ';
+                            text += (i + 1).toString() + '. ';
 
                             if (false) {
                                 text += str(entry) + ' ';
                             }
 
                             let card = appInst.model.get_intervention_card(entry);
+                            text += appInst.model.card_to_string(card);
 
-                            text += (card['type'] + ' ' + card['name']).padEnd(40, ' ');
-                            text += '  EP:' + card['EP'].toString().padEnd(2, ' ');
-                            text += '  BP:' + card['BP'].toString().padEnd(2, ' ');
-                            text += '  FP:' + card['FP'].toString().padEnd(2, ' ');
-                            text += '  DP:' + card['DP'].toString().padEnd(2, ' ');
-                            text += '  HP:' + card['HP'].toString().padEnd(2, ' ');
-
-                            console.log(text);
-
-
-                            let selected_intervention = current_options[Math.floor(Math.random()*current_options.length)];
-
-                            console.log('You selected: ' + selected_intervention['name']);
-
-                            appInst.model.select_intervention(selected_intervention);
+                            text +='\n';
                         }
 
+                        console.log(text);
+
+                        let selected_intervention = current_options[Math.floor(Math.random()*current_options.length)];
+
+                        console.log('You selected: ' + appInst.model.get_intervention_card(selected_intervention)['name']);
+
+                        appInst.model.select_intervention(selected_intervention);
                     }
+                    //do protection events
+                    //appInst.model.selected_interventions = [0,1,2,3];
+
+                    let prot = appInst.model.get_protection();
+
+                    let text = '\n';
+                    text += 'Overall protection';
+                    text += '\n';
+
+                    for(let i=0;i< appInst.model.selected_interventions.length;i++) {
+                        let card = appInst.model.selected_interventions[i];
+                        text += '\t'+ appInst.model.card_to_string(appInst.model.get_intervention_card(card));
+                        text +='\n';
+                    }
+
+                    text +='\n';
+
+                    for (const [key, value] of Object.entries(prot)) {
+                        text += '\t' + key + ':' + prot[key].toString().padEnd(2, ' ');
+                    }
+
+                    console.log(text);
+
+                    let events = {};
+                    events['EP'] = {'name': 'Economic'};
+                    events['BP'] = {'name': 'Biodiversity'};
+                    events['FP'] = {'name': 'Flood'};
+                    events['DP'] = {'name': 'Drought'};
+                    events['HP'] = {'name': 'Heat Wave'};
+
+                    text = '\n';
+
+                    for (const [key, value] of Object.entries(events)) {
+                        let severity = appInst.model.random.getChoice(['Minor', 'Average', 'Extreme']);
+
+                        text += '\t';
+                        text += ( severity + ' '+ events[key]['name'] + ' event!').padEnd(40, ' ');
+                        text += 'resillience: ' + (prot[key]).toString() + ', ' + appInst.model.get_response(severity.toLowerCase(), prot[key]);
+                        text +='\n';
+                    }
+
+                    console.log(text);
+
+
+
                     break;
 
                 default:

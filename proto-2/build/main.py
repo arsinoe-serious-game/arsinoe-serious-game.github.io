@@ -58,6 +58,8 @@ class ARSINOEReslienceGame:
             fp.write('\n')
             fp.close()
 
+        return
+
 
         self.current_deck = []
 

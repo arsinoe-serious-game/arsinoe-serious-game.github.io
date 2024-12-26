@@ -7,7 +7,7 @@ class ButtonBase extends Rect
     {
         super(inRect.x,inRect.y,inRect.w,inRect.h);
         this.active = false;
-        this.selected = false
+        this.selected = false;
     }
 
     label()

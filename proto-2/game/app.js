@@ -1,9 +1,19 @@
+/*
+        EP - Economic protection
+        BP - Bio (diversity) protection
+        FP - Flood protection
+        DP - Drought protection
+        HP - Heat protection
+     */
+
 
 class ModelBase{
     constructor(game){
         this.game = game;
         this.current_deck = [];
         this.selected_interventions = [];
+
+        this.random = new Random(123456);
     }
 
     on_new_game(){
@@ -32,12 +42,16 @@ class ModelBase{
 
     card_to_string(card){
         let text = '';
-        text += (card['type'] + ' ' + card['name']).padEnd(40, ' ');
-        text += '  EP:' + card['EP'].toString().padEnd(2, ' ');
-        text += '  BP:' + card['BP'].toString().padEnd(2, ' ');
-        text += '  FP:' + card['FP'].toString().padEnd(2, ' ');
-        text += '  DP:' + card['DP'].toString().padEnd(2, ' ');
-        text += '  HP:' + card['HP'].toString().padEnd(2, ' ');
+        try {
+            text += (card['type'] + ' ' + card['name']).padEnd(40, ' ');
+            text += '  EP:' + card['EP'].toString().padEnd(2, ' ');
+            text += '  BP:' + card['BP'].toString().padEnd(2, ' ');
+            text += '  FP:' + card['FP'].toString().padEnd(2, ' ');
+            text += '  DP:' + card['DP'].toString().padEnd(2, ' ');
+            text += '  HP:' + card['HP'].toString().padEnd(2, ' ');
+        }catch (e){
+            console.log('error');
+        }
 
         return text;
     }
@@ -48,7 +62,7 @@ class ModelBase{
 
         for (let i = 0; i < 4; i++) {
             while (true){
-                let intervention = this.current_deck[Math.floor(Math.random()*this.current_deck.length)];
+                let intervention = this.random.getChoice(this.current_deck);
 
                 if ((current_options.indexOf(intervention) == -1) &&  !(this.invention_type_in_cards(intervention, current_options))) {
                     current_options.push(intervention);
@@ -68,6 +82,82 @@ class ModelBase{
         }
         return false;
     }
+
+    get_protection() {
+        let protection = {};
+
+        protection['EP'] = 0;
+        protection['BP'] = 0;
+        protection['FP'] = 0;
+        protection['DP'] = 0;
+        protection['HP'] = 0;
+
+        for(let i=0;i< this.selected_interventions.length;i++) {
+            let card = this.get_intervention_card(this.selected_interventions[i]);
+
+            for (const [key, value] of Object.entries(protection)) {
+                protection[key] += parseInt(card[key]);
+            }
+        }
+
+        return protection;
+    }
+
+    get_response(severity, score) {
+        if (severity == 'minor') {
+            if (score < 1) {
+                return 'under-prepared';
+            }
+
+            if (score < 3) {
+                return 'appropriate';
+            }
+
+            if (score > 6) {
+                return 'extreme overkill';
+            }
+
+            return 'overkill';
+        }
+
+        if (severity == 'average') {
+            if (score < 1) {
+                return 'severly under-prepared';
+            }
+
+            if (score < 3) {
+                return 'under-prepared';
+            }
+
+            if (score < 5) {
+                return 'appropriate';
+            }
+
+            if (score > 6) {
+                return 'extreme overkill';
+            }
+
+            return 'overkill';
+        }
+
+        if (severity == 'extreme') {
+            if (score < 3) {
+                return 'severly under-prepared';
+            }
+
+            if (score < 5) {
+                return 'under-prepared';
+            }
+
+            if (score > 7) {
+                return 'overkill';
+            }
+
+            return 'appropriate';
+        }
+
+        return 'n/a'
+    }
 }
 
 class ControllerBase{
@@ -78,13 +168,6 @@ class ControllerBase{
 }
 class ARSINOEGame extends AppBase
 {
-    /*
-        EP - Economic protection
-        BP - Bio (diversity) protection
-        FP - Flood protection
-        DP - Drought protection
-        HP - Heat protection
-     */
     constructor()
     {
         super();

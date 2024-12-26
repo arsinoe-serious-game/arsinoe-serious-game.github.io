@@ -9,6 +9,74 @@ function DEG_TO_RAD(x)
     return (x * Math.PI) / 180;
 }
 
+class Random {
+    constructor(value) {
+       this.seed = 0;
+       this.currentValue = 0;
+        this.init(value);
+    }
+
+    init(value) {
+        this.seed = value;
+        this.currentValue = this.seed;
+    }
+
+    next() {
+        this.currentValue += this.seed;
+        this.currentValue ^= 353562;
+
+        while(this.currentValue < 0){
+            this.currentValue += 353562;
+        }
+
+        return this.currentValue;
+    }
+
+    reset() {
+        this.currentValue = this.seed;
+    }
+
+    getInt(min, max) {
+        if (min == max) return min;
+        var val = this.next() % 10000;
+        return Math.floor(((val / 10000.0) * (max - min)) + min);
+    }
+
+    getFloat(min, max) {
+        if (min == max) return min;
+        var val = this.next() % 10000;
+        return (((val / 10000.0) * (max - min)) + min);
+    }
+
+    getChoice(input_array){
+        return input_array[ this.getInt(0, input_array.length)]
+    }
+
+    getRandomColor(I) {
+        var r,g,b;
+
+        if (I===undefined){
+            I = 0;
+        }
+
+        I = Math.max(Math.min(255,I),0);
+        do{
+            r= this.getInt(0,255);
+            g= this.getInt(0,255);
+            b= this.getInt(0,255);
+
+        }while ((r < I) && (g < I) && (b<I));
+        var color = '#';
+        color += r.toString(16).padStart(2,'0').toLowerCase();
+        color += g.toString(16).padStart(2,'0').toLowerCase();
+        color += b.toString(16).padStart(2,'0').toLowerCase();
+
+      return color;
+    }
+}
+
+
+
 //vector2
 class Vector2
 {
