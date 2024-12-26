@@ -1,3 +1,81 @@
+
+class ModelBase{
+    constructor(game){
+        this.game = game;
+        this.current_deck = [];
+        this.selected_interventions = [];
+    }
+
+    on_new_game(){
+        this.current_deck = [];
+
+        let index = 0;
+        for(let i=0;i< intervention_cards.length;i++)
+            this.current_deck.push(i);
+
+        this.round = 0;
+        this.selected_interventions = [];
+    }
+
+    get_intervention_card(entry){
+        return intervention_cards[entry];
+    }
+
+    select_intervention(entry) {
+        this.selected_interventions.push(entry);
+
+        const index = this.current_deck.indexOf(entry);
+        if (index > -1) {
+            this.current_deck.splice(index, 1);
+        }
+    }
+
+    card_to_string(card){
+        let text = '';
+        text += (card['type'] + ' ' + card['name']).padEnd(40, ' ');
+        text += '  EP:' + card['EP'].toString().padEnd(2, ' ');
+        text += '  BP:' + card['BP'].toString().padEnd(2, ' ');
+        text += '  FP:' + card['FP'].toString().padEnd(2, ' ');
+        text += '  DP:' + card['DP'].toString().padEnd(2, ' ');
+        text += '  HP:' + card['HP'].toString().padEnd(2, ' ');
+
+        return text;
+    }
+
+
+    get_round_cards() {
+        let current_options = [];
+
+        for (let i = 0; i < 4; i++) {
+            while (true){
+                let intervention = this.current_deck[Math.floor(Math.random()*this.current_deck.length)];
+
+                if ((current_options.indexOf(intervention) == -1) &&  !(this.invention_type_in_cards(intervention, current_options))) {
+                    current_options.push(intervention);
+                    break;
+                }
+            }
+        }
+        return current_options;
+    }
+
+    invention_type_in_cards(intervention, current_options) {
+        for (let i = 0; i < current_options.length; i++) {
+            let card = current_options[i];
+            if (intervention_cards[intervention]['type'] == this.get_intervention_card(card)['type']) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class ControllerBase{
+    constructor(game){
+        this.game = game;
+    }
+
+}
 class ARSINOEGame extends AppBase
 {
     /*
@@ -11,51 +89,35 @@ class ARSINOEGame extends AppBase
     {
         super();
 
+        this.model = new ModelBase(this);
+        this.controller = new ControllerBase(this);
+
         this.image = new Image();
 
         this.buttons = {};
         this.first_intervention = 0;
+
+        this.stateMachine = new StateMachine();
     }
 
-    on_interventon_button(b, step){
 
-        this.first_intervention += step;
-
-        this.buttons['prev_intervention'].active = this.first_intervention > 0;
-        this.buttons['next_intervention'].active = (this.first_intervention+step < intervention_cards.length);
-    }
 
     oneTimeInit()
     {
-        let self = this;
-
         super.oneTimeInit(1600,900);
+        this.stateMachine.addState(GameState_Test.label(), new GameState_Test());
+        this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
+        this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
+
+
+        this.stateMachine.setState(GameState_SimpleGame.label());
 
         this.image.src = "assets/interventions/intervention-0.png";
-
-        this.buttons['prev_intervention'] = new ButtonBase(new Rect(10,200, 50,100));
-        this.buttons['prev_intervention'].active = false;
-        this.buttons['prev_intervention'].label = 'PREV';
-        this.buttons['prev_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, -4);
-            };
-
-
-        this.buttons['next_intervention'] = new ButtonBase(new Rect(1200,200, 50,100));
-        this.buttons['next_intervention'].active = true;
-        this.buttons['next_intervention'].label = 'NEXT';
-        this.buttons['next_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, 4);
-            };
     }
     
     update()
     {
         super.update();
-
-        for (const [key, value] of Object.entries(this.buttons)) {
-                this.buttons[key].update();
-        }
     }
 
     format_desc(in_str, max_chars){
@@ -177,27 +239,35 @@ class ARSINOEGame extends AppBase
     draw()
     {
         super.draw();
-
-        GAZCanvas.clip_start();
-        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-        for(let i=0;i<4;i++) {
-            this.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i+this.first_intervention);
-        }
-
-        GAZCanvas.clip_end();
-
-        for(let i=0;i<5;i++) {
-            this.draw_card(new Vector2(80 + (i * (270 + 10)), 70 +410), i+4);
-        }
-
-        for (const [key, value] of Object.entries(this.buttons)) {
-            this.buttons[key].draw();
-        }
-
-
-        this.draw_mouse_pointer();
     }
+
+    Run() {
+        //do oneTimeInit once
+
+        appInst.oneTimeInit();
+
+        setInterval(function () {
+            //on each frame ...
+            GAZCanvas.update(60);
+
+            Input.update();
+
+            appInst.frameCount += 1;
+
+            //do state machine update
+            appInst.stateMachine.update();
+
+            //clear screen for drawing
+            Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight), appInst.letterboxColour);
+
+            //do state machine draw
+            appInst.stateMachine.draw();
+
+            //draw the letterbox over the screen to hide any overdraw
+            GAZCanvas.drawLetterbox(appInst.letterboxColour);
+        }, 17);
+    }
+
 }
 
 appInst = new ARSINOEGame();

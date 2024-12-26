@@ -2009,6 +2009,7 @@ class AppBase
     constructor()
     {
         this.letterboxColour = 'rgb(32,32,32)';
+        this.frameCount = 0;
     }
 
     oneTimeInit(refWidth, refHeight)
@@ -2018,6 +2019,7 @@ class AppBase
 
     update()
     {
+        this.frameCount+=1;
     }
 
     draw() {
