@@ -6,6 +6,54 @@
         HP - Heat protection
      */
 
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function getCookieAsList(cname){
+    let r = getCookie(cname).split(',');
+
+    let result = [];
+
+    for (let i=0;i< r.length;i++){
+        result.push(r[i]);
+    }
+
+    return result;
+}
+
+function getCookieAsIntList(cname){
+    let r = getCookie(cname).split(',');
+
+    let result = [];
+
+    for (let i=0;i< r.length;i++){
+        if (r[i].length > 0) {
+            result.push(parseInt(r[i]));
+        }
+    }
+
+    return result;
+}
 
 class ModelBase{
     constructor(game){
@@ -19,6 +67,31 @@ class ModelBase{
         this.players = [];
         this.current_mayor = '';
     }
+
+    do_cookie_data(b_get){
+
+        if (b_get){
+            let current_deck = getCookieAsIntList('current_deck');
+            let selected_interventions =getCookieAsIntList('selected_interventions');
+            let players = getCookieAsList('players');
+            let current_mayor = getCookie('current_mayor');
+            console.log(current_deck);
+        }else{
+            setCookie('current_deck', this.current_deck, 365);
+            setCookie('selected_interventions', this.selected_interventions, 365);
+            setCookie('players', this.players, 365);
+            setCookie('current_mayor', this.current_mayor, 365);
+        }
+    }
+
+    get_cookie_data(){
+        return this.do_cookie_data(true);
+    }
+
+    set_cookie_data(){
+        return this.do_cookie_data(false);
+    }
+
 
     on_new_game(){
         this.current_deck = [];
@@ -37,6 +110,9 @@ class ModelBase{
         }
 
         this.select_mayor();
+
+        this.set_cookie_data();
+        this.get_cookie_data();
     }
 
     select_mayor(){
@@ -179,7 +255,7 @@ class ModelBase{
             return 'appropriate';
         }
 
-        return 'n/a'
+        return 'n/a';
     }
 }
 
