@@ -55,7 +55,7 @@ class GameState_InterventionPreview extends StateMachineState
         }
 
         this.buttons['prev_intervention'].active = this.current_intervention > 0;
-        this.buttons['next_intervention'].active = this.current_intervention < this.intervention_types.length;
+        this.buttons['next_intervention'].active = this.current_intervention < this.intervention_types.length-1;
     }
 
     init()
