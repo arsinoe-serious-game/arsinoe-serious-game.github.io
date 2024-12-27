@@ -292,7 +292,8 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
 
 
-        this.stateMachine.setState(GameState_SimpleGame.label());
+        //this.stateMachine.setState(GameState_SimpleGame.label());
+        this.stateMachine.setState(GameState_InterventionPreview.label());
 
         this.image.src = "assets/interventions/intervention-0.png";
     }
@@ -329,11 +330,11 @@ class ARSINOEGame extends AppBase
             let card_info = intervention_cards[card_index];
             let bg_col = 'rgb(127,127,127)';
 
-            if (card_info['type'] == 'ET'){
+            if (card_info['type'] == 'HP'){
                 bg_col = 'rgb(0,255,0)';
             }
 
-            if (card_info['type'] == 'BD'){
+            if (card_info['type'] == 'BP'){
                 bg_col = 'rgb(255,255,0)';
             }
 

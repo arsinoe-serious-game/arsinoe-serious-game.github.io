@@ -49,7 +49,7 @@ class Random {
     }
 
     getChoice(input_array){
-        return input_array[ this.getInt(0, input_array.length)]
+        return input_array[ this.getInt(0, input_array.length)];
     }
 
     getRandomColor(I) {

@@ -43,14 +43,19 @@ class GameState_InterventionPreview extends StateMachineState
 
         this.buttons = {};
         this.first_intervention = 0;
+
+        this.intervention_types = ['BP', 'FP','DP','HP'];
+        this.current_intervention = 0;
+
     }
 
     on_interventon_button(b, step){
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < this.intervention_types.length)) {
+            this.current_intervention += step;
+        }
 
-        this.first_intervention += step;
-
-        this.buttons['prev_intervention'].active = this.first_intervention > 0;
-        this.buttons['next_intervention'].active = (this.first_intervention+step < intervention_cards.length);
+        this.buttons['prev_intervention'].active = this.current_intervention > 0;
+        this.buttons['next_intervention'].active = this.current_intervention < this.intervention_types.length;
     }
 
     init()
@@ -59,19 +64,22 @@ class GameState_InterventionPreview extends StateMachineState
 
         let self = this;
 
-        this.buttons['prev_intervention'] = new ButtonBase(new Rect(10,200, 50,100));
+        let loc = layout['screen_intervention_preview']['children']['button_prev'];
+
+        this.buttons['prev_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1],));
         this.buttons['prev_intervention'].active = false;
         this.buttons['prev_intervention'].label = 'PREV';
         this.buttons['prev_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, -4);
+                self.on_interventon_button(d, -1);
             };
 
+        loc = layout['screen_intervention_preview']['children']['button_next'];
 
-        this.buttons['next_intervention'] = new ButtonBase(new Rect(1200,200, 50,100));
+        this.buttons['next_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1],));
         this.buttons['next_intervention'].active = true;
         this.buttons['next_intervention'].label = 'NEXT';
         this.buttons['next_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, 4);
+                self.on_interventon_button(d, 1);
             };
     }
 
@@ -92,15 +100,22 @@ class GameState_InterventionPreview extends StateMachineState
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
 
-        for(let i=0;i<4;i++) {
-            appInst.draw_card(new Vector2(80 + (i * (270 + 10)), 70), i+this.first_intervention);
+
+        let current_card = 0;
+        for(let i=0;i < intervention_cards.length;i++){
+
+            if (intervention_cards[i]['type'] == this.intervention_types[this.current_intervention]) {
+
+                let loc = layout['screen_intervention_preview']['children']['card_'+current_card.toString()];
+
+                appInst.draw_card(new Vector2(loc['offset'][0], loc['offset'][1]), i + this.first_intervention);
+                current_card += 1;
+            }
         }
 
         GAZCanvas.clip_end();
 
-        for(let i=0;i<5;i++) {
-            appInst.draw_card(new Vector2(80 + (i * (270 + 10)), 70 +410), i+4);
-        }
+
 
         for (const [key, value] of Object.entries(this.buttons)) {
             this.buttons[key].draw();
@@ -148,6 +163,14 @@ class GameState_SimpleGame extends StateMachineState
                                 text +='\n';
                             }
 
+                            let prot = appInst.model.get_protection();
+
+                            text +='\tTotal Protection'.padEnd(41,' ');
+
+                            for (const [key, value] of Object.entries(prot)) {
+                                text += '  ' + key + ':' + prot[key].toString().padEnd(2, ' ');
+                            }
+
                             text +='\n';
 
                             console.log(text);
@@ -186,16 +209,25 @@ class GameState_SimpleGame extends StateMachineState
 
                         appInst.model.select_intervention(selected_intervention);
 
-                        text = '';
+                        /*
+                        let outcomes = {};
                         for(let i=0;i<100;i++){
-                            text += appInst.model.random.getInt(1,6+1).toString();
-                            text += '\n';
+                            let outcome = appInst.model.random.getChoice([1,2,3,4,5,6]);
+
+                            if(!(outcome.toString() in outcomes)){
+                                outcomes[outcome.toString()] = 0;
+                            }
+                            outcomes[outcome.toString()]+=1;
                         }
 
-                       // console.log(text);
+                        for (const [key, value] of Object.entries(outcomes)) {
+                            console.log(key, outcomes[key].toString());
+                        }
+                        */
 
+                        text = '';
                         //do response!
-                        let outcome = appInst.model.random.getInt(1,6+1);
+                        let outcome = appInst.model.random.getChoice([1,2,3,4,5,6]);
                         let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-bad'];
 
                         let have_an_election = false;
