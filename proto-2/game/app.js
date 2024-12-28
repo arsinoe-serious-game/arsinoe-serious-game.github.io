@@ -263,8 +263,14 @@ class ControllerBase{
     constructor(game){
         this.game = game;
     }
-
 }
+
+class ViewBase{
+    constructor(game){
+        this.game = game;
+    }
+}
+
 class ARSINOEGame extends AppBase
 {
     constructor()
@@ -273,6 +279,7 @@ class ARSINOEGame extends AppBase
 
         this.model = new ModelBase(this);
         this.controller = new ControllerBase(this);
+        this.view = new ViewBase(this);
 
         this.image = new Image();
 
