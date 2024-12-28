@@ -1309,10 +1309,10 @@ class gazcanvas
     toScreenSpace(inRect)
     {
         let drawRect = new Rect();
-        drawRect.x = ((inRect.x / this.referenceScreenSize.w) * this.targetSize.w) + this.offset.x/2;
-        drawRect.y = ((inRect.y / this.referenceScreenSize.h) * this.targetSize.h) + this.offset.y/2;
-        drawRect.w = (inRect.w / this.referenceScreenSize.w) * this.targetSize.w;
-        drawRect.h = (inRect.h / this.referenceScreenSize.h) * this.targetSize.h;
+        drawRect.x = Math.floor(((inRect.x / this.referenceScreenSize.w) * this.targetSize.w) + this.offset.x/2);
+        drawRect.y = Math.floor(((inRect.y / this.referenceScreenSize.h) * this.targetSize.h) + this.offset.y/2);
+        drawRect.w = Math.floor((inRect.w / this.referenceScreenSize.w) * this.targetSize.w);
+        drawRect.h = Math.floor((inRect.h / this.referenceScreenSize.h) * this.targetSize.h);
 
         return drawRect;
     }

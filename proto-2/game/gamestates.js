@@ -108,7 +108,8 @@ class GameState_InterventionPreview extends StateMachineState
 
                 let loc = layout['screen_intervention_preview']['children']['card_'+current_card.toString()];
 
-                appInst.draw_card(new Vector2(loc['offset'][0], loc['offset'][1]), i + this.first_intervention);
+                //appInst.draw_card(new Vector2(loc['offset'][0], loc['offset'][1]), i + this.first_intervention);
+                appInst.view.intervention_card(new Vector2(loc['offset'][0], loc['offset'][1]), intervention_cards[i + this.first_intervention]);
                 current_card += 1;
             }
         }
