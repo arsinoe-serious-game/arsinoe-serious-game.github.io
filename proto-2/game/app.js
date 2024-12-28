@@ -6,6 +6,219 @@
         HP - Heat protection
      */
 
+class LayerWidget extends  WidgetBase{
+
+    constructor(inRect) {
+        super(inRect);
+        this.card_info = undefined;
+        this.scale = new Vector2(1,1);
+    }
+
+    format_desc(in_str, max_chars){
+
+        let out_str = '';
+
+        let words = in_str.split(" ");
+
+        let current_line = '';
+        for(let i=0;i<words.length;i++){
+            if (current_line.length + words[i].length > max_chars){
+                out_str += current_line;
+                out_str += '\n';
+                current_line = '';
+            }
+
+            current_line += words[i] + ' ';
+        }
+
+        out_str += current_line;
+
+        return out_str;
+    }
+
+    layer_to_rect(loc, layer){
+        return new Rect((layer['offset'][0] * this.scale.x)  + loc.x
+            , (layer['offset'][1] * this.scale.y)  + loc.y
+            , layer['size'][0] * this.scale.x
+            , layer['size'][1] * this.scale.y);
+    }
+
+    debug_rect(loc, layer, col){
+        GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
+    }
+
+    debug_text(loc, layer, font_size, text, color, just, font, font_style){
+
+        let pos= loc.clone();
+
+        pos.x = loc.x + ((layer['offset'][0]) * this.scale.x);
+        pos.y = loc.y + ((layer['offset'][1]) * this.scale.y);
+
+        if ((just === 'centre') || (just == 'center')){
+            pos.x += (layer['size'][0]/2) * this.scale.x;
+            pos.y += (layer['size'][1]/2) * this.scale.y;
+        }
+
+        GAZCanvas.Text(font_size* this.scale.y, text, pos, color, just, font, font_style);
+    }
+
+    debug_layer(loc, layer){
+        if ('children' in layer){
+            for (const [key, value] of Object.entries(layer['children'])) {
+                this.debug_layer(loc, value);
+            }
+        }else{
+            this.debug_rect(loc, layer, appInst.view.random.getRandomColor());
+        }
+    }
+
+    debug_image(loc, layer, image){
+        GAZCanvas.Sprite(appInst.view.image, this.layer_to_rect(loc,layer) );
+    }
+}
+
+
+class InterventionCardWidget extends  LayerWidget{
+    constructor(inRect) {
+        super(inRect);
+        this.card_info = undefined;
+
+        this.template= layout['templates']['children']['template_intervention_card'];
+
+        this.scale.x = this.w / (this.template['children']['bg']["size"][0]);
+        this.scale.y = this.h / (this.template['children']['bg']["size"][1]);
+
+        this.qr_code_link = new WidgetBase( this.layer_to_rect(new Vector2(this.x,this.y), this.template['children']['qr_code']));
+        this.qr_code_link.set_active(true);
+        this.qr_code_link.on_click = function (d) {
+            console.log('QR link!');
+        };
+    }
+
+    set_card_info(card_info){
+        this.card_info = card_info;
+    }
+
+    update(){
+        super.update();
+        this.qr_code_link.update();
+    }
+
+    draw(){
+        //super.draw();
+
+        let loc = new Vector2(this.x, this.y);
+
+        let bg_col = 'rgb(127,127,127)';
+
+        if (this.card_info['type'] == 'HP'){
+            bg_col = 'rgb(246,244,113)';
+        }
+
+        if (this.card_info['type'] == 'BP'){
+            bg_col = 'rgb(244,174,100)';
+        }
+
+        if (this.card_info['type'] == 'DP'){
+            bg_col = 'rgb(143,161,246)';
+        }
+
+        if (this.card_info['type'] == 'FP') {
+            bg_col = 'rgb(179,218,244)';
+        }
+
+
+        let template = layout['templates']['children']['template_intervention_card'];
+
+        //this.debug_layer(loc,template);
+
+        this.debug_rect(loc, template['children']['bg'], bg_col );
+        //this.debug_rect(loc, template['children']['qr_code'], 'rgba(255,0,255)');
+        this.qr_code_link.draw();
+
+        let title = this.card_info['name'].toUpperCase();
+
+        //title = loc.toString() +' ' + template['children']['bg']['size'].toString();
+
+        let max_line_length = 24;
+
+        if (title.length > max_line_length) {
+            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 36*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', '');
+        }else {
+            this.debug_text(loc, template['children']['header_text'], 40*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', '');
+        }
+
+        this.debug_image(loc, template['children']['image_loc'],this.image);
+
+
+        //do description
+        let t = template['children']['floating_text'];
+        let pos = new Vector2();
+
+        pos.x = loc.x + (t['offset'][0])*this.scale.x;
+        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+
+        pos.y += 10*this.scale.y;
+
+        max_line_length = 45;
+
+        let text_font_size = 17*this.scale.y;
+
+        let text = this.format_desc(this.card_info['desc'], max_line_length);
+
+        pos.x = loc.x + (t['offset'][0] + t['size'][0]/2) * this.scale.x;
+
+        GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', 'roboto', '');
+
+        pos.y += ((text.split('\n').length) * text_font_size);
+
+        //do positives
+        pos.y += 7*this.scale.y;
+        pos.x = loc.x + (t['offset'][0]*this.scale.x);
+
+        //text_font_size = 16*this.scale.y;
+        GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+        pos.y += text_font_size;
+
+        for(let p=0;p<3;p++) {
+            text = (p + 1).toString() + '.';
+            text += this.format_desc(this.card_info['pos-' + (p + 1).toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y +=((text.split('\n').length) * text_font_size);
+        }
+
+        //do issues
+        pos.y += 5*this.scale.y;
+
+        GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+        pos.y += text_font_size;
+
+        for(let p=0;p<3;p++) {
+            text = (p + 1).toString() + '.';
+            text += this.format_desc(this.card_info['neg-' + (p + 1).toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y +=((text.split('\n').length) * text_font_size);
+        }
+
+        //do protection racket
+        let headings = ['EP','BP','FP','DP','HP'];
+
+        pos = loc.clone();
+        pos.y +=1*this.scale.y;
+
+        for(let i=0;i<5;i++) {
+            let c = template['children']['protection_table']['children']['p' + i.toString()];
+
+            this.debug_rect(loc, c['children']['heading'], 'rgb(28,96,126)');
+            this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
+
+            this.debug_text(pos, c['children']['heading'], 20*this.scale.y, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
+            this.debug_text(pos, c['children']['value'], 20*this.scale.y, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }
+    }
+}
+
+
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -713,3 +926,4 @@ class ARSINOEGame extends AppBase
 }
 
 appInst = new ARSINOEGame();
+

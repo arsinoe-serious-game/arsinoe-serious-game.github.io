@@ -41,7 +41,7 @@ class GameState_InterventionPreview extends StateMachineState
     {
         super();
 
-        this.buttons = {};
+        this.widget_list = {};
         this.first_intervention = 0;
 
         this.intervention_types = ['BP', 'FP','DP','HP'];
@@ -54,8 +54,18 @@ class GameState_InterventionPreview extends StateMachineState
             this.current_intervention += step;
         }
 
-        this.buttons['prev_intervention'].set_active(this.current_intervention > 0);
-        this.buttons['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
+        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
+        this.widget_list['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
+
+
+        let card_index = 0;
+        for(let i=0;i < intervention_cards.length;i++) {
+
+            if (intervention_cards[i]['type'] === this.intervention_types[this.current_intervention]) {
+                this.widget_list['intervention_card_' + card_index.toString()].set_card_info(intervention_cards[i]);
+                card_index += 1;
+            }
+        }
     }
 
     init()
@@ -66,29 +76,36 @@ class GameState_InterventionPreview extends StateMachineState
 
         let loc = layout['screen_intervention_preview']['children']['button_prev'];
 
-        this.buttons['prev_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
-        this.buttons['prev_intervention'].set_active(false);
-        this.buttons['prev_intervention'].set_label('PREV');
-        this.buttons['prev_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, -1);
-            };
+        this.widget_list['prev_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
+        this.widget_list['prev_intervention'].set_active(false);
+        this.widget_list['prev_intervention'].set_label('PREV');
+        this.widget_list['prev_intervention'].on_click = function (d) {
+            self.on_interventon_button(d, -1);
+        };
 
         loc = layout['screen_intervention_preview']['children']['button_next'];
 
-        this.buttons['next_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
-        this.buttons['next_intervention'].set_active(true);
-        this.buttons['next_intervention'].set_label('NEXT');
-        this.buttons['next_intervention'].on_click = function (d) {
-                self.on_interventon_button(d, 1);
-            };
+        this.widget_list['next_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('NEXT');
+        this.widget_list['next_intervention'].on_click = function (d) {
+            self.on_interventon_button(d, 1);
+        };
+
+        for(let i=0;i < 7;i++) {
+            let loc = layout['screen_intervention_preview']['children']['card_' + i.toString()];
+            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
+        }
+
+        this.on_interventon_button(undefined,0);
     }
 
     update()
     {
         super.update();
 
-        for (const [key, value] of Object.entries(this.buttons)) {
-                this.buttons[key].update();
+        for (const [key, value] of Object.entries(this.widget_list)) {
+                this.widget_list[key].update();
         }
     }
 
@@ -100,26 +117,10 @@ class GameState_InterventionPreview extends StateMachineState
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
 
-
-        let current_card = 0;
-        for(let i=0;i < intervention_cards.length;i++){
-
-            if (intervention_cards[i]['type'] == this.intervention_types[this.current_intervention]) {
-
-                let loc = layout['screen_intervention_preview']['children']['card_'+current_card.toString()];
-
-                //appInst.draw_card(new Vector2(loc['offset'][0], loc['offset'][1]), i + this.first_intervention);
-                appInst.view.intervention_card(new Vector2(loc['offset'][0], loc['offset'][1]), intervention_cards[i + this.first_intervention]);
-                current_card += 1;
-            }
-        }
-
         GAZCanvas.clip_end();
 
-
-
-        for (const [key, value] of Object.entries(this.buttons)) {
-            this.buttons[key].draw();
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
         }
 
 
