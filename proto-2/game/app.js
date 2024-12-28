@@ -92,14 +92,15 @@ class InterventionCardWidget extends  LayerWidget{
         this.qr_code_link.set_active(true);
         this.qr_code_link.on_click = function (d) {
             console.log('QR link!');
+            window.open(document.URL, 'https://arsinoe-serious-game.github.io/proto-2/', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
         };
     }
 
-    set_card_info(card_info){
+    set_card_info(card_info) {
         this.card_info = card_info;
     }
 
-    update(){
+    update() {
         super.update();
         this.qr_code_link.update();
     }
@@ -143,9 +144,9 @@ class InterventionCardWidget extends  LayerWidget{
         let max_line_length = 24;
 
         if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 36*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', '');
+            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 36*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }else {
-            this.debug_text(loc, template['children']['header_text'], 40*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', '');
+            this.debug_text(loc, template['children']['header_text'], 40*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
 
         this.debug_image(loc, template['children']['image_loc'],this.image);

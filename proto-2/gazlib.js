@@ -1125,7 +1125,7 @@ class baseCanvas
             context_font += font_style + ' ';
         }
 
-        if(font == undefined)
+        if((font == undefined) || (font === ""))
         {
             font = "san-serif";
         }
