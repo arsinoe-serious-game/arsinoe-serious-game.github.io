@@ -2128,26 +2128,37 @@ class AppBase
 }
 
 /*
-    ButtonBase - base button class
+    Widget lib
  */
-class ButtonBase extends Rect
-{
+
+class WidgetBase extends Rect{
     constructor(inRect)
     {
         super(inRect.x,inRect.y,inRect.w,inRect.h);
         this.active = false;
         this.selected = false;
-        this.label = 'set label text';
-
-        this.font_family = '';
-        this.font_size = 24;
-        this.font_style = '';
-
         this.on_click = undefined;
 
     }
 
-    get_button_color(){
+    get_active(){
+        return this.active;
+    }
+
+    set_active(active){
+        this.active = active;
+    }
+
+    isInRect(pos)
+    {
+        if(this.active === false)
+        {
+            return false;
+        }
+        return this.isInMe(pos);
+    }
+
+    get_color(){
 
         if(this.active === false){
             return 'rgb(255,127,127)';
@@ -2165,23 +2176,6 @@ class ButtonBase extends Rect
         return 'rgb(0,255,0)';
     }
 
-    get_text_color(){
-        return 'rgb(255,255,255)';
-    }
-
-    get_label()
-    {
-        return this.label;
-    }
-
-    isInRect(pos)
-    {
-        if(this.active === false)
-        {
-            return false;
-        }
-        return this.isInMe(pos);
-    }
 
     update(){
         if (Input.currentMouseState === INPUT_PRESSED){
@@ -2195,9 +2189,75 @@ class ButtonBase extends Rect
 
     draw()
     {
-        GAZCanvas.Rect(this, this.get_button_color());
+        GAZCanvas.Rect(this, this.get_color());
+    }
+}
 
+class LabelBase extends WidgetBase{
+    constructor(inRect)
+    {
+        super(inRect);
+        this.label = 'set label text';
+
+        this.font_family = '';
+        this.font_size = 24;
+        this.font_style = '';
+
+        this.font_color = 'rgb(0,0,0)';
+    }
+
+    get_color(){
+        return this.font_color;
+    }
+
+    set_color(col){
+        this.font_color = col;
+    }
+
+    update(){
+
+    }
+
+    get_label()
+    {
+        return this.label;
+    }
+
+    set_label(label)
+    {
+        this.label = label;
+    }
+
+
+    draw()
+    {
         let pos = this.getCentre();
-        GAZCanvas.Text(this.font_size,this.get_label(), pos,this.get_text_color(),'center',this.font_family, this.font_style);
+        GAZCanvas.Text(this.font_size,this.get_label(), pos,this.get_color(),'center',this.font_family, this.font_style);
+    }
+}
+
+
+class ButtonBase extends WidgetBase{
+    constructor(inRect)
+    {
+        super(inRect);
+
+        this.label = new LabelBase(inRect);
+        this.label.set_color('rgb(255,255,255');
+    }
+
+    set_label(text){
+        this.label.set_label(text);
+    }
+
+    set_active(active){
+        super.set_active(active);
+        this.label.set_active(active);
+    }
+
+    draw()
+    {
+        super.draw();
+        this.label.draw();
     }
 }

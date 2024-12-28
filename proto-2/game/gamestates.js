@@ -54,8 +54,8 @@ class GameState_InterventionPreview extends StateMachineState
             this.current_intervention += step;
         }
 
-        this.buttons['prev_intervention'].active = this.current_intervention > 0;
-        this.buttons['next_intervention'].active = this.current_intervention < this.intervention_types.length-1;
+        this.buttons['prev_intervention'].set_active(this.current_intervention > 0);
+        this.buttons['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
     }
 
     init()
@@ -67,8 +67,8 @@ class GameState_InterventionPreview extends StateMachineState
         let loc = layout['screen_intervention_preview']['children']['button_prev'];
 
         this.buttons['prev_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
-        this.buttons['prev_intervention'].active = false;
-        this.buttons['prev_intervention'].label = 'PREV';
+        this.buttons['prev_intervention'].set_active(false);
+        this.buttons['prev_intervention'].set_label('PREV');
         this.buttons['prev_intervention'].on_click = function (d) {
                 self.on_interventon_button(d, -1);
             };
@@ -76,8 +76,8 @@ class GameState_InterventionPreview extends StateMachineState
         loc = layout['screen_intervention_preview']['children']['button_next'];
 
         this.buttons['next_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
-        this.buttons['next_intervention'].active = true;
-        this.buttons['next_intervention'].label = 'NEXT';
+        this.buttons['next_intervention'].set_active(true);
+        this.buttons['next_intervention'].set_label('NEXT');
         this.buttons['next_intervention'].on_click = function (d) {
                 self.on_interventon_button(d, 1);
             };
