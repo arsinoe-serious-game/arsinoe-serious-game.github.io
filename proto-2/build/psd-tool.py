@@ -22,9 +22,10 @@ def do_layer(layer, indent, data):
 
 
 data = {}
+data['children'] = {}
 for layer in psd:
 
-    do_layer(layer, 0, data)
+    do_layer(layer, 0, data['children'])
 
 print(data)
 

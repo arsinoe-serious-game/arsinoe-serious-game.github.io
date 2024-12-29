@@ -77,23 +77,63 @@ class LayerWidget extends  WidgetBase{
     }
 }
 
+function layout_get_by_name(layer, name){
+
+    for (const [key, value] of Object.entries(layer)) {
+
+        console.log(name +' -> ' + key);
+
+        if (key === name){
+            return value;
+        }
+
+        if ('children' in value) {
+            let result = layout_get_by_name(value, name);
+
+            if (result !== null) {
+                return result;
+            }
+        }
+
+        if (key === 'children') {
+            let result = layout_get_by_name(value, name);
+
+            if (result !== null) {
+                return result;
+            }
+        }
+    }
+    return null;
+}
+
+function layer_to_rect(layer){
+    return new Rect(layer['offset'][0],layer['offset'][1],layer['size'][0],layer['size'][1]);
+}
 
 class InterventionCardWidget extends  LayerWidget{
     constructor(inRect) {
         super(inRect);
         this.card_info = undefined;
 
-        this.template= layout['templates']['children']['template_intervention_card'];
+        this.template = layout_get_by_name(layout, 'template_intervention_card');
 
-        this.scale.x = this.w / (this.template['children']['bg']["size"][0]);
-        this.scale.y = this.h / (this.template['children']['bg']["size"][1]);
+        let bg = layout_get_by_name(this.template,'bg');
 
-        this.qr_code_link = new WidgetBase( this.layer_to_rect(new Vector2(this.x,this.y), this.template['children']['qr_code']));
+        this.scale.x = this.w / (layout_get_by_name(this.template,'bg')["size"][0]);
+        this.scale.y = this.h / (layout_get_by_name(this.template,'bg')["size"][1]);
+
+        this.qr_code_link = new WidgetBase( this.layer_to_rect(new Vector2(this.x,this.y), layout_get_by_name(this.template,'qr_code') ));
         this.qr_code_link.set_active(true);
         this.qr_code_link.on_click = function (d) {
             console.log('QR link!');
-            window.open(document.URL, 'https://arsinoe-serious-game.github.io/proto-2/', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+            window.open('website/game/events/flood_event.pdf', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
         };
+
+        this.side = 'front';
+    }
+
+    set_display(side){
+        this.side = side;
     }
 
     set_card_info(card_info) {
@@ -105,35 +145,36 @@ class InterventionCardWidget extends  LayerWidget{
         this.qr_code_link.update();
     }
 
-    draw(){
-        //super.draw();
-
-        let loc = new Vector2(this.x, this.y);
-
-        let bg_col = 'rgb(127,127,127)';
-
+    get_bg_col(){
         if (this.card_info['type'] == 'HP'){
-            bg_col = 'rgb(246,244,113)';
+            return 'rgb(246,244,113)';
         }
 
         if (this.card_info['type'] == 'BP'){
-            bg_col = 'rgb(244,174,100)';
+            return 'rgb(244,174,100)';
         }
 
         if (this.card_info['type'] == 'DP'){
-            bg_col = 'rgb(143,161,246)';
+            return 'rgb(143,161,246)';
         }
 
         if (this.card_info['type'] == 'FP') {
-            bg_col = 'rgb(179,218,244)';
+            return 'rgb(179,218,244)';
         }
 
+        return 'rgb(127,127,127)';
+    }
 
-        let template = layout['templates']['children']['template_intervention_card'];
+    draw_bg(loc){
+        this.debug_rect(loc, layout_get_by_name(this.template,'bg'), this.get_bg_col() );
+    }
 
-        //this.debug_layer(loc,template);
+    draw_front(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
 
-        this.debug_rect(loc, template['children']['bg'], bg_col );
+        let template = layout_get_by_name(this.template,'front');
+
         //this.debug_rect(loc, template['children']['qr_code'], 'rgba(255,0,255)');
         this.qr_code_link.draw();
 
@@ -144,12 +185,12 @@ class InterventionCardWidget extends  LayerWidget{
         let max_line_length = 24;
 
         if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 36*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 28*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }else {
-            this.debug_text(loc, template['children']['header_text'], 40*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
 
-        this.debug_image(loc, template['children']['image_loc'],this.image);
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'),this.image);
 
 
         //do description
@@ -208,7 +249,7 @@ class InterventionCardWidget extends  LayerWidget{
         pos.y +=1*this.scale.y;
 
         for(let i=0;i<5;i++) {
-            let c = template['children']['protection_table']['children']['p' + i.toString()];
+            let c = layout_get_by_name(template,'protection_table')['children']['p' + i.toString()];
 
             this.debug_rect(loc, c['children']['heading'], 'rgb(28,96,126)');
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
@@ -216,6 +257,66 @@ class InterventionCardWidget extends  LayerWidget{
             this.debug_text(pos, c['children']['heading'], 20*this.scale.y, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
             this.debug_text(pos, c['children']['value'], 20*this.scale.y, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
+    }
+
+    draw_back(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+
+        let template = layout_get_by_name(this.template,'back');
+
+        //this.debug_layer(loc, template);
+
+        let title = 'outcomes'.toUpperCase();
+
+        let max_line_length = 19;
+
+        if (title.length > max_line_length) {
+            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 28*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }else {
+            this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }
+
+        //do description
+        let t = template['children']['floating_text'];
+        let pos = new Vector2();
+
+        pos.x = loc.x + (t['offset'][0])*this.scale.x;
+        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+
+        pos.y += 10*this.scale.y;
+
+        max_line_length = 48;
+
+        let text_font_size = 17*this.scale.y;
+
+        //do positives
+        pos.y += 7*this.scale.y;
+        pos.x = loc.x + (t['offset'][0]*this.scale.x);
+
+        let dice = ['1: Very Bad','2-3: Bad','4-5:Alright','6:Great'];
+
+        for(let p=0;p<4;p++) {
+            GAZCanvas.Text(text_font_size, dice[p], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            pos.y += text_font_size *1.1;
+
+            let text= this.format_desc(this.card_info['outcome-' + (p).toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y +=((text.split('\n').length) * text_font_size);
+            pos.y += text_font_size *1.1;
+        }
+    }
+
+    draw(){
+
+        if (this.side === 'front'){
+            this.draw_front();
+        }else{
+            this.draw_back();
+        }
+
+
+        //super.draw();
     }
 }
 
@@ -763,9 +864,13 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
         this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
 
+        this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
+
+        let current_mode = GameState_InterventionPrint.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
-        this.stateMachine.setState(GameState_InterventionPreview.label());
+        //this.stateMachine.setState(GameState_InterventionPreview.label());
+        this.stateMachine.setState(current_mode);
 
         this.image.src = "assets/interventions/intervention-0.png";
     }
