@@ -80,9 +80,6 @@ class LayerWidget extends  WidgetBase{
 function layout_get_by_name(layer, name){
 
     for (const [key, value] of Object.entries(layer)) {
-
-        console.log(name +' -> ' + key);
-
         if (key === name){
             return value;
         }
@@ -130,6 +127,10 @@ class InterventionCardWidget extends  LayerWidget{
         };
 
         this.side = 'front';
+
+        this.heading_font_size = 24;
+        //this.content_font_size = 17;
+        this.content_font_size = 18;
     }
 
     set_display(side){
@@ -182,12 +183,12 @@ class InterventionCardWidget extends  LayerWidget{
 
         //title = loc.toString() +' ' + template['children']['bg']['size'].toString();
 
-        let max_line_length = 24;
+        let max_line_length = 22;
 
         if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 28*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }else {
-            this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
 
         this.debug_image(loc, layout_get_by_name(template,'image_loc'),this.image);
@@ -202,9 +203,10 @@ class InterventionCardWidget extends  LayerWidget{
 
         pos.y += 10*this.scale.y;
 
-        max_line_length = 45;
+        max_line_length = Math.floor((45 * this.content_font_size)/18.0);
 
-        let text_font_size = 17*this.scale.y;
+
+        let text_font_size = this.content_font_size * this.scale.y;
 
         let text = this.format_desc(this.card_info['desc'], max_line_length);
 
@@ -269,13 +271,8 @@ class InterventionCardWidget extends  LayerWidget{
 
         let title = 'outcomes'.toUpperCase();
 
-        let max_line_length = 19;
+        this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
 
-        if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-(14*this.scale.y) ), template['children']['header_text'], 28*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
-        }else {
-            this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
-        }
 
         //do description
         let t = template['children']['floating_text'];
@@ -286,15 +283,15 @@ class InterventionCardWidget extends  LayerWidget{
 
         pos.y += 10*this.scale.y;
 
-        max_line_length = 48;
+        let text_font_size = this.content_font_size * this.scale.y;
 
-        let text_font_size = 17*this.scale.y;
-
-        //do positives
+        //do outcomes
         pos.y += 7*this.scale.y;
         pos.x = loc.x + (t['offset'][0]*this.scale.x);
 
         let dice = ['1: Very Bad','2-3: Bad','4-5:Alright','6:Great'];
+
+        let max_line_length = Math.floor((46 * this.content_font_size)/18.0);
 
         for(let p=0;p<4;p++) {
             GAZCanvas.Text(text_font_size, dice[p], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
