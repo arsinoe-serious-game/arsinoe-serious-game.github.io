@@ -181,8 +181,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        400,
-                        600
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -431,12 +431,128 @@ let layout =
                         },
                         "back": {
                             "offset": [
-                                16,
+                                0,
+                                0
+                            ],
+                            "size": [
+                                0,
+                                0
+                            ],
+                            "children": {
+                                "floating_text": {
+                                    "offset": [
+                                        16,
+                                        76
+                                    ],
+                                    "size": [
+                                        366,
+                                        504
+                                    ]
+                                },
+                                "header_text": {
+                                    "offset": [
+                                        16,
+                                        11
+                                    ],
+                                    "size": [
+                                        366,
+                                        56
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "template_persona_card": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        400,
+                        600
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                400,
+                                600
+                            ]
+                        },
+                        "front": {
+                            "offset": [
+                                15,
                                 11
                             ],
                             "size": [
-                                366,
-                                569
+                                367,
+                                498
+                            ],
+                            "children": {
+                                "reference_data": {
+                                    "offset": [
+                                        0,
+                                        0
+                                    ],
+                                    "size": [
+                                        438,
+                                        601
+                                    ]
+                                },
+                                "header_text": {
+                                    "offset": [
+                                        16,
+                                        11
+                                    ],
+                                    "size": [
+                                        307,
+                                        56
+                                    ]
+                                },
+                                "qr_code": {
+                                    "offset": [
+                                        326,
+                                        11
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
+                                },
+                                "image_loc": {
+                                    "offset": [
+                                        16,
+                                        70
+                                    ],
+                                    "size": [
+                                        366,
+                                        182
+                                    ]
+                                },
+                                "floating_text": {
+                                    "offset": [
+                                        15,
+                                        258
+                                    ],
+                                    "size": [
+                                        367,
+                                        251
+                                    ]
+                                }
+                            }
+                        },
+                        "back": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                0,
+                                0
                             ],
                             "children": {
                                 "floating_text": {

@@ -247,7 +247,34 @@ class ARSINOEReslienceGame:
             print(text)
 
 
-inst = ARSINOEReslienceGame()
+#inst = ARSINOEReslienceGame()
 
-inst.run_game()
+#inst.run_game()
 
+def build_json_from_csv(filename, js_name):
+
+    entries = []
+
+    with open(filename, newline='', encoding='utf-8-sig') as csvfile:
+        reader = csv.DictReader(csvfile, skipinitialspace=True)
+
+        for row in reader:
+
+            for key in row:
+                row[key] = row[key].replace('\n', '')
+                row[key] = row[key].replace('\u00a0', ' ')
+
+            entries.append(row)
+
+    with open('../game/'+js_name +'.js', 'w') as fp:
+        fp.write('let ' + js_name + ' = ')
+        fp.write('\n')
+        json.dump(entries, fp, indent=4)
+        fp.write(';\n')
+        fp.write('\n')
+        fp.close()
+
+    return
+
+build_json_from_csv('interventions.csv', 'intervention_cards')
+build_json_from_csv('personas.csv', 'persona_cards')

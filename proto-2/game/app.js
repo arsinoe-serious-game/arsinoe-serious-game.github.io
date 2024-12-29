@@ -107,12 +107,16 @@ function layer_to_rect(layer){
     return new Rect(layer['offset'][0],layer['offset'][1],layer['size'][0],layer['size'][1]);
 }
 
-class InterventionCardWidget extends  LayerWidget{
+class CardWidgetBase extends LayerWidget {
     constructor(inRect) {
         super(inRect);
-        this.card_info = undefined;
 
-        this.template = layout_get_by_name(layout, 'template_intervention_card');
+        this.card_info = undefined;
+        this.template_name = 'template_intervention_card';
+    }
+
+    init(){
+        this.template = layout_get_by_name(layout, this.template_name);
 
         let bg = layout_get_by_name(this.template,'bg');
 
@@ -129,7 +133,6 @@ class InterventionCardWidget extends  LayerWidget{
         this.side = 'front';
 
         this.heading_font_size = 24;
-        //this.content_font_size = 17;
         this.content_font_size = 18;
     }
 
@@ -141,33 +144,45 @@ class InterventionCardWidget extends  LayerWidget{
         this.card_info = card_info;
     }
 
+    get_bg_col(){
+        return 'rgb(127,127,127)';
+    }
+
     update() {
         super.update();
         this.qr_code_link.update();
     }
 
-    get_bg_col(){
-        if (this.card_info['type'] == 'HP'){
-            return 'rgb(246,244,113)';
-        }
-
-        if (this.card_info['type'] == 'BP'){
-            return 'rgb(244,174,100)';
-        }
-
-        if (this.card_info['type'] == 'DP'){
-            return 'rgb(143,161,246)';
-        }
-
-        if (this.card_info['type'] == 'FP') {
-            return 'rgb(179,218,244)';
-        }
-
-        return 'rgb(127,127,127)';
-    }
-
     draw_bg(loc){
         this.debug_rect(loc, layout_get_by_name(this.template,'bg'), this.get_bg_col() );
+    }
+
+    draw(){
+
+        if (this.side === 'front'){
+            this.draw_front();
+        }else{
+            this.draw_back();
+        }
+
+
+        //super.draw();
+    }
+
+    draw_front(){
+
+    }
+
+    draw_back(){
+
+    }
+}
+
+class PersonaCardWidget extends CardWidgetBase{
+    constructor(inRect) {
+        super(inRect);
+
+        this.template_name = 'template_persona_card';
     }
 
     draw_front(){
@@ -175,13 +190,9 @@ class InterventionCardWidget extends  LayerWidget{
         this.draw_bg(loc);
 
         let template = layout_get_by_name(this.template,'front');
-
-        //this.debug_rect(loc, template['children']['qr_code'], 'rgba(255,0,255)');
         this.qr_code_link.draw();
 
         let title = this.card_info['name'].toUpperCase();
-
-        //title = loc.toString() +' ' + template['children']['bg']['size'].toString();
 
         let max_line_length = 22;
 
@@ -205,6 +216,107 @@ class InterventionCardWidget extends  LayerWidget{
 
         max_line_length = Math.floor((45 * this.content_font_size)/18.0);
 
+        let text_font_size = this.content_font_size * this.scale.y;
+
+        let text = this.format_desc(this.card_info['desc'], max_line_length);
+
+        pos.x = loc.x + (t['offset'][0] + t['size'][0]/2) * this.scale.x;
+
+        GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', 'roboto', '');
+
+        pos.y += ((text.split('\n').length) * text_font_size);
+
+        //do positives
+        pos.y += 7*this.scale.y;
+        pos.x = loc.x + (t['offset'][0]*this.scale.x);
+
+        //text_font_size = 16*this.scale.y;
+        GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+        pos.y += text_font_size;
+
+        for(let p=0;p<3;p++) {
+            text = (p + 1).toString() + '.';
+            text += this.format_desc(this.card_info['pos-' + (p + 1).toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y +=((text.split('\n').length) * text_font_size);
+        }
+
+        //do issues
+        pos.y += 5*this.scale.y;
+
+        GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+        pos.y += text_font_size;
+
+        for(let p=0;p<3;p++) {
+            text = (p + 1).toString() + '.';
+            text += this.format_desc(this.card_info['neg-' + (p + 1).toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y +=((text.split('\n').length) * text_font_size);
+        }
+    }
+
+    draw_back(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+    }
+}
+
+class InterventionCardWidget extends  CardWidgetBase{
+    constructor(inRect) {
+        super(inRect);
+    }
+
+
+    get_bg_col(){
+        if (this.card_info['type'] == 'HP'){
+            return 'rgb(246,244,113)';
+        }
+
+        if (this.card_info['type'] == 'BP'){
+            return 'rgb(244,174,100)';
+        }
+
+        if (this.card_info['type'] == 'DP'){
+            return 'rgb(143,161,246)';
+        }
+
+        if (this.card_info['type'] == 'FP') {
+            return 'rgb(179,218,244)';
+        }
+
+        return 'rgb(127,127,127)';
+    }
+
+    draw_front(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+
+        let template = layout_get_by_name(this.template,'front');
+        this.qr_code_link.draw();
+
+        let title = this.card_info['name'].toUpperCase();
+
+        let max_line_length = 22;
+
+        if (title.length > max_line_length) {
+            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size*this.scale.y, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }else {
+            this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }
+
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'),this.image);
+
+
+        //do description
+        let t = template['children']['floating_text'];
+        let pos = new Vector2();
+
+        pos.x = loc.x + (t['offset'][0])*this.scale.x;
+        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+
+        pos.y += 10*this.scale.y;
+
+        max_line_length = Math.floor((45 * this.content_font_size)/18.0);
 
         let text_font_size = this.content_font_size * this.scale.y;
 
@@ -302,18 +414,6 @@ class InterventionCardWidget extends  LayerWidget{
             pos.y +=((text.split('\n').length) * text_font_size);
             pos.y += text_font_size *1.1;
         }
-    }
-
-    draw(){
-
-        if (this.side === 'front'){
-            this.draw_front();
-        }else{
-            this.draw_back();
-        }
-
-
-        //super.draw();
     }
 }
 
@@ -862,8 +962,9 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
 
         this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
+        this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());
 
-        let current_mode = GameState_InterventionPrint.label();
+        let current_mode = GameState_PersonaPrint.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
