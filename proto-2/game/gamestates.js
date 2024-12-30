@@ -62,7 +62,7 @@ class GameState_InterventionPreview extends StateMachineState
         for(let i=0;i < intervention_cards.length;i++) {
 
             if (intervention_cards[i]['type'] === this.intervention_types[this.current_intervention]) {
-                this.widget_list['intervention_card_' + card_index.toString()].set_card_info(intervention_cards[i]);
+                this.widget_list['intervention_card_' + card_index.toString()].set_card_info(i);
                 card_index += 1;
             }
         }
@@ -74,9 +74,11 @@ class GameState_InterventionPreview extends StateMachineState
 
         let self = this;
 
-        let loc = layout['screen_intervention_preview']['children']['button_prev'];
+        let template = layout_get_by_name(layout, 'screen_intervention_preview');
 
-        this.widget_list['prev_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
+        let loc = layout_get_by_name(template, 'button_prev');
+
+        this.widget_list['prev_intervention'] = new ButtonBase(layer_to_rect(loc));
         this.widget_list['prev_intervention'].set_active(false);
         this.widget_list['prev_intervention'].set_label('PREV');
         this.widget_list['prev_intervention'].label.font_size = 24;
@@ -85,9 +87,9 @@ class GameState_InterventionPreview extends StateMachineState
             self.on_interventon_button(d, -1);
         };
 
-        loc = layout['screen_intervention_preview']['children']['button_next'];
+        loc = layout_get_by_name(template, 'button_next');
 
-        this.widget_list['next_intervention'] = new ButtonBase(new Rect(loc['offset'][0],loc['offset'][1],loc['size'][0],loc['size'][1]));
+        this.widget_list['next_intervention'] = new ButtonBase(layer_to_rect(loc));
         this.widget_list['next_intervention'].set_active(true);
         this.widget_list['next_intervention'].set_label('NEXT');
         this.widget_list['next_intervention'].label.font_size = 24;
@@ -97,7 +99,7 @@ class GameState_InterventionPreview extends StateMachineState
         };
 
         for(let i=0;i < 7;i++) {
-            let loc = layout['screen_intervention_preview']['children']['card_' + i.toString()];
+            let loc = layout_get_by_name(template, 'card_' + i.toString());
             this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
         }
 
@@ -400,8 +402,8 @@ class GameState_InterventionPrint extends StateMachineState
         this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
         this.widget_list['next_intervention'].set_active(this.current_intervention < intervention_cards.length-1);
 
-        this.widget_list['intervention_card_0'].set_card_info(intervention_cards[this.current_intervention]);
-        this.widget_list['intervention_card_1'].set_card_info(intervention_cards[this.current_intervention]);
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
     }
 
     init()
@@ -501,8 +503,8 @@ class GameState_PersonaPrint extends StateMachineState
         this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
         this.widget_list['next_intervention'].set_active(this.current_intervention < persona_cards.length-1);
 
-        this.widget_list['intervention_card_0'].set_card_info(persona_cards[this.current_intervention]);
-        this.widget_list['intervention_card_1'].set_card_info(persona_cards[this.current_intervention]);
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
     }
 
     init()
@@ -600,8 +602,8 @@ class GameState_EventPrint extends StateMachineState
         this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
         this.widget_list['next_intervention'].set_active(this.current_intervention < event_cards.length-1);
 
-        this.widget_list['intervention_card_0'].set_card_info(event_cards[this.current_intervention]);
-        this.widget_list['intervention_card_1'].set_card_info(event_cards[this.current_intervention]);
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
     }
 
     init()

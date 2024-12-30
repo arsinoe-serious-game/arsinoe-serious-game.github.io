@@ -18,7 +18,8 @@ let intervention_cards =
         "outcome-0": "Water has been greatly contaminated by the operation of the farm. As a result, the natural marine life has been endangered by the release of pathogens and parasites",
         "outcome-1": "The fish farm attracts the local shark population resulting in  a surfer being attacked and wounded. ",
         "outcome-2": "The fish farms are operational and working well, creating jobs and adding fish to the local palette. ",
-        "outcome-3": "The fish farming has been a great success! Many more people can afford to have locally supplied fresh fish, saving air miles. The income from the farming has been put back into the local community in educating local fishermen on sustainable fishing practice"
+        "outcome-3": "The fish farming has been a great success! Many more people can afford to have locally supplied fresh fish, saving air miles. The income from the farming has been put back into the local community in educating local fishermen on sustainable fishing practice",
+        "img": "fish_farm.jpg"
     },
     {
         "type": "BP",
@@ -38,7 +39,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "monofarm.jpg"
     },
     {
         "type": "BP",
@@ -58,7 +60,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "dashboard.jpg"
     },
     {
         "type": "BP",
@@ -78,7 +81,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "digital_twin.jpg"
     },
     {
         "type": "BP",
@@ -98,7 +102,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "dashboard.jpg"
     },
     {
         "type": "BP",
@@ -118,7 +123,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": ""
     },
     {
         "type": "BP",
@@ -138,7 +144,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "protect_local_crops.jpg"
     },
     {
         "type": "DP",
@@ -158,7 +165,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "golf_course.jpg"
     },
     {
         "type": "DP",
@@ -178,7 +186,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "reservoir.jpg"
     },
     {
         "type": "DP",
@@ -198,7 +207,8 @@ let intervention_cards =
         "outcome-0": " The water quality did not pass the needed checks, and none of the water can be used. ",
         "outcome-1": "Traffic in the town has become much worse due to transporting all the water. There are potholes everywhere and you have some very disgruntled locals.",
         "outcome-2": "The effects of a hot and dry summer have been offset through the water. While not a perfect solution, it has had a positive effect.",
-        "outcome-3": "Despite a very hot and dry summer, there\u2019s more than enough water bringing in lots of tourists from other drier areas. "
+        "outcome-3": "Despite a very hot and dry summer, there\u2019s more than enough water bringing in lots of tourists from other drier areas. ",
+        "img": "water_delivery_service.png"
     },
     {
         "type": "DP",
@@ -218,7 +228,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "dashboard.jpg"
     },
     {
         "type": "DP",
@@ -238,7 +249,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "digital_twin.jpg"
     },
     {
         "type": "DP",
@@ -258,7 +270,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "smart_meters.jpg"
     },
     {
         "type": "DP",
@@ -278,7 +291,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "smart_irrigation.jpg"
     },
     {
         "type": "FP",
@@ -298,7 +312,8 @@ let intervention_cards =
         "outcome-0": "The project is a disaster! Residents of nearby cliff heights raise a long and costly legal objections as their district is being allowed to erode into the sea, resulting in the project being substaintially delayed. ",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "Shortly after the project completes, there is a huge storm. Unlike previous storms, the coast road district doesn\u2019t flood saving the council by not having to perform a large clean-up. "
+        "outcome-3": "Shortly after the project completes, there is a huge storm. Unlike previous storms, the coast road district doesn\u2019t flood saving the council by not having to perform a large clean-up. ",
+        "img": "sea_wall.jpg"
     },
     {
         "type": "FP",
@@ -318,7 +333,8 @@ let intervention_cards =
         "outcome-0": "The complex is a titanic success, so much so that there\u2019s gridlock in and around the town as everybody wants to go there making it impossible to travel anywhere.",
         "outcome-1": "The complex is a success, but heavy rains frequently flood the huge car parks ",
         "outcome-2": "The complex is a success with tenants that complement rather than compete with the town centre attractions. ",
-        "outcome-3": "The complex is a real success and careful transport planning has enabled people from all over the region to attend films, gigs, and shows without causing chaos. "
+        "outcome-3": "The complex is a real success and careful transport planning has enabled people from all over the region to attend films, gigs, and shows without causing chaos. ",
+        "img": "lesiure_resort.jpg"
     },
     {
         "type": "FP",
@@ -338,7 +354,8 @@ let intervention_cards =
         "outcome-0": "The research is a disaster! The beavers have moved to the local arboretum and destroyed most of the rare saplings. The university abandoned the research as unworkable.",
         "outcome-1": "The beaver area suffers from a heavy rainstorm  resulting in beaver damn bursts and flooding in the downstream ",
         "outcome-2": "The beaver experiment is working well, and the university is working to increase size of the project, protecting more land. ",
-        "outcome-3": "The beaver experiment is working well, with fewer floods. The beavers have been a local point of interest , drawing in beaver tourists and the sale of beaver plushies is through the roof. "
+        "outcome-3": "The beaver experiment is working well, with fewer floods. The beavers have been a local point of interest , drawing in beaver tourists and the sale of beaver plushies is through the roof. ",
+        "img": "beavers.jpg"
     },
     {
         "type": "FP",
@@ -358,7 +375,8 @@ let intervention_cards =
         "outcome-0": "As the golf course returns to nature, the town is hit by a \u2018once in a generation\u2019 storm with extreme tides that rush over the course and undermine the mainline rail track, causing it to be out of use for six months.",
         "outcome-1": "Local golfers protest the decision by playing \u2018urban golf\u2019 in the town centre.  ",
         "outcome-2": "As the course returns to wetland, it becomes a popular destination for firstly, birds and then bird watchers.",
-        "outcome-3": "Hearing the news,  a former champion golfer buys the old typewriter factory and rejuvenates it into a high-quality course that keen golfers flock to, boosting tourism substantially. "
+        "outcome-3": "Hearing the news,  a former champion golfer buys the old typewriter factory and rejuvenates it into a high-quality course that keen golfers flock to, boosting tourism substantially. ",
+        "img": "golf_course.jpg"
     },
     {
         "type": "FP",
@@ -378,7 +396,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "dashboard.jpg"
     },
     {
         "type": "FP",
@@ -398,7 +417,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "digital_twin.jpg"
     },
     {
         "type": "FP",
@@ -418,7 +438,8 @@ let intervention_cards =
         "outcome-0": "The project is a disaster! There was a major flood event, and a much larger area of land was flooded. Many farmer's land has been destroyed and polluted waters flow through the town. ",
         "outcome-1": "",
         "outcome-2": "",
-        "outcome-3": "The project was a success. A rare species of butterfly has been seen in the area and bird species have increased. The downstream town also did not suffer flooding in the last heavy rainfall event"
+        "outcome-3": "The project was a success. A rare species of butterfly has been seen in the area and bird species have increased. The downstream town also did not suffer flooding in the last heavy rainfall event",
+        "img": "flood_plain.jpg"
     },
     {
         "type": "HP",
@@ -438,7 +459,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "cool_roofs.jpg"
     },
     {
         "type": "HP",
@@ -458,7 +480,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": ""
     },
     {
         "type": "HP",
@@ -478,7 +501,8 @@ let intervention_cards =
         "outcome-0": "The green walls have not been adequately maintained. Clogged drainage systems have led to sewage overflows and spills and created a right old stink in and around the buildings.",
         "outcome-1": "There has been an infestation of  aphids and spiders in one of the buildings and requires additional pest control.",
         "outcome-2": "The project was a success, many people have commented on the reduction of noise and stress within the workplace. ",
-        "outcome-3": "The project was a great success. A local study has found that urban temperatures and air pollution have reduced, and less money has been spent on heating the buildings. "
+        "outcome-3": "The project was a great success. A local study has found that urban temperatures and air pollution have reduced, and less money has been spent on heating the buildings. ",
+        "img": "green_walls.jpg"
     },
     {
         "type": "HP",
@@ -498,7 +522,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "dashboard.jpg"
     },
     {
         "type": "HP",
@@ -518,7 +543,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "digital_twin.jpg"
     },
     {
         "type": "HP",
@@ -538,7 +564,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": ""
     },
     {
         "type": "HP",
@@ -558,7 +585,8 @@ let intervention_cards =
         "outcome-0": "out-1",
         "outcome-1": "out-2",
         "outcome-2": "out-3",
-        "outcome-3": "out-4"
+        "outcome-3": "out-4",
+        "img": "heat_tourism.jpg"
     }
 ];
 

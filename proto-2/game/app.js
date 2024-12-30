@@ -73,7 +73,18 @@ class LayerWidget extends  WidgetBase{
     }
 
     debug_image(loc, layer, image){
-        GAZCanvas.Sprite(image, this.layer_to_rect(loc,layer) );
+        let r= this.layer_to_rect(loc,layer);
+
+        if(image.naturalWidth > 0) {
+            let f = (r.h / image.naturalHeight);
+            let w = image.naturalWidth * f;
+            let h = image.naturalHeight * f;
+
+            r.x += w/2;
+            r.w = w;
+
+            GAZCanvas.Sprite(image, r);
+        }
     }
 }
 
@@ -81,7 +92,7 @@ function layout_get_by_name(layer, name){
 
 
     for (const [key, value] of Object.entries(layer)) {
-        console.log(key +'->' +name);
+        //console.log(key +'->' +name);
 
         if (key === name){
             return value;
@@ -116,6 +127,8 @@ class CardWidgetBase extends LayerWidget {
 
         this.card_info = undefined;
         this.template_name = 'template_intervention_card';
+        this.card_index = 0;
+        this.card_set = undefined;
     }
 
     init(){
@@ -143,8 +156,9 @@ class CardWidgetBase extends LayerWidget {
         this.side = side;
     }
 
-    set_card_info(card_info) {
-        this.card_info = card_info;
+    set_card_info(index) {
+        this.card_index = index;
+        this.card_info = this.card_set[this.card_index];
     }
 
     get_bg_col(){
@@ -192,12 +206,13 @@ class EventCardWidget  extends CardWidgetBase {
         super(inRect);
 
         this.template_name = 'template_event_card';
-
     }
 
     init(){
         super.init();
         this.content_font_size = 16;
+
+        this.card_set = event_cards;
     }
 
     draw_front() {
@@ -293,6 +308,7 @@ class PersonaCardWidget extends CardWidgetBase{
         super(inRect);
 
         this.template_name = 'template_persona_card';
+        this.card_set = persona_cards;
     }
 
     draw_front(){
@@ -302,7 +318,7 @@ class PersonaCardWidget extends CardWidgetBase{
         let template = layout_get_by_name(this.template,'front');
         this.qr_code_link.draw();
 
-        let title = this.card_info['name'].toUpperCase();
+        let title = this.card_info['type'].toUpperCase();
 
         let max_line_length = 22;
 
@@ -312,8 +328,7 @@ class PersonaCardWidget extends CardWidgetBase{
             this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'),this.image);
-
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['personas'][this.card_index] );
 
         //do description
         let t = template['children']['floating_text'];
@@ -374,8 +389,9 @@ class PersonaCardWidget extends CardWidgetBase{
 class InterventionCardWidget extends  CardWidgetBase{
     constructor(inRect) {
         super(inRect);
-    }
 
+        this.card_set = intervention_cards;
+    }
 
     get_bg_col(){
         if (this.card_info['type'] == 'HP'){
@@ -414,8 +430,7 @@ class InterventionCardWidget extends  CardWidgetBase{
             this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'),this.image);
-
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['interventions'][this.card_index] );
 
         //do description
         let t = template['children']['floating_text'];
@@ -797,6 +812,7 @@ class ViewBase{
 
         this.event_map = new Image();
 
+        this.image_bank = {};
     }
 
     on_draw_start(){
@@ -804,6 +820,28 @@ class ViewBase{
     }
 
     oneTimeInit() {
+
+        this.image_bank = {};
+        this.image_bank['interventions'] = [];
+        this.image_bank['personas'] = [];
+
+
+        for(let i=0;i< intervention_cards.length;i++){
+            this.image_bank['interventions'].push(new Image());
+
+            if(intervention_cards[i]['img'] !== ''){
+                this.image_bank['interventions'][i].src = "assets/interventions/" + intervention_cards[i]['img'];
+            }
+        }
+
+        for(let i=0;i< persona_cards.length;i++){
+            this.image_bank['personas'].push(new Image());
+
+            if(persona_cards[i]['img'] !== ''){
+                this.image_bank['personas'][i].src = "assets/persona/" + persona_cards[i]['img'];
+            }
+        }
+
         this.image.src = "assets/interventions/intervention-0.png";
         this.event_map.src = "assets/events/event_matrix.png";
     }
@@ -1079,6 +1117,9 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_EventPrint.label(), new GameState_EventPrint());
 
         let current_mode = GameState_EventPrint.label();
+
+        current_mode = GameState_InterventionPrint.label();
+        current_mode = GameState_PersonaPrint.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
