@@ -73,7 +73,7 @@ class LayerWidget extends  WidgetBase{
     }
 
     debug_image(loc, layer, image){
-        GAZCanvas.Sprite(appInst.view.image, this.layer_to_rect(loc,layer) );
+        GAZCanvas.Sprite(image, this.layer_to_rect(loc,layer) );
     }
 }
 
@@ -192,6 +192,12 @@ class EventCardWidget  extends CardWidgetBase {
         super(inRect);
 
         this.template_name = 'template_event_card';
+
+    }
+
+    init(){
+        super.init();
+        this.content_font_size = 16;
     }
 
     draw_front() {
@@ -236,7 +242,7 @@ class EventCardWidget  extends CardWidgetBase {
         text_font_size = this.content_font_size * this.scale.y;
 
 
-        max_line_length = Math.floor((42 * this.content_font_size)/18.0);
+        max_line_length = Math.floor((52 * this.content_font_size)/18.0);
 
         for(let i=2;i< 5;i++) {
             GAZCanvas.Text(text_font_size, this.card_info['heading-' + i.toString()], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
@@ -246,6 +252,8 @@ class EventCardWidget  extends CardWidgetBase {
             GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
             pos.y += (((text.split('\n').length)) * text_font_size) + text_font_size/2;
         }
+
+        this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.event_map);
     }
 
     draw_back() {
@@ -267,7 +275,7 @@ class EventCardWidget  extends CardWidgetBase {
             let layer = layout_get_by_name(template, 'result_' + i.toString());
 
             let r = layer_to_rect(layout_get_by_name(layer, 'right_text'));
-            let max_line_length = Math.floor((72 * this.content_font_size)/18.0);
+            let max_line_length = Math.floor((90 * this.content_font_size)/18.0);
             let text = this.format_desc(this.card_info['outcome-' + i.toString()], max_line_length);
             GAZCanvas.Text(text_font_size, text, new Vector2(r.x+loc.x,r.y+loc.y+ text_font_size ), 'rgb(0,0,0)', 'left', 'roboto', '');
 
@@ -787,6 +795,8 @@ class ViewBase{
 
         this.random = new Random(123456);
 
+        this.event_map = new Image();
+
     }
 
     on_draw_start(){
@@ -795,6 +805,7 @@ class ViewBase{
 
     oneTimeInit() {
         this.image.src = "assets/interventions/intervention-0.png";
+        this.event_map.src = "assets/events/event_matrix.png";
     }
 
     format_desc(in_str, max_chars){

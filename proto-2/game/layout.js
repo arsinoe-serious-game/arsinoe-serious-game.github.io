@@ -17,7 +17,7 @@ let layout =
                 0
             ],
             "size": [
-                700,
+                704,
                 500
             ],
             "children": {
@@ -431,7 +431,7 @@ let layout =
                         0
                     ],
                     "size": [
-                        700,
+                        704,
                         500
                     ],
                     "children": {
@@ -451,8 +451,8 @@ let layout =
                                 0
                             ],
                             "size": [
-                                0,
-                                0
+                                704,
+                                500
                             ],
                             "children": {
                                 "reference_data": {
@@ -487,12 +487,12 @@ let layout =
                                 },
                                 "image_loc": {
                                     "offset": [
-                                        16,
-                                        70
+                                        14,
+                                        256
                                     ],
                                     "size": [
-                                        366,
-                                        182
+                                        318,
+                                        227
                                     ]
                                 },
                                 "left_floating_text": {
@@ -523,8 +523,8 @@ let layout =
                                 0
                             ],
                             "size": [
-                                700,
-                                500
+                                0,
+                                0
                             ],
                             "children": {
                                 "reference_data": {
@@ -549,12 +549,12 @@ let layout =
                                 },
                                 "result_4": {
                                     "offset": [
-                                        16,
-                                        417
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        669,
-                                        80
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "left_text": {
@@ -581,12 +581,12 @@ let layout =
                                 },
                                 "result_3": {
                                     "offset": [
-                                        16,
-                                        330
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        669,
-                                        80
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "left_text": {
@@ -613,12 +613,12 @@ let layout =
                                 },
                                 "result_2": {
                                     "offset": [
-                                        16,
-                                        244
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        669,
-                                        80
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "left_text": {
@@ -645,12 +645,12 @@ let layout =
                                 },
                                 "result_1": {
                                     "offset": [
-                                        16,
-                                        157
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        669,
-                                        80
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "left_text": {
@@ -677,12 +677,12 @@ let layout =
                                 },
                                 "result_0": {
                                     "offset": [
-                                        16,
-                                        70
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        669,
-                                        80
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "left_text": {
