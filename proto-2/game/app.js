@@ -212,7 +212,7 @@ class EventCardWidget  extends CardWidgetBase {
         super.init();
         this.content_font_size = 16;
 
-        this.card_set = event_cards;
+        this.card_set = appInst.model.get_event_cards();
     }
 
     draw_front() {
@@ -308,7 +308,7 @@ class PersonaCardWidget extends CardWidgetBase{
         super(inRect);
 
         this.template_name = 'template_persona_card';
-        this.card_set = persona_cards;
+        this.card_set = appInst.model.get_persona_cards();
     }
 
     draw_front(){
@@ -390,7 +390,7 @@ class InterventionCardWidget extends  CardWidgetBase{
     constructor(inRect) {
         super(inRect);
 
-        this.card_set = intervention_cards;
+        this.card_set = appInst.model.get_intervention_cards();
     }
 
     get_bg_col(){
@@ -603,6 +603,18 @@ class ModelBase{
 
         this.players = [];
         this.current_mayor = '';
+    }
+
+    get_intervention_cards(){
+        return game_data['interventions'];
+    }
+
+    get_persona_cards(){
+        return game_data['personas'];
+    }
+
+    get_event_cards(){
+        return game_data['events'];
     }
 
     do_cookie_data(b_get){
@@ -825,6 +837,7 @@ class ViewBase{
         this.image_bank['interventions'] = [];
         this.image_bank['personas'] = [];
 
+        let intervention_cards = appInst.model.get_intervention_cards();
 
         for(let i=0;i< intervention_cards.length;i++){
             this.image_bank['interventions'].push(new Image());
@@ -834,6 +847,7 @@ class ViewBase{
             }
         }
 
+        let persona_cards = appInst.model.get_persona_cards();
         for(let i=0;i< persona_cards.length;i++){
             this.image_bank['personas'].push(new Image());
 

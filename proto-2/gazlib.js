@@ -599,6 +599,10 @@ class Size
             this.w = this.h = 0;
         }
     }
+
+    toString(){
+        return this.w.toString()+'x'+this.h.toString();
+    }
 }
 
 class Colour

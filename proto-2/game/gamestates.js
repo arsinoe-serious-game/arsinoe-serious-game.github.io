@@ -447,6 +447,7 @@ class GameState_InterventionPrint extends GameState_TestModeBase
     }
 
     on_update_interventon(step){
+        let intervention_cards = appInst.model.get_intervention_cards();
         if ((this.current_intervention + step >= 0) && (this.current_intervention+step < intervention_cards.length-1)) {
             this.current_intervention += step;
         }
@@ -461,6 +462,7 @@ class GameState_InterventionPrint extends GameState_TestModeBase
     init()
     {
         super.init();
+        this.current_intervention = 0;
 
         let self = this;
 
@@ -519,6 +521,9 @@ class GameState_PersonaPrint extends GameState_TestModeBase
     }
 
     on_update_interventon(step){
+
+        let persona_cards = appInst.model.get_persona_cards();
+
         if ((this.current_intervention + step >= 0) && (this.current_intervention+step < persona_cards.length)) {
             this.current_intervention += step;
         }
@@ -535,6 +540,7 @@ class GameState_PersonaPrint extends GameState_TestModeBase
         super.init();
 
         let self = this;
+        this.current_intervention = 0;
 
         let template = layout_get_by_name(layout,'screen_intervention_preview');
 
@@ -583,12 +589,14 @@ class GameState_EventPrint extends GameState_TestModeBase
     {
         super();
 
-        this.first_intervention = 0;
         this.current_intervention = 0;
 
     }
 
+
     on_update_interventon(step){
+        let event_cards = appInst.model.get_event_cards();
+
         if ((this.current_intervention + step >= 0) && (this.current_intervention+step < event_cards.length)) {
             this.current_intervention += step;
         }
@@ -603,6 +611,7 @@ class GameState_EventPrint extends GameState_TestModeBase
     init()
     {
         super.init();
+        this.current_intervention = 0;
 
         let self = this;
 
@@ -702,6 +711,8 @@ class GameState_Testbed extends StateMachineState
         for (const [key, value] of Object.entries(this.widget_list)) {
             this.widget_list[key].draw();
         }
+
+        GAZCanvas.Text(20,GAZCanvas.currentScreenSize.toString(),new Vector2(0,20),'rgb(255,255,255)', 'left', 'Roboto');
 
         appInst.draw_mouse_pointer();
     }
