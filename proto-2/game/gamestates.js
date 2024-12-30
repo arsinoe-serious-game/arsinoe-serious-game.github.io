@@ -375,7 +375,61 @@ class GameState_SimpleGame extends StateMachineState
 
 //*********************************************************************************************************************
 
-class GameState_InterventionPrint extends StateMachineState
+class GameState_TestModeBase extends StateMachineState{
+    constructor()
+    {
+        super();
+
+        this.widget_list = {};
+
+    }
+
+    init()
+    {
+        super.init();
+
+        let self = this;
+
+        let template = layout_get_by_name(layout,'screen_event_print');
+
+        this.widget_list['To Testbed'] = new ButtonBase( new Rect(1600 - 120,10,100,30));
+        this.widget_list['To Testbed'].set_active(true);
+        this.widget_list['To Testbed'].set_label('Back');
+        this.widget_list['To Testbed'].label.font_size = 24;
+        this.widget_list['To Testbed'].label.font_family = 'roboto';
+        this.widget_list['To Testbed'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_Testbed.label());
+        };
+    }
+
+    update()
+    {
+        super.update();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+                this.widget_list[key].update();
+        }
+    }
+
+    draw()
+    {
+        appInst.draw();
+        super.draw();
+
+        GAZCanvas.clip_start();
+        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
+
+        GAZCanvas.clip_end();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
+        }
+
+        appInst.draw_mouse_pointer();
+    }
+}
+
+class GameState_InterventionPrint extends GameState_TestModeBase
 {
     static label()
     {
@@ -386,9 +440,7 @@ class GameState_InterventionPrint extends StateMachineState
     {
         super();
 
-        this.widget_list = {};
         this.first_intervention = 0;
-
         this.intervention_types = ['BP', 'FP','DP','HP'];
         this.current_intervention = 0;
 
@@ -444,40 +496,13 @@ class GameState_InterventionPrint extends StateMachineState
 
         this.on_update_interventon(0);
     }
-
-    update()
-    {
-        super.update();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
-        }
-    }
-
-    draw()
-    {
-        appInst.draw();
-        super.draw();
-
-        GAZCanvas.clip_start();
-        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-        GAZCanvas.clip_end();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-            this.widget_list[key].draw();
-        }
-
-
-        appInst.draw_mouse_pointer();
-    }
 }
 
 //*********************************************************************************************************************
 
 //*********************************************************************************************************************
 
-class GameState_PersonaPrint extends StateMachineState
+class GameState_PersonaPrint extends GameState_TestModeBase
 {
     static label()
     {
@@ -488,9 +513,7 @@ class GameState_PersonaPrint extends StateMachineState
     {
         super();
 
-        this.widget_list = {};
         this.first_intervention = 0;
-
         this.current_intervention = 0;
 
     }
@@ -545,38 +568,11 @@ class GameState_PersonaPrint extends StateMachineState
 
         this.on_update_interventon(0);
     }
-
-    update()
-    {
-        super.update();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
-        }
-    }
-
-    draw()
-    {
-        appInst.draw();
-        super.draw();
-
-        GAZCanvas.clip_start();
-        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-        GAZCanvas.clip_end();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-            this.widget_list[key].draw();
-        }
-
-
-        appInst.draw_mouse_pointer();
-    }
 }
 
 //*********************************************************************************************************************
 
-class GameState_EventPrint extends StateMachineState
+class GameState_EventPrint extends GameState_TestModeBase
 {
     static label()
     {
@@ -587,9 +583,7 @@ class GameState_EventPrint extends StateMachineState
     {
         super();
 
-        this.widget_list = {};
         this.first_intervention = 0;
-
         this.current_intervention = 0;
 
     }
@@ -643,6 +637,55 @@ class GameState_EventPrint extends StateMachineState
         this.on_update_interventon(0);
     }
 
+}
+
+//*********************************************************************************************************************
+
+class GameState_Testbed extends StateMachineState
+{
+    static label()
+    {
+        return "GameState_Test";
+    }
+
+    constructor()
+    {
+        super();
+        this.widget_list = {};
+    }
+
+    init()
+    {
+        super.init();
+
+        this.widget_list['View Personas'] = new ButtonBase( new Rect((1600-250)/2,100,250,100));
+        this.widget_list['View Personas'].set_active(true);
+        this.widget_list['View Personas'].set_label('View Persona Cards');
+        this.widget_list['View Personas'].label.font_size = 24;
+        this.widget_list['View Personas'].label.font_family = 'roboto';
+        this.widget_list['View Personas'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_PersonaPrint.label());
+        };
+
+        this.widget_list['View Intervention'] = new ButtonBase( new Rect((1600-250)/2,300,250,100));
+        this.widget_list['View Intervention'].set_active(true);
+        this.widget_list['View Intervention'].set_label('View Intervention Cards');
+        this.widget_list['View Intervention'].label.font_size = 24;
+        this.widget_list['View Intervention'].label.font_family = 'roboto';
+        this.widget_list['View Intervention'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_InterventionPrint.label());
+        };
+
+        this.widget_list['View Event'] = new ButtonBase( new Rect((1600-250)/2,500,250,100));
+        this.widget_list['View Event'].set_active(true);
+        this.widget_list['View Event'].set_label('View Event Cards');
+        this.widget_list['View Event'].label.font_size = 24;
+        this.widget_list['View Event'].label.font_family = 'roboto';
+        this.widget_list['View Event'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_EventPrint.label());
+        };
+    }
+
     update()
     {
         super.update();
@@ -654,18 +697,11 @@ class GameState_EventPrint extends StateMachineState
 
     draw()
     {
-        appInst.draw();
         super.draw();
-
-        GAZCanvas.clip_start();
-        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-        GAZCanvas.clip_end();
 
         for (const [key, value] of Object.entries(this.widget_list)) {
             this.widget_list[key].draw();
         }
-
 
         appInst.draw_mouse_pointer();
     }

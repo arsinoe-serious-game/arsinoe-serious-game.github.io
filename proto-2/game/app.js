@@ -72,10 +72,10 @@ class LayerWidget extends  WidgetBase{
         }
     }
 
-    debug_image(loc, layer, image){
+    debug_image(loc, layer, image, aspect_correct){
         let r= this.layer_to_rect(loc,layer);
 
-        if(image.naturalWidth > 0) {
+        if((image.naturalWidth > 0) && (aspect_correct === undefined) || (aspect_correct===true)){
             let f = (r.h / image.naturalHeight);
             let w = image.naturalWidth * f;
             let h = image.naturalHeight * f;
@@ -83,8 +83,8 @@ class LayerWidget extends  WidgetBase{
             r.x += w/2;
             r.w = w;
 
-            GAZCanvas.Sprite(image, r);
         }
+        GAZCanvas.Sprite(image, r);
     }
 }
 
@@ -268,7 +268,7 @@ class EventCardWidget  extends CardWidgetBase {
             pos.y += (((text.split('\n').length)) * text_font_size) + text_font_size/2;
         }
 
-        this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.event_map);
+        this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.event_map, false);
     }
 
     draw_back() {
@@ -1116,10 +1116,13 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());
         this.stateMachine.addState(GameState_EventPrint.label(), new GameState_EventPrint());
 
+        this.stateMachine.addState(GameState_Testbed.label(), new GameState_Testbed());
+
         let current_mode = GameState_EventPrint.label();
 
         current_mode = GameState_InterventionPrint.label();
         current_mode = GameState_PersonaPrint.label();
+        current_mode = GameState_Testbed.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
