@@ -11,168 +11,14 @@ let layout =
                 900
             ]
         },
-        "screen_intervention_preview": {
-            "offset": [
-                0,
-                0
-            ],
-            "size": [
-                0,
-                0
-            ],
-            "children": {
-                "card_0": {
-                    "offset": [
-                        108,
-                        36
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_1": {
-                    "offset": [
-                        436,
-                        35
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_2": {
-                    "offset": [
-                        769,
-                        34
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_3": {
-                    "offset": [
-                        1096,
-                        36
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_4": {
-                    "offset": [
-                        225,
-                        464
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_5": {
-                    "offset": [
-                        566,
-                        465
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "card_6": {
-                    "offset": [
-                        899,
-                        464
-                    ],
-                    "size": [
-                        300,
-                        400
-                    ]
-                },
-                "button_next": {
-                    "offset": [
-                        1422,
-                        382
-                    ],
-                    "size": [
-                        60,
-                        113
-                    ]
-                },
-                "button_prev": {
-                    "offset": [
-                        19,
-                        385
-                    ],
-                    "size": [
-                        60,
-                        113
-                    ]
-                }
-            }
-        },
-        "screen_intervention_print": {
-            "offset": [
-                0,
-                0
-            ],
-            "size": [
-                0,
-                0
-            ],
-            "children": {
-                "button_next": {
-                    "offset": [
-                        1422,
-                        382
-                    ],
-                    "size": [
-                        60,
-                        113
-                    ]
-                },
-                "button_prev": {
-                    "offset": [
-                        19,
-                        385
-                    ],
-                    "size": [
-                        60,
-                        113
-                    ]
-                },
-                "card_front": {
-                    "offset": [
-                        299,
-                        138
-                    ],
-                    "size": [
-                        400,
-                        600
-                    ]
-                },
-                "card_back": {
-                    "offset": [
-                        748,
-                        140
-                    ],
-                    "size": [
-                        400,
-                        600
-                    ]
-                }
-            }
-        },
         "templates": {
             "offset": [
                 0,
                 0
             ],
             "size": [
-                400,
-                600
+                700,
+                500
             ],
             "children": {
                 "template_intervention_card": {
@@ -469,8 +315,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        400,
-                        600
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -485,12 +331,12 @@ let layout =
                         },
                         "front": {
                             "offset": [
-                                15,
-                                11
+                                0,
+                                0
                             ],
                             "size": [
-                                367,
-                                498
+                                0,
+                                0
                             ],
                             "children": {
                                 "reference_data": {
@@ -576,6 +422,510 @@ let layout =
                                     ]
                                 }
                             }
+                        }
+                    }
+                },
+                "template_event_card": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        700,
+                        500
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                700,
+                                500
+                            ]
+                        },
+                        "front": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                0,
+                                0
+                            ],
+                            "children": {
+                                "reference_data": {
+                                    "offset": [
+                                        0,
+                                        0
+                                    ],
+                                    "size": [
+                                        704,
+                                        500
+                                    ]
+                                },
+                                "header_text": {
+                                    "offset": [
+                                        15,
+                                        11
+                                    ],
+                                    "size": [
+                                        585,
+                                        52
+                                    ]
+                                },
+                                "qr_code": {
+                                    "offset": [
+                                        638,
+                                        9
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
+                                },
+                                "image_loc": {
+                                    "offset": [
+                                        16,
+                                        70
+                                    ],
+                                    "size": [
+                                        366,
+                                        182
+                                    ]
+                                },
+                                "left_floating_text": {
+                                    "offset": [
+                                        16,
+                                        70
+                                    ],
+                                    "size": [
+                                        330,
+                                        250
+                                    ]
+                                },
+                                "right_floating_text": {
+                                    "offset": [
+                                        364,
+                                        67
+                                    ],
+                                    "size": [
+                                        330,
+                                        401
+                                    ]
+                                }
+                            }
+                        },
+                        "back": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                700,
+                                500
+                            ],
+                            "children": {
+                                "reference_data": {
+                                    "offset": [
+                                        0,
+                                        0
+                                    ],
+                                    "size": [
+                                        700,
+                                        500
+                                    ]
+                                },
+                                "header_text": {
+                                    "offset": [
+                                        15,
+                                        11
+                                    ],
+                                    "size": [
+                                        585,
+                                        52
+                                    ]
+                                },
+                                "result_4": {
+                                    "offset": [
+                                        16,
+                                        417
+                                    ],
+                                    "size": [
+                                        669,
+                                        80
+                                    ],
+                                    "children": {
+                                        "left_text": {
+                                            "offset": [
+                                                16,
+                                                417
+                                            ],
+                                            "size": [
+                                                76,
+                                                80
+                                            ]
+                                        },
+                                        "right_text": {
+                                            "offset": [
+                                                107,
+                                                417
+                                            ],
+                                            "size": [
+                                                578,
+                                                80
+                                            ]
+                                        }
+                                    }
+                                },
+                                "result_3": {
+                                    "offset": [
+                                        16,
+                                        330
+                                    ],
+                                    "size": [
+                                        669,
+                                        80
+                                    ],
+                                    "children": {
+                                        "left_text": {
+                                            "offset": [
+                                                16,
+                                                330
+                                            ],
+                                            "size": [
+                                                76,
+                                                80
+                                            ]
+                                        },
+                                        "right_text": {
+                                            "offset": [
+                                                107,
+                                                330
+                                            ],
+                                            "size": [
+                                                578,
+                                                80
+                                            ]
+                                        }
+                                    }
+                                },
+                                "result_2": {
+                                    "offset": [
+                                        16,
+                                        244
+                                    ],
+                                    "size": [
+                                        669,
+                                        80
+                                    ],
+                                    "children": {
+                                        "left_text": {
+                                            "offset": [
+                                                16,
+                                                244
+                                            ],
+                                            "size": [
+                                                76,
+                                                80
+                                            ]
+                                        },
+                                        "right_text": {
+                                            "offset": [
+                                                107,
+                                                244
+                                            ],
+                                            "size": [
+                                                578,
+                                                80
+                                            ]
+                                        }
+                                    }
+                                },
+                                "result_1": {
+                                    "offset": [
+                                        16,
+                                        157
+                                    ],
+                                    "size": [
+                                        669,
+                                        80
+                                    ],
+                                    "children": {
+                                        "left_text": {
+                                            "offset": [
+                                                16,
+                                                157
+                                            ],
+                                            "size": [
+                                                76,
+                                                80
+                                            ]
+                                        },
+                                        "right_text": {
+                                            "offset": [
+                                                107,
+                                                157
+                                            ],
+                                            "size": [
+                                                578,
+                                                80
+                                            ]
+                                        }
+                                    }
+                                },
+                                "result_0": {
+                                    "offset": [
+                                        16,
+                                        70
+                                    ],
+                                    "size": [
+                                        669,
+                                        80
+                                    ],
+                                    "children": {
+                                        "left_text": {
+                                            "offset": [
+                                                16,
+                                                70
+                                            ],
+                                            "size": [
+                                                76,
+                                                80
+                                            ]
+                                        },
+                                        "right_text": {
+                                            "offset": [
+                                                107,
+                                                70
+                                            ],
+                                            "size": [
+                                                578,
+                                                80
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "screens": {
+            "offset": [
+                0,
+                0
+            ],
+            "size": [
+                0,
+                0
+            ],
+            "children": {
+                "screen_intervention_print": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        0,
+                        0
+                    ],
+                    "children": {
+                        "button_next": {
+                            "offset": [
+                                1422,
+                                382
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "button_prev": {
+                            "offset": [
+                                19,
+                                385
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "card_front": {
+                            "offset": [
+                                299,
+                                138
+                            ],
+                            "size": [
+                                400,
+                                600
+                            ]
+                        },
+                        "card_back": {
+                            "offset": [
+                                748,
+                                140
+                            ],
+                            "size": [
+                                400,
+                                600
+                            ]
+                        }
+                    }
+                },
+                "screen_event_print": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        0,
+                        0
+                    ],
+                    "children": {
+                        "button_next": {
+                            "offset": [
+                                1521,
+                                382
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "button_prev": {
+                            "offset": [
+                                19,
+                                385
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "card_front": {
+                            "offset": [
+                                93,
+                                200
+                            ],
+                            "size": [
+                                700,
+                                500
+                            ]
+                        },
+                        "card_back": {
+                            "offset": [
+                                802,
+                                199
+                            ],
+                            "size": [
+                                700,
+                                500
+                            ]
+                        }
+                    }
+                },
+                "screen_intervention_preview": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        0,
+                        0
+                    ],
+                    "children": {
+                        "card_0": {
+                            "offset": [
+                                108,
+                                36
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_1": {
+                            "offset": [
+                                436,
+                                35
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_2": {
+                            "offset": [
+                                769,
+                                34
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_3": {
+                            "offset": [
+                                1096,
+                                36
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_4": {
+                            "offset": [
+                                225,
+                                464
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_5": {
+                            "offset": [
+                                566,
+                                465
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "card_6": {
+                            "offset": [
+                                899,
+                                464
+                            ],
+                            "size": [
+                                300,
+                                400
+                            ]
+                        },
+                        "button_next": {
+                            "offset": [
+                                1422,
+                                382
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "button_prev": {
+                            "offset": [
+                                19,
+                                385
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
                         }
                     }
                 }

@@ -278,3 +278,4 @@ def build_json_from_csv(filename, js_name):
 
 build_json_from_csv('interventions.csv', 'intervention_cards')
 build_json_from_csv('personas.csv', 'persona_cards')
+build_json_from_csv('events.csv', 'event_cards')

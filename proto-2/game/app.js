@@ -79,7 +79,10 @@ class LayerWidget extends  WidgetBase{
 
 function layout_get_by_name(layer, name){
 
+
     for (const [key, value] of Object.entries(layer)) {
+        console.log(key +'->' +name);
+
         if (key === name){
             return value;
         }
@@ -170,10 +173,109 @@ class CardWidgetBase extends LayerWidget {
     }
 
     draw_front(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
 
+        this.debug_layer(loc, layout_get_by_name(this.template, 'front') );
     }
 
     draw_back(){
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+
+        this.debug_layer(loc, layout_get_by_name(this.template, 'back') );
+    }
+}
+
+class EventCardWidget  extends CardWidgetBase {
+    constructor(inRect) {
+        super(inRect);
+
+        this.template_name = 'template_event_card';
+    }
+
+    draw_front() {
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+
+        let template = layout_get_by_name(this.template, 'front');
+        this.qr_code_link.draw();
+
+        let title = this.card_info['name'].toUpperCase();
+        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+
+        //left side
+        let t = template['children']['left_floating_text'];
+        let pos = new Vector2();
+
+        pos.x = loc.x + (t['offset'][0])*this.scale.x;
+        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+
+        pos.y += 10*this.scale.y;
+        let text_font_size = this.content_font_size * this.scale.y;
+        let max_line_length = Math.floor((45 * this.content_font_size)/18.0);
+
+        for(let i=0;i< 1;i++) {
+            GAZCanvas.Text(text_font_size, this.card_info['heading-' + i.toString()], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            pos.y += text_font_size;
+
+            let text = this.format_desc(this.card_info['desc-' + i.toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y += ((text.split('\n').length) * text_font_size);
+        }
+
+
+        //right side
+        t = template['children']['right_floating_text'];
+        pos = new Vector2();
+
+        pos.x = loc.x + (t['offset'][0])*this.scale.x;
+        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+
+        pos.y += 10*this.scale.y;
+        text_font_size = this.content_font_size * this.scale.y;
+
+
+        max_line_length = Math.floor((42 * this.content_font_size)/18.0);
+
+        for(let i=2;i< 5;i++) {
+            GAZCanvas.Text(text_font_size, this.card_info['heading-' + i.toString()], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            pos.y += text_font_size;
+
+            let text = this.format_desc(this.card_info['desc-' + i.toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+            pos.y += (((text.split('\n').length)) * text_font_size) + text_font_size/2;
+        }
+    }
+
+    draw_back() {
+        super.draw_back();
+        let loc = new Vector2(this.x, this.y);
+        this.draw_bg(loc);
+
+        let template = layout_get_by_name(this.template, 'back');
+
+        let title = this.card_info['outcome-heading'].toUpperCase();
+        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+
+
+        let text_font_size = this.content_font_size * this.scale.y;
+
+        let labels = ['Severely Under Prepared', 'Under Prepared', 'Fitting', 'Overkill', 'Extreme Overkill'];
+
+        for(let i=0;i< 5;i++) {
+            let layer = layout_get_by_name(template, 'result_' + i.toString());
+
+            let r = layer_to_rect(layout_get_by_name(layer, 'right_text'));
+            let max_line_length = Math.floor((72 * this.content_font_size)/18.0);
+            let text = this.format_desc(this.card_info['outcome-' + i.toString()], max_line_length);
+            GAZCanvas.Text(text_font_size, text, new Vector2(r.x+loc.x,r.y+loc.y+ text_font_size ), 'rgb(0,0,0)', 'left', 'roboto', '');
+
+            r = layer_to_rect(layout_get_by_name(layer, 'left_text'));
+            max_line_length = Math.floor((12 * this.content_font_size)/18.0);
+            text = this.format_desc(labels[i], max_line_length);
+            GAZCanvas.Text(text_font_size, text, new Vector2(r.x+loc.x,r.y+loc.y+ text_font_size ), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+        }
 
     }
 }
@@ -963,8 +1065,9 @@ class ARSINOEGame extends AppBase
 
         this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
         this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());
+        this.stateMachine.addState(GameState_EventPrint.label(), new GameState_EventPrint());
 
-        let current_mode = GameState_PersonaPrint.label();
+        let current_mode = GameState_EventPrint.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
