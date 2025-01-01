@@ -2,7 +2,8 @@ let game_data =
 {
     "personas": [
         {
-            "type": "Student",
+            "type": "",
+            "name": "Student",
             "desc": "You live in the town while you are studying.You may move away for work, if there's nothing suitable here\"",
             "pos-1": "The idea of having money and freedom but are unsure how to get it.",
             "pos-2": "Surfing and Swim swimming (anything outdoorsy)  -  cowabunga baby!",
@@ -13,7 +14,8 @@ let game_data =
             "img": "student.jpg"
         },
         {
-            "type": "Single worker",
+            "type": "",
+            "name": "Single worker",
             "desc": "It's been a couple of years since you left education and have been finding your feet in the adult world of employment and responsibilities.",
             "pos-1": "Having a stable job with a decent wage and room to grow.",
             "pos-2": "Having nice things to do when I'm not at work.",
@@ -24,7 +26,8 @@ let game_data =
             "img": "single_worker.jpg"
         },
         {
-            "type": "Family",
+            "type": "",
+            "name": "Family",
             "desc": "You moved here when you got married to a local. It's a nice place, but it's not really home. However, you've got a good job and are putting down roots.",
             "pos-1": "My partner, they make it all worthwhile.",
             "pos-2": "Work opportunities, I couldn't do this work at home.",
@@ -35,7 +38,8 @@ let game_data =
             "img": "family.jpg"
         },
         {
-            "type": "Retiree",
+            "type": "",
+            "name": "Retiree",
             "desc": "You've retired to the town and want to enjoy yourself",
             "pos-1": "Activities that meet your needs as an active member of society.",
             "pos-2": "Opporunities to shop, socialize and be entertained.",
@@ -46,7 +50,8 @@ let game_data =
             "img": "retiree.jpg"
         },
         {
-            "type": "Business owner",
+            "type": "",
+            "name": "Business owner",
             "desc": "You are a local shop keeper. You've managed your shop for years. It keeps you busy enough and financially secure, but not wealthy.",
             "pos-1": "Nice customers that make good purchases",
             "pos-2": "Tourists and holidaymakers that are keen to buy from me.",
@@ -57,7 +62,8 @@ let game_data =
             "img": "business_owner.jpg"
         },
         {
-            "type": "Politician",
+            "type": "",
+            "name": "Politician",
             "desc": "You are a local politician who got into politics to address injustice both locally and in the wider community.",
             "pos-1": "Policies that help all people",
             "pos-2": "Fair and just outcomes",

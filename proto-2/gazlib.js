@@ -2076,6 +2076,21 @@ class LineCollider extends ColliderBase
 /*
     Build your app from this, and create an instance of it as appInst for the run() to work
  */
+
+class MVCBase{
+    constructor(game) {
+        this.game = game;
+    }
+
+    oneTimeInit(){
+
+    }
+
+    on_new_game(){
+
+    }
+}
+
 class AppBase
 {
     constructor()
@@ -2131,6 +2146,8 @@ class AppBase
     }
 }
 
+
+
 /*
     Widget lib
  */
@@ -2140,8 +2157,11 @@ class WidgetBase extends Rect{
     {
         super(inRect.x,inRect.y,inRect.w,inRect.h);
         this.active = false;
+        this.visible = true;
         this.selected = false;
         this.on_click = undefined;
+
+        this.current_color = 'rgb(0,255,0)';
 
     }
 
@@ -2163,37 +2183,16 @@ class WidgetBase extends Rect{
     }
 
     get_color(){
-
-        if(this.active === false){
-            return 'rgb(255,127,127)';
-        }
-
-        if(this.selected === true) {
-            return 'rgb(127,127,255)';
-        }
-
-        if (this.isInMe(Input.mouseLogicalPos) === true)
-        {
-            return 'rgb(0,255,255)';
-        }
-
-        return 'rgb(0,255,0)';
+        return this.current_color;
     }
 
 
     update(){
-        if (Input.currentMouseState === INPUT_PRESSED){
-            if (this.isInRect(Input.mouseLogicalPos)){
-                if(this.on_click !== undefined){
-                    this.on_click(this);
-                }
-            }
-        }
     }
 
     draw()
     {
-        GAZCanvas.Rect(this, this.get_color());
+        GAZCanvas.Rect(this, this.current_color);
     }
 }
 
@@ -2257,6 +2256,32 @@ class ButtonBase extends WidgetBase{
     set_active(active){
         super.set_active(active);
         this.label.set_active(active);
+    }
+
+    update() {
+        super.update();
+
+        if(this.active === false){
+            this.current_color = 'rgb(255,127,127)';
+        }else {
+            if (this.selected === true) {
+                this.current_color = 'rgb(127,127,255)';
+            } else {
+                if (this.isInMe(Input.mouseLogicalPos) === true) {
+                    this.current_color = 'rgb(0,255,255)';
+                } else {
+                    this.current_color = 'rgb(0,255,0)';
+                }
+            }
+        }
+
+        if (Input.currentMouseState === INPUT_PRESSED){
+            if (this.isInRect(Input.mouseLogicalPos)){
+                if(this.on_click !== undefined){
+                    this.on_click(this);
+                }
+            }
+        }
     }
 
     draw()

@@ -1,4 +1,87 @@
 //*********************************************************************************************************************
+
+class GameState_Testbed extends StateMachineState
+{
+    static label()
+    {
+        return "GameState_Test";
+    }
+
+    constructor()
+    {
+        super();
+        this.widget_list = {};
+    }
+
+    init()
+    {
+        super.init();
+
+        let button_width = 300;
+
+        this.widget_list['View Personas'] = new ButtonBase( new Rect((1600-button_width)/2,100,button_width,100));
+        this.widget_list['View Personas'].set_active(true);
+        this.widget_list['View Personas'].set_label('View Persona Cards');
+        this.widget_list['View Personas'].label.font_size = 24;
+        this.widget_list['View Personas'].label.font_family = 'roboto';
+        this.widget_list['View Personas'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_PersonaPrint.label());
+        };
+
+        this.widget_list['View Intervention'] = new ButtonBase( new Rect((1600-button_width)/2,300,button_width,100));
+        this.widget_list['View Intervention'].set_active(true);
+        this.widget_list['View Intervention'].set_label('View Intervention Cards');
+        this.widget_list['View Intervention'].label.font_size = 24;
+        this.widget_list['View Intervention'].label.font_family = 'roboto';
+        this.widget_list['View Intervention'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_InterventionPrint.label());
+        };
+
+        this.widget_list['View Event'] = new ButtonBase( new Rect((1600-button_width)/2,500,button_width,100));
+        this.widget_list['View Event'].set_active(true);
+        this.widget_list['View Event'].set_label('View Event Cards');
+        this.widget_list['View Event'].label.font_size = 24;
+        this.widget_list['View Event'].label.font_family = 'roboto';
+        this.widget_list['View Event'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_EventPrint.label());
+        };
+
+        this.widget_list['Play Game'] = new ButtonBase( new Rect((1600-button_width)/2,700,button_width,100));
+        this.widget_list['Play Game'].set_active(true);
+        this.widget_list['Play Game'].set_label('Play Game');
+        this.widget_list['Play Game'].label.font_size = 24;
+        this.widget_list['Play Game'].label.font_family = 'roboto';
+        this.widget_list['Play Game'].on_click = function (d) {
+            appInst.stateMachine.setState(GameState_SelectPlayers.label());
+        };
+    }
+
+    update()
+    {
+        super.update();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+                this.widget_list[key].update();
+        }
+    }
+
+    draw()
+    {
+        super.draw();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
+        }
+
+        GAZCanvas.Text(20,GAZCanvas.currentScreenSize.toString(),new Vector2(0,20),'rgb(255,255,255)', 'left', 'Roboto');
+
+        appInst.draw_mouse_pointer();
+    }
+}
+
+//*********************************************************************************************************************
+
+//*********************************************************************************************************************
 class GameState_Test extends StateMachineState
 {
     static label()
@@ -380,7 +463,9 @@ class GameState_TestModeBase extends StateMachineState{
     {
         super();
 
-        this.widget_list = {};
+        this.quit_modal = undefined;
+        this.quit_button = undefined;
+        this.mode = 'normal';
 
     }
 
@@ -390,24 +475,41 @@ class GameState_TestModeBase extends StateMachineState{
 
         let self = this;
 
-        let template = layout_get_by_name(layout,'screen_event_print');
+        let template = layout_get_by_name(layout,'template_screen_layout');
 
-        this.widget_list['To Testbed'] = new ButtonBase( new Rect(1600 - 120,10,100,30));
-        this.widget_list['To Testbed'].set_active(true);
-        this.widget_list['To Testbed'].set_label('Back');
-        this.widget_list['To Testbed'].label.font_size = 24;
-        this.widget_list['To Testbed'].label.font_family = 'roboto';
-        this.widget_list['To Testbed'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_Testbed.label());
-        };
+        this.quit_modal = new LayerModal(layout_get_by_name(layout,'template_modal'));
+        this.quit_modal.set_text('Quit Game', 'Are you sure?');
+
+        this.quit_button = new LayerWidgetButton(layout_get_by_name(template,'quit_button'));
+        this.quit_button.set_label('Quit');
+
+        this.mode = 'normal';
+    }
+
+    client_update(){
+
     }
 
     update()
     {
         super.update();
 
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
+        if (this.mode === 'normal') {
+            if(this.quit_button.update() === true){
+                this.mode = 'modal';
+            }else{
+                this.client_update();
+            }
+        }else{
+            switch(this.quit_modal.update()){
+                case 1:
+                    appInst.stateMachine.setState(GameState_Testbed.label());
+                    break;
+
+                case -1:
+                    this.mode = 'normal';
+                    break;
+            }
         }
     }
 
@@ -421,13 +523,57 @@ class GameState_TestModeBase extends StateMachineState{
 
         GAZCanvas.clip_end();
 
-        for (const [key, value] of Object.entries(this.widget_list)) {
-            this.widget_list[key].draw();
+        this.client_draw();
+
+        this.quit_button.draw();
+
+        if(this.mode === 'modal'){
+            this.quit_modal.draw();
         }
+
 
         appInst.draw_mouse_pointer();
     }
+
+    client_draw(){
+
+    }
+
 }
+//*********************************************************************************************************************
+
+class GameState_PlayGame extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_PlayGame";
+    }
+
+
+    init()
+    {
+        super.init();
+        appInst.on_new_game();
+        appInst.controller.set_players(5);
+        appInst.controller.select_mayor();
+
+        console.log();
+    }
+
+    update() {
+        super.update();
+    }
+
+    draw() {
+        super.draw();
+    }
+}
+
+//*********************************************************************************************************************
+
 
 class GameState_InterventionPrint extends GameState_TestModeBase
 {
@@ -500,7 +646,6 @@ class GameState_InterventionPrint extends GameState_TestModeBase
     }
 }
 
-//*********************************************************************************************************************
 
 //*********************************************************************************************************************
 
@@ -645,77 +790,430 @@ class GameState_EventPrint extends GameState_TestModeBase
 
         this.on_update_interventon(0);
     }
+}
 
+/*
+    modes:
+        - init
+        - select players
+        - select mayor
+        - intervention stage
+            - choose intervention
+            - show outcome
+            - (select mayor again)
+        - event stage
+            - show event
+        - final outcome
+*/
+
+//*********************************************************************************************************************
+class GameState_SelectPlayers extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_SelectPlayers";
+    }
+
+    init()
+    {
+        super.init();
+        appInst.on_new_game();
+
+        let layer = layout_get_by_name(layout,'screen_choose_players');
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+        this.heading_text.label = 'Select Number of Players';
+
+        //1-7 players
+        this.player_button = [];
+
+        for(let i=1;i <7;i++){
+            let b = new LayerWidgetButton(layout_get_by_name(layer, 'player_'+i.toString()));
+            b.button_text.label = i.toString();
+            this.player_button.push(b);
+        }
+    }
+
+    client_update(){
+
+        for(let i = 0;i<this.player_button.length;i++){
+            if (this.player_button[i].update() == 1){
+                appInst.controller.set_players(i+1);
+                appInst.stateMachine.setState(GameState_ViewPlayers.label());
+            }
+        }
+    }
+
+
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
+
+        for(let i = 0;i<this.player_button.length;i++){
+            this.player_button[i].draw();
+        }
+    }
 }
 
 //*********************************************************************************************************************
-
-class GameState_Testbed extends StateMachineState
+class GameState_ViewPlayers extends GameState_TestModeBase
 {
+    constructor() {
+        super();
+    }
     static label()
     {
-        return "GameState_Test";
-    }
-
-    constructor()
-    {
-        super();
-        this.widget_list = {};
+        return "GameState_ViewPlayers";
     }
 
     init()
     {
         super.init();
 
-        this.widget_list['View Personas'] = new ButtonBase( new Rect((1600-250)/2,100,250,100));
-        this.widget_list['View Personas'].set_active(true);
-        this.widget_list['View Personas'].set_label('View Persona Cards');
-        this.widget_list['View Personas'].label.font_size = 24;
-        this.widget_list['View Personas'].label.font_family = 'roboto';
-        this.widget_list['View Personas'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_PersonaPrint.label());
-        };
+        let layer = layout_get_by_name(layout,'screen_view_players');
 
-        this.widget_list['View Intervention'] = new ButtonBase( new Rect((1600-250)/2,300,250,100));
-        this.widget_list['View Intervention'].set_active(true);
-        this.widget_list['View Intervention'].set_label('View Intervention Cards');
-        this.widget_list['View Intervention'].label.font_size = 24;
-        this.widget_list['View Intervention'].label.font_family = 'roboto';
-        this.widget_list['View Intervention'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_InterventionPrint.label());
-        };
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
 
-        this.widget_list['View Event'] = new ButtonBase( new Rect((1600-250)/2,500,250,100));
-        this.widget_list['View Event'].set_active(true);
-        this.widget_list['View Event'].set_label('View Event Cards');
-        this.widget_list['View Event'].label.font_size = 24;
-        this.widget_list['View Event'].label.font_family = 'roboto';
-        this.widget_list['View Event'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_EventPrint.label());
-        };
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+        this.heading_text.label = 'Your Personas';
+
+        //1-7 players
+        this.player_button = [];
+
+        for(let i=1;i <8;i++){
+            let b = new LayerWidgetButton(layout_get_by_name(layer, 'player_'+i.toString()));
+            b.visible = false;
+            this.player_button.push(b);
+        }
+
+        for(let i=0;i< appInst.model.players.length;i++){
+            this.player_button[i].visible = true;
+            this.player_button[i].set_label(appInst.model.get_persona_cards()[appInst.model.players[i]]['name']);
+        }
+
+        this.continue_button = new LayerWidgetButton(layout_get_by_name(layer,'button_ok'));
+        this.continue_button.set_label('Continue');
+
     }
 
-    update()
-    {
-        super.update();
+    client_update(){
 
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
+        if (this.continue_button.update()){
+            //set-up for interventions
+            appInst.controller.setup_for_interventions();
+            appInst.stateMachine.setState(GameState_MayoralElection.label());
         }
     }
 
-    draw()
-    {
-        super.draw();
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
 
-        for (const [key, value] of Object.entries(this.widget_list)) {
-            this.widget_list[key].draw();
+        for(let i = 0;i<this.player_button.length;i++){
+            this.player_button[i].draw();
         }
 
-        GAZCanvas.Text(20,GAZCanvas.currentScreenSize.toString(),new Vector2(0,20),'rgb(255,255,255)', 'left', 'Roboto');
-
-        appInst.draw_mouse_pointer();
+        this.continue_button.draw();
     }
 }
 
 //*********************************************************************************************************************
+class GameState_MayoralElection extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_MayoralElection";
+    }
+
+    init()
+    {
+        super.init();
+
+        appInst.controller.select_mayor();
+
+        let layer = layout_get_by_name(layout,'screen_mayoral_election');
+
+        this.debug_layers = new LayerWidgetBase(layer);
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+        this.heading_text.label = 'Mayoral results';
+
+        //player_name text
+        this.player_text = new LayerWidgetText(layout_get_by_name(layer, 'player_name'));
+        this.player_text.current_color= 'rgb(0,0,0)';
+        this.player_text.label = 'Player:' + appInst.model.current_mayor.toString();
+
+
+        //player_card
+        this.player_card = new PersonaCardWidget(layer_to_rect(layout_get_by_name(layer, 'mayor_persona')));
+        this.player_card.init();
+        this.player_card.set_card_info(appInst.model.players[appInst.model.current_mayor]);
+
+        //mayor text
+        this.mayor_text = new LayerWidgetText(layout_get_by_name(layer, 'mayor_text'));
+        this.mayor_text.current_color= 'rgb(0,0,0)';
+        this.mayor_text.label = 'blah blah blah';
+
+        //continue
+        this.continue_button = new LayerWidgetButton(layout_get_by_name(layer,'button_ok'));
+        this.continue_button.set_label('Continue');
+
+    }
+
+    client_update(){
+
+        if (this.continue_button.update()){
+            appInst.stateMachine.setState(GameState_ChooseIntervention.label());
+        }
+    }
+
+    client_draw() {
+
+        this.bg.draw();
+
+        this.debug_layers.draw();
+
+        this.heading_text.draw();
+        this.player_text.draw();
+        this.mayor_text.draw();
+
+        this.player_card.draw();
+
+        this.continue_button.draw();
+    }
+
+}
+
+//*********************************************************************************************************************
+class GameState_ChooseIntervention extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_ChooseIntervention";
+    }
+
+    init()
+    {
+        super.init();
+        let layer = layout_get_by_name(layout,'screen_intervention_select');
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+        this.heading_text.label = 'Intervention Selection Round ' + (appInst.model.current_intervention_round+1).toString() +' of 4';
+
+        this.round_cards = appInst.controller.get_round_cards();
+
+        //interventions
+        this.intervention_cards = [];
+        this.intervention_buttons = [];
+        for(let i=0;i<4;i++){
+            let card = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layer, 'intervention_'+(i+1).toString())));
+            card.init();
+            card.set_card_info(this.round_cards[i]);
+
+            this.intervention_cards.push(card);
+
+            let button = new LayerWidgetButton(layout_get_by_name(layer,'button_select_' +(i+1).toString()));
+            button.set_label('Select this intervention');
+
+            this.intervention_buttons.push(button);
+        }
+
+        this.selected_interventions = [];
+
+
+        this.selected_intervention_heading_text = new LayerWidgetText(layout_get_by_name(layer, 'selected_intervention_heading_text') );
+        this.selected_intervention_heading_text.label = 'Selected Interventions';
+        this.selected_intervention_heading_text.visible = appInst.model.selected_interventions.length > 0;
+
+
+        for(let i=0;i<appInst.model.selected_interventions.length;i++){
+            let card = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layer, 'selected_intervention_'+(i+1).toString())));
+            card.init();
+            card.set_card_info(appInst.model.selected_interventions[i]);
+
+            this.selected_interventions.push(card);
+        }
+    }
+
+    client_update(){
+        for(let i=0;i<4;i++){
+            if(this.intervention_buttons[i].update() === true){
+                //select intervention
+                appInst.controller.select_intervention(this.round_cards[i]);
+                appInst.stateMachine.setState(GameState_InterventionResult.label());
+                return;
+            }
+        }
+    }
+
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
+
+        for(let i=0;i< this.intervention_cards.length;i++){
+            this.intervention_cards[i].draw();
+        }
+
+        let layer = layout_get_by_name(layout,'screen_intervention_select');
+
+        GAZCanvas.clip_start();
+        GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(layer_to_rect(layout_get_by_name(layer, 'selected_interventions_clip'))));
+
+        if(this.selected_interventions.length>0) {
+            this.selected_intervention_heading_text.draw();
+
+            for (let i = 0; i < this.selected_interventions.length; i++) {
+                this.selected_interventions[i].draw();
+            }
+        }
+
+        GAZCanvas.clip_end();
+
+
+        for(let i=0;i<4;i++){
+            this.intervention_buttons[i].draw();
+        }
+    }
+}
+
+//*********************************************************************************************************************
+class GameState_InterventionResult extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_InterventionResult";
+    }
+
+    init(){
+        super.init();
+        let layer = layout_get_by_name(layout,'screen_intervention_outcome');
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+        this.heading_text.label = 'Intervention Outcome ' + (appInst.model.current_intervention_round+1).toString() +' of 4';
+
+        //interventions
+        this.card_front = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layer, 'intervention_1') ));
+        this.card_back = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layer, 'intervention_2') ));
+        this.card_front.init();
+        this.card_front.set_card_info(appInst.model.selected_interventions[appInst.model.current_intervention_round]);
+
+        this.card_back.init();
+        this.card_back.set_display('back');
+        this.card_back.set_card_info(appInst.model.selected_interventions[appInst.model.current_intervention_round]);
+
+        //outcome heading
+        this.outcome_heading = new LayerWidgetText(layout_get_by_name(layer,'outcome_heading_text') );
+        this.outcome_heading.label = 'Outcome: ' + appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString();
+        this.outcome_body = new LayerWidgetText(layout_get_by_name(layer,'outcome_body_text') );
+        this.outcome_body.label = 'blah blah blah';
+
+        this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
+
+        if (appInst.model.current_intervention_round <3) {
+            if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 1){
+                this.next_button.set_label('Elect new mayor');
+            }else{
+                this.next_button.set_label('Next intervention round');
+            }
+
+        }else {
+            this.next_button.set_label('Go to Event Reckoning');
+        }
+    }
+
+    client_update(){
+        if (this.next_button.update()){
+            if (appInst.model.current_intervention_round <3) {
+                let next_state = GameState_ChooseIntervention.label();
+
+                if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 1) {
+                    next_state = GameState_MayoralElection.label();
+                }
+
+                appInst.model.current_intervention_round += 1;
+                appInst.stateMachine.setState(next_state);
+            }else {
+                appInst.model.current_event_round = 0;
+                appInst.stateMachine.setState(GameState_EventResult.label());
+            }
+        }
+    }
+
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
+
+        this.card_front.draw();
+        this.card_back.draw();
+
+        this.outcome_heading.draw();
+        this.outcome_body.draw();
+
+        this.next_button.draw();
+    }
+}
+
+//*********************************************************************************************************************
+class GameState_EventResult extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_EventResult";
+    }
+
+}
+
+class GameState_FinalOutcome extends GameState_TestModeBase
+{
+    constructor() {
+        super();
+    }
+    static label()
+    {
+        return "GameState_FinalOutcome";
+    }
+
+
+}
+
+
+
+
