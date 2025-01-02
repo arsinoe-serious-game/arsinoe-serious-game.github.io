@@ -799,12 +799,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                -127,
-                24
+                -1,
+                25
             ],
             "size": [
-                1854,
-                843
+                1601,
+                751
             ],
             "children": {
                 "screen_intervention_print": {
@@ -1385,12 +1385,12 @@ let layout =
                 },
                 "screen_view_players": {
                     "offset": [
-                        -127,
-                        24
+                        0,
+                        0
                     ],
                     "size": [
-                        1854,
-                        843
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -1425,32 +1425,32 @@ let layout =
                         },
                         "new": {
                             "offset": [
-                                -127,
-                                182
+                                0,
+                                0
                             ],
                             "size": [
-                                1854,
-                                532
+                                0,
+                                0
                             ],
                             "children": {
                                 "persona_scroller": {
                                     "offset": [
-                                        -127,
-                                        182
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        1854,
-                                        532
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "persona_0": {
                                             "offset": [
-                                                -127,
-                                                200
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1477,12 +1477,12 @@ let layout =
                                         },
                                         "persona_1": {
                                             "offset": [
-                                                187,
-                                                201
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1509,12 +1509,12 @@ let layout =
                                         },
                                         "persona_2": {
                                             "offset": [
-                                                495,
-                                                201
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1541,12 +1541,12 @@ let layout =
                                         },
                                         "persona_3": {
                                             "offset": [
-                                                807,
-                                                202
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1573,12 +1573,12 @@ let layout =
                                         },
                                         "persona_4": {
                                             "offset": [
-                                                1120,
-                                                205
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1605,12 +1605,12 @@ let layout =
                                         },
                                         "persona_5": {
                                             "offset": [
-                                                1427,
-                                                206
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                300,
-                                                490
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "card": {
@@ -1827,12 +1827,12 @@ let layout =
                 },
                 "screen_intervention_select": {
                     "offset": [
-                        -1,
-                        25
+                        0,
+                        0
                     ],
                     "size": [
-                        1601,
-                        61
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -2011,7 +2011,7 @@ let layout =
                         }
                     }
                 },
-                "screen_intervention_outcome": {
+                "screen_intervention_select copy": {
                     "offset": [
                         0,
                         0
@@ -2039,6 +2039,306 @@ let layout =
                             "size": [
                                 0,
                                 0
+                            ],
+                            "children": {
+                                "button_select_1": {
+                                    "offset": [
+                                        23,
+                                        561
+                                    ],
+                                    "size": [
+                                        300,
+                                        38
+                                    ]
+                                },
+                                "button_select_2": {
+                                    "offset": [
+                                        336,
+                                        560
+                                    ],
+                                    "size": [
+                                        304,
+                                        40
+                                    ]
+                                },
+                                "button_select_3": {
+                                    "offset": [
+                                        650,
+                                        561
+                                    ],
+                                    "size": [
+                                        300,
+                                        38
+                                    ]
+                                },
+                                "button_select_4": {
+                                    "offset": [
+                                        964,
+                                        561
+                                    ],
+                                    "size": [
+                                        300,
+                                        38
+                                    ]
+                                },
+                                "intervention_1": {
+                                    "offset": [
+                                        24,
+                                        100
+                                    ],
+                                    "size": [
+                                        300,
+                                        450
+                                    ]
+                                },
+                                "intervention_2": {
+                                    "offset": [
+                                        337,
+                                        100
+                                    ],
+                                    "size": [
+                                        301,
+                                        450
+                                    ]
+                                },
+                                "intervention_3": {
+                                    "offset": [
+                                        650,
+                                        100
+                                    ],
+                                    "size": [
+                                        301,
+                                        450
+                                    ]
+                                },
+                                "intervention_4": {
+                                    "offset": [
+                                        964,
+                                        100
+                                    ],
+                                    "size": [
+                                        301,
+                                        450
+                                    ]
+                                }
+                            }
+                        },
+                        "selected_interventions": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                0,
+                                0
+                            ],
+                            "children": {
+                                "selected_intervention_1": {
+                                    "offset": [
+                                        1300,
+                                        200
+                                    ],
+                                    "size": [
+                                        301,
+                                        450
+                                    ]
+                                },
+                                "selected_intervention_2": {
+                                    "offset": [
+                                        1298,
+                                        398
+                                    ],
+                                    "size": [
+                                        305,
+                                        454
+                                    ]
+                                },
+                                "selected_intervention_3": {
+                                    "offset": [
+                                        1300,
+                                        599
+                                    ],
+                                    "size": [
+                                        302,
+                                        452
+                                    ]
+                                },
+                                "selected_intervention_heading_text": {
+                                    "offset": [
+                                        1300,
+                                        140
+                                    ],
+                                    "size": [
+                                        300,
+                                        38
+                                    ]
+                                },
+                                "selected_interventions_clip": {
+                                    "offset": [
+                                        1288,
+                                        125
+                                    ],
+                                    "size": [
+                                        312,
+                                        644
+                                    ]
+                                }
+                            }
+                        },
+                        "heading_text": {
+                            "offset": [
+                                -1,
+                                25
+                            ],
+                            "size": [
+                                1601,
+                                61
+                            ]
+                        }
+                    }
+                },
+                "screen_event_outcome": {
+                    "offset": [
+                        -1,
+                        25
+                    ],
+                    "size": [
+                        1601,
+                        751
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                1600,
+                                900
+                            ]
+                        },
+                        "interventions": {
+                            "offset": [
+                                16,
+                                100
+                            ],
+                            "size": [
+                                821,
+                                600
+                            ],
+                            "children": {
+                                "intervention_1": {
+                                    "offset": [
+                                        16,
+                                        100
+                                    ],
+                                    "size": [
+                                        400,
+                                        600
+                                    ]
+                                },
+                                "intervention_2": {
+                                    "offset": [
+                                        436,
+                                        100
+                                    ],
+                                    "size": [
+                                        401,
+                                        600
+                                    ]
+                                }
+                            }
+                        },
+                        "heading_text": {
+                            "offset": [
+                                -1,
+                                25
+                            ],
+                            "size": [
+                                1601,
+                                61
+                            ]
+                        },
+                        "outcome_heading_text": {
+                            "offset": [
+                                858,
+                                99
+                            ],
+                            "size": [
+                                706,
+                                73
+                            ]
+                        },
+                        "button_flip_card": {
+                            "offset": [
+                                47,
+                                703
+                            ],
+                            "size": [
+                                706,
+                                73
+                            ]
+                        },
+                        "button_next": {
+                            "offset": [
+                                857,
+                                703
+                            ],
+                            "size": [
+                                706,
+                                73
+                            ]
+                        },
+                        "outcome_body_text": {
+                            "offset": [
+                                857,
+                                179
+                            ],
+                            "size": [
+                                707,
+                                512
+                            ]
+                        },
+                        "card": {
+                            "offset": [
+                                16,
+                                100
+                            ],
+                            "size": [
+                                820,
+                                601
+                            ]
+                        }
+                    }
+                },
+                "screen_intervention_outcome": {
+                    "offset": [
+                        -1,
+                        25
+                    ],
+                    "size": [
+                        1601,
+                        676
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                1600,
+                                900
+                            ]
+                        },
+                        "interventions": {
+                            "offset": [
+                                16,
+                                100
+                            ],
+                            "size": [
+                                821,
+                                600
                             ],
                             "children": {
                                 "intervention_1": {

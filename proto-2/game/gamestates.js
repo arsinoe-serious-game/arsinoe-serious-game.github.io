@@ -1199,6 +1199,89 @@ class GameState_EventResult extends GameState_TestModeBase
         return "GameState_EventResult";
     }
 
+    init(){
+        super.init();
+        this.show_card_back = false;
+        let layer = layout_get_by_name(layout,'screen_event_outcome');
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.current_color= 'rgb(0,0,0)';
+
+
+        //event
+        this.card = new EventCardWidget(layer_to_rect(layout_get_by_name(layer, 'card') ));
+        this.card.init();
+
+
+        //outcome heading
+        this.outcome_heading = new LayerWidgetText(layout_get_by_name(layer,'outcome_heading_text') );
+        this.outcome_body = new LayerWidgetText(layout_get_by_name(layer,'outcome_body_text') );
+        this.outcome_body.label = 'blah blah blah';
+
+        this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
+
+        if (appInst.model.current_event_round <4) {
+            this.next_button.set_label('Next intervention round');
+        }else {
+            this.next_button.set_label('Final Results');
+        }
+
+        this.card_flip_button = new LayerWidgetButton(layout_get_by_name(layer,'button_flip_card') );
+
+
+        this.on_set_event_round();
+    }
+
+    on_set_event_round(){
+        this.heading_text.label = 'Event Outcome ' + (appInst.model.current_event_round+1).toString() +' of 5';
+        this.card.set_card_info(appInst.model.current_event_round);
+
+        this.outcome_heading.label = 'Outcome: ' + appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString();
+
+        if(this.show_card_back === false){
+            this.card_flip_button.set_label('Show Back');
+            this.card.set_display('front');
+        }else{
+            this.card_flip_button.set_label('Show Front');
+            this.card.set_display('back');
+        }
+
+    }
+
+    client_update(){
+        if (this.next_button.update()){
+            if (appInst.model.current_event_round <4) {
+                appInst.model.current_event_round += 1;
+                this.show_card_back = false;
+                this.on_set_event_round();
+            }else {
+                appInst.stateMachine.setState(GameState_FinalOutcome.label());
+            }
+        }
+
+        if (this.card_flip_button.update()) {
+            this.show_card_back = !this.show_card_back;
+            this.on_set_event_round();
+        }
+    }
+
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
+
+        this.card.draw();
+
+        this.outcome_heading.draw();
+        this.outcome_body.draw();
+
+        this.next_button.draw();
+        this.card_flip_button.draw();
+    }
+
 }
 
 class GameState_FinalOutcome extends GameState_TestModeBase
