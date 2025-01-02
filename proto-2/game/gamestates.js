@@ -569,8 +569,8 @@ class GameState_PlayGame extends GameState_TestModeBase
     {
         super.init();
         appInst.on_new_game();
-        appInst.controller.set_players(5);
-        appInst.controller.select_mayor();
+        appInst.set_players(5);
+        appInst.select_mayor();
 
         console.log();
     }
@@ -860,7 +860,7 @@ class GameState_SelectPlayers extends GameState_TestModeBase
 
         for(let i = 0;i<this.player_button.length;i++){
             if (this.player_button[i].update() == 1){
-                appInst.controller.set_players(i+1);
+                appInst.set_players(i+1);
                 appInst.stateMachine.setState(GameState_ViewPlayers.label());
             }
         }
@@ -925,7 +925,7 @@ class GameState_ViewPlayers extends GameState_TestModeBase
 
         if (this.continue_button.update()){
             //set-up for interventions
-            appInst.controller.setup_for_interventions();
+            appInst.setup_for_interventions();
             appInst.stateMachine.setState(GameState_MayoralElection.label());
         }
     }
@@ -957,7 +957,7 @@ class GameState_MayoralElection extends GameState_TestModeBase
     {
         super.init();
 
-        appInst.controller.select_mayor();
+        appInst.select_mayor();
 
         let layer = layout_get_by_name(layout,'screen_mayoral_election');
 
@@ -1043,7 +1043,7 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
         this.heading_text.current_color= 'rgb(0,0,0)';
         this.heading_text.label = 'Intervention Selection Round ' + (appInst.model.current_intervention_round+1).toString() +' of 4';
 
-        this.round_cards = appInst.controller.get_round_cards();
+        this.round_cards = appInst.get_round_cards();
 
         //interventions
         this.intervention_cards = [];
@@ -1082,7 +1082,7 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
         for(let i=0;i<4;i++){
             if(this.intervention_buttons[i].update() === true){
                 //select intervention
-                appInst.controller.select_intervention(this.round_cards[i]);
+                appInst.select_intervention(this.round_cards[i]);
                 appInst.stateMachine.setState(GameState_InterventionResult.label());
                 return;
             }
