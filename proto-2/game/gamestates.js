@@ -998,6 +998,8 @@ class GameState_MayoralElection extends GameState_TestModeBase
         if (this.continue_button.update()){
             appInst.stateMachine.setState(GameState_ChooseIntervention.label());
         }
+
+        this.player_card.update();
     }
 
     client_draw() {
@@ -1084,6 +1086,14 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
                 appInst.stateMachine.setState(GameState_InterventionResult.label());
                 return;
             }
+        }
+
+        for (let i = 0; i < this.selected_interventions.length; i++) {
+            this.selected_interventions[i].update();
+        }
+
+        for(let i=0;i< this.intervention_cards.length;i++){
+            this.intervention_cards[i].update();
         }
     }
 
@@ -1186,6 +1196,8 @@ class GameState_InterventionResult extends GameState_TestModeBase
                 appInst.stateMachine.setState(GameState_EventResult.label());
             }
         }
+
+        this.card_front.update();
     }
 
     client_draw() {

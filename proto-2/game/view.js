@@ -38,6 +38,29 @@ class LayerWidget extends  WidgetBase{
         super(inRect);
         this.card_info = undefined;
         this.scale = new Vector2(1,1);
+        this.offset = new Vector2(0,0);
+    }
+
+    isInMe(inVal)
+    {
+        if(inVal !== undefined)
+        {
+            if( (inVal.x >= this.x+this.offset.x) && (inVal.x < (this.x + this.w+this.offset.x)) && (inVal.y >= this.y+this.offset.y) && (inVal.y < (this.y + this.h+this.offset.y)) )
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    set_scale(scale){
+        this.scale.set(scale);
+    }
+
+    set_offset(offset){
+        this.offset.set(offset);
     }
 
     format_desc(in_str, max_chars){
@@ -119,7 +142,6 @@ class LayerWidgetBase extends LayerWidget{
     constructor(layer) {
         super(layer_to_rect(layer));
         this.layer = layer;
-        this.scale = new Vector2(1,1);
     }
 
     update(){
@@ -169,7 +191,80 @@ class LayerWidgetRect extends LayerWidgetBase{
     }
 }
 
-class LayerWidgetButton extends LayerWidgetBase{
+class LayerWidgetClickable extends LayerWidgetBase{
+    constructor(layer) {
+        super(layer);
+        this.active = true;
+
+        this.current_color = 'rgb(0,255,0)';
+    }
+
+    update() {
+        super.update();
+
+        if(this.visible === false){
+            return false;
+        }
+
+        let r = this.layer_to_rect(this.offset, this.layer);
+
+        if (Input.currentMouseState === INPUT_PRESSED) {
+            if (r.isInMe(Input.mouseLogicalPos)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    draw(){
+        if(this.visible) {
+            this.debug_rect(new Vector2(0, 0), this.layer, this.current_color);
+        }
+    }
+}
+
+class LayerWidgetClickableImage extends LayerWidgetClickable{
+
+    constructor(layer) {
+        super(layer);
+
+        this.image = undefined;
+        this.aspect_correct = false;
+
+    }
+
+    update() {
+
+        this.current_color = 'rgb(0,255,0)';
+
+        if(this.visible === false){
+            return false;
+        }
+
+        let r = this.layer_to_rect(this.offset, this.layer);
+
+        if (r.isInMe(Input.mouseLogicalPos)) {
+            this.current_color = 'rgb(255,0,0)';
+            return (Input.currentMouseState === INPUT_PRESSED);
+        }
+
+        return false;
+    }
+
+    draw(){
+        if(this.visible) {
+
+            if (this.image !== undefined) {
+                this.debug_image(this.offset, this.layer, this.image, this.aspect_correct);
+            }else{
+                this.debug_rect(this.offset,this.layer,this.current_color);
+            }
+        }
+    }
+}
+
+
+class LayerWidgetButton extends LayerWidgetClickable{
     constructor(layer) {
         super(layer);
         this.active = true;
@@ -288,12 +383,17 @@ class CardWidgetBase extends LayerWidget {
         this.scale.x = this.w / (layout_get_by_name(this.template,'bg')["size"][0]);
         this.scale.y = this.h / (layout_get_by_name(this.template,'bg')["size"][1]);
 
+        /*
         this.qr_code_link = new WidgetBase( this.layer_to_rect(new Vector2(this.x,this.y), layout_get_by_name(this.template,'qr_code') ));
         this.qr_code_link.set_active(true);
         this.qr_code_link.on_click = function (d) {
             console.log('QR link!');
             window.open('website/game/events/flood_event.pdf', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
-        };
+        };*/
+
+        this.qr_code_link = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
+        this.qr_code_link.set_scale(this.scale);
+        this.qr_code_link.set_offset(new Vector2(this.x, this.y));
 
         this.side = 'front';
 
@@ -316,7 +416,9 @@ class CardWidgetBase extends LayerWidget {
 
     update() {
         super.update();
-        this.qr_code_link.update();
+        if(this.qr_code_link.update() === true){
+            window.open('website/game/events/flood_event.pdf', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        }
     }
 
     draw_bg(loc){
@@ -330,9 +432,6 @@ class CardWidgetBase extends LayerWidget {
         }else{
             this.draw_back();
         }
-
-
-        //super.draw();
     }
 
     draw_front(){
@@ -369,7 +468,7 @@ class EventCardWidget  extends CardWidgetBase {
         this.draw_bg(loc);
 
         let template = layout_get_by_name(this.template, 'front');
-        this.qr_code_link.draw();
+        this.qr_code_link.draw(loc);
 
         let title = this.card_info['name'].toUpperCase();
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
@@ -465,7 +564,7 @@ class PersonaCardWidget extends CardWidgetBase{
         this.draw_bg(loc);
 
         let template = layout_get_by_name(this.template,'front');
-        this.qr_code_link.draw();
+        this.qr_code_link.draw(loc);
 
         let title = this.card_info['name'].toUpperCase();
 
@@ -567,7 +666,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         this.draw_bg(loc);
 
         let template = layout_get_by_name(this.template,'front');
-        this.qr_code_link.draw();
+        this.qr_code_link.draw(loc);
 
         let title = this.card_info['name'].toUpperCase();
 
