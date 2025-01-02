@@ -1293,6 +1293,10 @@ class GameState_EventResult extends GameState_TestModeBase
             this.show_card_back = !this.show_card_back;
             this.on_set_event_round();
         }
+
+        if(this.show_card_back === false){
+            this.card.update();
+        }
     }
 
     client_draw() {
