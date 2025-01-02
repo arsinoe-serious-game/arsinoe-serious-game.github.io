@@ -467,11 +467,14 @@ class GameState_TestModeBase extends StateMachineState{
         this.quit_button = undefined;
         this.mode = 'normal';
 
+        this.widget_list = {};
     }
 
     init()
     {
         super.init();
+        this.widget_list = {};
+
 
         let self = this;
 
@@ -488,7 +491,21 @@ class GameState_TestModeBase extends StateMachineState{
 
     client_update(){
 
+        if(this.widget_list !== undefined) {
+            for (const [key, value] of Object.entries(this.widget_list)) {
+                value.update();
+            }
+        }
     }
+
+    client_draw() {
+        if(this.widget_list !== undefined) {
+            for (const [key, value] of Object.entries(this.widget_list)) {
+                value.draw();
+            }
+        }
+    }
+
 
     update()
     {
@@ -534,11 +551,6 @@ class GameState_TestModeBase extends StateMachineState{
 
         appInst.draw_mouse_pointer();
     }
-
-    client_draw(){
-
-    }
-
 }
 //*********************************************************************************************************************
 
@@ -594,7 +606,7 @@ class GameState_InterventionPrint extends GameState_TestModeBase
 
     on_update_interventon(step){
         let intervention_cards = appInst.model.get_intervention_cards();
-        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < intervention_cards.length-1)) {
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < intervention_cards.length)) {
             this.current_intervention += step;
         }
 
@@ -686,6 +698,8 @@ class GameState_PersonaPrint extends GameState_TestModeBase
 
         let self = this;
         this.current_intervention = 0;
+
+        this.widget_list = {};
 
         let template = layout_get_by_name(layout,'screen_intervention_preview');
 

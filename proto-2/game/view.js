@@ -675,7 +675,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         pos.y += 7*this.scale.y;
         pos.x = loc.x + (t['offset'][0]*this.scale.x);
 
-        let dice = ['1: Very Bad','2-3: Bad','4-5:Alright','6:Great'];
+        let dice = ['1: Oh Dear!','2-3: Not Good','4-5:Not Bad','6:Great'];
 
         let max_line_length = Math.floor((46 * this.content_font_size)/18.0);
 
@@ -686,6 +686,13 @@ class InterventionCardWidget extends  CardWidgetBase{
             let text= this.format_desc(this.card_info['outcome-' + (p).toString()], max_line_length);
             GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
             pos.y +=((text.split('\n').length) * text_font_size);
+
+
+            if(p==0){
+                GAZCanvas.Text(text_font_size, 'The citizens demand a new mayor!', pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+                pos.y += text_font_size *1.1;
+            }
+
             pos.y += text_font_size *1.1;
         }
     }
