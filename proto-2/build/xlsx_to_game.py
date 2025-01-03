@@ -51,7 +51,9 @@ def do_stuff():
                 if isinstance(value, float):
                     value = str(value)
 
-                value = value.replace('\n', '')
+                value = value.replace('\n', ' <br> ')
+                value = value.replace('<b>', ' <b> ')
+                value = value.replace('<\b>', ' <\b> ')
                 value = value.replace('\u00a0', ' ')
                 value = value.replace('\u2019',"'")
                 value = value.replace('\u2018', "'")

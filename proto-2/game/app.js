@@ -105,6 +105,10 @@ class ARSINOEGame extends AppBase
         return 'ERROR';
     }
 
+    is_current_intervention_new_mayor(){
+        return this.model.intervention_outcomes[appInst.model.current_intervention_round] == 0;
+    }
+
     select_intervention(entry) {
         this.model.selected_interventions.push(entry);
 
@@ -124,7 +128,8 @@ class ARSINOEGame extends AppBase
 
         let dice_to_outcome_lookup = [0,1,1,2,2,3];
 
-        let always_return_bad = true;
+        //let always_return_bad = true;
+        let always_return_bad = false;
 
         let result = 0;
 

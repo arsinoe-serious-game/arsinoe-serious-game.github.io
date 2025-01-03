@@ -171,7 +171,7 @@ class LayerWidgetText extends LayerWidgetBase{
 
     draw(){
 
-        let max_line_length = Math.floor((this.w*2) / this.font_size);
+        let max_line_length = Math.floor((this.w*2.3) / this.font_size);
 
         let text = this.format_desc(this.label, max_line_length);
 
@@ -192,25 +192,82 @@ class LayerWidgetText extends LayerWidgetBase{
             pos.y += text_font_size;
         }
 
+        let current_style = this.font_style;
 
+        if(this.label.length) {
 
-        GAZCanvas.Text(text_font_size, text, pos, 'rgb(255,0,255)' //this.font_color
-            , this.font_just
-            , this.font_family
-            , this.font_style);
+            let words = this.label.replace('\n', ' \n ').split(" ");
 
-        pos.y += ((text.split('\n').length) * text_font_size);
+            let current_line = '';
+            for (let i = 0; i < words.length; i++) {
+                if (words[i][0] === '<') {
+                    if (words[i] == '<br>') {
+                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                            , this.font_just
+                            , this.font_family
+                            , current_style);
 
-        /*
-        this.debug_text(new Vector2(0,0)
-            , this.layer
-            , this.font_size*this.scale.y
-            , this.label
-            , this.font_color
-            , this.font_just
-            , this.font_family
-            , this.font_style);
-            */
+                        current_line = '';
+                        pos.y += text_font_size;
+
+                        pos.x = r.x;
+
+                        if (this.font_just == 'center') {
+                            pos.x += r.w / 2;
+                        } else {
+                            pos.x += text_font_size / 2;
+                        }
+                    }
+
+                    if (words[i] == '<b>') {
+                        if (current_style !== 'bold') {
+                            GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                                , this.font_just
+                                , this.font_family
+                                , current_style);
+
+                            current_line = '';
+                            current_style = 'bold';
+
+                            pos.y += text_font_size;
+                        }
+                    }
+                    if (words[i] == '</b>') {
+                        if (current_style === 'bold') {
+                            GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                                , this.font_just
+                                , this.font_family
+                                , current_style);
+
+                            current_line = '';
+                            current_style = '';
+
+                            pos.y += text_font_size;
+                        }
+                    }
+                } else {
+                    if (current_line.length + words[i].length > max_line_length) {
+                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                            , this.font_just
+                            , this.font_family
+                            , current_style);
+
+                        current_line = '';
+                        pos.y += text_font_size;
+                    }
+                    current_line += words[i] + ' ';
+                }
+            }
+
+            if (current_line.length > 0) {
+                GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                    , this.font_just
+                    , this.font_family
+                    , current_style);
+
+                pos.y += ((current_line.split('\n').length) * text_font_size);
+            }
+        }
     }
 }
 

@@ -1172,12 +1172,16 @@ class GameState_InterventionResult extends GameState_TestModeBase
 
         let c = appInst.model.get_intervention_cards()[appInst.model.selected_interventions[appInst.model.current_intervention_round]];
 
-        this.outcome_body.label = c['outcome-'+appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString()] +'\n\n<b>The citizens demand a new mayor</b>';
+        this.outcome_body.label = c['outcome-'+appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString()];
+
+        if (appInst.is_current_intervention_new_mayor() ) {
+            this.outcome_body.label += ' <br> <br> <b> The citizens demand a new mayor! </b>';
+        }
 
         this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
 
         if (appInst.model.current_intervention_round <3) {
-            if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 0){
+            if (appInst.is_current_intervention_new_mayor() ){
                 this.next_button.set_label('Elect new mayor');
             }else{
                 this.next_button.set_label('Next intervention round');
@@ -1193,7 +1197,7 @@ class GameState_InterventionResult extends GameState_TestModeBase
             if (appInst.model.current_intervention_round <3) {
                 let next_state = GameState_ChooseIntervention.label();
 
-                if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 1) {
+                if (appInst.is_current_intervention_new_mayor() ){
                     next_state = GameState_MayoralElection.label();
                 }
 
