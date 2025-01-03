@@ -67,21 +67,22 @@ class LayerWidget extends  WidgetBase{
 
         let out_str = '';
 
-        let words = in_str.split(" ");
+        if(in_str.length) {
+            let words = in_str.split(" ");
 
-        let current_line = '';
-        for(let i=0;i<words.length;i++){
-            if (current_line.length + words[i].length > max_chars){
-                out_str += current_line;
-                out_str += '\n';
-                current_line = '';
+            let current_line = '';
+            for (let i = 0; i < words.length; i++) {
+                if (current_line.length + words[i].length > max_chars) {
+                    out_str += current_line;
+                    out_str += '\n';
+                    current_line = '';
+                }
+
+                current_line += words[i] + ' ';
             }
 
-            current_line += words[i] + ' ';
+            out_str += current_line;
         }
-
-        out_str += current_line;
-
         return out_str;
     }
 
@@ -163,19 +164,53 @@ class LayerWidgetText extends LayerWidgetBase{
         this.font_family = 'roboto';
         this.font_size = 24;
         this.font_style = 'bold';
+        this.font_just = 'center';
 
         this.font_color = 'rgb(0,0,0)';
     }
 
     draw(){
+
+        let max_line_length = Math.floor((this.w*2) / this.font_size);
+
+        let text = this.format_desc(this.label, max_line_length);
+
+        let text_font_size = this.font_size * this.scale.y;
+
+        let pos = new Vector2();
+
+        let r = this.layer_to_rect(this.offset, this.layer);
+
+        pos.x = r.x;
+        pos.y = r.y;
+
+        if(this.font_just == 'center'){
+            pos.x += r.w/2;
+            pos.y += r.h/2;
+        }else{
+            pos.x += text_font_size/2;
+            pos.y += text_font_size;
+        }
+
+
+
+        GAZCanvas.Text(text_font_size, text, pos, 'rgb(255,0,255)' //this.font_color
+            , this.font_just
+            , this.font_family
+            , this.font_style);
+
+        pos.y += ((text.split('\n').length) * text_font_size);
+
+        /*
         this.debug_text(new Vector2(0,0)
             , this.layer
             , this.font_size*this.scale.y
             , this.label
             , this.font_color
-            , 'center'
+            , this.font_just
             , this.font_family
             , this.font_style);
+            */
     }
 }
 

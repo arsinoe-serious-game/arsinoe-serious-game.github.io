@@ -985,7 +985,9 @@ class GameState_MayoralElection extends GameState_TestModeBase
         //mayor text
         this.mayor_text = new LayerWidgetText(layout_get_by_name(layer, 'mayor_text'));
         this.mayor_text.current_color= 'rgb(0,0,0)';
-        this.mayor_text.label = 'blah blah blah';
+        this.mayor_text.font_style = '';
+        this.mayor_text.font_just = 'left';
+        this.mayor_text.label = appInst.model.get_game_text('MAYOR_DETAIL');
 
         //continue
         this.continue_button = new LayerWidgetButton(layout_get_by_name(layer,'button_ok'));
@@ -1162,14 +1164,20 @@ class GameState_InterventionResult extends GameState_TestModeBase
 
         //outcome heading
         this.outcome_heading = new LayerWidgetText(layout_get_by_name(layer,'outcome_heading_text') );
-        this.outcome_heading.label = 'Outcome: ' + appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString();
+        this.outcome_heading.label = 'Outcome: ' + appInst.get_intervention_outcome_label(appInst.model.current_intervention_round);
         this.outcome_body = new LayerWidgetText(layout_get_by_name(layer,'outcome_body_text') );
-        this.outcome_body.label = 'blah blah blah';
+        this.outcome_body.current_color= 'rgb(0,0,0)';
+        this.outcome_body.font_style = '';
+        this.outcome_body.font_just = 'left';
+
+        let c = appInst.model.get_intervention_cards()[appInst.model.selected_interventions[appInst.model.current_intervention_round]];
+
+        this.outcome_body.label = c['outcome-'+appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString()] +'\n\n<b>The citizens demand a new mayor</b>';
 
         this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
 
         if (appInst.model.current_intervention_round <3) {
-            if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 1){
+            if (appInst.model.intervention_outcomes[appInst.model.current_intervention_round] == 0){
                 this.next_button.set_label('Elect new mayor');
             }else{
                 this.next_button.set_label('Next intervention round');
@@ -1311,7 +1319,6 @@ class GameState_EventResult extends GameState_TestModeBase
         this.next_button.draw();
         this.card_flip_button.draw();
     }
-
 }
 
 class GameState_FinalOutcome extends GameState_TestModeBase
@@ -1324,8 +1331,45 @@ class GameState_FinalOutcome extends GameState_TestModeBase
         return "GameState_FinalOutcome";
     }
 
+    init(){
+        super.init();
+        this.show_card_back = false;
+        let layer = layout_get_by_name(layout,'screen_final_results');
+
+        this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
+        this.bg.current_color = 'rgb(255,255,255)';
+
+        //heading
+        this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
+        this.heading_text.label = 'Final Results';
+        this.heading_text.current_color= 'rgb(0,0,0)';
+
+
+
+        //outcome heading
+        this.outcome_body = new LayerWidgetText(layout_get_by_name(layer,'outcome_body_text') );
+        this.outcome_body.label = 'blah blah blah';
+
+        this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
+
+        this.next_button.set_label('End Game');
+    }
+
+    client_update(){
+        if (this.next_button.update()){
+            appInst.stateMachine.setState(GameState_SelectPlayers.label());
+        }
+    }
+
+    client_draw() {
+        this.bg.draw();
+        this.heading_text.draw();
+        this.outcome_body.draw();
+        this.next_button.draw();
+    }
 
 }
+
 
 
 

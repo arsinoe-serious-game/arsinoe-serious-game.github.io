@@ -94,6 +94,17 @@ class ARSINOEGame extends AppBase
         }
     }
 
+    get_intervention_outcome_label(round){
+
+        let dice = ['1: Oh Dear!','2-3: Not Good','4-5:Not Bad','6:Great'];
+
+        if (round < this.model.intervention_outcomes.length){
+            return dice[this.model.intervention_outcomes[round]];
+        }
+
+        return 'ERROR';
+    }
+
     select_intervention(entry) {
         this.model.selected_interventions.push(entry);
 
@@ -101,9 +112,34 @@ class ARSINOEGame extends AppBase
         if (index > -1) {
             this.model.current_deck.splice(index, 1);
         }
+        /*
+            dice to outcomes
+            1 - 0
+            2 - 1
+            3 - 1
+            4 - 2
+            5 - 2
+            6 - 3
+         */
 
-        //this.model.intervention_outcomes.push(appInst.model.random.getChoice([1,2,3,4,5,6]));
-        this.model.intervention_outcomes.push(1);
+        let dice_to_outcome_lookup = [0,1,1,2,2,3];
+
+        let always_return_bad = true;
+
+        let result = 0;
+
+        if(always_return_bad == true) {
+            result = 1;
+        }else{
+            let always_return_ok = false;
+
+            if (always_return_ok === true) {
+                result = this.model.random.getChoice([2, 3, 4, 5, 6]);
+            }else{
+                result = this.model.random.getChoice([1, 2, 3, 4, 5, 6]);
+            }
+        }
+        this.model.intervention_outcomes.push(dice_to_outcome_lookup[result-1]);
     }
 
     get_round_cards() {

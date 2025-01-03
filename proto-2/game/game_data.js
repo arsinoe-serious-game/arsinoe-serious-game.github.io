@@ -171,6 +171,12 @@ let game_data =
             "outcome-4": "extreme overkillLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
         }
     ],
+    "text": [
+        {
+            "ID": "MAYOR_DETAIL",
+            "text": "Welcome to the mayoral office. Your role is to lead your team of citizens to ensure that they come to their decisions quickly and efficiently, while exploring the options in enough depth to make reasoned decisions. The reward for success is knowing that you have lead your citizens to make difficult decisions for the good of the town. However, the price of failure is high."
+        }
+    ],
     "interventions": [
         {
             "type": "BP",

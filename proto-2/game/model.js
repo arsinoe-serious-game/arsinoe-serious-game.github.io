@@ -97,6 +97,16 @@ class ModelBase extends MVCBase{
         return game_data['personas'];
     }
 
+    get_game_text(ID){
+        for(let i=0;i< game_data['text'].length;i++ ){
+            if (game_data['text'][i]['ID'] === ID){
+                return game_data['text'][i]['text'];
+            }
+        }
+
+        return '***NOT IN DB';
+    }
+
     get_event_cards(){
         return game_data['events'];
     }

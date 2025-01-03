@@ -1,7 +1,7 @@
 from psd_tools import PSDImage
 import json
 
-psd = PSDImage.open('/Users/gareth/Documents/dev/arsinoe/arsinoe-serious-game.github.io/proto-2/build/arsinoe-serious-layout3.psd')
+psd = PSDImage.open('/Users/gareth/Documents/dev/arsinoe/arsinoe-serious-game.github.io/proto-2/build/arsinoe-serious-layout4.psd')
 #psd.composite().save('example.png')
 
 def do_layer(layer, indent, data):
