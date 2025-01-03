@@ -53,7 +53,7 @@ def do_stuff():
 
                 value = value.replace('\n', ' <br> ')
                 value = value.replace('<b>', ' <b> ')
-                value = value.replace('<\b>', ' <\b> ')
+                value = value.replace('</b>', ' </b> ')
                 value = value.replace('\u00a0', ' ')
                 value = value.replace('\u2019',"'")
                 value = value.replace('\u2018', "'")

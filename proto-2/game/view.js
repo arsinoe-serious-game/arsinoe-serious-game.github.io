@@ -760,7 +760,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let template = layout_get_by_name(this.template,'front');
         this.qr_code_link.draw(loc);
 
-        let title = this.card_info['name'].toUpperCase();
+        let title = this.card_info['name'].toUpperCase() + ':' +this.card_info['case_study'];
 
         let max_line_length = 22;
 
@@ -772,59 +772,21 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['interventions'][this.card_index] );
 
-        //do description
-        let t = template['children']['floating_text'];
-        let pos = new Vector2();
+        let mayor_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
+        mayor_text.current_color= 'rgb(0,0,0)';
+        mayor_text.label = this.card_info['desc'];
+        mayor_text.font_style = '';
+        mayor_text.font_just = 'left';
+        mayor_text.font_size = this.content_font_size;
+        mayor_text.set_scale(this.scale);
+        mayor_text.set_offset(new Vector2(this.x, this.y));
 
-        pos.x = loc.x + (t['offset'][0])*this.scale.x;
-        pos.y = loc.y + (t['offset'][1])*this.scale.y;
-
-        pos.y += 10*this.scale.y;
-
-        max_line_length = Math.floor((45 * this.content_font_size)/18.0);
-
-        let text_font_size = this.content_font_size * this.scale.y;
-
-        let text = this.format_desc(this.card_info['desc'], max_line_length);
-
-        pos.x = loc.x + (t['offset'][0] + t['size'][0]/2) * this.scale.x;
-
-        GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', 'roboto', '');
-
-        pos.y += ((text.split('\n').length) * text_font_size);
-
-        //do positives
-        pos.y += 7*this.scale.y;
-        pos.x = loc.x + (t['offset'][0]*this.scale.x);
-
-        //text_font_size = 16*this.scale.y;
-        GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-        pos.y += text_font_size;
-
-        for(let p=0;p<3;p++) {
-            text = (p + 1).toString() + '.';
-            text += this.format_desc(this.card_info['pos-' + (p + 1).toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
-            pos.y +=((text.split('\n').length) * text_font_size);
-        }
-
-        //do issues
-        pos.y += 5*this.scale.y;
-
-        GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-        pos.y += text_font_size;
-
-        for(let p=0;p<3;p++) {
-            text = (p + 1).toString() + '.';
-            text += this.format_desc(this.card_info['neg-' + (p + 1).toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
-            pos.y +=((text.split('\n').length) * text_font_size);
-        }
+        mayor_text.draw();
 
         //do protection racket
         let headings = ['EP','BP','FP','DP','HP'];
 
-        pos = loc.clone();
+        let pos = loc.clone();
         pos.y +=1*this.scale.y;
 
         for(let i=0;i<5;i++) {
