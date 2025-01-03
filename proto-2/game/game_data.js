@@ -222,7 +222,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "citizen MINKA",
+            "name": "citizen MINKA (CS9)",
             "desc": "This is MINKA. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             "EP": "0",
             "BP": "2",
@@ -243,7 +243,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Create a biodiversity digital twin",
+            "name": "Create a biodiversity digital twin ",
             "desc": "Add a digital twin to do digital twin stuff",
             "EP": "-1",
             "BP": "3",
@@ -264,7 +264,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Create a biodiversity knowledge base",
+            "name": "Create a biodiversity knowledge base (CS9)",
             "desc": "This sounds like MINKA, but is part of the Sardinia farmer dashboard - although that's ET rather than BD",
             "EP": "-1",
             "BP": "2",
@@ -285,7 +285,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Protect local biodiversity",
+            "name": "Protect local biodiversity (CS9)",
             "desc": "This sounds like MINKA. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
             "EP": "0",
             "BP": "2",
@@ -558,7 +558,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Create a flood support website",
+            "name": "Create a flood support website (CS6)",
             "desc": "As per CS6. Municipality will install a platform to support citizens with support and guidance for flooding.",
             "EP": "-1",
             "BP": "0",
@@ -621,7 +621,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Approve installation of cool roofs",
+            "name": "Approve installation of cool roofs (CS1)",
             "desc": "Plans have been submitted to paint roofs with reflective paint, reducing the overall temperature in buildings and surrounding environment.",
             "EP": "0",
             "BP": "0",
@@ -663,7 +663,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Approve installation of green walls",
+            "name": "Approve installation of green walls (CS1)",
             "desc": "Green walls will lower urban temperatures making towns more habitable, increasing footfall and revenue.",
             "EP": "1",
             "BP": "1",
@@ -726,7 +726,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Construct a Miyawaki Forest",
+            "name": "Construct a Miyawaki Forest (CS1)",
             "desc": "Build a Miyawaki forest",
             "EP": "0",
             "BP": "1",

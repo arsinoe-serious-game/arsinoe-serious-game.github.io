@@ -127,7 +127,7 @@ class GameState_InterventionPreview extends StateMachineState
         this.widget_list = {};
         this.first_intervention = 0;
 
-        this.intervention_types = ['BP', 'FP','DP','HP'];
+        this.intervention_types = [ 'FP','DP','HP', 'BP'];
         this.current_intervention = 0;
 
     }
@@ -142,9 +142,9 @@ class GameState_InterventionPreview extends StateMachineState
 
 
         let card_index = 0;
-        for(let i=0;i < intervention_cards.length;i++) {
+        for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
 
-            if (intervention_cards[i]['type'] === this.intervention_types[this.current_intervention]) {
+            if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[this.current_intervention]) {
                 this.widget_list['intervention_card_' + card_index.toString()].set_card_info(i);
                 card_index += 1;
             }
@@ -184,6 +184,7 @@ class GameState_InterventionPreview extends StateMachineState
         for(let i=0;i < 7;i++) {
             let loc = layout_get_by_name(template, 'card_' + i.toString());
             this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
+            this.widget_list['intervention_card_' + i.toString()].init();
         }
 
         this.on_interventon_button(undefined,0);
