@@ -485,7 +485,7 @@ let game_data =
         {
             "type": "BP",
             "name": "CLEVEL TOOL",
-            "desc": " <b> Weather saas to record port shutdowns from climatic events </b>  <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "desc": "A climate change impact monitoring system that integrates with the data from the SAMOA system (which provides oceanic variable predictions for the Port of Valencia) , meteorological variables from both the port's own stations and AEMET (Spanish Weather Agency). Additionally, terminals operating in the port will be equipped with a user-friendly tool, a mobile app, allowing them to quickly and clearly report any events (shutdowns, damages, delays, etc.) caused by climatic conditions. This way, real-time data on the evolution of variables and their impacts on port infrastructures and operations will be available. This, in turn, will assist port authorities in obtaining the most accurate future climate predictions, facilitating proper sizing of new infrastructures and determining when adjustments to current facilities are necessary.",
             "case_study": "CS2",
             "EP": "0",
             "BP": "1",

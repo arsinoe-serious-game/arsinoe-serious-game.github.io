@@ -200,62 +200,71 @@ class LayerWidgetText extends LayerWidgetBase{
 
             let current_line = '';
             for (let i = 0; i < words.length; i++) {
-                if (words[i][0] === '<') {
-                    if (words[i] == '<br>') {
-                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
-                            , this.font_just
-                            , this.font_family
-                            , current_style);
-
-                        current_line = '';
-                        pos.y += text_font_size;
-
-                        pos.x = r.x;
-
-                        if (this.font_just == 'center') {
-                            pos.x += r.w / 2;
-                        } else {
-                            pos.x += text_font_size / 2;
-                        }
-                    }
-
-                    if (words[i] == '<b>') {
-                        if (current_style !== 'bold') {
+                if (words[i].length) {
+                    if (words[i][0] === '<') {
+                        if (words[i] == '<br>') {
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
                                 , this.font_just
                                 , this.font_family
                                 , current_style);
 
                             current_line = '';
-                            current_style = 'bold';
-
                             pos.y += text_font_size;
+
+                            pos.x = r.x;
+
+                            if (this.font_just == 'center') {
+                                pos.x += r.w / 2;
+                            } else {
+                                pos.x += text_font_size / 2;
+                            }
                         }
-                    }
-                    if (words[i] == '</b>') {
-                        if (current_style === 'bold') {
+
+                        if (words[i] == '<b>') {
+                            if (current_style !== 'bold') {
+                                if (current_line.length) {
+                                    GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                                        , this.font_just
+                                        , this.font_family
+                                        , current_style);
+
+                                    current_line = '';
+                                    pos.y += text_font_size;
+                                }
+                                current_style = 'bold';
+
+
+                            }
+                        }
+                        if (words[i] == '</b>') {
+                            if (current_style === 'bold') {
+
+                                if (current_line.length) {
+                                    GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                                        , this.font_just
+                                        , this.font_family
+                                        , current_style);
+
+                                    current_line = '';
+                                    //pos.y += text_font_size;
+                                }
+                                current_style = '';
+
+
+                            }
+                        }
+                    } else {
+                        if (current_line.length + words[i].length > max_line_length) {
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family
                                 , current_style);
 
                             current_line = '';
-                            current_style = '';
-
                             pos.y += text_font_size;
                         }
+                        current_line += words[i] + ' ';
                     }
-                } else {
-                    if (current_line.length + words[i].length > max_line_length) {
-                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
-                            , this.font_just
-                            , this.font_family
-                            , current_style);
-
-                        current_line = '';
-                        pos.y += text_font_size;
-                    }
-                    current_line += words[i] + ' ';
                 }
             }
 
@@ -518,11 +527,12 @@ class CardWidgetBase extends LayerWidget {
     }
 
     draw(){
-
-        if (this.side === 'front'){
-            this.draw_front();
-        }else{
-            this.draw_back();
+        if (this.visible === true) {
+            if (this.side === 'front') {
+                this.draw_front();
+            } else {
+                this.draw_back();
+            }
         }
     }
 

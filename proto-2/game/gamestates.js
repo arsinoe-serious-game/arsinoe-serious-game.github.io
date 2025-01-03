@@ -141,11 +141,16 @@ class GameState_InterventionPreview extends StateMachineState
         this.widget_list['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
 
 
+        for(let i=0;i < 7;i++) {
+            this.widget_list['intervention_card_' + i.toString()].visible = false;
+        }
+
         let card_index = 0;
         for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
 
             if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[this.current_intervention]) {
                 this.widget_list['intervention_card_' + card_index.toString()].set_card_info(i);
+                this.widget_list['intervention_card_' + card_index.toString()].visible = true;
                 card_index += 1;
             }
         }
