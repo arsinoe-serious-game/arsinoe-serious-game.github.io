@@ -17,43 +17,29 @@ class GameState_Testbed extends StateMachineState
     {
         super.init();
 
-        let button_width = 300;
+        let button_width = 500;
+        let button_height = 75;
 
-        this.widget_list['View Personas'] = new ButtonBase( new Rect((1600-button_width)/2,100,button_width,100));
-        this.widget_list['View Personas'].set_active(true);
-        this.widget_list['View Personas'].set_label('View Persona Cards');
-        this.widget_list['View Personas'].label.font_size = 24;
-        this.widget_list['View Personas'].label.font_family = 'roboto';
-        this.widget_list['View Personas'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_PersonaPrint.label());
-        };
+        let modes = [GameState_PersonaPrint.label(),
+            GameState_InterventionPrint.label(),
+            GameState_EventPrint.label(),
+            GameState_InterventionPreview.label(),
+            GameState_SelectPlayers.label()
+        ];
 
-        this.widget_list['View Intervention'] = new ButtonBase( new Rect((1600-button_width)/2,300,button_width,100));
-        this.widget_list['View Intervention'].set_active(true);
-        this.widget_list['View Intervention'].set_label('View Intervention Cards');
-        this.widget_list['View Intervention'].label.font_size = 24;
-        this.widget_list['View Intervention'].label.font_family = 'roboto';
-        this.widget_list['View Intervention'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_InterventionPrint.label());
-        };
+        for (let i=0;i<modes.length;i++) {
 
-        this.widget_list['View Event'] = new ButtonBase( new Rect((1600-button_width)/2,500,button_width,100));
-        this.widget_list['View Event'].set_active(true);
-        this.widget_list['View Event'].set_label('View Event Cards');
-        this.widget_list['View Event'].label.font_size = 24;
-        this.widget_list['View Event'].label.font_family = 'roboto';
-        this.widget_list['View Event'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_EventPrint.label());
-        };
+            let button_label = 'button_'+i.toString();
 
-        this.widget_list['Play Game'] = new ButtonBase( new Rect((1600-button_width)/2,700,button_width,100));
-        this.widget_list['Play Game'].set_active(true);
-        this.widget_list['Play Game'].set_label('Play Game');
-        this.widget_list['Play Game'].label.font_size = 24;
-        this.widget_list['Play Game'].label.font_family = 'roboto';
-        this.widget_list['Play Game'].on_click = function (d) {
-            appInst.stateMachine.setState(GameState_SelectPlayers.label());
-        };
+            this.widget_list[button_label] = new ButtonBase(new Rect((1600 - button_width) / 2, 100 + ((button_height + 25) * i), button_width, button_height));
+            this.widget_list[button_label].set_active(true);
+            this.widget_list[button_label].set_label(modes[i]);
+            this.widget_list[button_label].label.font_size = 24;
+            this.widget_list[button_label].label.font_family = 'roboto';
+            this.widget_list[button_label].on_click = function (d) {
+                appInst.stateMachine.setState(modes[i]);
+            };
+        }
     }
 
     update()
@@ -112,116 +98,6 @@ class GameState_Test extends StateMachineState
     }
 }
 
-//*********************************************************************************************************************
-class GameState_InterventionPreview extends StateMachineState
-{
-    static label()
-    {
-        return "GameState_InterventionPreview";
-    }
-
-    constructor()
-    {
-        super();
-
-        this.widget_list = {};
-        this.first_intervention = 0;
-
-        this.intervention_types = [ 'FP','DP','HP', 'BP'];
-        this.current_intervention = 0;
-
-    }
-
-    on_interventon_button(b, step){
-        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < this.intervention_types.length)) {
-            this.current_intervention += step;
-        }
-
-        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
-        this.widget_list['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
-
-
-        for(let i=0;i < 7;i++) {
-            this.widget_list['intervention_card_' + i.toString()].visible = false;
-        }
-
-        let card_index = 0;
-        for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
-
-            if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[this.current_intervention]) {
-                this.widget_list['intervention_card_' + card_index.toString()].set_card_info(i);
-                this.widget_list['intervention_card_' + card_index.toString()].visible = true;
-                card_index += 1;
-            }
-        }
-    }
-
-    init()
-    {
-        super.init();
-
-        let self = this;
-
-        let template = layout_get_by_name(layout, 'screen_intervention_preview');
-
-        let loc = layout_get_by_name(template, 'button_prev');
-
-        this.widget_list['prev_intervention'] = new ButtonBase(layer_to_rect(loc));
-        this.widget_list['prev_intervention'].set_active(false);
-        this.widget_list['prev_intervention'].set_label('PREV');
-        this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
-        this.widget_list['prev_intervention'].on_click = function (d) {
-            self.on_interventon_button(d, -1);
-        };
-
-        loc = layout_get_by_name(template, 'button_next');
-
-        this.widget_list['next_intervention'] = new ButtonBase(layer_to_rect(loc));
-        this.widget_list['next_intervention'].set_active(true);
-        this.widget_list['next_intervention'].set_label('NEXT');
-        this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
-        this.widget_list['next_intervention'].on_click = function (d) {
-            self.on_interventon_button(d, 1);
-        };
-
-        for(let i=0;i < 7;i++) {
-            let loc = layout_get_by_name(template, 'card_' + i.toString());
-            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
-            this.widget_list['intervention_card_' + i.toString()].init();
-        }
-
-        this.on_interventon_button(undefined,0);
-    }
-
-    update()
-    {
-        super.update();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
-        }
-    }
-
-    draw()
-    {
-        appInst.draw();
-        super.draw();
-
-        GAZCanvas.clip_start();
-        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-        GAZCanvas.clip_end();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-            this.widget_list[key].draw();
-        }
-
-
-        appInst.draw_mouse_pointer();
-    }
-}
 
 //*********************************************************************************************************************
 
@@ -590,228 +466,9 @@ class GameState_PlayGame extends GameState_TestModeBase
     }
 }
 
-//*********************************************************************************************************************
-
-
-class GameState_InterventionPrint extends GameState_TestModeBase
-{
-    static label()
-    {
-        return "GameState_InterventionPrint";
-    }
-
-    constructor()
-    {
-        super();
-
-        this.first_intervention = 0;
-        this.intervention_types = ['BP', 'FP','DP','HP'];
-        this.current_intervention = 0;
-
-    }
-
-    on_update_interventon(step){
-        let intervention_cards = appInst.model.get_intervention_cards();
-        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < intervention_cards.length)) {
-            this.current_intervention += step;
-        }
-
-        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
-        this.widget_list['next_intervention'].set_active(this.current_intervention < intervention_cards.length-1);
-
-        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
-        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
-    }
-
-    init()
-    {
-        super.init();
-        this.current_intervention = 0;
-
-        let self = this;
-
-        let template = layout_get_by_name(layout,'screen_intervention_preview');
-
-        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
-        this.widget_list['prev_intervention'].set_active(false);
-        this.widget_list['prev_intervention'].set_label('PREV');
-        this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
-        this.widget_list['prev_intervention'].on_click = function (d) {
-            self.on_update_interventon(-1);
-        };
-
-        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
-        this.widget_list['next_intervention'].set_active(true);
-        this.widget_list['next_intervention'].set_label('NEXT');
-        this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
-        this.widget_list['next_intervention'].on_click = function (d) {
-            self.on_update_interventon(1);
-        };
-
-        template = layout_get_by_name(layout,'screen_intervention_print');
-
-        this.widget_list['intervention_card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
-        this.widget_list['intervention_card_0'].init();
-
-        this.widget_list['intervention_card_1'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
-        this.widget_list['intervention_card_1'].init();
-        this.widget_list['intervention_card_1'].set_display('back');
-
-
-        this.on_update_interventon(0);
-    }
-}
-
 
 //*********************************************************************************************************************
-
-class GameState_PersonaPrint extends GameState_TestModeBase
-{
-    static label()
-    {
-        return "GameState_PersonaPrint";
-    }
-
-    constructor()
-    {
-        super();
-
-        this.first_intervention = 0;
-        this.current_intervention = 0;
-
-    }
-
-    on_update_interventon(step){
-
-        let persona_cards = appInst.model.get_persona_cards();
-
-        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < persona_cards.length)) {
-            this.current_intervention += step;
-        }
-
-        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
-        this.widget_list['next_intervention'].set_active(this.current_intervention < persona_cards.length-1);
-
-        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
-        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
-    }
-
-    init()
-    {
-        super.init();
-
-        let self = this;
-        this.current_intervention = 0;
-
-        this.widget_list = {};
-
-        let template = layout_get_by_name(layout,'screen_intervention_preview');
-
-        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
-        this.widget_list['prev_intervention'].set_active(false);
-        this.widget_list['prev_intervention'].set_label('PREV');
-        this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
-        this.widget_list['prev_intervention'].on_click = function (d) {
-            self.on_update_interventon(-1);
-        };
-
-        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
-        this.widget_list['next_intervention'].set_active(true);
-        this.widget_list['next_intervention'].set_label('NEXT');
-        this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
-        this.widget_list['next_intervention'].on_click = function (d) {
-            self.on_update_interventon(1);
-        };
-
-        template = layout_get_by_name(layout,'screen_intervention_print');
-
-        this.widget_list['intervention_card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
-        this.widget_list['intervention_card_0'].init();
-
-        this.widget_list['intervention_card_1'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
-        this.widget_list['intervention_card_1'].init();
-        this.widget_list['intervention_card_1'].set_display('back');
-
-
-        this.on_update_interventon(0);
-    }
-}
-
 //*********************************************************************************************************************
-
-class GameState_EventPrint extends GameState_TestModeBase
-{
-    static label()
-    {
-        return "GameState_EventPrint";
-    }
-
-    constructor()
-    {
-        super();
-
-        this.current_intervention = 0;
-
-    }
-
-
-    on_update_interventon(step){
-        let event_cards = appInst.model.get_event_cards();
-
-        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < event_cards.length)) {
-            this.current_intervention += step;
-        }
-
-        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
-        this.widget_list['next_intervention'].set_active(this.current_intervention < event_cards.length-1);
-
-        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
-        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
-    }
-
-    init()
-    {
-        super.init();
-        this.current_intervention = 0;
-
-        let self = this;
-
-        let template = layout_get_by_name(layout,'screen_event_print');
-
-        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
-        this.widget_list['prev_intervention'].set_active(false);
-        this.widget_list['prev_intervention'].set_label('PREV');
-        this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
-        this.widget_list['prev_intervention'].on_click = function (d) {
-            self.on_update_interventon(-1);
-        };
-
-        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
-        this.widget_list['next_intervention'].set_active(true);
-        this.widget_list['next_intervention'].set_label('NEXT');
-        this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
-        this.widget_list['next_intervention'].on_click = function (d) {
-            self.on_update_interventon(1);
-        };
-
-        this.widget_list['intervention_card_0'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
-        this.widget_list['intervention_card_0'].init();
-
-        this.widget_list['intervention_card_1'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
-        this.widget_list['intervention_card_1'].init();
-        this.widget_list['intervention_card_1'].set_display('back');
-
-
-        this.on_update_interventon(0);
-    }
-}
-
 /*
     modes:
         - init
@@ -1014,7 +671,7 @@ class GameState_MayoralElection extends GameState_TestModeBase
 
         this.bg.draw();
 
-        this.debug_layers.draw();
+        //this.debug_layers.draw();
 
         this.heading_text.draw();
         this.player_text.draw();
@@ -1330,7 +987,7 @@ class GameState_EventResult extends GameState_TestModeBase
         this.card_flip_button.draw();
     }
 }
-
+//*********************************************************************************************************************
 class GameState_FinalOutcome extends GameState_TestModeBase
 {
     constructor() {
@@ -1379,8 +1036,326 @@ class GameState_FinalOutcome extends GameState_TestModeBase
     }
 
 }
+//*********************************************************************************************************************
+
+class GameState_InterventionPreview extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_InterventionPreview";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.widget_list = {};
+        this.first_intervention = 0;
+
+        this.intervention_types = [ 'FP','DP','HP', 'BP'];
+        this.current_intervention = 0;
+
+    }
+
+    on_interventon_button(b, step){
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < this.intervention_types.length)) {
+            this.current_intervention += step;
+        }
+
+        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
+        this.widget_list['next_intervention'].set_active(this.current_intervention < this.intervention_types.length-1);
 
 
+        for(let i=0;i < 7;i++) {
+            this.widget_list['intervention_card_' + i.toString()].visible = false;
+        }
+
+        let card_index = 0;
+        for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
+
+            if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[this.current_intervention]) {
+                this.widget_list['intervention_card_' + card_index.toString()].set_card_info(i);
+                this.widget_list['intervention_card_' + card_index.toString()].visible = true;
+                card_index += 1;
+            }
+        }
+    }
+
+    init()
+    {
+        super.init();
+
+        let self = this;
+
+        let template = layout_get_by_name(layout, 'screen_intervention_preview');
+
+        let loc = layout_get_by_name(template, 'button_prev');
+
+        this.widget_list['prev_intervention'] = new ButtonBase(layer_to_rect(loc));
+        this.widget_list['prev_intervention'].set_active(false);
+        this.widget_list['prev_intervention'].set_label('PREV');
+        this.widget_list['prev_intervention'].label.font_size = 24;
+        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].on_click = function (d) {
+            self.on_interventon_button(d, -1);
+        };
+
+        loc = layout_get_by_name(template, 'button_next');
+
+        this.widget_list['next_intervention'] = new ButtonBase(layer_to_rect(loc));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('NEXT');
+        this.widget_list['next_intervention'].label.font_size = 24;
+        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].on_click = function (d) {
+            self.on_interventon_button(d, 1);
+        };
+
+        for(let i=0;i < 7;i++) {
+            let loc = layout_get_by_name(template, 'card_' + i.toString());
+            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
+            this.widget_list['intervention_card_' + i.toString()].init();
+        }
+
+        this.on_interventon_button(undefined,0);
+    }
+
+    client_update() {
+        super.client_update();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+                this.widget_list[key].update();
+        }
+    }
+
+    client_draw()
+    {
+        GAZCanvas.clip_start();
+        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
+
+        GAZCanvas.clip_end();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
+        }
+    }
+}
+//*********************************************************************************************************************
+
+class GameState_InterventionPrint extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_InterventionPrint";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.first_intervention = 0;
+        this.intervention_types = ['BP', 'FP','DP','HP'];
+        this.current_intervention = 0;
+
+    }
+
+    on_update_interventon(step){
+        let intervention_cards = appInst.model.get_intervention_cards();
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < intervention_cards.length)) {
+            this.current_intervention += step;
+        }
+
+        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
+        this.widget_list['next_intervention'].set_active(this.current_intervention < intervention_cards.length-1);
+
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
+    }
+
+    init()
+    {
+        super.init();
+        this.current_intervention = 0;
+
+        let self = this;
+
+        let template = layout_get_by_name(layout,'screen_intervention_preview');
+
+        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
+        this.widget_list['prev_intervention'].set_active(false);
+        this.widget_list['prev_intervention'].set_label('PREV');
+        this.widget_list['prev_intervention'].label.font_size = 24;
+        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].on_click = function (d) {
+            self.on_update_interventon(-1);
+        };
+
+        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('NEXT');
+        this.widget_list['next_intervention'].label.font_size = 24;
+        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].on_click = function (d) {
+            self.on_update_interventon(1);
+        };
+
+        template = layout_get_by_name(layout,'screen_intervention_print');
+
+        this.widget_list['intervention_card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
+        this.widget_list['intervention_card_0'].init();
+
+        this.widget_list['intervention_card_1'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
+        this.widget_list['intervention_card_1'].init();
+        this.widget_list['intervention_card_1'].set_display('back');
 
 
+        this.on_update_interventon(0);
+    }
+}
 
+//*********************************************************************************************************************
+
+class GameState_EventPrint extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_EventPrint";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.current_intervention = 0;
+
+    }
+
+
+    on_update_interventon(step){
+        let event_cards = appInst.model.get_event_cards();
+
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < event_cards.length)) {
+            this.current_intervention += step;
+        }
+
+        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
+        this.widget_list['next_intervention'].set_active(this.current_intervention < event_cards.length-1);
+
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
+    }
+
+    init()
+    {
+        super.init();
+        this.current_intervention = 0;
+
+        let self = this;
+
+        let template = layout_get_by_name(layout,'screen_event_print');
+
+        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
+        this.widget_list['prev_intervention'].set_active(false);
+        this.widget_list['prev_intervention'].set_label('PREV');
+        this.widget_list['prev_intervention'].label.font_size = 24;
+        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].on_click = function (d) {
+            self.on_update_interventon(-1);
+        };
+
+        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('NEXT');
+        this.widget_list['next_intervention'].label.font_size = 24;
+        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].on_click = function (d) {
+            self.on_update_interventon(1);
+        };
+
+        this.widget_list['intervention_card_0'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
+        this.widget_list['intervention_card_0'].init();
+
+        this.widget_list['intervention_card_1'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
+        this.widget_list['intervention_card_1'].init();
+        this.widget_list['intervention_card_1'].set_display('back');
+
+
+        this.on_update_interventon(0);
+    }
+}
+
+//*********************************************************************************************************************
+
+class GameState_PersonaPrint extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_PersonaPrint";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.first_intervention = 0;
+        this.current_intervention = 0;
+
+    }
+
+    on_update_interventon(step){
+
+        let persona_cards = appInst.model.get_persona_cards();
+
+        if ((this.current_intervention + step >= 0) && (this.current_intervention+step < persona_cards.length)) {
+            this.current_intervention += step;
+        }
+
+        this.widget_list['prev_intervention'].set_active(this.current_intervention > 0);
+        this.widget_list['next_intervention'].set_active(this.current_intervention < persona_cards.length-1);
+
+        this.widget_list['intervention_card_0'].set_card_info(this.current_intervention);
+        this.widget_list['intervention_card_1'].set_card_info(this.current_intervention);
+    }
+
+    init()
+    {
+        super.init();
+
+        let self = this;
+        this.current_intervention = 0;
+
+        this.widget_list = {};
+
+        let template = layout_get_by_name(layout,'screen_intervention_preview');
+
+        this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
+        this.widget_list['prev_intervention'].set_active(false);
+        this.widget_list['prev_intervention'].set_label('PREV');
+        this.widget_list['prev_intervention'].label.font_size = 24;
+        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].on_click = function (d) {
+            self.on_update_interventon(-1);
+        };
+
+        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('NEXT');
+        this.widget_list['next_intervention'].label.font_size = 24;
+        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].on_click = function (d) {
+            self.on_update_interventon(1);
+        };
+
+        template = layout_get_by_name(layout,'screen_intervention_print');
+
+        this.widget_list['intervention_card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
+        this.widget_list['intervention_card_0'].init();
+
+        this.widget_list['intervention_card_1'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
+        this.widget_list['intervention_card_1'].init();
+        this.widget_list['intervention_card_1'].set_display('back');
+
+
+        this.on_update_interventon(0);
+    }
+}
