@@ -13,6 +13,11 @@ class ARSINOEGame extends AppBase
         this.first_intervention = 0;
 
         this.stateMachine = new StateMachine();
+
+        //cheat values
+        this.always_return_bad = false;
+        this.always_return_ok = true;
+
     }
 
     oneTimeInit()
@@ -131,16 +136,14 @@ class ARSINOEGame extends AppBase
         let dice_to_outcome_lookup = [0,1,1,2,2,3];
 
         //let always_return_bad = true;
-        let always_return_bad = false;
+        this.always_return_bad = false;
 
         let result = 0;
 
-        if(always_return_bad == true) {
+        if(this.always_return_bad == true) {
             result = 1;
         }else{
-            let always_return_ok = false;
-
-            if (always_return_ok === true) {
+            if (this.always_return_ok === true) {
                 result = this.model.random.getChoice([2, 3, 4, 5, 6]);
             }else{
                 result = this.model.random.getChoice([1, 2, 3, 4, 5, 6]);
@@ -167,6 +170,69 @@ class ARSINOEGame extends AppBase
 
     setup_for_interventions(){
         this.model.current_intervention_round = 0;
+    }
+
+
+    on_setup_event_results(){
+        this.model.current_event_round = 0;
+
+        this.model.event_outcomes = {};
+
+        let prot = this.model.get_protection();
+
+        for (const [key, value] of Object.entries(this.model.events)) {
+            this.model.event_outcomes[key] = {};
+            this.model.event_outcomes[key]['severity'] = this.model.get_event_random_severity();
+            this.model.event_outcomes[key]['outcome'] = this.model.get_response(this.model.event_outcomes[key]['severity'], prot[key]);
+        }
+    }
+
+    get_event_outcome_heading_text(current_event){
+        let text = current_event +' ';
+        text +=  'Severity:'+ this.model.event_outcomes[current_event]['severity'];
+        text += ' ';
+        text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'];
+
+        return text;
+    }
+
+    get_event_outcome_body_text(current_event){
+        //which card is event?
+        let card = undefined;
+        let card_set = this.model.get_event_cards();
+
+        let text = '';
+
+        for(let i=0;i< card_set.length;i++){
+            if (card_set[i]['type'] === current_event){
+                text += ' <b> Severity </b> ';
+                text += ' <br> ';
+
+                for(let s=0;s<this.model.event_severity.length;s++) {
+
+                    if (this.model.event_outcomes[current_event]['severity'] === this.model.event_severity[s]) {
+                        text += card_set[i]['desc-' + (s + 2).toString()];
+                    }
+                }
+
+                text += ' <br> ';
+                text += ' <br> ';
+
+                text += ' <b> Outcome </b> ';
+                text += ' <br> ';
+
+                for(let s=0;s<this.model.event_prepareness.length;s++) {
+                    if (this.model.event_outcomes[current_event]['outcome'] === this.model.event_prepareness[s]) {
+                        text += card_set[i]['outcome-' + s.toString()];
+                    }
+                }
+
+                text += ' <br> ';
+            }
+        }
+
+        return text;
+
     }
 
     

@@ -171,7 +171,7 @@ class LayerWidgetText extends LayerWidgetBase{
 
     draw(){
 
-        let max_line_length = Math.floor((this.w*2.3) / this.font_size);
+        let max_line_length = Math.floor((this.w*2.0) / this.font_size);
 
         let text = this.format_desc(this.label, max_line_length);
 

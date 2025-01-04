@@ -563,20 +563,25 @@ class GameState_ViewPlayers extends GameState_TestModeBase
         //heading
         this.heading_text = new LayerWidgetText(layout_get_by_name(layer, 'heading_text'));
         this.heading_text.current_color= 'rgb(0,0,0)';
-        this.heading_text.label = 'Your Personas';
+        this.heading_text.label = 'Players';
 
         //1-7 players
         this.player_button = [];
 
-        for(let i=1;i <8;i++){
-            let b = new LayerWidgetButton(layout_get_by_name(layer, 'player_'+i.toString()));
-            b.visible = false;
-            this.player_button.push(b);
-        }
+        for(let i=0;i < appInst.model.players.length;i++){
+            let l = layout_get_by_name(layer, 'player_'+(i+1).toString());
+            let b = new PersonaCardWidget(layer_to_rect(layout_get_by_name(l, 'card')));
+            b.init();
+            b.visible = true;
+            b.set_card_info(appInst.model.players[i]);
 
-        for(let i=0;i< appInst.model.players.length;i++){
-            this.player_button[i].visible = true;
-            this.player_button[i].set_label(appInst.model.get_persona_cards()[appInst.model.players[i]]['name']);
+            let t = new LayerWidgetText(layout_get_by_name(l, 'text'));
+            t.visible = true;
+            t.label = 'Player: ' + (i+1).toString();
+
+
+            this.player_button.push({'card':b, 'text':t});
+
         }
 
         this.continue_button = new LayerWidgetButton(layout_get_by_name(layer,'button_ok'));
@@ -598,7 +603,8 @@ class GameState_ViewPlayers extends GameState_TestModeBase
         this.heading_text.draw();
 
         for(let i = 0;i<this.player_button.length;i++){
-            this.player_button[i].draw();
+            this.player_button[i]['card'].draw();
+            this.player_button[i]['text'].draw();
         }
 
         this.continue_button.draw();
@@ -867,7 +873,7 @@ class GameState_InterventionResult extends GameState_TestModeBase
                 appInst.model.current_intervention_round += 1;
                 appInst.stateMachine.setState(next_state);
             }else {
-                appInst.model.current_event_round = 0;
+                appInst.on_setup_event_results();
                 appInst.stateMachine.setState(GameState_EventResult.label());
             }
         }
@@ -904,6 +910,7 @@ class GameState_EventResult extends GameState_TestModeBase
         super.init();
         this.show_card_back = false;
         let layer = layout_get_by_name(layout,'screen_event_outcome');
+        this.debug_layers = new LayerWidgetBase(layer);
 
         this.bg = new LayerWidgetRect(layout_get_by_name(layer, 'bg'));
         this.bg.current_color = 'rgb(255,255,255)';
@@ -922,6 +929,7 @@ class GameState_EventResult extends GameState_TestModeBase
         this.outcome_heading = new LayerWidgetText(layout_get_by_name(layer,'outcome_heading_text') );
         this.outcome_body = new LayerWidgetText(layout_get_by_name(layer,'outcome_body_text') );
         this.outcome_body.label = 'blah blah blah';
+        this.outcome_body.font_just = 'left';
 
         this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
 
@@ -941,7 +949,12 @@ class GameState_EventResult extends GameState_TestModeBase
         this.heading_text.label = 'Event Outcome ' + (appInst.model.current_event_round+1).toString() +' of 5';
         this.card.set_card_info(appInst.model.current_event_round);
 
-        this.outcome_heading.label = 'Outcome: ' + appInst.model.intervention_outcomes[appInst.model.current_intervention_round].toString();
+        let current_event = appInst.model.event_order[appInst.model.current_event_round];
+
+        this.outcome_heading.label = appInst.get_event_outcome_heading_text(current_event);
+        this.outcome_body.label = appInst.get_event_outcome_body_text(current_event);
+
+
 
         if(this.show_card_back === false){
             this.card_flip_button.set_label('Show Back');
@@ -976,6 +989,7 @@ class GameState_EventResult extends GameState_TestModeBase
 
     client_draw() {
         this.bg.draw();
+        this.debug_layers.draw();
         this.heading_text.draw();
 
         this.card.draw();
