@@ -706,6 +706,16 @@ let layout =
                                             ]
                                         }
                                     }
+                                },
+                                "floating_text": {
+                                    "offset": [
+                                        18,
+                                        70
+                                    ],
+                                    "size": [
+                                        671,
+                                        411
+                                    ]
                                 }
                             }
                         }
@@ -799,12 +809,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                0,
-                0
+                -1,
+                25
             ],
             "size": [
-                1641,
-                900
+                1601,
+                751
             ],
             "children": {
                 "screen_intervention_print": {
@@ -1389,8 +1399,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        1641,
-                        900
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -1671,22 +1681,22 @@ let layout =
                         },
                         "Folder 1": {
                             "offset": [
-                                402,
-                                92
+                                0,
+                                0
                             ],
                             "size": [
-                                801,
-                                702
+                                0,
+                                0
                             ],
                             "children": {
                                 "player_1": {
                                     "offset": [
-                                        402,
-                                        92
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        348
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -1713,12 +1723,12 @@ let layout =
                                 },
                                 "player_2": {
                                     "offset": [
-                                        679,
-                                        92
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        347
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -1745,12 +1755,12 @@ let layout =
                                 },
                                 "player_3": {
                                     "offset": [
-                                        954,
-                                        92
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        347
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -1777,12 +1787,12 @@ let layout =
                                 },
                                 "player_4": {
                                     "offset": [
-                                        404,
-                                        447
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        347
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -1809,12 +1819,12 @@ let layout =
                                 },
                                 "player_5": {
                                     "offset": [
-                                        681,
-                                        447
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        347
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -1841,12 +1851,12 @@ let layout =
                                 },
                                 "player_6": {
                                     "offset": [
-                                        956,
-                                        447
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        247,
-                                        347
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "card": {
@@ -2135,12 +2145,12 @@ let layout =
                 },
                 "screen_event_outcome": {
                     "offset": [
-                        0,
-                        0
+                        -1,
+                        25
                     ],
                     "size": [
-                        0,
-                        0
+                        1601,
+                        751
                     ],
                     "children": {
                         "bg": {
@@ -2241,8 +2251,8 @@ let layout =
                                 100
                             ],
                             "size": [
-                                820,
-                                601
+                                824,
+                                590
                             ]
                         }
                     }

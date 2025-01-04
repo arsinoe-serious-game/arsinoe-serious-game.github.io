@@ -52,7 +52,7 @@ class ARSINOEGame extends AppBase
 
         current_mode = GameState_InterventionPrint.label();
         current_mode = GameState_PersonaPrint.label();
-        current_mode = GameState_SelectPlayers.label();
+        current_mode = GameState_Testbed.label();
 
         //current_mode = GameState_InterventionPreview.label();
 

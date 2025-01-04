@@ -167,15 +167,11 @@ class LayerWidgetText extends LayerWidgetBase{
         this.font_just = 'center';
 
         this.font_color = 'rgb(0,0,0)';
+        this.max_line_length = Math.floor((this.w*2.0) / this.font_size);
     }
 
     draw(){
-
-        let max_line_length = Math.floor((this.w*2.0) / this.font_size);
-
-        let text = this.format_desc(this.label, max_line_length);
-
-        let text_font_size = this.font_size * this.scale.y;
+        let text_font_size = this.font_size;
 
         let pos = new Vector2();
 
@@ -254,7 +250,7 @@ class LayerWidgetText extends LayerWidgetBase{
                             }
                         }
                     } else {
-                        if (current_line.length + words[i].length > max_line_length) {
+                        if (current_line.length + words[i].length > this.max_line_length) {
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family
@@ -552,9 +548,9 @@ class CardWidgetBase extends LayerWidget {
 }
 
 class EventCardWidget  extends CardWidgetBase {
-    constructor(inRect) {
-        super(inRect);
-
+    constructor(layer) {
+        super(layer_to_rect(layer));
+        this.template = layer;
         this.template_name = 'template_event_card';
     }
 
@@ -575,47 +571,59 @@ class EventCardWidget  extends CardWidgetBase {
         let title = this.card_info['name'].toUpperCase();
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
 
-        //left side
-        let t = template['children']['left_floating_text'];
-        let pos = new Vector2();
+        //right side
+        {
+            let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'right_floating_text'));
+            floating_text.font_just = 'left';
+            floating_text.font_size = this.content_font_size * this.scale.x;
+            floating_text.font_style = '';
+            floating_text.font_family = 'roboto';
+            floating_text.font_color = 'rgb(0,0,0)';
+            floating_text.max_line_length = 45;
 
-        pos.x = loc.x + (t['offset'][0])*this.scale.x;
-        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+            floating_text.set_scale(this.scale);
+            floating_text.set_offset(new Vector2(this.x, this.y));
 
-        pos.y += 10*this.scale.y;
-        let text_font_size = this.content_font_size * this.scale.y;
-        let max_line_length = Math.floor((45 * this.content_font_size)/18.0);
+            floating_text.label = '';
 
-        for(let i=0;i< 1;i++) {
-            GAZCanvas.Text(text_font_size, this.card_info['heading-' + i.toString()], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-            pos.y += text_font_size;
+            for (let i = 1; i < 4; i++) {
+                floating_text.label += ' <b> ';
+                floating_text.label += this.card_info['heading-' + i.toString()];
+                floating_text.label += ' </b> ';
+                floating_text.label += ' <br> ';
 
-            let text = this.format_desc(this.card_info['desc-' + i.toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
-            pos.y += ((text.split('\n').length) * text_font_size);
+                floating_text.label += this.card_info['desc-' + i.toString()];
+                floating_text.label += ' <br> ';
+                floating_text.label += ' <br> ';
+
+            }
+            floating_text.draw();
         }
 
+        //left side
+        {
+            let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'left_floating_text'));
+            floating_text.font_just = 'left';
+            floating_text.font_size = this.content_font_size * this.scale.x;
+            floating_text.font_style = '';
+            floating_text.font_family = 'roboto';
+            floating_text.font_color = 'rgb(0,0,0)';
+            floating_text.max_line_length = 40;
 
-        //right side
-        t = template['children']['right_floating_text'];
-        pos = new Vector2();
+            floating_text.set_scale(this.scale);
+            floating_text.set_offset(new Vector2(this.x, this.y));
 
-        pos.x = loc.x + (t['offset'][0])*this.scale.x;
-        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+            floating_text.label = '';
+            floating_text.label += ' <b> ';
 
-        pos.y += 10*this.scale.y;
-        text_font_size = this.content_font_size * this.scale.y;
+            floating_text.label += this.card_info['heading-0'];
+            floating_text.label += ' </b> ';
+            floating_text.label += ' <br> ';
+
+            floating_text.label += this.card_info['desc-0'];
 
 
-        max_line_length = Math.floor((52 * this.content_font_size)/18.0);
-
-        for(let i=2;i< 5;i++) {
-            GAZCanvas.Text(text_font_size, this.card_info['heading-' + i.toString()], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-            pos.y += text_font_size;
-
-            let text = this.format_desc(this.card_info['desc-' + i.toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
-            pos.y += (((text.split('\n').length)) * text_font_size) + text_font_size/2;
+            floating_text.draw();
         }
 
         this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.event_map, false);
@@ -632,24 +640,32 @@ class EventCardWidget  extends CardWidgetBase {
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
 
 
-        let text_font_size = this.content_font_size * this.scale.y;
+        let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
+        floating_text.font_just = 'left';
+        floating_text.font_size = this.content_font_size * this.scale.x;
+        floating_text.font_style = '';
+        floating_text.font_family = 'roboto';
+        floating_text.font_color = 'rgb(0,0,0)';
+        floating_text.max_line_length = 90;
 
-        let labels = ['Severely Under Prepared', 'Under Prepared', 'Fitting', 'Overkill', 'Extreme Overkill'];
+        floating_text.set_scale(this.scale);
+        floating_text.set_offset(new Vector2(this.x, this.y));
+
+        floating_text.label = '';
 
         for(let i=0;i< 5;i++) {
-            let layer = layout_get_by_name(template, 'result_' + i.toString());
+            floating_text.label += ' <b> ';
+            floating_text.label +=appInst.model.event_prepareness[i];
+            floating_text.label += ' </b> ';
+            floating_text.label += ' <br> ';
 
-            let r = layer_to_rect(layout_get_by_name(layer, 'right_text'));
-            let max_line_length = Math.floor((90 * this.content_font_size)/18.0);
-            let text = this.format_desc(this.card_info['outcome-' + i.toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, new Vector2(r.x+loc.x,r.y+loc.y+ text_font_size ), 'rgb(0,0,0)', 'left', 'roboto', '');
+            floating_text.label += this.card_info['outcome-' + i.toString()];
 
-            r = layer_to_rect(layout_get_by_name(layer, 'left_text'));
-            max_line_length = Math.floor((12 * this.content_font_size)/18.0);
-            text = this.format_desc(labels[i], max_line_length);
-            GAZCanvas.Text(text_font_size, text, new Vector2(r.x+loc.x,r.y+loc.y+ text_font_size ), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            floating_text.label += ' <br> ';
+            floating_text.label += ' <br> ';
         }
 
+        floating_text.draw();
     }
 }
 

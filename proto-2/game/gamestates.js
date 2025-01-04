@@ -921,7 +921,7 @@ class GameState_EventResult extends GameState_TestModeBase
 
 
         //event
-        this.card = new EventCardWidget(layer_to_rect(layout_get_by_name(layer, 'card') ));
+        this.card = new EventCardWidget(layout_get_by_name(layer, 'card') );
         this.card.init();
 
 
@@ -1286,10 +1286,10 @@ class GameState_EventPrint extends GameState_TestModeBase
             self.on_update_interventon(1);
         };
 
-        this.widget_list['intervention_card_0'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
+        this.widget_list['intervention_card_0'] = new EventCardWidget(layout_get_by_name(template,'card_front'));
         this.widget_list['intervention_card_0'].init();
 
-        this.widget_list['intervention_card_1'] = new EventCardWidget(layer_to_rect(layout_get_by_name(template,'card_back')));
+        this.widget_list['intervention_card_1'] = new EventCardWidget(layout_get_by_name(template,'card_back'));
         this.widget_list['intervention_card_1'].init();
         this.widget_list['intervention_card_1'].set_display('back');
 
