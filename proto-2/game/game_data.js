@@ -4,7 +4,7 @@ let game_data =
         {
             "type": "",
             "name": "Student",
-            "desc": "You live in the town while you are studying. <br> You may move away for work, if there's nothing suitable here\"",
+            "desc": "You're a student and you're living and studying in the town. The local college is great, but you really like all the outdoor ammenities. <br>  <br> You're not sure about the future, you like the town but you need to have somewhere where you can get a good job and get on. <br>  <br> 12345 12345 12345 12345 12345 12345 12345 12345",
             "pos-1": "The idea of having money and freedom but are unsure how to get it.",
             "pos-2": "Surfing and Swim swimming (anything outdoorsy)  -  cowabunga baby!",
             "pos-3": " Not having to work",
