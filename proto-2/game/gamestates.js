@@ -643,7 +643,7 @@ class GameState_MayoralElection extends GameState_TestModeBase
         //player_name text
         this.player_text = new LayerWidgetText(layout_get_by_name(layer, 'player_name'));
         this.player_text.current_color= 'rgb(0,0,0)';
-        this.player_text.label = 'Player:' + appInst.model.current_mayor.toString();
+        this.player_text.label = 'Player:' + (appInst.model.current_mayor+1).toString();
 
 
         //player_card
