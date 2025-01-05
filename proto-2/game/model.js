@@ -70,6 +70,25 @@ class ModelBase extends MVCBase{
         this.current_mayor = '';
 
         this.current_event_round = 0;
+
+        this.events = {};
+        this.events['EP'] = {'name': 'Economic'};
+        this.events['BP'] = {'name': 'Biodiversity'};
+        this.events['FP'] = {'name': 'Flood'};
+        this.events['DP'] = {'name': 'Drought'};
+        this.events['HP'] = {'name': 'Heat Wave'};
+
+        this.event_order = ['EP', 'BP', 'FP', 'DP', 'HP'];
+
+        this.event_severity = ['minor', 'average', 'extreme'];
+        this.event_prepareness = ['severely under-prepared',
+                'under-prepared',
+                'fitting',
+                'overkill',
+                'over-prepared',
+        ];
+
+        this.event_outcomes = {};
     }
 
     on_new_game() {
@@ -165,6 +184,12 @@ class ModelBase extends MVCBase{
         return false;
     }
 
+    //*********************************************************************************************************************
+
+    get_event_random_severity() {
+        return this.random.getChoice(this.event_severity);
+    }
+
     get_protection() {
         let protection = {};
 
@@ -188,57 +213,57 @@ class ModelBase extends MVCBase{
     get_response(severity, score) {
         if (severity == 'minor') {
             if (score < 1) {
-                return 'under-prepared';
+                return this.event_prepareness[1];
             }
 
             if (score < 3) {
-                return 'appropriate';
+                return this.event_prepareness[2];
             }
-
+/*
             if (score > 6) {
                 return 'extreme overkill';
             }
-
-            return 'overkill';
+*/
+            return this.event_prepareness[4];
         }
 
         if (severity == 'average') {
             if (score < 1) {
-                return 'severly under-prepared';
+                return this.event_prepareness[0];
             }
 
             if (score < 3) {
-                return 'under-prepared';
+                return this.event_prepareness[1];
             }
 
             if (score < 5) {
-                return 'appropriate';
+                return this.event_prepareness[2];
             }
 
+            /*
             if (score > 6) {
                 return 'extreme overkill';
-            }
+            }*/
 
-            return 'overkill';
+            return this.event_prepareness[3];
         }
 
         if (severity == 'extreme') {
             if (score < 3) {
-                return 'severly under-prepared';
+                return this.event_prepareness[0];
             }
 
             if (score < 5) {
-                return 'under-prepared';
+                return this.event_prepareness[1];
             }
 
             if (score > 7) {
-                return 'overkill';
+                return this.event_prepareness[4];
             }
 
-            return 'appropriate';
+            return this.event_prepareness[3];
         }
 
         return 'n/a';
     }
 }
-

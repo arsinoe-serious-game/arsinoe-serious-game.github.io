@@ -13,6 +13,11 @@ class ARSINOEGame extends AppBase
         this.first_intervention = 0;
 
         this.stateMachine = new StateMachine();
+
+        //cheat values
+        this.always_return_bad = false;
+        this.always_return_ok = true;
+
     }
 
     oneTimeInit()
@@ -47,9 +52,9 @@ class ARSINOEGame extends AppBase
 
         current_mode = GameState_InterventionPrint.label();
         current_mode = GameState_PersonaPrint.label();
-        current_mode = GameState_SelectPlayers.label();
+        current_mode = GameState_Testbed.label();
 
-        current_mode = GameState_InterventionPreview.label();
+        //current_mode = GameState_InterventionPreview.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
@@ -131,16 +136,14 @@ class ARSINOEGame extends AppBase
         let dice_to_outcome_lookup = [0,1,1,2,2,3];
 
         //let always_return_bad = true;
-        let always_return_bad = false;
+        this.always_return_bad = false;
 
         let result = 0;
 
-        if(always_return_bad == true) {
+        if(this.always_return_bad == true) {
             result = 1;
         }else{
-            let always_return_ok = false;
-
-            if (always_return_ok === true) {
+            if (this.always_return_ok === true) {
                 result = this.model.random.getChoice([2, 3, 4, 5, 6]);
             }else{
                 result = this.model.random.getChoice([1, 2, 3, 4, 5, 6]);
@@ -167,6 +170,69 @@ class ARSINOEGame extends AppBase
 
     setup_for_interventions(){
         this.model.current_intervention_round = 0;
+    }
+
+
+    on_setup_event_results(){
+        this.model.current_event_round = 0;
+
+        this.model.event_outcomes = {};
+
+        let prot = this.model.get_protection();
+
+        for (const [key, value] of Object.entries(this.model.events)) {
+            this.model.event_outcomes[key] = {};
+            this.model.event_outcomes[key]['severity'] = this.model.get_event_random_severity();
+            this.model.event_outcomes[key]['outcome'] = this.model.get_response(this.model.event_outcomes[key]['severity'], prot[key]);
+        }
+    }
+
+    get_event_outcome_heading_text(current_event){
+        let text = current_event +' ';
+        text +=  'Severity:'+ this.model.event_outcomes[current_event]['severity'];
+        text += ' ';
+        text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'];
+
+        return text;
+    }
+
+    get_event_outcome_body_text(current_event){
+        //which card is event?
+        let card = undefined;
+        let card_set = this.model.get_event_cards();
+
+        let text = '';
+
+        for(let i=0;i< card_set.length;i++){
+            if (card_set[i]['type'] === current_event){
+                text += ' <b> Severity </b> ';
+                text += ' <br> ';
+
+                for(let s=0;s<this.model.event_severity.length;s++) {
+
+                    if (this.model.event_outcomes[current_event]['severity'] === this.model.event_severity[s]) {
+                        text += card_set[i]['desc-' + (s + 1).toString()];
+                    }
+                }
+
+                text += ' <br> ';
+                text += ' <br> ';
+
+                text += ' <b> Outcome </b> ';
+                text += ' <br> ';
+
+                for(let s=0;s<this.model.event_prepareness.length;s++) {
+                    if (this.model.event_outcomes[current_event]['outcome'] === this.model.event_prepareness[s]) {
+                        text += card_set[i]['outcome-' + s.toString()];
+                    }
+                }
+
+                text += ' <br> ';
+            }
+        }
+
+        return text;
+
     }
 
     
@@ -196,104 +262,8 @@ class ARSINOEGame extends AppBase
         return out_str;
     }
 
-    draw_card(offset, card_index){
-
-        if (card_index < intervention_cards.length) {
-            let card_info = intervention_cards[card_index];
-            let bg_col = 'rgb(127,127,127)';
-
-            if (card_info['type'] == 'HP'){
-                bg_col = 'rgb(0,255,0)';
-            }
-
-            if (card_info['type'] == 'BP'){
-                bg_col = 'rgb(255,255,0)';
-            }
-
-            if (card_info['type'] == 'DP'){
-                bg_col = 'rgb(0,255,255)';
-            }
-
-            if (card_info['type'] == 'FP'){
-                bg_col = 'rgb(255,0,255)';
-            }
-
-
-            GAZCanvas.Rect(new Rect(offset.x, offset.y, 270, 395), bg_col);
-
-            let max_line_length = 22;
-
-            //let title = card_info['type'] + ':' + card_info['name'].toUpperCase();
-            let title = card_info['name'].toUpperCase();
-
-            if (title.length > max_line_length) {
-                GAZCanvas.Text(15, this.format_desc(title, max_line_length), new Vector2(offset.x + 270 / 2, offset.y + 20 - 2), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            } else {
-                GAZCanvas.Text(20, title, new Vector2(offset.x + 270 / 2, offset.y + 20), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            }
-
-            GAZCanvas.Sprite(this.image, new Rect(offset.x + 46, offset.y + 48, 175, 125));
-
-            let y = offset.y + 190;
-
-            max_line_length = 50;
-
-            let text = this.format_desc(card_info['desc'], max_line_length);
-            GAZCanvas.Text(10, text, new Vector2(offset.x + 270 / 2, y), 'rgb(0,0,0)', 'center', 'roboto', '');
-
-            y += ((text.split('\n').length) * 12);
-
-            y += 7;
-
-            GAZCanvas.Text(10, "Positives", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-            y += 12;
-
-            for(let p=0;p<3;p++) {
-                text = (p + 1).toString() + '.';
-                text += this.format_desc(card_info['pos-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(10, text, new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-                y +=((text.split('\n').length) * 12);
-            }
-
-            y += 5;
-
-            GAZCanvas.Text(10, "Potential Issues", new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-            y += 12;
-
-            for(let p=0;p<3;p++) {
-                text = (p + 1).toString() + '.';
-                text += this.format_desc(card_info['neg-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(10, text, new Vector2(offset.x + 26, y), 'rgb(0,0,0)', 'left', 'roboto', '');
-                y +=((text.split('\n').length) * 12);
-            }
-
-
-            y = offset.y + 333 + 18;
-            GAZCanvas.Rect(new Rect(offset.x + 25, y, 222, 16), 'rgb(28,96,126)');
-
-
-            y += 8 + 1;
-            GAZCanvas.Text(10, "EP", new Vector2(offset.x + 43, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, "BP", new Vector2(offset.x + 91, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, "FP", new Vector2(offset.x + 138, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, "DP", new Vector2(offset.x + 181, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, "HP", new Vector2(offset.x + 226, y), 'rgb(255,255,255)', 'center', 'roboto', 'bold');
-
-
-            y += 8;
-            GAZCanvas.Rect(new Rect(offset.x + 25, y, 222, 16), 'rgb(210,210,210)');
-            y += 8;
-            GAZCanvas.Text(10, card_info['EP'], new Vector2(offset.x + 43, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, card_info['BP'], new Vector2(offset.x + 91, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, card_info['FP'], new Vector2(offset.x + 138, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, card_info['DP'], new Vector2(offset.x + 181, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-            GAZCanvas.Text(10, card_info['HP'], new Vector2(offset.x + 226, y), 'rgb(0,0,0)', 'center', 'roboto', 'bold');
-        }
-    }
-    
     draw()
     {
-        this.view.on_draw_start();
         super.draw();
     }
 
