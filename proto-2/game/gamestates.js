@@ -989,7 +989,7 @@ class GameState_EventResult extends GameState_TestModeBase
 
     client_draw() {
         this.bg.draw();
-        this.debug_layers.draw();
+        //this.debug_layers.draw();
         this.heading_text.draw();
 
         this.card.draw();

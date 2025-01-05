@@ -95,6 +95,8 @@ class LayerWidget extends  WidgetBase{
 
     debug_rect(loc, layer, col){
         GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
+        GAZCanvas.Rect(this.layer_to_rect(loc,layer), 'rgb(0,0,0)', false, 1);
+
     }
 
     debug_text(loc, layer, font_size, text, color, just, font, font_style){
@@ -491,6 +493,7 @@ class CardWidgetBase extends LayerWidget {
         this.qr_code_link = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
         this.qr_code_link.set_scale(this.scale);
         this.qr_code_link.set_offset(new Vector2(this.x, this.y));
+        this.qr_code_link.image = appInst.view.get_qrcode();
 
         this.side = 'front';
 
@@ -919,6 +922,8 @@ class ViewBase extends MVCBase{
         this.image_bank['interventions'] = [];
         this.image_bank['personas'] = [];
 
+        this.image_bank['intervention_qrcodes'] = [];
+
         let intervention_cards = appInst.model.get_intervention_cards();
 
         for(let i=0;i< intervention_cards.length;i++){
@@ -940,6 +945,14 @@ class ViewBase extends MVCBase{
 
         this.image.src = "assets/interventions/intervention-0.png";
         this.event_map.src = "assets/events/event_matrix.png";
+
+        let default_qrcode = new Image();
+        default_qrcode.src = 'assets/default_qrcode.png';
+        this.image_bank['intervention_qrcodes'].push(default_qrcode);
+    }
+
+    get_qrcode(){
+        return this.image_bank['intervention_qrcodes'][0];
     }
 
 }
