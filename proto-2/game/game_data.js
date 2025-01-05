@@ -400,7 +400,7 @@ let game_data =
         {
             "type": "FP",
             "name": "Approve construction of a sea wall",
-            "desc": "12345 12345 12345 12345 12345 12345 12345 12345 12345 12345 <br> The coast road community is plagued by coastal over topping, causing disruption and flooding local shops and houses. <br>  <br> The sea wall should minimise flooding risk to the local community, reduce flood clean-up costs and iIncrease investment into the area.  <br>  <br> However, there will be substaintial isruption during building works and the wall will lessen the view of the bay.",
+            "desc": "The community around the coastal road has been plagued by frequent sea flooding events, causing a lot of disruption and costing a lot to clean up. <br> Building a sea wall will stop these flooding events. It will be a messy and disruptive construction, but stopping the floods will help the area to stabilise and grow economically, even if it does ruin a good sea view.",
             "case_study": "",
             "EP": "2",
             "BP": "0",
