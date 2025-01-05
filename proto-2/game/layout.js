@@ -17,8 +17,8 @@ let layout =
                 0
             ],
             "size": [
-                400,
-                600
+                0,
+                0
             ],
             "children": {
                 "template_intervention_card": {
@@ -27,8 +27,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        400,
-                        600
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -43,12 +43,12 @@ let layout =
                         },
                         "front": {
                             "offset": [
-                                14,
-                                10
+                                0,
+                                0
                             ],
                             "size": [
-                                373,
-                                580
+                                0,
+                                0
                             ],
                             "children": {
                                 "reference_data": {
@@ -103,22 +103,22 @@ let layout =
                                 },
                                 "protection_table": {
                                     "offset": [
-                                        15,
-                                        533
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        371,
-                                        57
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "p0": {
                                             "offset": [
-                                                15,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                71,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "heading": {
@@ -145,12 +145,12 @@ let layout =
                                         },
                                         "p1": {
                                             "offset": [
-                                                89,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "heading": {
@@ -177,12 +177,12 @@ let layout =
                                         },
                                         "p2": {
                                             "offset": [
-                                                164,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -209,12 +209,12 @@ let layout =
                                         },
                                         "p3": {
                                             "offset": [
-                                                239,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -241,12 +241,12 @@ let layout =
                                         },
                                         "p4": {
                                             "offset": [
-                                                314,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -809,12 +809,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                0,
-                0
+                19,
+                30
             ],
             "size": [
-                0,
-                0
+                1463,
+                854
             ],
             "children": {
                 "screen_intervention_print": {
@@ -1000,6 +1000,366 @@ let layout =
                                 300,
                                 400
                             ]
+                        },
+                        "button_next": {
+                            "offset": [
+                                1422,
+                                382
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        },
+                        "button_prev": {
+                            "offset": [
+                                19,
+                                385
+                            ],
+                            "size": [
+                                60,
+                                113
+                            ]
+                        }
+                    }
+                },
+                "screen_all_intervention_preview": {
+                    "offset": [
+                        19,
+                        30
+                    ],
+                    "size": [
+                        1463,
+                        854
+                    ],
+                    "children": {
+                        "row_0": {
+                            "offset": [
+                                182,
+                                30
+                            ],
+                            "size": [
+                                1143,
+                                202
+                            ],
+                            "children": {
+                                "card_0": {
+                                    "offset": [
+                                        182,
+                                        31
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_1": {
+                                    "offset": [
+                                        346,
+                                        31
+                                    ],
+                                    "size": [
+                                        150,
+                                        200
+                                    ]
+                                },
+                                "card_2": {
+                                    "offset": [
+                                        512,
+                                        30
+                                    ],
+                                    "size": [
+                                        151,
+                                        201
+                                    ]
+                                },
+                                "card_3": {
+                                    "offset": [
+                                        676,
+                                        31
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_4": {
+                                    "offset": [
+                                        838,
+                                        31
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_5": {
+                                    "offset": [
+                                        1008,
+                                        32
+                                    ],
+                                    "size": [
+                                        151,
+                                        200
+                                    ]
+                                },
+                                "card_6": {
+                                    "offset": [
+                                        1175,
+                                        31
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                }
+                            }
+                        },
+                        "row_1": {
+                            "offset": [
+                                182,
+                                247
+                            ],
+                            "size": [
+                                1143,
+                                202
+                            ],
+                            "children": {
+                                "card_0": {
+                                    "offset": [
+                                        182,
+                                        248
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_1": {
+                                    "offset": [
+                                        346,
+                                        248
+                                    ],
+                                    "size": [
+                                        150,
+                                        200
+                                    ]
+                                },
+                                "card_2": {
+                                    "offset": [
+                                        512,
+                                        247
+                                    ],
+                                    "size": [
+                                        151,
+                                        201
+                                    ]
+                                },
+                                "card_3": {
+                                    "offset": [
+                                        676,
+                                        248
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_4": {
+                                    "offset": [
+                                        838,
+                                        248
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_5": {
+                                    "offset": [
+                                        1008,
+                                        249
+                                    ],
+                                    "size": [
+                                        151,
+                                        200
+                                    ]
+                                },
+                                "card_6": {
+                                    "offset": [
+                                        1175,
+                                        248
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                }
+                            }
+                        },
+                        "row_2": {
+                            "offset": [
+                                182,
+                                465
+                            ],
+                            "size": [
+                                1143,
+                                202
+                            ],
+                            "children": {
+                                "card_0": {
+                                    "offset": [
+                                        182,
+                                        466
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_1": {
+                                    "offset": [
+                                        346,
+                                        466
+                                    ],
+                                    "size": [
+                                        150,
+                                        200
+                                    ]
+                                },
+                                "card_2": {
+                                    "offset": [
+                                        512,
+                                        465
+                                    ],
+                                    "size": [
+                                        151,
+                                        201
+                                    ]
+                                },
+                                "card_3": {
+                                    "offset": [
+                                        676,
+                                        466
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_4": {
+                                    "offset": [
+                                        838,
+                                        466
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_5": {
+                                    "offset": [
+                                        1008,
+                                        467
+                                    ],
+                                    "size": [
+                                        151,
+                                        200
+                                    ]
+                                },
+                                "card_6": {
+                                    "offset": [
+                                        1175,
+                                        466
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                }
+                            }
+                        },
+                        "row_3": {
+                            "offset": [
+                                182,
+                                682
+                            ],
+                            "size": [
+                                1143,
+                                202
+                            ],
+                            "children": {
+                                "card_0": {
+                                    "offset": [
+                                        182,
+                                        683
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_1": {
+                                    "offset": [
+                                        346,
+                                        683
+                                    ],
+                                    "size": [
+                                        150,
+                                        200
+                                    ]
+                                },
+                                "card_2": {
+                                    "offset": [
+                                        512,
+                                        682
+                                    ],
+                                    "size": [
+                                        151,
+                                        201
+                                    ]
+                                },
+                                "card_3": {
+                                    "offset": [
+                                        676,
+                                        683
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_4": {
+                                    "offset": [
+                                        838,
+                                        683
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                },
+                                "card_5": {
+                                    "offset": [
+                                        1008,
+                                        684
+                                    ],
+                                    "size": [
+                                        151,
+                                        200
+                                    ]
+                                },
+                                "card_6": {
+                                    "offset": [
+                                        1175,
+                                        683
+                                    ],
+                                    "size": [
+                                        150,
+                                        201
+                                    ]
+                                }
+                            }
                         },
                         "button_next": {
                             "offset": [

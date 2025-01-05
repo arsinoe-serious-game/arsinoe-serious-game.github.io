@@ -27,9 +27,13 @@ class ARSINOEGame extends AppBase
 
         super.oneTimeInit(1600,900);
         this.stateMachine.addState(GameState_Test.label(), new GameState_Test());
-        this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
         this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
 
+        //preview cards
+        this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
+        this.stateMachine.addState(GameState_AllInterventionPreview.label(), new GameState_AllInterventionPreview());
+
+        //print cards
         this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
         this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());
         this.stateMachine.addState(GameState_EventPrint.label(), new GameState_EventPrint());
@@ -38,6 +42,7 @@ class ARSINOEGame extends AppBase
 
         this.stateMachine.addState(GameState_Testbed.label(), new GameState_Testbed());
 
+        //actual game
         this.stateMachine.addState(GameState_SelectPlayers.label(), new GameState_SelectPlayers());
         this.stateMachine.addState(GameState_ViewPlayers.label(), new GameState_ViewPlayers());
         this.stateMachine.addState(GameState_MayoralElection.label(), new GameState_MayoralElection());

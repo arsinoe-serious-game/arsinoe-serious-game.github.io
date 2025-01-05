@@ -24,6 +24,7 @@ class GameState_Testbed extends StateMachineState
             GameState_InterventionPrint.label(),
             GameState_EventPrint.label(),
             GameState_InterventionPreview.label(),
+            GameState_AllInterventionPreview.label(),
             GameState_SelectPlayers.label()
         ];
 
@@ -1366,5 +1367,67 @@ class GameState_PersonaPrint extends GameState_TestModeBase
 
 
         this.on_update_interventon(0);
+    }
+}
+
+//*********************************************************************************************************************
+class GameState_AllInterventionPreview extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_AllInterventionPreview";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.widget_list = {};
+
+        this.intervention_types = [ 'FP','DP','HP', 'BP'];
+        this.current_intervention = 0;
+
+    }
+
+    init()
+    {
+        super.init();
+
+        let self = this;
+
+        let template = layout_get_by_name(layout, 'screen_all_intervention_preview');
+
+        for(let type = 0;type < this.intervention_types.length;type++) {
+
+            let card_index = 0;
+            for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
+                if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[type]) {
+                    let b = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layout_get_by_name(template, 'row_'+type.toString()), 'card_'+ card_index.toString())));
+                    b.init();
+                    b.visible = true;
+                    b.set_card_info(i);
+
+                    this.widget_list['card_'+this.intervention_types[type].toString() +'_'+card_index.toString()] = b;
+                    card_index += 1;
+                }
+            }
+        }
+
+    }
+
+    client_update() {
+        super.client_update();
+    }
+
+    client_draw()
+    {
+        GAZCanvas.clip_start();
+        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
+
+        GAZCanvas.clip_end();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
+        }
     }
 }

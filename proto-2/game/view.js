@@ -810,7 +810,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let max_line_length = 22;
 
         if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)) ), template['children']['header_text'], this.heading_font_size, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }else {
             this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
