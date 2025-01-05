@@ -582,7 +582,7 @@ class EventCardWidget  extends CardWidgetBase {
             floating_text.font_style = '';
             floating_text.font_family = 'roboto';
             floating_text.font_color = 'rgb(0,0,0)';
-            floating_text.max_line_length = 45;
+            floating_text.max_line_length = 44;
 
             floating_text.set_scale(this.scale);
             floating_text.set_offset(new Vector2(this.x, this.y));
@@ -656,7 +656,7 @@ class EventCardWidget  extends CardWidgetBase {
 
         floating_text.label = '';
 
-        for(let i=0;i< 5;i++) {
+        for(let i=0;i< appInst.model.event_prepareness.length;i++) {
             floating_text.label += ' <b> ';
             floating_text.label +=appInst.model.event_prepareness[i];
             floating_text.label += ' </b> ';

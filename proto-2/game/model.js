@@ -85,7 +85,7 @@ class ModelBase extends MVCBase{
                 'under-prepared',
                 'fitting',
                 'overkill',
-                'over-prepared',
+                //'over-prepared',
         ];
 
         this.event_outcomes = {};
@@ -224,7 +224,7 @@ class ModelBase extends MVCBase{
                 return 'extreme overkill';
             }
 */
-            return this.event_prepareness[4];
+            return this.event_prepareness[3];
         }
 
         if (severity == 'average') {
@@ -240,11 +240,6 @@ class ModelBase extends MVCBase{
                 return this.event_prepareness[2];
             }
 
-            /*
-            if (score > 6) {
-                return 'extreme overkill';
-            }*/
-
             return this.event_prepareness[3];
         }
 
@@ -255,10 +250,6 @@ class ModelBase extends MVCBase{
 
             if (score < 5) {
                 return this.event_prepareness[1];
-            }
-
-            if (score > 7) {
-                return this.event_prepareness[4];
             }
 
             return this.event_prepareness[3];
