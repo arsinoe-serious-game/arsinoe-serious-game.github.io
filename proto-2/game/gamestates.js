@@ -1064,7 +1064,6 @@ class GameState_InterventionPreview extends GameState_TestModeBase
         super();
 
         this.widget_list = {};
-        this.first_intervention = 0;
 
         this.intervention_types = [ 'FP','DP','HP', 'BP'];
         this.current_intervention = 0;
@@ -1136,10 +1135,6 @@ class GameState_InterventionPreview extends GameState_TestModeBase
 
     client_update() {
         super.client_update();
-
-        for (const [key, value] of Object.entries(this.widget_list)) {
-                this.widget_list[key].update();
-        }
     }
 
     client_draw()
