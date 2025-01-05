@@ -1160,6 +1160,38 @@ class baseCanvas
         }
     }
 
+    MeasureText(inSize,inString,inPos,inColour,inJustification,font, font_style)
+    {
+        let context_font = '';
+        this.ctx().font = '';
+        if (font_style !== undefined){
+            context_font += font_style + ' ';
+        }
+
+        if((font == undefined) || (font === ""))
+        {
+            font = "san-serif";
+        }
+
+        context_font += inSize +"px";
+        context_font += " " + font;//Archivo Black";
+
+        this.ctx().font = context_font;
+
+        if(inJustification == undefined)
+        {
+            inJustification = "left";
+        }
+        this.ctx().textAlign = inJustification;
+        this.ctx().fillStyle = inColour;
+
+
+        let result = this.ctx().measureText(inString);
+
+        return result.width;
+
+    }
+
     /*
         Rect(Rect inRect,string inColour, bool inFilled, float inWidth)
 
@@ -1372,6 +1404,16 @@ class gazcanvas
         r = this.toScreenSpace(r);
 
         Canvas.Text(r.h, inString, new Vector2(r.x,r.y),inColour,inJustification,font, font_style);
+    }
+
+    MeasureText(inSize,inString,inPos,inColour,inJustification,font, font_style)
+    {
+        let r = new Rect();
+
+        r.set(inPos.x,inPos.y,inSize,inSize);
+        r = this.toScreenSpace(r);
+
+        return Canvas.MeasureText(r.h, inString, new Vector2(r.x,r.y),inColour,inJustification,font, font_style);
     }
 
     /*

@@ -252,7 +252,14 @@ class LayerWidgetText extends LayerWidgetBase{
                             }
                         }
                     } else {
-                        if (current_line.length + words[i].length > this.max_line_length) {
+                        let text_to_print = current_line + words[i] + ' ';
+
+                        let result = Canvas.MeasureText(text_font_size, text_to_print, pos, this.font_color
+                                , this.font_just
+                                , this.font_family
+                                , current_style);
+
+                        if(result >= (this.w*this.scale.x)){
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family
@@ -261,6 +268,7 @@ class LayerWidgetText extends LayerWidgetBase{
                             current_line = '';
                             pos.y += text_font_size;
                         }
+
                         current_line += words[i] + ' ';
                     }
                 }
@@ -825,7 +833,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         floating_text.font_size = this.content_font_size*this.scale.y;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
-        floating_text.max_line_length = 45;
+        floating_text.max_line_length = 50;
 
         floating_text.draw();
 
