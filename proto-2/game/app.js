@@ -16,7 +16,7 @@ class ARSINOEGame extends AppBase
 
         //cheat values
         this.always_return_bad = false;
-        this.always_return_ok = true;
+        this.always_return_ok = false;
 
     }
 
@@ -24,8 +24,7 @@ class ARSINOEGame extends AppBase
     {
         this.model.oneTimeInit();
         this.view.oneTimeInit();
-
-
+        
         super.oneTimeInit(1600,900);
         this.stateMachine.addState(GameState_Test.label(), new GameState_Test());
         this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
