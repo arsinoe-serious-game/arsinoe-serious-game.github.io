@@ -849,8 +849,8 @@ class InterventionCardWidget extends  CardWidgetBase{
             this.debug_rect(loc, c['children']['heading'], 'rgb(28,96,126)');
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
 
-            this.debug_text(pos, c['children']['heading'], 20*this.scale.y, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
-            this.debug_text(pos, c['children']['value'], 20*this.scale.y, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
+            this.debug_text(pos, c['children']['value'], 20, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', 'roboto', 'bold');
         }
     }
 
