@@ -954,5 +954,4 @@ class ViewBase extends MVCBase{
     get_qrcode(){
         return this.image_bank['intervention_qrcodes'][0];
     }
-
 }
