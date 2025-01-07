@@ -259,7 +259,7 @@ class LayerWidgetText extends LayerWidgetBase{
                                 , this.font_family
                                 , current_style);
 
-                        if(result >= (this.w*this.scale.x)){
+                        if( Math.floor(result) > Math.floor(this.w*this.scale.x)){
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family
@@ -586,11 +586,11 @@ class EventCardWidget  extends CardWidgetBase {
         {
             let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'right_floating_text'));
             floating_text.font_just = 'left';
-            floating_text.font_size = this.content_font_size * this.scale.x;
+            floating_text.font_size = this.content_font_size * this.scale.y;
             floating_text.font_style = '';
             floating_text.font_family = 'roboto';
             floating_text.font_color = 'rgb(0,0,0)';
-            floating_text.max_line_length = 44;
+
 
             floating_text.set_scale(this.scale);
             floating_text.set_offset(new Vector2(this.x, this.y));
@@ -615,11 +615,11 @@ class EventCardWidget  extends CardWidgetBase {
         {
             let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'left_floating_text'));
             floating_text.font_just = 'left';
-            floating_text.font_size = this.content_font_size * this.scale.x;
+            floating_text.font_size = this.content_font_size * this.scale.y;
             floating_text.font_style = '';
             floating_text.font_family = 'roboto';
             floating_text.font_color = 'rgb(0,0,0)';
-            floating_text.max_line_length = 40;
+
 
             floating_text.set_scale(this.scale);
             floating_text.set_offset(new Vector2(this.x, this.y));
@@ -653,11 +653,11 @@ class EventCardWidget  extends CardWidgetBase {
 
         let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.x;
+        floating_text.font_size = this.content_font_size * this.scale.y;
         floating_text.font_style = '';
         floating_text.font_family = 'roboto';
         floating_text.font_color = 'rgb(0,0,0)';
-        floating_text.max_line_length = 90;
+
 
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
@@ -712,10 +712,10 @@ class PersonaCardWidget extends CardWidgetBase{
         floating_text.label = this.card_info['desc'];
         floating_text.font_style = '';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size*this.scale.y;
+        floating_text.font_size = this.content_font_size * this.scale.y;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
-        floating_text.max_line_length = 44;
+
 
         floating_text.draw();
 
@@ -813,7 +813,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let template = layout_get_by_name(this.template,'front');
         this.qr_code_link.draw(loc);
 
-        let title = this.card_info['name'].toUpperCase() + ':' +this.card_info['case_study'];
+        let title = this.card_info['type'] +':'+ this.card_info['name'].toUpperCase();
 
         let max_line_length = 22;
 
@@ -830,10 +830,10 @@ class InterventionCardWidget extends  CardWidgetBase{
         floating_text.label = this.card_info['desc'];
         floating_text.font_style = '';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size*this.scale.y;
+        floating_text.font_size = this.content_font_size * this.scale.y;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
-        floating_text.max_line_length = 50;
+
 
         floating_text.draw();
 
@@ -854,54 +854,64 @@ class InterventionCardWidget extends  CardWidgetBase{
         }
     }
 
-    draw_back(){
+    draw_back() {
         let loc = new Vector2(this.x, this.y);
         this.draw_bg(loc);
 
-        let template = layout_get_by_name(this.template,'back');
+        let template = layout_get_by_name(this.template, 'back');
 
-        //this.debug_layer(loc, template);
+        this.debug_layer(loc, template);
 
         let title = 'outcomes'.toUpperCase();
 
-        this.debug_text(loc, layout_get_by_name(template,'header_text'), 28*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        this.debug_text(loc, layout_get_by_name(template, 'header_text'), 28 * this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
 
 
         //do description
         let t = template['children']['floating_text'];
         let pos = new Vector2();
 
-        pos.x = loc.x + (t['offset'][0])*this.scale.x;
-        pos.y = loc.y + (t['offset'][1])*this.scale.y;
+        pos.x = loc.x + (t['offset'][0]) * this.scale.x;
+        pos.y = loc.y + (t['offset'][1]) * this.scale.y;
 
-        pos.y += 10*this.scale.y;
+        pos.y += 10 * this.scale.y;
 
         let text_font_size = this.content_font_size * this.scale.y;
 
         //do outcomes
-        pos.y += 7*this.scale.y;
-        pos.x = loc.x + (t['offset'][0]*this.scale.x);
+        pos.y += 7 * this.scale.y;
+        pos.x = loc.x + (t['offset'][0] * this.scale.x);
 
-        let dice = ['1: Oh Dear!','2-3: Not Good','4-5:Not Bad','6:Great'];
+        let dice = ['1: Oh Dear!', '2-3: Not Good', '4-5:Not Bad', '6:Great'];
 
-        let max_line_length = Math.floor((46 * this.content_font_size)/18.0);
-
-        for(let p=0;p<4;p++) {
-            GAZCanvas.Text(text_font_size, dice[p], pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-            pos.y += text_font_size *1.1;
-
-            let text= this.format_desc(this.card_info['outcome-' + (p).toString()], max_line_length);
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
-            pos.y +=((text.split('\n').length) * text_font_size);
+        let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
+        floating_text.current_color= 'rgb(0,0,0)';
+        floating_text.font_just = 'left';
+        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.set_scale(this.scale);
+        floating_text.set_offset(new Vector2(this.x, this.y));
 
 
-            if(p==0){
-                GAZCanvas.Text(text_font_size, 'The citizens demand a new mayor!', pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
-                pos.y += text_font_size *1.1;
+        floating_text.label = '';
+        for (let p = 0; p < 4; p++) {
+            floating_text.label += ' <b> ';
+            floating_text.label += dice[p];
+            floating_text.label += ' </b> ';
+            floating_text.label += ' <br> ';
+
+            floating_text.label +=this.card_info['outcome-' + (p).toString()];
+
+            if (p == 0) {
+                floating_text.label += ' <b> ';
+                floating_text.label += 'The citizens demand a new mayor!';
+                floating_text.label += ' </b> ';
             }
 
-            pos.y += text_font_size *1.1;
+            floating_text.label += ' <br> ';
+            floating_text.label += ' <br> ';
         }
+
+        floating_text.draw();
     }
 }
 
@@ -913,7 +923,8 @@ class ViewBase extends MVCBase{
 
         this.image = new Image();
 
-        this.random = new Random(123456);
+        this.random_seed = 23450;
+        this.random = new Random(this.random_seed);
 
         this.event_map = new Image();
 
@@ -921,7 +932,7 @@ class ViewBase extends MVCBase{
     }
 
     on_draw_start(){
-        this.random = new Random(123456);
+        this.random = new Random(this.random_seed);
     }
 
     oneTimeInit() {

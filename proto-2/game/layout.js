@@ -17,8 +17,8 @@ let layout =
                 0
             ],
             "size": [
-                0,
-                0
+                400,
+                600
             ],
             "children": {
                 "template_intervention_card": {
@@ -27,8 +27,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        0,
-                        0
+                        400,
+                        600
                     ],
                     "children": {
                         "bg": {
@@ -277,32 +277,32 @@ let layout =
                         },
                         "back": {
                             "offset": [
-                                0,
-                                0
+                                9,
+                                10
                             ],
                             "size": [
-                                0,
-                                0
+                                381,
+                                580
                             ],
                             "children": {
                                 "floating_text": {
                                     "offset": [
-                                        16,
-                                        76
+                                        9,
+                                        70
                                     ],
                                     "size": [
-                                        366,
-                                        504
+                                        381,
+                                        520
                                     ]
                                 },
                                 "header_text": {
                                     "offset": [
-                                        16,
-                                        11
+                                        9,
+                                        10
                                     ],
                                     "size": [
-                                        366,
-                                        56
+                                        381,
+                                        50
                                     ]
                                 }
                             }
@@ -809,12 +809,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                19,
-                30
+                0,
+                0
             ],
             "size": [
-                1463,
-                854
+                0,
+                0
             ],
             "children": {
                 "screen_intervention_print": {
@@ -1025,22 +1025,22 @@ let layout =
                 },
                 "screen_all_intervention_preview": {
                     "offset": [
-                        19,
-                        30
+                        0,
+                        0
                     ],
                     "size": [
-                        1463,
-                        854
+                        0,
+                        0
                     ],
                     "children": {
                         "row_0": {
                             "offset": [
-                                182,
-                                30
+                                0,
+                                0
                             ],
                             "size": [
-                                1143,
-                                202
+                                0,
+                                0
                             ],
                             "children": {
                                 "card_0": {
@@ -1117,12 +1117,12 @@ let layout =
                         },
                         "row_1": {
                             "offset": [
-                                182,
-                                247
+                                0,
+                                0
                             ],
                             "size": [
-                                1143,
-                                202
+                                0,
+                                0
                             ],
                             "children": {
                                 "card_0": {
@@ -1199,12 +1199,12 @@ let layout =
                         },
                         "row_2": {
                             "offset": [
-                                182,
-                                465
+                                0,
+                                0
                             ],
                             "size": [
-                                1143,
-                                202
+                                0,
+                                0
                             ],
                             "children": {
                                 "card_0": {
@@ -1281,12 +1281,12 @@ let layout =
                         },
                         "row_3": {
                             "offset": [
-                                182,
-                                682
+                                0,
+                                0
                             ],
                             "size": [
-                                1143,
-                                202
+                                0,
+                                0
                             ],
                             "children": {
                                 "card_0": {

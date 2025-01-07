@@ -157,7 +157,7 @@ class GameState_SimpleGame extends StateMachineState
 
 
 
-                        let current_options = appInst.model.get_round_cards();
+                        let current_options = appInst.get_round_cards();
 
                         for (let i=0;i< current_options.length;i++) {
 
@@ -181,7 +181,7 @@ class GameState_SimpleGame extends StateMachineState
 
                         console.log('You selected: ' + appInst.model.get_intervention_card(selected_intervention)['name']);
 
-                        appInst.model.select_intervention(selected_intervention);
+                        appInst.select_intervention(selected_intervention);
 
                         /*
                         let outcomes = {};
@@ -202,7 +202,7 @@ class GameState_SimpleGame extends StateMachineState
                         text = '';
                         //do response!
                         let outcome = appInst.model.random.getChoice([1,2,3,4,5,6]);
-                        let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-bad'];
+                        let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-0'];
 
                         let have_an_election = false;
 
@@ -212,15 +212,15 @@ class GameState_SimpleGame extends StateMachineState
                         }
 
                         if (outcome >1 && outcome< 4 ){
-                            outcome_response = 'OK:'+appInst.model.get_intervention_card(selected_intervention)['outcome-ok'];
+                            outcome_response = 'OK:'+appInst.model.get_intervention_card(selected_intervention)['outcome-1'];
                         }
 
                         if (outcome >3 && outcome< 6 ){
-                            outcome_response = 'GOOD:'+appInst.model.get_intervention_card(selected_intervention)['outcome-good'];
+                            outcome_response = 'GOOD:'+appInst.model.get_intervention_card(selected_intervention)['outcome-2'];
                         }
 
                         if (outcome == 6){
-                            outcome_response = 'GREAT:'+appInst.model.get_intervention_card(selected_intervention)['outcome-great'];
+                            outcome_response = 'GREAT:'+appInst.model.get_intervention_card(selected_intervention)['outcome-3'];
                         }
 
                         text = '\n';
@@ -237,7 +237,7 @@ class GameState_SimpleGame extends StateMachineState
                             text +='Mayor: ' + appInst.model.current_mayor +' has been voted out';
                             text += '\n';
 
-                            appInst.model.select_mayor();
+                            appInst.select_mayor();
                             text += appInst.model.current_mayor + ' is the new mayor';
                             text += '\n';
 

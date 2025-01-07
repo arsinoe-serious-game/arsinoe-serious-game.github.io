@@ -59,6 +59,7 @@ class ARSINOEGame extends AppBase
         current_mode = GameState_Testbed.label();
 
         //current_mode = GameState_InterventionPreview.label();
+        //current_mode = GameState_SimpleGame.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
@@ -70,6 +71,10 @@ class ARSINOEGame extends AppBase
     on_new_game(){
         this.model.on_new_game();
         this.view.on_new_game();
+    }
+
+    on_draw_start(){
+        this.view.on_draw_start();
     }
 
     set_players(player_count){
@@ -291,6 +296,7 @@ class ARSINOEGame extends AppBase
             Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight), appInst.letterboxColour);
 
             //do state machine draw
+            appInst.on_draw_start();
             appInst.stateMachine.draw();
 
             //draw the letterbox over the screen to hide any overdraw
