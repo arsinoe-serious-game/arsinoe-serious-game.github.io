@@ -132,7 +132,7 @@ class LayerWidget extends  WidgetBase{
             let w = image.naturalWidth * f;
             let h = image.naturalHeight * f;
 
-            r.x += w/2;
+            r.x += (r.w - w)/2;
             r.w = w;
 
         }
@@ -370,7 +370,6 @@ class LayerWidgetClickableImage extends LayerWidgetClickable{
     }
 }
 
-
 class LayerWidgetButton extends LayerWidgetClickable{
     constructor(layer) {
         super(layer);
@@ -470,8 +469,6 @@ class LayerModal extends LayerWidgetBase
     }
 }
 
-
-
 class CardWidgetBase extends LayerWidget {
     constructor(inRect) {
         super(inRect);
@@ -505,7 +502,7 @@ class CardWidgetBase extends LayerWidget {
 
         this.side = 'front';
 
-        this.heading_font_size = 24;
+        this.heading_font_size = 20;
         this.content_font_size = 18;
     }
 
@@ -786,21 +783,43 @@ class InterventionCardWidget extends  CardWidgetBase{
         this.card_set = appInst.model.get_intervention_cards();
     }
 
+    init(){
+        super.init();
+
+        this.arsinoe_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        this.arsinoe_logo.set_scale(this.scale);
+        this.arsinoe_logo.set_offset(new Vector2(this.x, this.y));
+        this.arsinoe_logo.image = appInst.view.get_arsinoe_logo();
+
+    }
+
+    update() {
+        super.update();
+
+        if(this.arsinoe_logo.update() === true){
+            window.open('https://arsinoe-project.eu/', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        }
+    }
+
     get_bg_col(){
+        //heat
         if (this.card_info['type'] == 'HP'){
-            return 'rgb(246,244,113)';
+            return 'rgb(244,201,57)';
         }
 
+        //bio
         if (this.card_info['type'] == 'BP'){
-            return 'rgb(244,174,100)';
+            return 'rgb(63,143,97)';
         }
 
+        //drought
         if (this.card_info['type'] == 'DP'){
-            return 'rgb(143,161,246)';
+            return 'rgb(246,153,88)';
         }
 
+        //flooding
         if (this.card_info['type'] == 'FP') {
-            return 'rgb(179,218,244)';
+            return 'rgb(107,128,221)';
         }
 
         return 'rgb(127,127,127)';
@@ -809,19 +828,28 @@ class InterventionCardWidget extends  CardWidgetBase{
     draw_front(){
         let loc = new Vector2(this.x, this.y);
         this.draw_bg(loc);
-
         let template = layout_get_by_name(this.template,'front');
+        //this.debug_layer(loc, template);
+
         this.qr_code_link.draw(loc);
+        this.arsinoe_logo.draw(loc);
 
-        let title = this.card_info['type'] +':'+ this.card_info['name'].toUpperCase();
+        let heading_text = new LayerWidgetText(layout_get_by_name(template, 'header_text'));
+        heading_text.current_color= 'rgb(0,0,0)';
+        heading_text.font_style = 'bold';
+        heading_text.font_just = 'center';
+        heading_text.font_size = this.heading_font_size * this.scale.y;
+        heading_text.set_scale(this.scale);
+        heading_text.set_offset(new Vector2(this.x, this.y));
 
-        let max_line_length = 22;
+        heading_text.label = this.card_info['name'].toUpperCase();
 
-        if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
-        }else {
-            this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        if (heading_text.label.length > 22){
+            heading_text.offset.y -= (this.heading_font_size/2) * this.scale.y;
         }
+
+
+        heading_text.draw();
 
         this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['interventions'][this.card_index] );
 
@@ -843,10 +871,18 @@ class InterventionCardWidget extends  CardWidgetBase{
         let pos = loc.clone();
         pos.y +=1*this.scale.y;
 
+        let cols = [
+            'rgb(88,39,120)',
+            'rgb(63,143,97)',
+            'rgb(107,128,221)',
+            'rgb(246,153,88)',
+            'rgb(244,201,57)',
+        ];
+
         for(let i=0;i<5;i++) {
             let c = layout_get_by_name(template,'protection_table')['children']['p' + i.toString()];
 
-            this.debug_rect(loc, c['children']['heading'], 'rgb(28,96,126)');
+            this.debug_rect(loc, c['children']['heading'], cols[i]);
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
 
             this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
@@ -860,7 +896,7 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         let template = layout_get_by_name(this.template, 'back');
 
-        this.debug_layer(loc, template);
+        //this.debug_layer(loc, template);
 
         let title = 'outcomes'.toUpperCase();
 
@@ -915,8 +951,6 @@ class InterventionCardWidget extends  CardWidgetBase{
     }
 }
 
-
-
 class ViewBase extends MVCBase{
     constructor(game){
         super(game);
@@ -968,9 +1002,20 @@ class ViewBase extends MVCBase{
         let default_qrcode = new Image();
         default_qrcode.src = 'assets/default_qrcode.png';
         this.image_bank['intervention_qrcodes'].push(default_qrcode);
+
+
+        this.image_bank['arsinoe_logo'] = [];
+        let logo = new Image();
+        logo.src = 'assets/arsinoe_logo.png';
+        this.image_bank['arsinoe_logo'].push(logo);
     }
 
     get_qrcode(){
         return this.image_bank['intervention_qrcodes'][0];
     }
+
+    get_arsinoe_logo(){
+        return this.image_bank['arsinoe_logo'][0];
+    }
 }
+
