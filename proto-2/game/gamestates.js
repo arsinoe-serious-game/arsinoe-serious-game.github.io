@@ -415,8 +415,9 @@ class GameState_TestModeBase extends StateMachineState{
 
     draw()
     {
-        appInst.draw();
+        //appInst.draw();
         super.draw();
+        GAZCanvas.Rect(new Rect(0, 0, GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h), 'rgb(255,255,255)');
 
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
