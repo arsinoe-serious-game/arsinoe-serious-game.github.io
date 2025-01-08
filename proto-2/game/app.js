@@ -27,9 +27,13 @@ class ARSINOEGame extends AppBase
 
         super.oneTimeInit(1600,900);
         this.stateMachine.addState(GameState_Test.label(), new GameState_Test());
-        this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
         this.stateMachine.addState(GameState_SimpleGame.label(), new GameState_SimpleGame());
 
+        //preview cards
+        this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
+        this.stateMachine.addState(GameState_AllInterventionPreview.label(), new GameState_AllInterventionPreview());
+
+        //print cards
         this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
         this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());
         this.stateMachine.addState(GameState_EventPrint.label(), new GameState_EventPrint());
@@ -38,6 +42,7 @@ class ARSINOEGame extends AppBase
 
         this.stateMachine.addState(GameState_Testbed.label(), new GameState_Testbed());
 
+        //actual game
         this.stateMachine.addState(GameState_SelectPlayers.label(), new GameState_SelectPlayers());
         this.stateMachine.addState(GameState_ViewPlayers.label(), new GameState_ViewPlayers());
         this.stateMachine.addState(GameState_MayoralElection.label(), new GameState_MayoralElection());
@@ -54,6 +59,7 @@ class ARSINOEGame extends AppBase
         current_mode = GameState_Testbed.label();
 
         //current_mode = GameState_InterventionPreview.label();
+        //current_mode = GameState_SimpleGame.label();
 
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
@@ -65,6 +71,10 @@ class ARSINOEGame extends AppBase
     on_new_game(){
         this.model.on_new_game();
         this.view.on_new_game();
+    }
+
+    on_draw_start(){
+        this.view.on_draw_start();
     }
 
     set_players(player_count){
@@ -189,7 +199,8 @@ class ARSINOEGame extends AppBase
     get_event_outcome_heading_text(current_event){
         let text = current_event +' ';
         text +=  'Severity:'+ this.model.event_outcomes[current_event]['severity'];
-        text += ' ';
+        text += ' <br> ';
+        text += ' <br> ';
         text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'];
 
         return text;
@@ -286,6 +297,7 @@ class ARSINOEGame extends AppBase
             Canvas.Rect(new Rect(0, 0, window.innerWidth, window.innerHeight), appInst.letterboxColour);
 
             //do state machine draw
+            appInst.on_draw_start();
             appInst.stateMachine.draw();
 
             //draw the letterbox over the screen to hide any overdraw

@@ -24,6 +24,7 @@ class GameState_Testbed extends StateMachineState
             GameState_InterventionPrint.label(),
             GameState_EventPrint.label(),
             GameState_InterventionPreview.label(),
+            GameState_AllInterventionPreview.label(),
             GameState_SelectPlayers.label()
         ];
 
@@ -156,7 +157,7 @@ class GameState_SimpleGame extends StateMachineState
 
 
 
-                        let current_options = appInst.model.get_round_cards();
+                        let current_options = appInst.get_round_cards();
 
                         for (let i=0;i< current_options.length;i++) {
 
@@ -180,7 +181,7 @@ class GameState_SimpleGame extends StateMachineState
 
                         console.log('You selected: ' + appInst.model.get_intervention_card(selected_intervention)['name']);
 
-                        appInst.model.select_intervention(selected_intervention);
+                        appInst.select_intervention(selected_intervention);
 
                         /*
                         let outcomes = {};
@@ -201,7 +202,7 @@ class GameState_SimpleGame extends StateMachineState
                         text = '';
                         //do response!
                         let outcome = appInst.model.random.getChoice([1,2,3,4,5,6]);
-                        let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-bad'];
+                        let outcome_response = appInst.model.get_intervention_card(selected_intervention)['outcome-0'];
 
                         let have_an_election = false;
 
@@ -211,15 +212,15 @@ class GameState_SimpleGame extends StateMachineState
                         }
 
                         if (outcome >1 && outcome< 4 ){
-                            outcome_response = 'OK:'+appInst.model.get_intervention_card(selected_intervention)['outcome-ok'];
+                            outcome_response = 'OK:'+appInst.model.get_intervention_card(selected_intervention)['outcome-1'];
                         }
 
                         if (outcome >3 && outcome< 6 ){
-                            outcome_response = 'GOOD:'+appInst.model.get_intervention_card(selected_intervention)['outcome-good'];
+                            outcome_response = 'GOOD:'+appInst.model.get_intervention_card(selected_intervention)['outcome-2'];
                         }
 
                         if (outcome == 6){
-                            outcome_response = 'GREAT:'+appInst.model.get_intervention_card(selected_intervention)['outcome-great'];
+                            outcome_response = 'GREAT:'+appInst.model.get_intervention_card(selected_intervention)['outcome-3'];
                         }
 
                         text = '\n';
@@ -236,7 +237,7 @@ class GameState_SimpleGame extends StateMachineState
                             text +='Mayor: ' + appInst.model.current_mayor +' has been voted out';
                             text += '\n';
 
-                            appInst.model.select_mayor();
+                            appInst.select_mayor();
                             text += appInst.model.current_mayor + ' is the new mayor';
                             text += '\n';
 
@@ -414,8 +415,9 @@ class GameState_TestModeBase extends StateMachineState{
 
     draw()
     {
-        appInst.draw();
+        //appInst.draw();
         super.draw();
+        GAZCanvas.Rect(new Rect(0, 0, GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h), 'rgb(255,255,255)');
 
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
@@ -1126,7 +1128,8 @@ class GameState_InterventionPreview extends GameState_TestModeBase
 
         for(let i=0;i < 7;i++) {
             let loc = layout_get_by_name(template, 'card_' + i.toString());
-            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
+            //this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
+            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(layer_to_rect(loc) );
             this.widget_list['intervention_card_' + i.toString()].init();
         }
 
@@ -1366,5 +1369,67 @@ class GameState_PersonaPrint extends GameState_TestModeBase
 
 
         this.on_update_interventon(0);
+    }
+}
+
+//*********************************************************************************************************************
+class GameState_AllInterventionPreview extends GameState_TestModeBase
+{
+    static label()
+    {
+        return "GameState_AllInterventionPreview";
+    }
+
+    constructor()
+    {
+        super();
+
+        this.widget_list = {};
+
+        this.intervention_types = [ 'FP','DP','HP', 'BP'];
+        this.current_intervention = 0;
+
+    }
+
+    init()
+    {
+        super.init();
+
+        let self = this;
+
+        let template = layout_get_by_name(layout, 'screen_all_intervention_preview');
+
+        for(let type = 0;type < this.intervention_types.length;type++) {
+
+            let card_index = 0;
+            for(let i=0;i < appInst.model.get_intervention_cards().length;i++) {
+                if (appInst.model.get_intervention_cards()[i]['type'] === this.intervention_types[type]) {
+                    let b = new InterventionCardWidget(layer_to_rect(layout_get_by_name(layout_get_by_name(template, 'row_'+type.toString()), 'card_'+ card_index.toString())));
+                    b.init();
+                    b.visible = true;
+                    b.set_card_info(i);
+
+                    this.widget_list['card_'+this.intervention_types[type].toString() +'_'+card_index.toString()] = b;
+                    card_index += 1;
+                }
+            }
+        }
+
+    }
+
+    client_update() {
+        super.client_update();
+    }
+
+    client_draw()
+    {
+        GAZCanvas.clip_start();
+        //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
+
+        GAZCanvas.clip_end();
+
+        for (const [key, value] of Object.entries(this.widget_list)) {
+            this.widget_list[key].draw();
+        }
     }
 }
