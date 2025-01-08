@@ -2329,6 +2329,16 @@ let layout =
                                         38
                                     ]
                                 },
+                                "selected_intervention_resilience_text": {
+                                    "offset": [
+                                        1300,
+                                        780
+                                    ],
+                                    "size": [
+                                        300,
+                                        38
+                                    ]
+                                },
                                 "selected_interventions_clip": {
                                     "offset": [
                                         1288,

@@ -323,6 +323,13 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
 
             GAZCanvas.clip_end();
 
+            let res_text = new LayerWidgetText(layout_get_by_name(layer, 'selected_intervention_resilience_text'));
+            res_text.label = 'Combined Resilience';
+            res_text.visible = true;
+
+            res_text.draw();
+
+
             this.resilience_table.set_resilience(appInst.model.get_protection());
 
             this.resilience_table.draw();
