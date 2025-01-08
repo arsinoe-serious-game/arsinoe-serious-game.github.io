@@ -194,7 +194,7 @@ let game_data =
             "outcome-1": "Whilst the wildlife park has been able to breed endangered local animals, returning  them to their environments always proved difficult, leading to accusations that the park staff were incompetent. ",
             "outcome-2": "The project is a success, with the wildlife park receiving awards for its programmes. There's interest from the community, but it's felt that people would rather enjoy their days out.",
             "outcome-3": "The project is a great success, with rare native species being successfully reintroduced back into their natural habitats. The wildlife park visitor centres prove very popular with both locals and tourists, offering both the opportunity to see rare animals and to learn about biodiversity conservation.",
-            "img": "image114.jpeg"
+            "img": "protect_biodiversity.jpg"
         },
         {
             "type": "BP",
@@ -290,7 +290,7 @@ let game_data =
             "outcome-1": "The effects of a hot and dry summer have been offset through the water. While not a perfect solution, it has had a positive effect.",
             "outcome-2": "Despite a hot and dry summer, there are adequate water reserves and tourism benefits.",
             "outcome-3": "Despite a very hot and dry summer, there's more than enough water bringing in lots of tourists from other drier areas. ",
-            "img": "water_delivery_service.png"
+            "img": "water_delivery_service.jpg"
         },
         {
             "type": "DP",
@@ -498,7 +498,7 @@ let game_data =
             "outcome-1": "The fire breaks are a success, but there is a lot of backlash from locals and tourists that the breaks have ruined the natural beaty of the hinterland.",
             "outcome-2": "High winds and a prolonged drought have hit the area, leading to wild fires breaking out across the region. However, the breaks are able to contain the fire to relatively small regions,  greatly reducing damage. ",
             "outcome-3": "The fire breaks have proved to be very capable in limiting the spread of wildfire. However, they've had the added bonus of becoming popular tourist hiking routes.",
-            "img": "image9.jpeg"
+            "img": "firebreaks.jpeg"
         },
         {
             "type": "HP",
@@ -530,7 +530,7 @@ let game_data =
             "outcome-1": "The forests are a limited success as the  many of the trees selected seem to die quite quickly, leading to a patchy feel to the forest. Some of the forests have been more resilient and the locals appreciate being close to nature.",
             "outcome-2": "The forests have been fairly successful and provide interesting talking points for the townspeople, though there are some concerns that the forests are becoming home to rats and feral pets.",
             "outcome-3": "The forests are a great success, providing local cool spaces in the middle of the town and providing opportunities for heat stress residents to 'touch grass' and engage with nature.",
-            "img": ""
+            "img": "miyawaki.png"
         },
         {
             "type": "HP",
