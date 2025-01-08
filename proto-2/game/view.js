@@ -163,7 +163,7 @@ class LayerWidgetText extends LayerWidgetBase{
 
         this.label = 'set label text';
 
-        this.font_family = 'roboto';
+        this.font_family = appInst.view.get_font_family();
         this.font_size = 24;
         this.font_style = 'bold';
         this.font_just = 'center';
@@ -507,8 +507,8 @@ class LayerWidgetResillienceTable extends LayerWidgetBase{
             this.debug_rect(loc, c['children']['heading'], cols[i]);
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
 
-            this.debug_text(loc, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
-            this.debug_text(loc, c['children']['value'], 20, this.resilience_table[headings[i]].toString(), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(loc, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', appInst.view.get_font_family(), 'bold');
+            this.debug_text(loc, c['children']['value'], 20, this.resilience_table[headings[i]].toString(), 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
         }
     }
 }
@@ -578,6 +578,10 @@ class ViewBase extends MVCBase{
 
     get_arsinoe_logo(){
         return this.image_bank['arsinoe_logo'][0];
+    }
+
+    get_font_family(){
+        return 'inter';
     }
 }
 

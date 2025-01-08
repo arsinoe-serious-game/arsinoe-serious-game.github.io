@@ -119,7 +119,7 @@ class EventCardWidget  extends CardWidgetBase {
 
 
         let title = this.card_info['name'].toUpperCase();
-        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
 
         //right side
         {
@@ -127,7 +127,7 @@ class EventCardWidget  extends CardWidgetBase {
             floating_text.font_just = 'left';
             floating_text.font_size = this.content_font_size * this.scale.y;
             floating_text.font_style = '';
-            floating_text.font_family = 'roboto';
+            floating_text.font_family = appInst.view.get_font_family();
             floating_text.font_color = 'rgb(0,0,0)';
 
 
@@ -156,7 +156,7 @@ class EventCardWidget  extends CardWidgetBase {
             floating_text.font_just = 'left';
             floating_text.font_size = this.content_font_size * this.scale.y;
             floating_text.font_style = '';
-            floating_text.font_family = 'roboto';
+            floating_text.font_family = appInst.view.get_font_family();
             floating_text.font_color = 'rgb(0,0,0)';
 
 
@@ -191,14 +191,14 @@ class EventCardWidget  extends CardWidgetBase {
         this.arsinoe_logo.draw(loc);
 
         let title = this.card_info['outcome-heading'].toUpperCase();
-        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
 
 
         let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
         floating_text.font_just = 'left';
         floating_text.font_size = this.content_font_size * this.scale.y;
         floating_text.font_style = '';
-        floating_text.font_family = 'roboto';
+        floating_text.font_family = appInst.view.get_font_family();
         floating_text.font_color = 'rgb(0,0,0)';
 
 
@@ -245,9 +245,9 @@ class PersonaCardWidget extends CardWidgetBase{
         let max_line_length = 22;
 
         if (title.length > max_line_length) {
-            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(new Vector2(loc.x,loc.y-((this.heading_font_size/2)*this.scale.y) ), template['children']['header_text'], this.heading_font_size, this.format_desc(title, max_line_length), 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
         }else {
-            this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
         }
 
         this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['personas'][this.card_index] );
@@ -284,7 +284,7 @@ class PersonaCardWidget extends CardWidgetBase{
 
             pos.x = loc.x + (t['offset'][0] + t['size'][0] / 2) * this.scale.x;
 
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', 'roboto', '');
+            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', appInst.view.get_font_family(), '');
 
             pos.y += ((text.split('\n').length) * text_font_size);
 
@@ -293,26 +293,26 @@ class PersonaCardWidget extends CardWidgetBase{
             pos.x = loc.x + (t['offset'][0] * this.scale.x);
 
             //text_font_size = 16*this.scale.y;
-            GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), 'bold');
             pos.y += text_font_size;
 
             for (let p = 0; p < 3; p++) {
                 text = (p + 1).toString() + '.';
                 text += this.format_desc(this.card_info['pos-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), '');
                 pos.y += ((text.split('\n').length) * text_font_size);
             }
 
             //do issues
             pos.y += 5 * this.scale.y;
 
-            GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', 'roboto', 'bold');
+            GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), 'bold');
             pos.y += text_font_size;
 
             for (let p = 0; p < 3; p++) {
                 text = (p + 1).toString() + '.';
                 text += this.format_desc(this.card_info['neg-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', 'roboto', '');
+                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), '');
                 pos.y += ((text.split('\n').length) * text_font_size);
             }
         }
@@ -425,8 +425,8 @@ class InterventionCardWidget extends  CardWidgetBase{
             this.debug_rect(loc, c['children']['heading'], cols[i]);
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
 
-            this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
-            this.debug_text(pos, c['children']['value'], 20, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+            this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', appInst.view.get_font_family(), 'bold');
+            this.debug_text(pos, c['children']['value'], 20, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
         }
     }
 
@@ -440,7 +440,7 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         let title = 'outcomes'.toUpperCase();
 
-        this.debug_text(loc, layout_get_by_name(template, 'header_text'), 28 * this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        this.debug_text(loc, layout_get_by_name(template, 'header_text'), 28 * this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
 
 
         //do description

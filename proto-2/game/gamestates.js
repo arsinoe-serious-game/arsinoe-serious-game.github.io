@@ -37,7 +37,7 @@ class GameState_Testbed extends StateMachineState
             this.widget_list[button_label].set_active(true);
             this.widget_list[button_label].set_label( menu_choices[i]['label']);
             this.widget_list[button_label].label.font_size = 24;
-            this.widget_list[button_label].label.font_family = 'roboto';
+            this.widget_list[button_label].label.font_family = appInst.view.get_font_family();
             this.widget_list[button_label].on_click = function (d) {
                 appInst.stateMachine.setState(menu_choices[i]['mode']);
             };
@@ -61,7 +61,7 @@ class GameState_Testbed extends StateMachineState
             this.widget_list[key].draw();
         }
 
-        GAZCanvas.Text(20,GAZCanvas.currentScreenSize.toString(),new Vector2(0,20),'rgb(255,255,255)', 'left', 'Roboto');
+        GAZCanvas.Text(20,GAZCanvas.currentScreenSize.toString(),new Vector2(0,20),'rgb(255,255,255)', 'left', appInst.view.get_font_family());
 
         appInst.draw_mouse_pointer();
     }

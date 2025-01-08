@@ -54,7 +54,7 @@ class GameState_InterventionPreview extends GameState_TestModeBase
         this.widget_list['prev_intervention'].set_active(false);
         this.widget_list['prev_intervention'].set_label('PREV');
         this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['prev_intervention'].on_click = function (d) {
             self.on_interventon_button(d, -1);
         };
@@ -65,7 +65,7 @@ class GameState_InterventionPreview extends GameState_TestModeBase
         this.widget_list['next_intervention'].set_active(true);
         this.widget_list['next_intervention'].set_label('NEXT');
         this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['next_intervention'].on_click = function (d) {
             self.on_interventon_button(d, 1);
         };
@@ -141,7 +141,7 @@ class GameState_InterventionPrint extends GameState_TestModeBase
         this.widget_list['prev_intervention'].set_active(false);
         this.widget_list['prev_intervention'].set_label('PREV');
         this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['prev_intervention'].on_click = function (d) {
             self.on_update_interventon(-1);
         };
@@ -150,7 +150,7 @@ class GameState_InterventionPrint extends GameState_TestModeBase
         this.widget_list['next_intervention'].set_active(true);
         this.widget_list['next_intervention'].set_label('NEXT');
         this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['next_intervention'].on_click = function (d) {
             self.on_update_interventon(1);
         };
@@ -214,7 +214,7 @@ class GameState_EventPrint extends GameState_TestModeBase
         this.widget_list['prev_intervention'].set_active(false);
         this.widget_list['prev_intervention'].set_label('PREV');
         this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['prev_intervention'].on_click = function (d) {
             self.on_update_interventon(-1);
         };
@@ -223,7 +223,7 @@ class GameState_EventPrint extends GameState_TestModeBase
         this.widget_list['next_intervention'].set_active(true);
         this.widget_list['next_intervention'].set_label('NEXT');
         this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['next_intervention'].on_click = function (d) {
             self.on_update_interventon(1);
         };
@@ -288,7 +288,7 @@ class GameState_PersonaPrint extends GameState_TestModeBase
         this.widget_list['prev_intervention'].set_active(false);
         this.widget_list['prev_intervention'].set_label('PREV');
         this.widget_list['prev_intervention'].label.font_size = 24;
-        this.widget_list['prev_intervention'].label.font_family = 'roboto';
+        this.widget_list['prev_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['prev_intervention'].on_click = function (d) {
             self.on_update_interventon(-1);
         };
@@ -297,7 +297,7 @@ class GameState_PersonaPrint extends GameState_TestModeBase
         this.widget_list['next_intervention'].set_active(true);
         this.widget_list['next_intervention'].set_label('NEXT');
         this.widget_list['next_intervention'].label.font_size = 24;
-        this.widget_list['next_intervention'].label.font_family = 'roboto';
+        this.widget_list['next_intervention'].label.font_family = appInst.view.get_font_family();
         this.widget_list['next_intervention'].on_click = function (d) {
             self.on_update_interventon(1);
         };
