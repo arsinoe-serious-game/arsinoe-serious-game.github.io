@@ -33,6 +33,11 @@ class CardWidgetBase extends LayerWidget {
 
         this.heading_font_size = 20;
         this.content_font_size = 18;
+
+        this.arsinoe_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        this.arsinoe_logo.set_scale(this.scale);
+        this.arsinoe_logo.set_offset(new Vector2(this.x, this.y));
+        this.arsinoe_logo.image = appInst.view.get_arsinoe_logo();
     }
 
     set_display(side){
@@ -52,6 +57,10 @@ class CardWidgetBase extends LayerWidget {
         super.update();
         if(this.qr_code_link.update() === true){
             window.open('website/game/events/flood_event.pdf', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+        }
+
+        if(this.arsinoe_logo.update() === true){
+            window.open('https://arsinoe-project.eu/', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
         }
     }
 
@@ -102,8 +111,12 @@ class EventCardWidget  extends CardWidgetBase {
         let loc = new Vector2(this.x, this.y);
         this.draw_bg(loc);
 
-        let template = layout_get_by_name(this.template, 'front');
+        let template = layout_get_by_name(this.template,'front');
+        //this.debug_layer(loc, template);
+
         this.qr_code_link.draw(loc);
+        this.arsinoe_logo.draw(loc);
+
 
         let title = this.card_info['name'].toUpperCase();
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
@@ -171,7 +184,11 @@ class EventCardWidget  extends CardWidgetBase {
         let loc = new Vector2(this.x, this.y);
         this.draw_bg(loc);
 
-        let template = layout_get_by_name(this.template, 'back');
+        let template = layout_get_by_name(this.template,'back');
+        //this.debug_layer(loc, template);
+
+        this.qr_code_link.draw(loc);
+        this.arsinoe_logo.draw(loc);
 
         let title = this.card_info['outcome-heading'].toUpperCase();
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', 'roboto', 'bold');
@@ -220,6 +237,8 @@ class PersonaCardWidget extends CardWidgetBase{
 
         let template = layout_get_by_name(this.template,'front');
         this.qr_code_link.draw(loc);
+        this.arsinoe_logo.draw(loc);
+
 
         let title = this.card_info['name'].toUpperCase();
 
@@ -314,20 +333,12 @@ class InterventionCardWidget extends  CardWidgetBase{
 
     init(){
         super.init();
-
-        this.arsinoe_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
-        this.arsinoe_logo.set_scale(this.scale);
-        this.arsinoe_logo.set_offset(new Vector2(this.x, this.y));
-        this.arsinoe_logo.image = appInst.view.get_arsinoe_logo();
-
     }
 
     update() {
         super.update();
 
-        if(this.arsinoe_logo.update() === true){
-            window.open('https://arsinoe-project.eu/', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
-        }
+
     }
 
     get_bg_col(){
