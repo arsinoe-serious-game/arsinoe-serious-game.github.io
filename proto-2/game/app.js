@@ -199,7 +199,8 @@ class ARSINOEGame extends AppBase
     get_event_outcome_heading_text(current_event){
         let text = current_event +' ';
         text +=  'Severity:'+ this.model.event_outcomes[current_event]['severity'];
-        text += ' ';
+        text += ' <br> ';
+        text += ' <br> ';
         text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'];
 
         return text;
