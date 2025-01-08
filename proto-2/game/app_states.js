@@ -276,6 +276,9 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
 
             this.selected_interventions.push(card);
         }
+
+        this.resilience_table = new LayerWidgetResillienceTable(layout_get_by_name(layer, 'protection_table'));
+        this.resilience_table.init();
     }
 
     client_update(){
@@ -307,19 +310,23 @@ class GameState_ChooseIntervention extends GameState_TestModeBase
 
         let layer = layout_get_by_name(layout,'screen_intervention_select');
 
-        GAZCanvas.clip_start();
-        GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(layer_to_rect(layout_get_by_name(layer, 'selected_interventions_clip'))));
-
         if(this.selected_interventions.length>0) {
+            GAZCanvas.clip_start();
+            GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(layer_to_rect(layout_get_by_name(layer, 'selected_interventions_clip'))));
+
+
             this.selected_intervention_heading_text.draw();
 
             for (let i = 0; i < this.selected_interventions.length; i++) {
                 this.selected_interventions[i].draw();
             }
+
+            GAZCanvas.clip_end();
+
+            this.resilience_table.set_resilience(appInst.model.get_protection());
+
+            this.resilience_table.draw();
         }
-
-        GAZCanvas.clip_end();
-
 
         for(let i=0;i<4;i++){
             this.intervention_buttons[i].draw();

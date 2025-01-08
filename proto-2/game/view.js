@@ -469,6 +469,50 @@ class LayerModal extends LayerWidgetBase
     }
 }
 
+class LayerWidgetResillienceTable extends LayerWidgetBase{
+
+    constructor(layer) {
+        super(layer);
+
+        this.resilience_table = {};
+
+    }
+
+    init(){
+
+    }
+
+    set_resilience(resilience_table){
+        Object.assign(this.resilience_table,resilience_table);
+    }
+
+    draw() {
+        super.draw();
+
+        let headings = ['EP','BP','FP','DP','HP'];
+
+        let loc = new Vector2(0, 0);
+
+        let cols = [
+            'rgb(88,39,120)',
+            'rgb(63,143,97)',
+            'rgb(107,128,221)',
+            'rgb(246,153,88)',
+            'rgb(244,201,57)',
+        ];
+
+        for(let i=0;i<5;i++) {
+            let c = layout_get_by_name(this.layer,'p' + i.toString());
+
+            this.debug_rect(loc, c['children']['heading'], cols[i]);
+            this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
+
+            this.debug_text(loc, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', 'roboto', 'bold');
+            this.debug_text(loc, c['children']['value'], 20, this.resilience_table[headings[i]].toString(), 'rgba(0,0,0)', 'center', 'roboto', 'bold');
+        }
+    }
+}
+
 class ViewBase extends MVCBase{
     constructor(game){
         super(game);

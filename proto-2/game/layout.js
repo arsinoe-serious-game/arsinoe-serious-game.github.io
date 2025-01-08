@@ -17,8 +17,8 @@ let layout =
                 0
             ],
             "size": [
-                700,
-                500
+                0,
+                0
             ],
             "children": {
                 "template_intervention_card": {
@@ -431,8 +431,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        700,
-                        500
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -519,12 +519,12 @@ let layout =
                         },
                         "back": {
                             "offset": [
-                                9,
-                                10
+                                0,
+                                0
                             ],
                             "size": [
-                                682,
-                                480
+                                0,
+                                0
                             ],
                             "children": {
                                 "header_text": {
@@ -659,12 +659,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                0,
-                0
+                -1,
+                25
             ],
             "size": [
-                0,
-                0
+                1601,
+                1025
             ],
             "children": {
                 "screen_intervention_print": {
@@ -2169,12 +2169,12 @@ let layout =
                 },
                 "screen_intervention_select": {
                     "offset": [
-                        0,
-                        0
+                        -1,
+                        25
                     ],
                     "size": [
-                        0,
-                        0
+                        1601,
+                        1025
                     ],
                     "children": {
                         "bg": {
@@ -2189,12 +2189,12 @@ let layout =
                         },
                         "interventions": {
                             "offset": [
-                                0,
-                                0
+                                23,
+                                100
                             ],
                             "size": [
-                                0,
-                                0
+                                1242,
+                                500
                             ],
                             "children": {
                                 "button_select_1": {
@@ -2281,12 +2281,12 @@ let layout =
                         },
                         "selected_interventions": {
                             "offset": [
-                                0,
-                                0
+                                1300,
+                                140
                             ],
                             "size": [
-                                0,
-                                0
+                                300,
+                                910
                             ],
                             "children": {
                                 "selected_intervention_1": {
@@ -2338,6 +2338,178 @@ let layout =
                                         312,
                                         644
                                     ]
+                                },
+                                "protection_table": {
+                                    "offset": [
+                                        1309,
+                                        828
+                                    ],
+                                    "size": [
+                                        281,
+                                        62
+                                    ],
+                                    "children": {
+                                        "p0": {
+                                            "offset": [
+                                                1309,
+                                                829
+                                            ],
+                                            "size": [
+                                                53,
+                                                61
+                                            ],
+                                            "children": {
+                                                "heading": {
+                                                    "offset": [
+                                                        1309,
+                                                        829
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "offset": [
+                                                        1309,
+                                                        863
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "p1": {
+                                            "offset": [
+                                                1367,
+                                                829
+                                            ],
+                                            "size": [
+                                                52,
+                                                61
+                                            ],
+                                            "children": {
+                                                "heading": {
+                                                    "offset": [
+                                                        1367,
+                                                        829
+                                                    ],
+                                                    "size": [
+                                                        52,
+                                                        27
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "offset": [
+                                                        1367,
+                                                        863
+                                                    ],
+                                                    "size": [
+                                                        52,
+                                                        27
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "p2": {
+                                            "offset": [
+                                                1424,
+                                                829
+                                            ],
+                                            "size": [
+                                                53,
+                                                61
+                                            ],
+                                            "children": {
+                                                "heading": {
+                                                    "offset": [
+                                                        1424,
+                                                        829
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "offset": [
+                                                        1424,
+                                                        863
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "p3": {
+                                            "offset": [
+                                                1481,
+                                                829
+                                            ],
+                                            "size": [
+                                                53,
+                                                61
+                                            ],
+                                            "children": {
+                                                "heading": {
+                                                    "offset": [
+                                                        1481,
+                                                        829
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "offset": [
+                                                        1481,
+                                                        863
+                                                    ],
+                                                    "size": [
+                                                        53,
+                                                        27
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "p4": {
+                                            "offset": [
+                                                1539,
+                                                828
+                                            ],
+                                            "size": [
+                                                51,
+                                                62
+                                            ],
+                                            "children": {
+                                                "heading": {
+                                                    "offset": [
+                                                        1539,
+                                                        828
+                                                    ],
+                                                    "size": [
+                                                        51,
+                                                        28
+                                                    ]
+                                                },
+                                                "value": {
+                                                    "offset": [
+                                                        1539,
+                                                        863
+                                                    ],
+                                                    "size": [
+                                                        51,
+                                                        27
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         },
