@@ -17,8 +17,8 @@ let layout =
                 0
             ],
             "size": [
-                400,
-                600
+                700,
+                500
             ],
             "children": {
                 "template_intervention_card": {
@@ -27,8 +27,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        400,
-                        600
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -43,12 +43,12 @@ let layout =
                         },
                         "front": {
                             "offset": [
-                                14,
-                                10
+                                0,
+                                0
                             ],
                             "size": [
-                                373,
-                                580
+                                0,
+                                0
                             ],
                             "children": {
                                 "header_text": {
@@ -103,22 +103,22 @@ let layout =
                                 },
                                 "protection_table": {
                                     "offset": [
-                                        15,
-                                        533
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        371,
-                                        57
+                                        0,
+                                        0
                                     ],
                                     "children": {
                                         "p0": {
                                             "offset": [
-                                                15,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                71,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "heading": {
@@ -145,12 +145,12 @@ let layout =
                                         },
                                         "p1": {
                                             "offset": [
-                                                89,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "heading": {
@@ -177,12 +177,12 @@ let layout =
                                         },
                                         "p2": {
                                             "offset": [
-                                                164,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -209,12 +209,12 @@ let layout =
                                         },
                                         "p3": {
                                             "offset": [
-                                                239,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -241,12 +241,12 @@ let layout =
                                         },
                                         "p4": {
                                             "offset": [
-                                                314,
-                                                533
+                                                0,
+                                                0
                                             ],
                                             "size": [
-                                                72,
-                                                57
+                                                0,
+                                                0
                                             ],
                                             "children": {
                                                 "value": {
@@ -431,8 +431,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        0,
-                        0
+                        700,
+                        500
                     ],
                     "children": {
                         "bg": {
@@ -447,72 +447,72 @@ let layout =
                         },
                         "front": {
                             "offset": [
-                                0,
-                                0
+                                14,
+                                10
                             ],
                             "size": [
-                                0,
-                                0
+                                676,
+                                481
                             ],
                             "children": {
-                                "reference_data": {
-                                    "offset": [
-                                        0,
-                                        0
-                                    ],
-                                    "size": [
-                                        704,
-                                        500
-                                    ]
-                                },
                                 "header_text": {
                                     "offset": [
-                                        15,
-                                        11
+                                        80,
+                                        10
                                     ],
                                     "size": [
-                                        585,
-                                        52
+                                        550,
+                                        55
                                     ]
                                 },
-                                "qr_code": {
+                                "image_loc": {
                                     "offset": [
-                                        638,
-                                        9
+                                        14,
+                                        250
+                                    ],
+                                    "size": [
+                                        326,
+                                        241
+                                    ]
+                                },
+                                "left_floating_text": {
+                                    "offset": [
+                                        15,
+                                        69
+                                    ],
+                                    "size": [
+                                        326,
+                                        172
+                                    ]
+                                },
+                                "right_floating_text": {
+                                    "offset": [
+                                        360,
+                                        69
+                                    ],
+                                    "size": [
+                                        330,
+                                        421
+                                    ]
+                                },
+                                "arsinoe_logo": {
+                                    "offset": [
+                                        15,
+                                        10
                                     ],
                                     "size": [
                                         56,
                                         56
                                     ]
                                 },
-                                "image_loc": {
+                                "qr_code": {
                                     "offset": [
-                                        14,
-                                        256
+                                        634,
+                                        10
                                     ],
                                     "size": [
-                                        318,
-                                        227
-                                    ]
-                                },
-                                "left_floating_text": {
-                                    "offset": [
-                                        16,
-                                        70
-                                    ],
-                                    "size": [
-                                        330,
-                                        250
-                                    ]
-                                },
-                                "right_floating_text": {
-                                    "offset": [
-                                        364,
-                                        67
-                                    ],
-                                    "size": [
-                                        330,
-                                        401
+                                        56,
+                                        56
                                     ]
                                 }
                             }
@@ -527,26 +527,6 @@ let layout =
                                 0
                             ],
                             "children": {
-                                "reference_data": {
-                                    "offset": [
-                                        0,
-                                        0
-                                    ],
-                                    "size": [
-                                        700,
-                                        500
-                                    ]
-                                },
-                                "header_text": {
-                                    "offset": [
-                                        15,
-                                        11
-                                    ],
-                                    "size": [
-                                        585,
-                                        52
-                                    ]
-                                },
                                 "result_4": {
                                     "offset": [
                                         0,
@@ -707,14 +687,44 @@ let layout =
                                         }
                                     }
                                 },
+                                "header_text": {
+                                    "offset": [
+                                        80,
+                                        10
+                                    ],
+                                    "size": [
+                                        550,
+                                        55
+                                    ]
+                                },
+                                "arsinoe_logo": {
+                                    "offset": [
+                                        15,
+                                        10
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
+                                },
+                                "qr_code": {
+                                    "offset": [
+                                        634,
+                                        10
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
+                                },
                                 "floating_text": {
                                     "offset": [
-                                        18,
+                                        15,
                                         70
                                     ],
                                     "size": [
-                                        671,
-                                        411
+                                        676,
+                                        421
                                     ]
                                 }
                             }

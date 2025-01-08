@@ -81,10 +81,10 @@ class ModelBase extends MVCBase{
         this.event_order = ['EP', 'BP', 'FP', 'DP', 'HP'];
 
         this.event_severity = ['minor', 'average', 'extreme'];
-        this.event_prepareness = ['severely under-prepared',
-                'under-prepared',
-                'fitting',
-                'overkill',
+        this.event_prepareness = ['Severely under-prepared',
+                'Under-prepared',
+                'Fitting',
+                'Overkill',
                 //'over-prepared',
         ];
 
