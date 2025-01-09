@@ -83,6 +83,7 @@ def do_stuff():
                     fp.write(sheet.title + '_' + str(index) + '.html')
                     fp.write('\n')
                     fp.write('</H1>\n')
+                    fp.write('<img src="../../../assets/cards/' + sheet.title +'/' + sheet.title+'-'+str(index)+'.png">')
                     fp.close()
 
                 index += 1
