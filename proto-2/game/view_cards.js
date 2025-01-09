@@ -6,6 +6,7 @@ class CardWidgetBase extends LayerWidget {
         this.template_name = 'template_intervention_card';
         this.card_index = 0;
         this.card_set = undefined;
+        this.card_set_name = undefined;
     }
 
     init(){
@@ -27,7 +28,7 @@ class CardWidgetBase extends LayerWidget {
         this.qr_code_link = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
         this.qr_code_link.set_scale(this.scale);
         this.qr_code_link.set_offset(new Vector2(this.x, this.y));
-        this.qr_code_link.image = appInst.view.get_qrcode();
+
 
         this.side = 'front';
 
@@ -47,6 +48,8 @@ class CardWidgetBase extends LayerWidget {
     set_card_info(index) {
         this.card_index = index;
         this.card_info = this.card_set[this.card_index];
+
+        this.qr_code_link.image = appInst.view.get_qrcode(this.card_set_name, this.card_index);
     }
 
     get_bg_col(){
@@ -104,6 +107,7 @@ class EventCardWidget  extends CardWidgetBase {
         super.init();
         this.content_font_size = 16;
 
+        this.card_set_name = 'events';
         this.card_set = appInst.model.get_event_cards();
     }
 
@@ -176,7 +180,7 @@ class EventCardWidget  extends CardWidgetBase {
             floating_text.draw();
         }
 
-        this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.event_map, false);
+        this.debug_image(loc,layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index) , false);
     }
 
     draw_back() {
@@ -229,6 +233,7 @@ class PersonaCardWidget extends CardWidgetBase{
 
         this.template_name = 'template_persona_card';
         this.card_set = appInst.model.get_persona_cards();
+        this.card_set_name = 'personas';
     }
 
     draw_front(){
@@ -250,7 +255,7 @@ class PersonaCardWidget extends CardWidgetBase{
             this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
         }
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['personas'][this.card_index] );
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.get_card_image(this.card_set_name,this.card_index) );
 
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
         floating_text.current_color= 'rgb(0,0,0)';
@@ -263,59 +268,6 @@ class PersonaCardWidget extends CardWidgetBase{
 
 
         floating_text.draw();
-
-
-
-        //do description
-        if (false) {
-            let t = template['children']['floating_text'];
-            let pos = new Vector2();
-
-            pos.x = loc.x + (t['offset'][0]) * this.scale.x;
-            pos.y = loc.y + (t['offset'][1]) * this.scale.y;
-
-            pos.y += 10 * this.scale.y;
-
-            max_line_length = Math.floor((45 * this.content_font_size) / 18.0);
-
-            let text_font_size = this.content_font_size * this.scale.y;
-
-            let text = this.format_desc(this.card_info['desc'], max_line_length);
-
-            pos.x = loc.x + (t['offset'][0] + t['size'][0] / 2) * this.scale.x;
-
-            GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'center', appInst.view.get_font_family(), '');
-
-            pos.y += ((text.split('\n').length) * text_font_size);
-
-            //do positives
-            pos.y += 7 * this.scale.y;
-            pos.x = loc.x + (t['offset'][0] * this.scale.x);
-
-            //text_font_size = 16*this.scale.y;
-            GAZCanvas.Text(text_font_size, "Positives", pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), 'bold');
-            pos.y += text_font_size;
-
-            for (let p = 0; p < 3; p++) {
-                text = (p + 1).toString() + '.';
-                text += this.format_desc(this.card_info['pos-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), '');
-                pos.y += ((text.split('\n').length) * text_font_size);
-            }
-
-            //do issues
-            pos.y += 5 * this.scale.y;
-
-            GAZCanvas.Text(text_font_size, "Potential Issues", pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), 'bold');
-            pos.y += text_font_size;
-
-            for (let p = 0; p < 3; p++) {
-                text = (p + 1).toString() + '.';
-                text += this.format_desc(this.card_info['neg-' + (p + 1).toString()], max_line_length);
-                GAZCanvas.Text(text_font_size, text, pos, 'rgb(0,0,0)', 'left', appInst.view.get_font_family(), '');
-                pos.y += ((text.split('\n').length) * text_font_size);
-            }
-        }
     }
 
     draw_back(){
@@ -329,6 +281,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         super(inRect);
 
         this.card_set = appInst.model.get_intervention_cards();
+        this.card_set_name = 'interventions';
     }
 
     init(){
@@ -391,7 +344,8 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         heading_text.draw();
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'),appInst.view.image_bank['interventions'][this.card_index] );
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index) );
+
 
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
         floating_text.current_color= 'rgb(0,0,0)';

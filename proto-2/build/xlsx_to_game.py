@@ -76,11 +76,13 @@ def do_stuff():
 
                 #make some html content for page
                 with open('../website/game/'+sheet.title+'/' + sheet.title+'_'+str(index)+'.html', 'w') as fp:
+                    fp.write('<H1>\n')
                     fp.write(record['name'])
                     fp.write('\n')
                     fp.write('\n')
                     fp.write(sheet.title + '_' + str(index) + '.html')
                     fp.write('\n')
+                    fp.write('</H1>\n')
                     fp.close()
 
                 index += 1

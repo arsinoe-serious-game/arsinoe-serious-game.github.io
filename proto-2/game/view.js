@@ -591,8 +591,12 @@ class ViewBase extends MVCBase{
         this.image_bank['arsinoe_logo'].push(logo);
     }
 
-    get_qrcode(){
-        return this.image_bank['intervention_qrcodes'][0];
+    get_qrcode(card_set_name, index){
+        return this.image_bank[card_set_name][index]['qr_code'];
+    }
+
+    get_card_image(card_set_name, index){
+        return this.image_bank[card_set_name][index]['image'];
     }
 
     get_arsinoe_logo(){
