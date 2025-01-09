@@ -1080,6 +1080,16 @@ class baseCanvas
         return canvas.getContext("2d");
     }
 
+    save(filename){
+
+        var dl = document.createElement("a");
+        dl.href = this.ctx().canvas.toDataURL("impage/png");
+        dl.innerHTML = "Download Image!";
+        dl.download = filename; // Make sure the browser downloads the image
+        document.body.appendChild(dl); // Needs to be added to the DOM to work
+        dl.click(); // Trigger the click
+    }
+
     /*
         Line(vector2 start, vector2 end, string inColour, float inWidth)
 
@@ -2052,45 +2062,31 @@ class PolyCollider extends ColliderBase
         this.pointList = [];
     }
 
-    init(edgeList)
-    {
-        for(let i=0;i<edgeList.length;i++)
-        {
+    init(edgeList){
+        for(let i=0;i<edgeList.length;i++){
             let nextIndex = (i+1)%edgeList.length;
             let line = new ParametricLine();
             line.init(edgeList[i].x,edgeList[i].y,edgeList[nextIndex].x,edgeList[nextIndex].y);
             this.linelist.push(line);
         }
 
-        for (let i = 0; i < this.linelist.length; i++)
-        {
-            this.pointList.push(new Vector2(this.linelist[i].x0, this.linelist[i].y0))
+        for (let i = 0; i < this.linelist.length; i++){
+            this.pointList.push(new Vector2(this.linelist[i].x0, this.linelist[i].y0));
         }
     }
 
-    isPointInMe(v0)
-    {
+    isPointInMe(v0){
         let i;
 
         let j = this.linelist.length - 1;
         let oddNodes = false;
 
-        for (i = 0; i < this.pointList.length; i++)
-        {
+        for (i = 0; i < this.pointList.length; i++){
             if ((this.pointList[i].y < v0.y && this.pointList[j].y >= v0.y)
-                || (this.pointList[j].y < v0.y && this.pointList[i].y >= v0.y)
-            )
-            {
-                if (this.pointList[i].x + (v0.y - this.pointList[i].y) / (this.pointList[j].y - this.pointList[i].y) * (this.pointList[j].x - this.pointList[i].x) < v0.x)
-                {
-                    if (oddNodes)
-                    {
-                        oddNodes = false;
-                    }
-                    else
-                    {
-                        oddNodes = true;
-                    }
+                || (this.pointList[j].y < v0.y && this.pointList[i].y >= v0.y)){
+
+                if (this.pointList[i].x + (v0.y - this.pointList[i].y) / (this.pointList[j].y - this.pointList[i].y) * (this.pointList[j].x - this.pointList[i].x) < v0.x) {
+                    oddNodes = !oddNodes;
                 }
             }
 

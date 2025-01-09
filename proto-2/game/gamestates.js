@@ -29,6 +29,8 @@ class GameState_Testbed extends StateMachineState
             {'label':'Play Game', 'mode':GameState_SelectPlayers.label()}
         ];
 
+
+
         for (let i=0;i<menu_choices.length;i++) {
 
             let button_label = 'button_'+i.toString();
@@ -352,6 +354,9 @@ class GameState_TestModeBase extends StateMachineState{
         this.mode = 'normal';
 
         this.widget_list = {};
+
+        this.print_screen = false;
+
     }
 
     init()
@@ -433,6 +438,10 @@ class GameState_TestModeBase extends StateMachineState{
             this.quit_modal.draw();
         }
 
+        if (this.print_screen === true){
+            Canvas.save('');
+            this.print_screen = false;
+        }
 
         //appInst.draw_mouse_pointer();
     }
