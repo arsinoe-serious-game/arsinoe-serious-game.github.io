@@ -554,7 +554,7 @@ class ViewBase extends MVCBase{
             this.image_bank['personas'].push(new Image());
 
             if(persona_cards[i]['img'] !== ''){
-                this.image_bank['personas'][i].src = "assets/persona/" + persona_cards[i]['img'];
+                this.image_bank['personas'][i].src = "assets/personas/" + persona_cards[i]['img'];
             }
         }
 

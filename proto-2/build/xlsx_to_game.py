@@ -2,6 +2,7 @@ import openpyxl
 import traceback
 import os
 import json
+import qrcode
 
 # Define variable to load the dataframe
 
@@ -36,6 +37,8 @@ def do_stuff():
 
         data[sheet.title] = []
 
+        index = 0
+
         for row in range(2, sheet.max_row+1):
 
             record = {}
@@ -60,6 +63,24 @@ def do_stuff():
                 value = value.replace('\u2018', "'")
 
                 record[label] = value
+
+            if sheet.title != 'text':
+                record['url'] = 'https://arsinoe-serious-game.github.io/proto-2/website/game/'+ sheet.title +'/' + sheet.title+'_'+str(index)+'.html'
+
+                img = qrcode.make(record['url'])
+                type(img)  # qrcode.image.pil.PilImage
+                img.save('../assets/'+sheet.title+'/' + sheet.title+'_'+str(index)+'_qr.png')
+
+                #make some html content for page
+                with open('../website/game/'+sheet.title+'/' + sheet.title+'_'+str(index)+'.html', 'w') as fp:
+                    fp.write(record['name'])
+                    fp.write('\n')
+                    fp.write('\n')
+                    fp.write(sheet.title + '_' + str(index) + '.html')
+                    fp.write('\n')
+                    fp.close()
+
+                index += 1
 
             data[sheet.title].append(record)
 
