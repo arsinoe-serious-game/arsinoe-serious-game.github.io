@@ -66,10 +66,13 @@ def do_stuff():
 
             if sheet.title != 'text':
                 record['url'] = 'https://arsinoe-serious-game.github.io/proto-2/website/game/'+ sheet.title +'/' + sheet.title+'_'+str(index)+'.html'
+                record['local_url'] = 'website/game/' + sheet.title + '/' + sheet.title + '_' + str(index) + '.html'
 
                 img = qrcode.make(record['url'])
                 type(img)  # qrcode.image.pil.PilImage
-                img.save('../assets/'+sheet.title+'/' + sheet.title+'_'+str(index)+'_qr.png')
+
+                record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'_'+str(index)+'_qr.png'
+                img.save('../' + record['qr_code'])
 
                 #make some html content for page
                 with open('../website/game/'+sheet.title+'/' + sheet.title+'_'+str(index)+'.html', 'w') as fp:

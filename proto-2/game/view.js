@@ -536,35 +536,54 @@ class ViewBase extends MVCBase{
         this.image_bank = {};
         this.image_bank['interventions'] = [];
         this.image_bank['personas'] = [];
+        this.image_bank['events'] = [];
 
-        this.image_bank['intervention_qrcodes'] = [];
+        let cards = appInst.model.get_intervention_cards();
 
-        let intervention_cards = appInst.model.get_intervention_cards();
+        for(let i=0;i< cards.length;i++){
+            if(cards[i]['img'] !== ''){
 
-        for(let i=0;i< intervention_cards.length;i++){
-            this.image_bank['interventions'].push(new Image());
+                let entry = {};
+                entry['image'] = new Image();
+                entry['qr_code'] = new Image();
 
-            if(intervention_cards[i]['img'] !== ''){
-                this.image_bank['interventions'][i].src = "assets/interventions/" + intervention_cards[i]['img'];
+                entry['image'].src = "assets/interventions/" + cards[i]['img'];
+                entry['qr_code'].src = cards[i]['qr_code'];
+
+                this.image_bank['interventions'].push(entry);
             }
         }
 
         let persona_cards = appInst.model.get_persona_cards();
         for(let i=0;i< persona_cards.length;i++){
-            this.image_bank['personas'].push(new Image());
 
             if(persona_cards[i]['img'] !== ''){
-                this.image_bank['personas'][i].src = "assets/personas/" + persona_cards[i]['img'];
+                let entry = {};
+                entry['image'] = new Image();
+                entry['qr_code'] = new Image();
+
+                entry['image'].src = "assets/personas/" + persona_cards[i]['img'];
+                entry['qr_code'].src = persona_cards[i]['qr_code'];
+
+                this.image_bank['personas'].push(entry);
             }
         }
 
-        this.image.src = "assets/interventions/intervention-0.png";
-        this.event_map.src = "assets/events/event_matrix.png";
+        cards = appInst.model.get_event_cards();
 
-        let default_qrcode = new Image();
-        default_qrcode.src = 'assets/default_qrcode.png';
-        this.image_bank['intervention_qrcodes'].push(default_qrcode);
+        for(let i=0;i< cards.length;i++){
+            if(cards[i]['img'] !== ''){
 
+                let entry = {};
+                entry['image'] = new Image();
+                entry['qr_code'] = new Image();
+
+                entry['image'].src = "assets/events/event_matrix.png";
+                entry['qr_code'].src = cards[i]['qr_code'];
+
+                this.image_bank['events'].push(entry);
+            }
+        }
 
         this.image_bank['arsinoe_logo'] = [];
         let logo = new Image();

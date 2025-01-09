@@ -7,8 +7,6 @@ class ARSINOEGame extends AppBase
         this.model = new ModelBase(this);
         this.view = new ViewBase(this);
 
-        this.image = new Image();
-
         this.buttons = {};
         this.first_intervention = 0;
 
@@ -64,8 +62,6 @@ class ARSINOEGame extends AppBase
         //this.stateMachine.setState(GameState_SimpleGame.label());
         //this.stateMachine.setState(GameState_InterventionPreview.label());
         this.stateMachine.setState(current_mode);
-
-        this.image.src = "assets/interventions/intervention-0.png";
     }
 
     on_new_game(){

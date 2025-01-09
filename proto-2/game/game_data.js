@@ -6,42 +6,54 @@ let game_data =
             "name": "Student",
             "desc": "You're a student, living and studying in the town. The local college is great, but you really like all the outdoor amenities in the town. <br>  <br> You like the idea of having money and freedom but are unsure how to get it.\u200b Getting outdoors and doing nice things with your friends and fam. Not having to work that much at the moment. <br>  <br> You hate older people telling you what to do and where to go, were they ever young? The state of the environment, everything seems to be messed up and getting worse.  You worry deeply about your future and the state of the world.",
             "img": "student.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_0.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_0.html",
+            "local_url": "website/game/personas/personas_0.html",
+            "qr_code": "assets/personas/personas_0_qr.png"
         },
         {
             "type": "",
             "name": "Single worker",
             "desc": "It's been a couple of years since you left education and have been finding your feet in the adult world of employment and responsibilities. <br>  <br> You like having a stable job with a decent wage and room to grow,\u200b having nice things to do when you're not at work,  being able to get on, buy a nice flat with your partner and start putting down some roots.\u200b <br>  <br> You hate\u200b the lack of work opportunities, you want to get on and build a career. You're struggling to make ends meet and  you seem to pay a lot of tax but not see much for it, given the state of the local environment, every thing looks tired and needs a good clean up.\u200b",
             "img": "single_worker.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_1.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_1.html",
+            "local_url": "website/game/personas/personas_1.html",
+            "qr_code": "assets/personas/personas_1_qr.png"
         },
         {
             "type": "",
             "name": "Family",
             "desc": "You're a young parent with some rug rats. Life has new levels of complexity and you're still trying to find your feet.\u200b <br>  <br> You like things you can do for and with your family, knowing that your kids have a future in the town\u200b, and being able to unwind with your partner at the end of the day.\u200b <br>  <br> You hate people and policies that hate people with children\u200b,  excessive government intervention\u200b, and pollution that may impact your family.",
             "img": "family.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_2.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_2.html",
+            "local_url": "website/game/personas/personas_2.html",
+            "qr_code": "assets/personas/personas_2_qr.png"
         },
         {
             "type": "",
             "name": "Retiree",
             "desc": "You are a retired worker. You've spent your lifetime working hard and, at your age, you are entitled to everything you deserve.\u200b <br>  <br> You like activities that meet your needs as an active member of society,  opportunities to shop, socialize and be entertained, and easy transport links so you can get around without any stress\u200b <br>  <br> You hate change that adversely impacts you.\u200b Young people whinging about having it tough as you had it tough when you were young, and it didn't affect you much.\u200b Taxation as you've paid tax all your life and should be done with it now.\u200b",
             "img": "retiree.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_3.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_3.html",
+            "local_url": "website/game/personas/personas_3.html",
+            "qr_code": "assets/personas/personas_3_qr.png"
         },
         {
             "type": "",
             "name": "Business owner",
             "desc": "You are a local business owner. You've managed your shop for years. It keeps you busy enough and financially secure, but not wealthy.\u200b <br>  <br> You like nice customers that make good purchases\u200b, tourists and holidaymakers that are keen to buy at your shop, and being apart of the local community\u200b <br>  <br> You hate the mall and out of town shopping taking away customers,\u200b high parking charges stopping people coming to town.\u200b The municipality needlessly changing things, you like things the way they are and want to keep them that way.",
             "img": "business_owner.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_4.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_4.html",
+            "local_url": "website/game/personas/personas_4.html",
+            "qr_code": "assets/personas/personas_4_qr.png"
         },
         {
             "type": "",
             "name": "Politician",
             "desc": "You are a local politician who got into politics to address injustice both locally and in the wider community. <br>  <br> You like being a force for good in the local community, being an agent of change, even if the change is often what people need rather than want, and keeping big businesses and the powerful in check. <br>  <br> You hate people and organisations that don't understand that we are just tenants, not the long term owners of the town. Carpet baggers trying to make a short term profit on the backs of hard working people.",
             "img": "politician.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_5.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/personas/personas_5.html",
+            "local_url": "website/game/personas/personas_5.html",
+            "qr_code": "assets/personas/personas_5_qr.png"
         }
     ],
     "events": [
@@ -61,7 +73,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the economic event with some knock on business failures and many residents reporting financial hardship. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their economic resilience planning.",
             "outcome-2": "Whilst there are some impacts to the event,  they tend to be small in nature and there are no major causalities, this is a huge relief for the local businesses and towns people. <br> People feel that the municipality has 'got it right' with their economic resilience planning.",
             "outcome-3": "There appears to be little impact of the economic event in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_0.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_0.html",
+            "local_url": "website/game/events/events_0.html",
+            "qr_code": "assets/events/events_0_qr.png"
         },
         {
             "type": "BP",
@@ -79,7 +93,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the event, with much work to do to recover the town's fauna and flora, and the people and businesses that are involved. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their biodiversity resilience.",
             "outcome-2": "Whilst there are some impacts to the event,  they tend to be small in nature and there are no major causalities, this is a huge relief for the town's fauna and flora and the people and businesses that are involved. <br> People feel that the municipality has 'got it right' with their  biodiversity resilience.",
             "outcome-3": "There appears to be little impact of the event in the town, which is a huge relief for all. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_1.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_1.html",
+            "local_url": "website/game/events/events_1.html",
+            "qr_code": "assets/events/events_1_qr.png"
         },
         {
             "type": "FP",
@@ -97,7 +113,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the flood, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their flood planning.",
             "outcome-2": "Whilst there are some impacts to the flood,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. <br> People feel that the municipality has 'got it right' with their flood planning.",
             "outcome-3": "There appears to be little impact of the flood in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_2.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_2.html",
+            "local_url": "website/game/events/events_2.html",
+            "qr_code": "assets/events/events_2_qr.png"
         },
         {
             "type": "DP",
@@ -115,7 +133,9 @@ let game_data =
             "outcome-1": "The town has been clearly impacted by the drought, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their drought planning.",
             "outcome-2": "Whilst there are some impacts to the drought,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. <br> People feel that the municipality has 'got it right' with their drought planning.",
             "outcome-3": "There appears to be little impact of the drought  in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_3.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_3.html",
+            "local_url": "website/game/events/events_3.html",
+            "qr_code": "assets/events/events_3_qr.png"
         },
         {
             "type": "HP",
@@ -133,7 +153,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the event, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their actions.",
             "outcome-2": "Whilst there are some impacts to the heat wave,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. <br> People feel that the municipality has 'got it right' with their actions.",
             "outcome-3": "There appears to be little impact of the event in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_4.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/events/events_4.html",
+            "local_url": "website/game/events/events_4.html",
+            "qr_code": "assets/events/events_4_qr.png"
         }
     ],
     "text": [
@@ -158,7 +180,9 @@ let game_data =
             "outcome-2": "The fish farms are operational and working well, creating jobs and adding fish to the local palette. ",
             "outcome-3": "The fish farming has been a great success! Many more people can afford to have locally supplied fresh fish, saving air miles. The income from the farming has been put back into the local community in educating local fishermen on sustainable fishing practice",
             "img": "fish_farm.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_0.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_0.html",
+            "local_url": "website/game/interventions/interventions_0.html",
+            "qr_code": "assets/interventions/interventions_0_qr.png"
         },
         {
             "type": "BP",
@@ -175,7 +199,9 @@ let game_data =
             "outcome-2": "The farm is producing an expected return and has created local jobs. The farm operators are careful to consider local biodiversity issues.",
             "outcome-3": "The farm is producing bumper crop yields and is managing to deliver them in harmony with the environment. To conserve water, the farm has developed a sophisticated irrigation system that has gained wide praise.",
             "img": "monofarm.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_1.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_1.html",
+            "local_url": "website/game/interventions/interventions_1.html",
+            "qr_code": "assets/interventions/interventions_1_qr.png"
         },
         {
             "type": "BP",
@@ -192,7 +218,9 @@ let game_data =
             "outcome-2": "The project is a success, with the app being popular for school projects and wildlife enthusiasts. Although the app doesn't get broad appeal, it has a large enough user base to provide a lot of value.",
             "outcome-3": "The project is a great success, with residents becoming keen citizen scientists monitoring the wildlife they see around them. The data created by the project provides local biodiversity researchers with clear insights into the state of the environment allowing meaningful interventions to be followed.",
             "img": "dashboard.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_2.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_2.html",
+            "local_url": "website/game/interventions/interventions_2.html",
+            "qr_code": "assets/interventions/interventions_2_qr.png"
         },
         {
             "type": "BP",
@@ -209,7 +237,9 @@ let game_data =
             "outcome-2": "The project is a success, with the wildlife park receiving awards for its programmes. There's interest from the community, but it's felt that people would rather enjoy their days out.",
             "outcome-3": "The project is a great success, with rare native species being successfully reintroduced back into their natural habitats. The wildlife park visitor centres prove very popular with both locals and tourists, offering both the opportunity to see rare animals and to learn about biodiversity conservation.",
             "img": "protect_biodiversity.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_3.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_3.html",
+            "local_url": "website/game/interventions/interventions_3.html",
+            "qr_code": "assets/interventions/interventions_3_qr.png"
         },
         {
             "type": "BP",
@@ -226,7 +256,9 @@ let game_data =
             "outcome-2": "The project is a success, with crop protection in place, the farmers can operate securely knowing that their crop comes from this town.",
             "outcome-3": "The project is a great success, with the local crop being protected, farmers have built a heritage industry around their crop and the foodstuffs that can be made from it. This has made the town an attraction for tourists and gourmands looking for the 'real thing'. ",
             "img": "protect_local_crops.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_4.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_4.html",
+            "local_url": "website/game/interventions/interventions_4.html",
+            "qr_code": "assets/interventions/interventions_4_qr.png"
         },
         {
             "type": "BP",
@@ -243,7 +275,9 @@ let game_data =
             "outcome-2": "The project is delivered and residents are aware and using the website. After an unseasonal flood, many residents cite the website as being a great resource for helping them to come to terms with flooding issues.",
             "outcome-3": "The project is a great success with residents regularly engaging and contributing with the website, to the point that it has become nationally recognised with other towns starting to adopt a similar approach. ",
             "img": "dashboard.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_5.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_5.html",
+            "local_url": "website/game/interventions/interventions_5.html",
+            "qr_code": "assets/interventions/interventions_5_qr.png"
         },
         {
             "type": "BP",
@@ -260,7 +294,9 @@ let game_data =
             "outcome-2": "The digital twin works well and is providing some good biodiversity strategy insights. The municipality is happy and would like to develop it further.",
             "outcome-3": "The digital twin is providing the municipality with great insights and predictions, allowing biodiversity protection activities to be far better targeted. Most residents don't notice, but biodiversity resilience is growing year on year.",
             "img": "digital_twin.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_6.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_6.html",
+            "local_url": "website/game/interventions/interventions_6.html",
+            "qr_code": "assets/interventions/interventions_6_qr.png"
         },
         {
             "type": "DP",
@@ -277,7 +313,9 @@ let game_data =
             "outcome-2": "There was a serve drought in the summer. Luckily because of the reservoir there is enough water for the township. ",
             "outcome-3": "There was a serve drought in the summer. However, with the winter rains captured in the reservoir, there is easily enough water for all.",
             "img": "reservoir.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_7.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_7.html",
+            "local_url": "website/game/interventions/interventions_7.html",
+            "qr_code": "assets/interventions/interventions_7_qr.png"
         },
         {
             "type": "DP",
@@ -294,7 +332,9 @@ let game_data =
             "outcome-2": "The course is a success, though the high resort fees tend to keep the resort ticking over, giving a relaxed feel. The course has been good for the town, with jobs to support the course and the customers.",
             "outcome-3": "Golf tourists come from far and wide to play, and when they aren't playing a lot of them are visiting the town and spending money on good days and nights out.",
             "img": "golf_course.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_8.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_8.html",
+            "local_url": "website/game/interventions/interventions_8.html",
+            "qr_code": "assets/interventions/interventions_8_qr.png"
         },
         {
             "type": "DP",
@@ -311,7 +351,9 @@ let game_data =
             "outcome-2": "Despite a hot and dry summer, there are adequate water reserves and tourism benefits.",
             "outcome-3": "Despite a very hot and dry summer, there's more than enough water bringing in lots of tourists from other drier areas. ",
             "img": "water_delivery_service.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_9.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_9.html",
+            "local_url": "website/game/interventions/interventions_9.html",
+            "qr_code": "assets/interventions/interventions_9_qr.png"
         },
         {
             "type": "DP",
@@ -328,7 +370,9 @@ let game_data =
             "outcome-2": "The smart water meters have been accepted by residents and water consumption is starting to show a reduction as enthusiastic residents look to minimise their consumption.",
             "outcome-3": "Residents love interacting with their smart water app and  consumption is at an all-time low. As a result, there is greatly decreased demand on the water distribution network allowing the water company to spend more time and resources addressing leakage.",
             "img": "smart_meters.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_10.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_10.html",
+            "local_url": "website/game/interventions/interventions_10.html",
+            "qr_code": "assets/interventions/interventions_10_qr.png"
         },
         {
             "type": "DP",
@@ -345,7 +389,9 @@ let game_data =
             "outcome-2": "The smart irrigation system seem to be working alright, though there have been a few teething issues. Most farmers are reporting that the system is working well for them, though a few have run into issues with over and under watering.",
             "outcome-3": "The smart irrigation systems are working well, with most farmers reporting both significant reductions in water requirements but also increases in yield. In some cases, marginal land is being returned to use.",
             "img": "smart_irrigation.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_11.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_11.html",
+            "local_url": "website/game/interventions/interventions_11.html",
+            "qr_code": "assets/interventions/interventions_11_qr.png"
         },
         {
             "type": "DP",
@@ -362,7 +408,9 @@ let game_data =
             "outcome-2": "The project is delivered and residents are aware and using the website. After an unseasonal flood, many residents cite the website as being a great resource for helping them to come to terms with flooding issues.",
             "outcome-3": "The project is a great success with residents regularly engaging and contributing with the website, to the point that it has become nationally recognised with other towns starting to adopt a similar approach. ",
             "img": "dashboard.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_12.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_12.html",
+            "local_url": "website/game/interventions/interventions_12.html",
+            "qr_code": "assets/interventions/interventions_12_qr.png"
         },
         {
             "type": "DP",
@@ -379,7 +427,9 @@ let game_data =
             "outcome-2": "The digital twin works well and is providing some good insights, not least a predictive flood model for coastal road closures. The municipality is happy and would like to develop it further.",
             "outcome-3": "The digital twin is providing the municipality with great insights and predictions, allowing flood protection activities to be far better targeted. Most residents don't notice, but the impact of flooding is decreasing year by year.",
             "img": "digital_twin.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_13.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_13.html",
+            "local_url": "website/game/interventions/interventions_13.html",
+            "qr_code": "assets/interventions/interventions_13_qr.png"
         },
         {
             "type": "FP",
@@ -396,7 +446,9 @@ let game_data =
             "outcome-2": "The project completes slightly ahead of time, early enough to protect the coastal road from some unseasonally high tides.",
             "outcome-3": "Shortly after the project completes, the town is buffeted a number of huge storms, the worst in living memory. Unlike previous storms, the coast road district doesn't flood saving the council by not having to perform a large clean-up. ",
             "img": "sea_wall.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_14.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_14.html",
+            "local_url": "website/game/interventions/interventions_14.html",
+            "qr_code": "assets/interventions/interventions_14_qr.png"
         },
         {
             "type": "FP",
@@ -413,7 +465,9 @@ let game_data =
             "outcome-2": "The complex is a success with tenants that complement rather than compete with the town centre attractions. ",
             "outcome-3": "The complex is a real success and careful transport planning has enabled people from all over the region to attend films, gigs, and shows without causing chaos. ",
             "img": "lesiure_resort.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_15.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_15.html",
+            "local_url": "website/game/interventions/interventions_15.html",
+            "qr_code": "assets/interventions/interventions_15_qr.png"
         },
         {
             "type": "FP",
@@ -430,7 +484,9 @@ let game_data =
             "outcome-2": "The beaver experiment is working well, and the university is working to increase size of the project, protecting more land. ",
             "outcome-3": "The beaver experiment is working well, with fewer floods. The beavers have been a local point of interest , drawing in beaver tourists and the sale of beaver plushies is through the roof. ",
             "img": "beavers.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_16.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_16.html",
+            "local_url": "website/game/interventions/interventions_16.html",
+            "qr_code": "assets/interventions/interventions_16_qr.png"
         },
         {
             "type": "FP",
@@ -447,7 +503,9 @@ let game_data =
             "outcome-2": "As the course returns to wetland, it becomes a popular destination for firstly, birds and then bird watchers.",
             "outcome-3": "Hearing the news,  a former champion golfer buys the old typewriter factory and rejuvenates it into a high-quality course that keen golfers flock to, boosting tourism substantially. ",
             "img": "golf_course.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_17.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_17.html",
+            "local_url": "website/game/interventions/interventions_17.html",
+            "qr_code": "assets/interventions/interventions_17_qr.png"
         },
         {
             "type": "FP",
@@ -464,7 +522,9 @@ let game_data =
             "outcome-2": "The project appears to have been a success and stakeholders appear happy with the outcome. There appears to be less flooding after recent heavy storms and evidence of increased biodiversity .",
             "outcome-3": "The project was a great success. A rare species of butterfly has been seen in the area and bird species have increased. The downstream town also did not suffer flooding in the last heavy rainfall event",
             "img": "flood_plain.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_18.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_18.html",
+            "local_url": "website/game/interventions/interventions_18.html",
+            "qr_code": "assets/interventions/interventions_18_qr.png"
         },
         {
             "type": "FP",
@@ -481,7 +541,9 @@ let game_data =
             "outcome-2": "The project is delivered and residents are aware and using the website. After an unseasonal flood, many residents cite the website as being a great resource for helping them to come to terms with flooding issues.",
             "outcome-3": "The project is a great success with residents regularly engaging and contributing with the website, to the point that it has become nationally recognised with other towns starting to adopt a similar approach. ",
             "img": "dashboard.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_19.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_19.html",
+            "local_url": "website/game/interventions/interventions_19.html",
+            "qr_code": "assets/interventions/interventions_19_qr.png"
         },
         {
             "type": "FP",
@@ -498,7 +560,9 @@ let game_data =
             "outcome-2": "The digital twin works well and is providing some good insights, not least a predictive flood model for coastal road closures. The municipality is happy and would like to develop it further.",
             "outcome-3": "The digital twin is providing the municipality with great insights and predictions, allowing flood protection activities to be far better targeted. Most residents don't notice, but the impact of flooding is decreasing year by year.",
             "img": "digital_twin.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_20.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_20.html",
+            "local_url": "website/game/interventions/interventions_20.html",
+            "qr_code": "assets/interventions/interventions_20_qr.png"
         },
         {
             "type": "HP",
@@ -515,7 +579,9 @@ let game_data =
             "outcome-2": "The roofs have been painted just in time for the summer heat wave and are having the desired effect. Rooms in painted houses feel cooler and the surrounding streets are far more pleasant to be in.",
             "outcome-3": "The roofs have been painted and there's a record breaking heatwave in the region. Unlike last year, it feels cooler in the streets, even though the weather is warmer. Residents are relived and thankful that their summers are liveable again.",
             "img": "cool_roofs.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_21.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_21.html",
+            "local_url": "website/game/interventions/interventions_21.html",
+            "qr_code": "assets/interventions/interventions_21_qr.png"
         },
         {
             "type": "HP",
@@ -532,7 +598,9 @@ let game_data =
             "outcome-2": "High winds and a prolonged drought have hit the area, leading to wild fires breaking out across the region. However, the breaks are able to contain the fire to relatively small regions,  greatly reducing damage. ",
             "outcome-3": "The fire breaks have proved to be very capable in limiting the spread of wildfire. However, they've had the added bonus of becoming popular tourist hiking routes.",
             "img": "firebreaks.jpeg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_22.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_22.html",
+            "local_url": "website/game/interventions/interventions_22.html",
+            "qr_code": "assets/interventions/interventions_22_qr.png"
         },
         {
             "type": "HP",
@@ -549,7 +617,9 @@ let game_data =
             "outcome-2": "The project was a success, many people have commented on the reduction of noise and stress within the workplace. ",
             "outcome-3": "The project was a great success. A local study has found that urban temperatures and air pollution have reduced, and less money has been spent on heating the buildings. ",
             "img": "green_walls.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_23.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_23.html",
+            "local_url": "website/game/interventions/interventions_23.html",
+            "qr_code": "assets/interventions/interventions_23_qr.png"
         },
         {
             "type": "HP",
@@ -566,7 +636,9 @@ let game_data =
             "outcome-2": "The forests have been fairly successful and provide interesting talking points for the townspeople, though there are some concerns that the forests are becoming home to rats and feral pets.",
             "outcome-3": "The forests are a great success, providing local cool spaces in the middle of the town and providing opportunities for heat stress residents to 'touch grass' and engage with nature.",
             "img": "miyawaki.png",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_24.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_24.html",
+            "local_url": "website/game/interventions/interventions_24.html",
+            "qr_code": "assets/interventions/interventions_24_qr.png"
         },
         {
             "type": "HP",
@@ -583,7 +655,9 @@ let game_data =
             "outcome-2": "The town has become a very popular summer heat destination, with tourists coming from around the world. This has created a boom for the locals, with many now working in tourism. ",
             "outcome-3": "The town has gained a reputation for being a great destination for discerning tourists throughout the year and it turns out that as much as tourists like the heat, they also like cool environments making the town liveable for all.",
             "img": "heat_tourism.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_25.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_25.html",
+            "local_url": "website/game/interventions/interventions_25.html",
+            "qr_code": "assets/interventions/interventions_25_qr.png"
         },
         {
             "type": "HP",
@@ -600,7 +674,9 @@ let game_data =
             "outcome-2": "The project is delivered and residents are aware and using the website.  Residents are better able to prepare for the long summer heatwave and pass invaluable knowledge to visitors to the town.",
             "outcome-3": "The project is a great success with residents regularly engaging and contributing with the website, to the point that it has become nationally recognised with other towns starting to adopt a similar approach. ",
             "img": "dashboard.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_26.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_26.html",
+            "local_url": "website/game/interventions/interventions_26.html",
+            "qr_code": "assets/interventions/interventions_26_qr.png"
         },
         {
             "type": "HP",
@@ -617,7 +693,9 @@ let game_data =
             "outcome-2": "The digital twin works well and is providing some good insights, not least  the predictive medium-term heat wave model. Allowing residents to plan accordingly. The municipality is happy and would like to develop it further.",
             "outcome-3": "The digital twin is providing the municipality with great insights and predictions, allowing heat protection activities to be far better targeted. Most residents don't notice, but the town is being able to better cope with long-term heat.",
             "img": "digital_twin.jpg",
-            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_27.html"
+            "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_27.html",
+            "local_url": "website/game/interventions/interventions_27.html",
+            "qr_code": "assets/interventions/interventions_27_qr.png"
         }
     ]
 };

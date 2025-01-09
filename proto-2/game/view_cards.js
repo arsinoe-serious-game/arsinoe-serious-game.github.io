@@ -56,7 +56,7 @@ class CardWidgetBase extends LayerWidget {
     update() {
         super.update();
         if(this.qr_code_link.update() === true){
-            window.open('website/game/events/flood_event.pdf', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+            window.open(this.card_info['local_url'], '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
         }
 
         if(this.arsinoe_logo.update() === true){
