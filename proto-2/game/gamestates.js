@@ -434,7 +434,7 @@ class GameState_TestModeBase extends StateMachineState{
         }
 
 
-        appInst.draw_mouse_pointer();
+        //appInst.draw_mouse_pointer();
     }
 }
 //*********************************************************************************************************************

@@ -96,7 +96,6 @@ class LayerWidget extends  WidgetBase{
     debug_rect(loc, layer, col){
         GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
         GAZCanvas.Rect(this.layer_to_rect(loc,layer), 'rgb(0,0,0)', false, 1);
-
     }
 
     debug_text(loc, layer, font_size, text, color, just, font, font_style){
@@ -291,6 +290,15 @@ class LayerWidgetRect extends LayerWidgetBase{
         super(layer);
 
         this.current_color = 'rgb(255,255,255)';
+        this.draw_outline = true;
+    }
+
+    debug_rect(loc, layer, col){
+        GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
+
+        if(this.draw_outline === true) {
+            GAZCanvas.Rect(this.layer_to_rect(loc, layer), 'rgb(0,0,0)', false, 1);
+        }
     }
 
     draw(){

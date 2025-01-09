@@ -135,7 +135,13 @@ class GameState_InterventionPrint extends GameState_TestModeBase
 
         let self = this;
 
-        let template = layout_get_by_name(layout,'screen_intervention_preview');
+        let template = layout_get_by_name(layout,'screen_intervention_print');
+
+        this.widget_list['bg2'] = new LayerWidgetRect( layout_get_by_name(template,'bg2'));
+        this.widget_list['bg2'].current_color = 'rgb(127,127,127)';
+        this.widget_list['bg'] = new LayerWidgetRect( layout_get_by_name(template,'bg'));
+        this.widget_list['bg'].current_color = 'rgb(255,255,255)';
+        this.widget_list['bg'].draw_outline = false;
 
         this.widget_list['prev_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_prev')));
         this.widget_list['prev_intervention'].set_active(false);
@@ -154,8 +160,6 @@ class GameState_InterventionPrint extends GameState_TestModeBase
         this.widget_list['next_intervention'].on_click = function (d) {
             self.on_update_interventon(1);
         };
-
-        template = layout_get_by_name(layout,'screen_intervention_print');
 
         this.widget_list['intervention_card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template,'card_front')));
         this.widget_list['intervention_card_0'].init();
