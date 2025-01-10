@@ -1059,7 +1059,7 @@ class baseCanvas
     /*
         This is my wrapper for canvas functionality.
 
-        It assumes the canvas component is called 'canvas' in the index.html file
+        It assumes the canvas component is called 'canvas' in the game.html file
 
         Is implemented as global Canvas object, defined at end of file
 

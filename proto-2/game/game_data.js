@@ -635,7 +635,7 @@ let game_data =
             "outcome-1": "The forests are a limited success as the  many of the trees selected seem to die quite quickly, leading to a patchy feel to the forest. Some of the forests have been more resilient and the locals appreciate being close to nature.",
             "outcome-2": "The forests have been fairly successful and provide interesting talking points for the townspeople, though there are some concerns that the forests are becoming home to rats and feral pets.",
             "outcome-3": "The forests are a great success, providing local cool spaces in the middle of the town and providing opportunities for heat stress residents to 'touch grass' and engage with nature.",
-            "img": "miyawaki.png",
+            "img": "miyawaki.jpg",
             "url": "https://arsinoe-serious-game.github.io/proto-2/website/game/interventions/interventions_24.html",
             "local_url": "website/game/interventions/interventions_24.html",
             "qr_code": "assets/interventions/interventions_24_qr.png"
