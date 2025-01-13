@@ -52,7 +52,40 @@ class CardWidgetBase extends LayerWidget {
         this.qr_code_link.image = appInst.view.get_qrcode(this.card_set_name, this.card_index);
     }
 
+    get_type_col(type_label){
+
+        if (type_label == 'HP') {
+            return 'rgb(244,201,57)';
+        }
+
+        //bio
+        if (type_label == 'BP') {
+            return 'rgb(63,143,97)';
+        }
+
+        //drought
+        if (type_label == 'DP') {
+            return 'rgb(246,153,88)';
+        }
+
+        //flooding
+        if (type_label == 'FP') {
+            return 'rgb(107,128,221)';
+        }
+
+        if (type_label == 'EP') {
+            return 'rgb(195,155,230)';
+        }
+
+        return 'rgb(127,127,127)';
+    }
+
     get_bg_col(){
+
+        if('type' in this.card_info) {
+            return this.get_type_col(this.card_info['type']);
+        }
+
         return 'rgb(127,127,127)';
     }
 
@@ -294,29 +327,6 @@ class InterventionCardWidget extends  CardWidgetBase{
 
     }
 
-    get_bg_col(){
-        //heat
-        if (this.card_info['type'] == 'HP'){
-            return 'rgb(244,201,57)';
-        }
-
-        //bio
-        if (this.card_info['type'] == 'BP'){
-            return 'rgb(63,143,97)';
-        }
-
-        //drought
-        if (this.card_info['type'] == 'DP'){
-            return 'rgb(246,153,88)';
-        }
-
-        //flooding
-        if (this.card_info['type'] == 'FP') {
-            return 'rgb(107,128,221)';
-        }
-
-        return 'rgb(127,127,127)';
-    }
 
     draw_front(){
         let loc = new Vector2(this.x, this.y);
@@ -365,18 +375,10 @@ class InterventionCardWidget extends  CardWidgetBase{
         let pos = loc.clone();
         pos.y +=1*this.scale.y;
 
-        let cols = [
-            'rgb(88,39,120)',
-            'rgb(63,143,97)',
-            'rgb(107,128,221)',
-            'rgb(246,153,88)',
-            'rgb(244,201,57)',
-        ];
-
         for(let i=0;i<5;i++) {
             let c = layout_get_by_name(template,'protection_table')['children']['p' + i.toString()];
 
-            this.debug_rect(loc, c['children']['heading'], cols[i]);
+            this.debug_rect(loc, c['children']['heading'], this.get_type_col(headings[i]));
             this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
 
             this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', appInst.view.get_font_family(), 'bold');

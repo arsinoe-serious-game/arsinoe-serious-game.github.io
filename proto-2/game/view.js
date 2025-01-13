@@ -258,7 +258,10 @@ class LayerWidgetText extends LayerWidgetBase{
                                 , this.font_family
                                 , current_style);
 
-                        if( Math.floor(result) > Math.floor(this.w*this.scale.x)){
+                        //if( Math.floor(result) > Math.floor(this.w*this.scale.x)){
+                        if( result >= this.w*this.scale.x){
+                        //if( (result+text_font_size*2) >= this.w*this.scale.x){
+
                             GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family

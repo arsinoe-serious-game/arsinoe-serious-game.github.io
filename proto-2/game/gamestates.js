@@ -26,7 +26,8 @@ class GameState_Testbed extends StateMachineState
             {'label':'View Event cards for printing', 'mode':GameState_EventPrint.label()},
             {'label':'View intervention cards by type', 'mode':GameState_InterventionPreview.label()},
             {'label':'View all intervention cards', 'mode':GameState_AllInterventionPreview.label()},
-            {'label':'Play Game', 'mode':GameState_SelectPlayers.label()}
+            {'label':'Play Game', 'mode':GameState_SelectPlayers.label()},
+            {'label':'Print Cards', 'mode':undefined}
         ];
 
 
@@ -41,7 +42,13 @@ class GameState_Testbed extends StateMachineState
             this.widget_list[button_label].label.font_size = 24;
             this.widget_list[button_label].label.font_family = appInst.view.get_font_family();
             this.widget_list[button_label].on_click = function (d) {
-                appInst.stateMachine.setState(menu_choices[i]['mode']);
+
+                if(menu_choices[i]['mode'] !== undefined) {
+                    appInst.stateMachine.setState(menu_choices[i]['mode']);
+                }else{
+                    window.open('printing.html', '','location=yes,height=570,width=520,scrollbars=yes,status=yes');
+                }
+
             };
         }
     }

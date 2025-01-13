@@ -286,29 +286,63 @@ class ARSINOEGame extends AppBase
     print_cards(){
 
         let tick_count = 0;
-        let current_intervention = 0;
+        let current_card = 0;
+
+        let max_cards = appInst.model.get_intervention_cards().length;
+
+        //let card_type = 'inteventions';
+        let card_type = 'events';
 
 
         setInterval(function () {
+            let widget_list = {};
+
             let template = layout_get_by_name(layout, 'print_interventions');
 
+            if(card_type === 'inteventions') {
+                template = layout_get_by_name(layout, 'print_interventions');
+            }
 
-            let widget_list = {};
+            if(card_type === 'events') {
+                template = layout_get_by_name(layout, 'print_events');
+            }
+
+            if(card_type === 'personas') {
+                template = layout_get_by_name(layout, 'print_personas');
+            }
+
 
             widget_list['bg'] = new LayerWidgetRect(layout_get_by_name(template, 'bg'));
             widget_list['bg'].current_color = 'rgb(255,255,255)';
             widget_list['bg'].draw_outline = false;
 
-            widget_list['intervention_card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
-            widget_list['intervention_card_0'].init();
+            if(card_type === 'inteventions') {
+                max_cards = appInst.model.get_intervention_cards().length;
+                widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+                widget_list['card_1'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_back')));
+            }
 
-            widget_list['intervention_card_1'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_back')));
-            widget_list['intervention_card_1'].init();
-            widget_list['intervention_card_1'].set_display('back');
+            if(card_type === 'events') {
+                max_cards = appInst.model.get_event_cards().length;
+                widget_list['card_0'] = new EventCardWidget(layout_get_by_name(template, 'card_front'));
+                widget_list['card_1'] = new EventCardWidget(layout_get_by_name(template, 'card_back'));
+            }
 
-            widget_list['intervention_card_0'].set_card_info(current_intervention);
-            widget_list['intervention_card_1'].set_card_info(current_intervention);
+            if(card_type === 'personas') {
+                max_cards = appInst.model.get_persona_cards().length;
+                widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
 
+            }
+
+            widget_list['card_0'].init();
+
+            if ('card_1' in widget_list) {
+                widget_list['card_1'].init();
+                widget_list['card_1'].set_display('back');
+                widget_list['card_1'].set_card_info(current_card);
+            }
+
+            widget_list['card_0'].set_card_info(current_card);
 
             GAZCanvas.referenceScreenSize.w = widget_list['bg'].w;
             GAZCanvas.referenceScreenSize.h = widget_list['bg'].h;
@@ -318,11 +352,6 @@ class ARSINOEGame extends AppBase
             GAZCanvas.update();
             GAZCanvas.Rect(new Rect(0, 0, GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h), 'rgb(255,255,255)');
 
-            GAZCanvas.clip_start();
-            //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
-
-            GAZCanvas.clip_end();
-
             if (widget_list !== undefined) {
                 for (const [key, value] of Object.entries(widget_list)) {
                     value.draw();
@@ -331,11 +360,11 @@ class ARSINOEGame extends AppBase
 
             if(tick_count > 10) {
                 console.log();
-                Canvas.save('interventions-'+current_intervention.toString()+'.png');
+                Canvas.save(card_type + '-' + current_card.toString() + '.png');
                 tick_count =0;
 
-                if(current_intervention < appInst.model.get_intervention_cards().length) {
-                    current_intervention += 1;
+                if(current_card < max_cards) {
+                    current_card += 1;
                 }
             }
 
@@ -343,12 +372,14 @@ class ARSINOEGame extends AppBase
         }, 17);
     }
 
-    Run() {
+    Run(args) {
         //do oneTimeInit once
 
         appInst.oneTimeInit();
 
-        //this.print_cards();
+        if ((args !== undefined) && (args)) {
+            this.print_cards();
+        }
 
 
         setInterval(function () {
