@@ -290,8 +290,11 @@ class ARSINOEGame extends AppBase
 
         let max_cards = appInst.model.get_intervention_cards().length;
 
-        //let card_type = 'inteventions';
-        let card_type = 'events';
+        let card_type = '';
+
+        //card_type = 'inteventions';
+        //let card_type = 'events';
+        card_type = 'personas';
 
 
         setInterval(function () {
@@ -331,7 +334,6 @@ class ARSINOEGame extends AppBase
             if(card_type === 'personas') {
                 max_cards = appInst.model.get_persona_cards().length;
                 widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
-
             }
 
             widget_list['card_0'].init();
