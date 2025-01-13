@@ -2823,7 +2823,7 @@ let layout =
                 0
             ],
             "size": [
-                860,
+                870,
                 1300
             ],
             "children": {
@@ -2833,8 +2833,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        860,
-                        1300
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -2949,41 +2949,31 @@ let layout =
                         0
                     ],
                     "size": [
-                        0,
-                        0
+                        870,
+                        1300
                     ],
                     "children": {
-                        "bg copy": {
+                        "bg": {
                             "offset": [
                                 0,
                                 0
                             ],
                             "size": [
-                                920,
+                                870,
                                 1300
                             ]
                         },
-                        "card_top_front": {
-                            "offset": [
-                                11,
-                                8
-                            ],
-                            "size": [
-                                400,
-                                600
-                            ]
-                        },
-                        "card_top_back": {
+                        "card_bottom_right": {
                             "offset": [
                                 464,
-                                8
+                                690
                             ],
                             "size": [
                                 400,
                                 600
                             ]
                         },
-                        "card_bottom_front": {
+                        "card_bottom_left": {
                             "offset": [
                                 11,
                                 690
@@ -2993,10 +2983,20 @@ let layout =
                                 600
                             ]
                         },
-                        "card_bottom_back": {
+                        "card_top_right": {
                             "offset": [
                                 464,
-                                690
+                                8
+                            ],
+                            "size": [
+                                400,
+                                600
+                            ]
+                        },
+                        "card_top_left": {
+                            "offset": [
+                                11,
+                                8
                             ],
                             "size": [
                                 400,
