@@ -296,7 +296,6 @@ class ARSINOEGame extends AppBase
         //let card_type = 'events';
         card_type = 'personas';
 
-
         setInterval(function () {
             let widget_list = {};
 
@@ -327,8 +326,8 @@ class ARSINOEGame extends AppBase
 
             if(card_type === 'events') {
                 max_cards = appInst.model.get_event_cards().length;
-                widget_list['card_0'] = new EventCardWidget(layout_get_by_name(template, 'card_front'));
-                widget_list['card_1'] = new EventCardWidget(layout_get_by_name(template, 'card_back'));
+                widget_list['card_0'] = new EventCardWidget(layout_get_by_name(template, 'card_front')); //top
+                widget_list['card_1'] = new EventCardWidget(layout_get_by_name(template, 'card_back')); //bottom
             }
 
             if(card_type === 'personas') {
@@ -374,13 +373,144 @@ class ARSINOEGame extends AppBase
         }, 17);
     }
 
+    print_cards_for_a4(){
+
+        /*
+            do all the fronts, left to right
+            then all the back, right to left
+
+            front| back
+            1 2  | 2 1
+            3 4  | 4 3
+
+         */
+        let tick_count = 0;
+        let current_card = 0;
+
+        let max_cards = appInst.model.get_intervention_cards().length;
+
+        let card_type = '';
+
+        //card_type = 'inteventions';
+        card_type = 'events';
+        //card_type = 'personas';
+
+        let isDone = false;
+
+
+        let widget_list = {};
+
+            let template = layout_get_by_name(layout, 'print_interventions');
+
+            if(card_type === 'inteventions') {
+                template = layout_get_by_name(layout, 'print_interventions');
+            }
+
+            if(card_type === 'events') {
+                template = layout_get_by_name(layout, 'print_events');
+            }
+
+            if(card_type === 'personas') {
+                template = layout_get_by_name(layout, 'print_personas');
+            }
+
+
+            widget_list['bg'] = new LayerWidgetRect(layout_get_by_name(template, 'bg'));
+            widget_list['bg'].current_color = 'rgb(255,255,255)';
+            widget_list['bg'].draw_outline = false;
+
+            if(card_type === 'inteventions') {
+                max_cards = appInst.model.get_intervention_cards().length;
+                widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+                widget_list['card_1'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_back')));
+            }
+
+            if(card_type === 'events') {
+                max_cards = appInst.model.get_event_cards().length;
+                widget_list['card_0'] = new EventCardWidget(layout_get_by_name(template, 'card_front')); //top
+                widget_list['card_1'] = new EventCardWidget(layout_get_by_name(template, 'card_back')); //bottom
+            }
+
+            if(card_type === 'personas') {
+                max_cards = appInst.model.get_persona_cards().length;
+                widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+            }
+
+            widget_list['card_0'].init();
+
+            if ('card_1' in widget_list) {
+                widget_list['card_1'].init();
+                widget_list['card_1'].set_display('back');
+                widget_list['card_1'].set_card_info(current_card);
+            }
+
+            widget_list['card_0'].set_card_info(current_card);
+
+            let current_side = 'front';
+
+        setInterval(function () {
+        //while(true) {
+
+            if(!isDone) {
+                widget_list['card_0'].set_card_info(current_card * 2);
+                widget_list['card_0'].set_display(current_side);
+                widget_list['card_0'].set_display(current_side);
+
+                if ('card_1' in widget_list) {
+
+                    widget_list['card_1'].visible = (((current_card * 2) + 1) < max_cards);
+
+                    if (widget_list['card_1'].visible) {
+                        widget_list['card_1'].set_card_info((current_card * 2) + 1);
+                        widget_list['card_1'].set_display(current_side);
+                        widget_list['card_1'].set_display(current_side);
+                    }
+                }
+
+                GAZCanvas.referenceScreenSize.w = widget_list['bg'].w;
+                GAZCanvas.referenceScreenSize.h = widget_list['bg'].h;
+
+                resize_window(GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h);
+
+                GAZCanvas.update();
+                GAZCanvas.Rect(new Rect(0, 0, GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h), 'rgb(255,255,255)');
+
+                if (widget_list !== undefined) {
+                    for (const [key, value] of Object.entries(widget_list)) {
+                        value.draw();
+                    }
+                }
+
+                if (tick_count > 10) {
+                    console.log();
+                    Canvas.save(card_type + '_' + current_side + '_' + current_card.toString() + '.png');
+                    tick_count = 0;
+
+                    if (current_card < Math.floor((max_cards) / 2)) {
+                        current_card += 1;
+                    } else {
+                        if (current_side == 'front') {
+                            current_side = 'back';
+                            current_card = 0;
+                        }else{
+                            isDone = true;
+                        }
+                    }
+                }
+            }
+            tick_count += 1;
+        //}
+        }, 17);
+    }
+
     Run(args) {
         //do oneTimeInit once
 
         appInst.oneTimeInit();
 
-        if ((args !== undefined) && (args)) {
-            this.print_cards();
+        if ((args !== undefined) && (args))
+        {
+            this.print_cards_for_a4();
         }
 
 
