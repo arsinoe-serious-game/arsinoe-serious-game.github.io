@@ -521,9 +521,9 @@ class ARSINOEGame extends AppBase
 
         let card_type = '';
 
-        card_type = 'inteventions';
+        //card_type = 'inteventions';
         //card_type = 'events';
-        //card_type = 'personas';
+        card_type = 'personas';
 
         let isDone = false;
 
@@ -541,7 +541,8 @@ class ARSINOEGame extends AppBase
             }
 
             if(card_type === 'personas') {
-                template = layout_get_by_name(layout, 'print_personas');
+                //template = layout_get_by_name(layout, 'print_personas');
+                template = layout_get_by_name(layout, 'print_6x4x4');
             }
 
 
@@ -566,7 +567,11 @@ class ARSINOEGame extends AppBase
 
             if(card_type === 'personas') {
                 max_cards = appInst.model.get_persona_cards().length;
-                widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+                widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_top_left')));
+                widget_list['card_1'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_top_right')));
+
+                widget_list['card_2'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_bottom_left')));
+                widget_list['card_3'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_bottom_right')));
             }
 
             widget_list['card_0'].init();
@@ -634,6 +639,11 @@ class ARSINOEGame extends AppBase
                         if (current_side == 'front') {
                             current_side = 'back';
                             current_card = 0;
+
+                            if(card_type === 'personas'){
+                                isDone = true;
+                            }
+
                         }else{
                             isDone = true;
                         }
