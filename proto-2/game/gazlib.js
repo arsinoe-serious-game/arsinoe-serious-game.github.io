@@ -37,14 +37,14 @@ class Random {
     }
 
     getInt(min, max) {
-        if (min == max) return min;
-        var val = this.next() % 10000;
+        if (min === max) return min;
+        let val = this.next() % 10000;
         return Math.floor(((val / 10000.0) * ((max) - min)) + min);
     }
 
     getFloat(min, max) {
-        if (min == max) return min;
-        var val = this.next() % 10000;
+        if (min === max) return min;
+        let val = this.next() % 10000;
         return (((val / 10000.0) * (max - min)) + min);
     }
 
@@ -53,7 +53,7 @@ class Random {
     }
 
     getRandomColor(I) {
-        var r,g,b;
+        let r,g,b;
 
         if (I===undefined){
             I = 0;
@@ -66,7 +66,7 @@ class Random {
             b= this.getInt(0,255);
 
         }while ((r < I) && (g < I) && (b<I));
-        var color = '#';
+        let color = '#';
         color += r.toString(16).padStart(2,'0').toLowerCase();
         color += g.toString(16).padStart(2,'0').toLowerCase();
         color += b.toString(16).padStart(2,'0').toLowerCase();
@@ -609,7 +609,7 @@ class Colour
 {
     constructor(r,g,b,a=1.0)
     {
-        if(r instanceof (Colour) == true)
+        if(r instanceof (Colour) === true)
         {
             this.r = r.r;
             this.g = r.g;
@@ -640,14 +640,14 @@ class Colour
         let hb = Math.floor(this.b * 255).toString(16);
         let ha = Math.floor(this.a * 255).toString(16);
 
-        if (hr.length == 1)
+        if (hr.length === 1)
             hr = "0" + hr;
-        if (hg.length == 1)
+        if (hg.length === 1)
             hg = "0" + hg;
-        if (hb.length == 1)
+        if (hb.length === 1)
             hb = "0" + hb;
 
-        if (ha.length == 1)
+        if (ha.length === 1)
             ha = "0" + ha;
 
         return "#" + hr + hg + hb;// + ha;
@@ -1001,7 +1001,8 @@ class InputClass
                     return INPUT_HELD;
                 }
             }
-                break;
+            break;
+
 
             case INPUT_HELD:
             {
@@ -1082,7 +1083,7 @@ class baseCanvas
 
     save(filename){
 
-        var dl = document.createElement("a");
+        let dl = document.createElement("a");
         dl.href = this.ctx().canvas.toDataURL("impage/png");
         dl.innerHTML = "Download Image!";
         dl.download = filename; // Make sure the browser downloads the image
@@ -1100,7 +1101,7 @@ class baseCanvas
     Line(start,end,inColour,inWidth)
     {
         this.ctx().beginPath();
-        if(inWidth == undefined)
+        if(inWidth === undefined)
         {
             this.ctx().lineWidth = 1;
         }
@@ -1139,7 +1140,7 @@ class baseCanvas
             context_font += font_style + ' ';
         }
 
-        if((font == undefined) || (font === ""))
+        if((font === undefined) || (font === ""))
         {
             font = "san-serif";
         }
@@ -1149,7 +1150,7 @@ class baseCanvas
 
         this.ctx().font = context_font;
 
-        if(inJustification == undefined)
+        if(inJustification === undefined)
         {
             inJustification = "left";
         }
@@ -1158,7 +1159,7 @@ class baseCanvas
 
         let lines = inString.split('\n');
 
-        if((inJustification == 'center') || (inJustification == 'centre'))
+        if((inJustification === 'center') || (inJustification === 'centre'))
         {
             inPos.y += (inSize/4);
             this.ctx().textAlign = 'center';
@@ -1178,7 +1179,7 @@ class baseCanvas
             context_font += font_style + ' ';
         }
 
-        if((font == undefined) || (font === ""))
+        if((font === undefined) || (font === ""))
         {
             font = "san-serif";
         }
@@ -1188,7 +1189,7 @@ class baseCanvas
 
         this.ctx().font = context_font;
 
-        if(inJustification == undefined)
+        if(inJustification === undefined)
         {
             inJustification = "left";
         }
@@ -1253,7 +1254,7 @@ class baseCanvas
     {
         if((image !==null) && (image.width >0))
         {
-            if(uvRect == undefined)
+            if(uvRect === undefined)
             {
                 this.ctx().drawImage(image
                     ,Math.floor(inRect.x)
@@ -1457,7 +1458,7 @@ class gazcanvas
     }
 
     /*
-        drawLetterbox(oolour)
+        drawLetterbox(colour)
 
         Draw a letterbox on canvas
             colour    - RGB colour as string
@@ -1522,7 +1523,7 @@ class StateMachine
 {
     constructor()
     {
-        this.states = {}
+        this.states = {};
         this.currentState ="";
         this.desiredState ="";
     }
@@ -1646,45 +1647,45 @@ class DebugMenuOption
         this.parent = parent;
         this.name = name;
         this.currentOption = 0;
-        this.dict = dict
+        this.dict = dict;
     }
 
     update(input)
     {
         if ('key' in input)
         {
-            if (input['key'] == "left")
+            if (input['key'] === "left")
             {
-                this.onLeft(input['held'])
+                this.onLeft(input['held']);
             }
 
-            if (input['key'] == "right")
+            if (input['key'] === "right")
             {
-                this.onRight(input['held'])
+                this.onRight(input['held']);
             }
 
-            if (input['key'] == "up")
+            if (input['key'] === "up")
             {
-                this.onUp()
+                this.onUp();
             }
 
-            if (input['key'] == "down")
+            if (input['key'] === "down")
             {
-                this.onDown()
+                this.onDown();
             }
 
-            if (input['key'] == "select")
+            if (input['key'] === "select")
             {
-                return this.onSelect()
+                return this.onSelect();
             }
 
-            if (input['key'] == "cancel")
+            if (input['key'] === "cancel")
             {
-                return this.onCancel()
+                return this.onCancel();
             }
         }
 
-        return this
+        return this;
     }
 
     onUp()
@@ -1715,7 +1716,7 @@ class DebugMenuOption
     {
         if (this.children.length > this.currentOption)
         {
-            this.children[this.currentOption].onRight(held)
+            this.children[this.currentOption].onRight(held);
         }
     }
 
@@ -1725,7 +1726,7 @@ class DebugMenuOption
         {
             if (this.children[this.currentOption].children.length > 0)
             {
-                return this.children[this.currentOption]
+                return this.children[this.currentOption];
             }
             else
             {
@@ -1753,7 +1754,7 @@ class DebugMenuOption
 
         for (let i = 0; i < this.children.length;i++)
         {
-            if (i == this.currentOption)
+            if (i === this.currentOption)
             {
                 text += '>> ';
             }
@@ -1766,7 +1767,7 @@ class DebugMenuOption
             text += '\n';
         }
 
-        return text
+        return text;
     }
 
     add(child)
@@ -1784,13 +1785,13 @@ class DebugMenuOption
     {
         for (let i = 0; this.children.length; i++)
         {
-            if (this.children[i].name == name)
+            if (this.children[i].name === name)
             {
-                return this.children[i]
+                return this.children[i];
             }
         }
 
-        return undefined
+        return undefined;
     }
 }
 
@@ -1800,18 +1801,18 @@ class DebugMenuOption_Float extends DebugMenuOption
 {
     constructor(name, parent = undefined, dict = undefined)
     {
-        super(name, parent, dict)
+        super(name, parent, dict);
     }
 
 
     onLeft(held = false)
     {
-        this.dict.value = Math.max(this.dict.value - this.dict.step, this.dict.min)
+        this.dict.value = Math.max(this.dict.value - this.dict.step, this.dict.min);
     }
 
     onRight(held = false)
     {
-        this.dict.value = Math.min(this.dict.value + this.dict.step, this.dict.max)
+        this.dict.value = Math.min(this.dict.value + this.dict.step, this.dict.max);
     }
 
     getName()
@@ -1824,27 +1825,26 @@ class DebugMenuOption_List extends DebugMenuOption_Float
 {
     constructor(name, parent = undefined, dict = undefined)
     {
-        super(name, parent, dict)
+        super(name, parent, dict);
 
-        if('step' in this.dict == false)
-        {
+        if (!('step' in this.dict)){
             this.dict.step = 1;
         }
     }
 
     onLeft(held = false)
     {
-        if(held == false)
+        if(held === false)
         {
-            this.dict.value = Math.max(this.dict.value - this.dict.step, 0)
+            this.dict.value = Math.max(this.dict.value - this.dict.step, 0);
         }
     }
 
     onRight(held = false)
     {
-        if(held == false)
+        if(held === false)
         {
-            this.dict.value = Math.min(this.dict.value + this.dict.step, this.dict.list.length-1)
+            this.dict.value = Math.min(this.dict.value + this.dict.step, this.dict.list.length-1);
         }
     }
 
@@ -1867,7 +1867,7 @@ class Timer
         this.values = new Float32Array(60);
         this.index = 0;
 
-        this.startTime = 0
+        this.startTime = 0;
 
     }
 
@@ -1927,10 +1927,10 @@ class AABB
 {
     constructor()
     {
-        this.maxVert = new Vector3(Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER)
-        this.minVert = new Vector3(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER)
+        this.maxVert = new Vector3(Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER);
+        this.minVert = new Vector3(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
-        this.range = new Vector3(0, 0, 0)
+        this.range = new Vector3(0, 0, 0);
     }
 
     addPoint(v0)
@@ -2040,7 +2040,7 @@ class ColliderBase
             {
                 if (obj.linelist[isrc].getIntercept(this.linelist[idst], result))
                 {
-                    return true
+                    return true;
                 }
             }
         }
