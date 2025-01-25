@@ -11,46 +11,13 @@ body { margin: 0; padding: 0; }
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 </style>
 </head>
+<script src="misc.js"></script>
+<script src="torbay_map_regions.js"></script>
+
+
 <body>
 <div id="map"></div>
 <script>
-    function point_in_regions(regions, lat,lng){
-
-        for (const [key, value] of Object.entries(regions)) {
-
-            let sx = 100; let fx = -100;
-            let sy = 90; let fy = 0;
-
-            for(let i = 0;i< value['rect'].length;i++) {
-                let p = value['rect'][i];
-
-                if (sx > p[0]) {
-                    sx = p[0];
-                }
-
-                if (fx < p[0]) {
-                    fx = p[0];
-                }
-
-                if (p[1] < sy) {
-                    sy = p[1];
-                }
-
-                if (p[1] > fy) {
-                    fy = p[1];
-                }
-            }
-
-            if ((lat >= sx) && (lat <=fx) && (lng >=sy) && (lng <=fy)){
-                return true;
-            }
-
-        }
-
-
-        return false;
-    }
-
 
 	// TO MAKE THE MAP APPEAR YOU MUST
 	// ADD YOUR ACCESS TOKEN FROM
@@ -62,78 +29,8 @@ body { margin: 0; padding: 0; }
         zoom: 12.0 // starting zoom
     });
 
-    let regions = {
-        "Brixham": {
-                "rect": [
-                    [
-                        -3.566823,
-                        50.412656
-                    ],
-                    [
-                        -3.482775,
-                        50.413758
-                    ],
-                    [
-                        -3.481527,
-                        50.373752
-                    ],
-                    [
-                        -3.565504,
-                        50.372651
-                    ]
-                ],
-            'col': '#ff0000',
-        },
-        "Paignton": {
-            "rect": [
-                [
-                    -3.612472,
-                    50.469556
-                ],
-                [
-                    -3.551369,
-                    50.470387
-                ],
-                [
-                    -3.549365,
-                    50.409041
-                ],
-                [
-                    -3.610389,
-                    50.408212
-                ]
-            ],
-            'col': '#00ff00',
-        },
-
-        "Torquay": {
-            "rect": [
-                [
-                    -3.582708,
-                    50.509987
-                ],
-                [
-                    -3.482585,
-                    50.511305
-                ],
-                [
-                    -3.480749,
-                    50.452618
-                ],
-                [
-                    -3.580749,
-                    50.451303
-                ]
-            ],
-            'col': '#0000ff',
-        }
-    };
-
 
     map.on('style.load', () => {
-
-        let sx = 100; let fx = -100;
-        let sy = 90; let fy = 0;
 
         for (const [key, value] of Object.entries(regions)) {
 
@@ -142,22 +39,6 @@ body { margin: 0; padding: 0; }
             for(let i = 0;i< value['rect'].length +1;i++) {
                 let p = value['rect'][i % value['rect'].length];
                 coords.push(p);
-
-                if (sx > p[0]){
-                    sx = p[0];
-                }
-
-                if (fx < p[0]){
-                    fx = p[0];
-                }
-
-                if (p[1] < sy){
-                    sy = p[1];
-                }
-
-                if (p[1] > fy){
-                    fy = p[1];
-                }
             }
 
 
@@ -167,7 +48,6 @@ body { margin: 0; padding: 0; }
                     'type': 'Feature',
                     'geometry': {
                         'type': 'Polygon',
-                        // These coordinates outline Maine.
                         'coordinates': [coords]
                     }
                 }
@@ -186,20 +66,11 @@ body { margin: 0; padding: 0; }
             });
         }
 
-            //add some markers
-        sx -= 0.01;
-        sy -= 0.01;
+        for(let i=0;i< markers.length;i++){
+            var popup = new mapboxgl.Popup().setHTML('<H1>'+markers[i]['loc'][0].toFixed(2)+':'+markers[i]['loc'][1].toFixed(2)+'</H1>');
+            const marker1 = new mapboxgl.Marker().setLngLat(markers[i]['loc']).addTo(map).setPopup(popup);
 
-        for(let lat = sx; lat <= (fx+0.01); lat += 0.01) {
-            for(let lng = sy; lng <= (fy+0.01); lng += 0.01) {
-
-                if (point_in_regions(regions, lat,lng)) {
-                    var popup = new mapboxgl.Popup().setText(lat.toFixed(2).toString() + ':' + lng.toFixed(2).toString());
-                    const marker1 = new mapboxgl.Marker().setLngLat([lat, lng]).addTo(map).setPopup(popup);
-                }
-            }
         }
-
     });
 
 
