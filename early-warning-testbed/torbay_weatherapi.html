@@ -27,7 +27,7 @@
 
     map.on('style.load', () => {
 
-        for (const [key, value] of Object.entries(regions)) {
+        for (const [key, value] of Object.entries(torbay_weatherapi_static)) {
 
             let coords = [];
 
@@ -60,9 +60,11 @@
             });
         }
 
-        for(let i=0;i< markers.length;i++){
-            var popup = new mapboxgl.Popup().setHTML('<H1>'+markers[i]['loc'][0].toFixed(2)+':'+markers[i]['loc'][1].toFixed(2)+'</H1>');
-            const marker1 = new mapboxgl.Marker().setLngLat(markers[i]['loc']).addTo(map).setPopup(popup);
+        for(let i=0;i< torbay_weatherapi_dynamic.length;i++){
+            let marker = torbay_weatherapi_dynamic[i];
+            
+            var popup = new mapboxgl.Popup().setHTML('<H1>'+marker['loc'][0].toFixed(2)+':'+marker['loc'][1].toFixed(2)+'</H1>');
+            const marker1 = new mapboxgl.Marker().setLngLat(marker['loc']).addTo(map).setPopup(popup);
 
         }
     });
@@ -73,6 +75,7 @@
     <script src="assets/js/js/bootstrap.min.js"></script>
     <script src="assets/js/js/misc.js"></script>
     <script src="assets/js/js/torbay_census_static.js"></script>
+    <script src="assets/js/js/torbay_weatherapi_dynamic.js"></script>
     <script src="assets/js/js/torbay_weatherapi_static.js"></script>
     <script src="assets/js/js/torbay_census_dynamic.js"></script>
 </body>
