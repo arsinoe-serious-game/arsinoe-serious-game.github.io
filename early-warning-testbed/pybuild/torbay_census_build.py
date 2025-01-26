@@ -11,7 +11,7 @@ with open('torbay_census.geojson', 'r') as f:
         fp.write('\n')
         fp.write(';\n')
 
-    with open('../assets/js/js/torbay_census_dyanmic.js', 'w') as fp:
+    with open('../assets/js/js/torbay_census_dynamic.js', 'w') as fp:
         fp.write('let torbay_census_dynamic = {};')
         fp.write('\n')
 
