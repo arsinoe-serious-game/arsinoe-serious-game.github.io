@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Torbay Regions</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+</head>
+
+<body>
+    <div id="map" style="position: absolute; width: 100%;top: 0; bottom: 0;"></div><script>
+
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZ2F6dGFzdGljIiwiYSI6ImNrYzA4Y2c4NjFoYnIyeHRicmZuaTgyMGQifQ.fkkbIOCwq4j70CqNeiBGcA';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [-3.533, 50.435], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 12.0 // starting zoom
+    });
+
+    map.setStyle('mapbox://styles/mapbox/streets-v12');
+
+    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.ScaleControl());
+
+    let popup = undefined;
+
+    map.on('style.load', () => {
+
+        let terrain_exaggeration = 1.5;
+
+        map.addSource('mapbox-dem', {
+                'type': 'raster-dem',
+                'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+                'tileSize': 512,
+                'maxzoom': 14
+            });
+
+            // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({'source': 'mapbox-dem', 'exaggeration': terrain_exaggeration});
+
+
+
+        let key = 'torbay-census';
+
+        for (let i=0;i< torbay_census_static['features'].length;i++){
+            torbay_census_static['features'][i]['properties']['colour'] = torbay_census_dynamic[torbay_census_static['features'][i]['properties']['geo_code']];
+        }
+
+        map.addSource(key, {
+            'type': 'geojson',
+            'data': torbay_census_static
+        });
+
+        // Add a new layer to visualize the polygon.
+        map.addLayer({
+            'id': key,
+            'type': 'fill',
+            'source': key, // reference the data source
+            'layout': {},
+            'paint': {
+                'fill-color':  ['get', 'colour'],
+                'fill-opacity': 0.33
+            }
+        });
+
+        map.addLayer({
+            'id': key +'-outline',
+            'type': 'line',
+            'source': key, // reference the data source
+            'layout': {},
+            'paint': {
+                'line-color': '#000',
+                'line-width': 3
+            }
+        });
+
+        popup = new mapboxgl.Popup({
+            offset: 25,
+            maxWidth: 600,
+            closeButton: false,
+            closeOnClick: true
+        });
+    });
+
+    map.on('mousemove', (e) => {
+        if (popup !== undefined) {
+
+            let text = '';
+            const features = map.queryRenderedFeatures(e.point);
+
+            for (let i = 0; i < features.length; i++) {
+                if ('geo_code' in features[i]['properties']) {
+                    text = features[i]['properties']['geo_code'];
+                }
+            }
+
+            if (text.length > 0) {
+                popup.addTo(map);
+                popup.setHTML('<H1>'+text +'</H1>');
+                popup.setLngLat(e.lngLat);
+            }else{
+                popup.remove();
+            }
+
+        }
+
+    });
+
+
+</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/support.js"></script>
+    <script src="assets/js/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/misc.js"></script>
+    <script src="assets/js/js/torbay_census_static.js"></script>
+    <script src="assets/js/js/torbay_weatherapi_static.js"></script>
+    <script src="assets/js/js/torbay_census_dynamic.js"></script>
+</body>
+
+</html>

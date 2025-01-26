@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>WeatherAPI locations</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+<script src="js/torbay_map_regions.js"></script>
+</head>
+
+<body>
+    <div id="map" style="position: absolute; width: 100%;top: 0; bottom: 0;"></div><script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZ2F6dGFzdGljIiwiYSI6ImNrYzA4Y2c4NjFoYnIyeHRicmZuaTgyMGQifQ.fkkbIOCwq4j70CqNeiBGcA';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [-3.533, 50.435], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 12.0 // starting zoom
+    });
+
+
+    map.on('style.load', () => {
+
+        for (const [key, value] of Object.entries(regions)) {
+
+            let coords = [];
+
+            for(let i = 0;i< value['rect'].length +1;i++) {
+                let p = value['rect'][i % value['rect'].length];
+                coords.push(p);
+            }
+
+            map.addSource(key, {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Polygon',
+                        'coordinates': [coords]
+                    }
+                }
+            });
+
+            // Add a new layer to visualize the polygon.
+            map.addLayer({
+                'id': key,
+                'type': 'fill',
+                'source': key, // reference the data source
+                'layout': {},
+                'paint': {
+                    'fill-color': value['col'], // blue color fill
+                    'fill-opacity': 0.33
+                }
+            });
+        }
+
+        for(let i=0;i< markers.length;i++){
+            var popup = new mapboxgl.Popup().setHTML('<H1>'+markers[i]['loc'][0].toFixed(2)+':'+markers[i]['loc'][1].toFixed(2)+'</H1>');
+            const marker1 = new mapboxgl.Marker().setLngLat(markers[i]['loc']).addTo(map).setPopup(popup);
+
+        }
+    });
+</script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/support.js"></script>
+    <script src="assets/js/js/bootstrap.min.js"></script>
+    <script src="assets/js/js/misc.js"></script>
+    <script src="assets/js/js/torbay_census_static.js"></script>
+    <script src="assets/js/js/torbay_weatherapi_static.js"></script>
+    <script src="assets/js/js/torbay_census_dynamic.js"></script>
+</body>
+
+</html>
