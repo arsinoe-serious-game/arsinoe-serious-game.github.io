@@ -203,11 +203,14 @@ class ARSINOEGame extends AppBase
     }
 
     get_event_outcome_heading_text(current_event){
+
+        let prot = this.model.get_protection();
+
         let text = current_event +' ';
         text +=  'Severity:'+ this.model.event_outcomes[current_event]['severity'];
         text += ' <br> ';
         text += ' <br> ';
-        text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'];
+        text += 'Preparedness: '+ this.model.event_outcomes[current_event]['outcome'] + ' (Protection: ' +prot[current_event].toString()+')';
 
         return text;
     }
@@ -218,6 +221,7 @@ class ARSINOEGame extends AppBase
         let card_set = this.model.get_event_cards();
 
         let text = '';
+        text += ' <br> ';
 
         for(let i=0;i< card_set.length;i++){
             if (card_set[i]['type'] === current_event){

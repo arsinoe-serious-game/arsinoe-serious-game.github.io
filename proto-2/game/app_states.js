@@ -476,12 +476,6 @@ class GameState_EventResult extends GameState_TestModeBase
 
         this.next_button = new LayerWidgetButton(layout_get_by_name(layer,'button_next') );
 
-        if (appInst.model.current_event_round <4) {
-            this.next_button.set_label('Next intervention round');
-        }else {
-            this.next_button.set_label('Final Results');
-        }
-
         this.card_flip_button = new LayerWidgetButton(layout_get_by_name(layer,'button_flip_card') );
 
 
@@ -505,6 +499,12 @@ class GameState_EventResult extends GameState_TestModeBase
         }else{
             this.card_flip_button.set_label('Show Front');
             this.card.set_display('back');
+        }
+
+        if (appInst.model.current_event_round <4) {
+            this.next_button.set_label('Next intervention round');
+        }else {
+            this.next_button.set_label('Final Results');
         }
 
     }
