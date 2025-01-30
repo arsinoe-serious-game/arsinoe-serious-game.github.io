@@ -24,6 +24,18 @@
 
 
     map.on('style.load', () => {
+        
+        let terrain_exaggeration = 1.5;
+
+        map.addSource('mapbox-dem', {
+                'type': 'raster-dem',
+                'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+                'tileSize': 512,
+                'maxzoom': 14
+            });
+
+            // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({'source': 'mapbox-dem', 'exaggeration': terrain_exaggeration});
 
         for (const [key, value] of Object.entries(torbay_weatherapi_static)) {
 
