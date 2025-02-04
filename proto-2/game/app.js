@@ -525,9 +525,9 @@ class ARSINOEGame extends AppBase
 
         let card_type = '';
 
-        //card_type = 'inteventions';
+        card_type = 'inteventions';
         //card_type = 'events';
-        card_type = 'personas';
+        //card_type = 'personas';
 
         let isDone = false;
 
