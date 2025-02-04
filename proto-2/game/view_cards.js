@@ -341,7 +341,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         heading_text.current_color= 'rgb(0,0,0)';
         heading_text.font_style = 'bold';
         heading_text.font_just = 'center';
-        heading_text.font_size = this.heading_font_size * this.scale.y;
+        heading_text.font_size = this.heading_font_size;
         heading_text.set_scale(this.scale);
         heading_text.set_offset(new Vector2(this.x, this.y));
 
@@ -362,7 +362,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         floating_text.label = this.card_info['desc'];
         floating_text.font_style = '';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = this.content_font_size;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
 

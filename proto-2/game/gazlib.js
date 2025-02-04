@@ -1171,7 +1171,7 @@ class baseCanvas
         }
     }
 
-    MeasureText(inSize,inString,inPos,inColour,inJustification,font, font_style)
+    MeasureText(inSize,inString,inColour,inJustification,font, font_style)
     {
         let context_font = '';
         this.ctx().font = '';

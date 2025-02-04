@@ -70,10 +70,12 @@ class GameState_InterventionPreview extends GameState_TestModeBase
             self.on_interventon_button(d, 1);
         };
 
+        let scale = 0.7;
+
         for(let i=0;i < 7;i++) {
             let loc = layout_get_by_name(template, 'card_' + i.toString());
-            //this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], (4*400)/6, 400) );
-            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(layer_to_rect(loc) );
+            this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(new Rect(loc['offset'][0], loc['offset'][1], Math.floor(0.9+(400*scale)), Math.floor(0.9+ (600*scale))) );
+            //this.widget_list['intervention_card_' + i.toString()] = new InterventionCardWidget(layer_to_rect(loc) );
             this.widget_list['intervention_card_' + i.toString()].init();
         }
 

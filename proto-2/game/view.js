@@ -186,7 +186,7 @@ class LayerWidgetText extends LayerWidgetBase{
             pos.y += r.h/2;
         }else{
             pos.x += text_font_size/2;
-            pos.y += text_font_size;
+            pos.y += text_font_size * this.scale.y;
         }
 
         let current_style = this.font_style;
@@ -200,33 +200,33 @@ class LayerWidgetText extends LayerWidgetBase{
                 if (words[i].length) {
                     if (words[i][0] === '<') {
                         if (words[i] == '<br>') {
-                            GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                            GAZCanvas.Text(text_font_size* this.scale.y, current_line, pos, this.font_color //this.font_color
                                 , this.font_just
                                 , this.font_family
                                 , current_style);
 
                             current_line = '';
-                            pos.y += text_font_size;
+                            pos.y += text_font_size * this.scale.y;
 
                             pos.x = r.x;
 
                             if (this.font_just == 'center') {
                                 pos.x += r.w / 2;
                             } else {
-                                pos.x += text_font_size / 2;
+                                pos.x += (text_font_size* this.scale.y) / 2;
                             }
                         }
 
                         if (words[i] == '<b>') {
                             if (current_style !== 'bold') {
                                 if (current_line.length) {
-                                    GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                                    GAZCanvas.Text(text_font_size* this.scale.y, current_line, pos, this.font_color //this.font_color
                                         , this.font_just
                                         , this.font_family
                                         , current_style);
 
                                     current_line = '';
-                                    pos.y += text_font_size;
+                                    pos.y += text_font_size* this.scale.y;
                                 }
                                 current_style = 'bold';
 
@@ -237,13 +237,12 @@ class LayerWidgetText extends LayerWidgetBase{
                             if (current_style === 'bold') {
 
                                 if (current_line.length) {
-                                    GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                                    GAZCanvas.Text(text_font_size* this.scale.y, current_line, pos, this.font_color
                                         , this.font_just
                                         , this.font_family
                                         , current_style);
 
                                     current_line = '';
-                                    //pos.y += text_font_size;
                                 }
                                 current_style = '';
 
@@ -253,22 +252,22 @@ class LayerWidgetText extends LayerWidgetBase{
                     } else {
                         let text_to_print = current_line + words[i] + ' ';
 
-                        let result = Canvas.MeasureText(text_font_size, text_to_print, pos, this.font_color
+                        let result = Canvas.MeasureText(text_font_size, text_to_print, this.font_color
                                 , this.font_just
                                 , this.font_family
                                 , current_style);
 
                         //if( Math.floor(result) > Math.floor(this.w*this.scale.x)){
-                        if( result >= this.w*this.scale.x){
+                        if( result > this.w){ //*this.scale.x){
                         //if( (result+text_font_size*2) >= this.w*this.scale.x){
 
-                            GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                            GAZCanvas.Text(text_font_size*this.scale.y, current_line, pos, this.font_color
                                 , this.font_just
                                 , this.font_family
                                 , current_style);
 
                             current_line = '';
-                            pos.y += text_font_size;
+                            pos.y += text_font_size*this.scale.y;
                         }
 
                         current_line += words[i] + ' ';
@@ -277,12 +276,12 @@ class LayerWidgetText extends LayerWidgetBase{
             }
 
             if (current_line.length > 0) {
-                GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                GAZCanvas.Text(text_font_size*this.scale.y, current_line, pos, this.font_color
                     , this.font_just
                     , this.font_family
                     , current_style);
 
-                pos.y += ((current_line.split('\n').length) * text_font_size);
+                pos.y += ((current_line.split('\n').length) * text_font_size*this.scale.y);
             }
         }
     }
