@@ -162,7 +162,7 @@ class EventCardWidget  extends CardWidgetBase {
         {
             let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'right_floating_text'));
             floating_text.font_just = 'left';
-            floating_text.font_size = this.content_font_size * this.scale.y;
+            floating_text.font_size = this.content_font_size;
             floating_text.font_style = '';
             floating_text.font_family = appInst.view.get_font_family();
             floating_text.font_color = 'rgb(0,0,0)';
@@ -191,7 +191,7 @@ class EventCardWidget  extends CardWidgetBase {
         {
             let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'left_floating_text'));
             floating_text.font_just = 'left';
-            floating_text.font_size = this.content_font_size * this.scale.y;
+            floating_text.font_size = this.content_font_size;
             floating_text.font_style = '';
             floating_text.font_family = appInst.view.get_font_family();
             floating_text.font_color = 'rgb(0,0,0)';
@@ -233,7 +233,7 @@ class EventCardWidget  extends CardWidgetBase {
 
         let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = this.content_font_size;
         floating_text.font_style = '';
         floating_text.font_family = appInst.view.get_font_family();
         floating_text.font_color = 'rgb(0,0,0)';
@@ -295,7 +295,7 @@ class PersonaCardWidget extends CardWidgetBase{
         floating_text.label = this.card_info['desc'];
         floating_text.font_style = '';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = this.content_font_size;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
 
@@ -419,7 +419,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
         floating_text.current_color= 'rgb(0,0,0)';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = this.content_font_size;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
 

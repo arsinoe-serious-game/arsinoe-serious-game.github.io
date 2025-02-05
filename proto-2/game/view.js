@@ -588,7 +588,7 @@ class ViewBase extends MVCBase{
                 entry['image'] = new Image();
                 entry['qr_code'] = new Image();
 
-                entry['image'].src = "assets/events/event_matrix.png";
+                entry['image'].src = "assets/events/event_matrix-2.png";
                 entry['qr_code'].src = cards[i]['qr_code'];
 
                 this.image_bank['events'].push(entry);

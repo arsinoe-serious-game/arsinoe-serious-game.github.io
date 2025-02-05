@@ -526,10 +526,11 @@ class ARSINOEGame extends AppBase
         let card_type = '';
 
         card_type = 'inteventions';
-        //card_type = 'events';
+        card_type = 'events';
         //card_type = 'personas';
 
         let isDone = false;
+        let card_count = 4;
 
 
         let widget_list = {};
@@ -542,6 +543,7 @@ class ARSINOEGame extends AppBase
 
             if(card_type === 'events') {
                 template = layout_get_by_name(layout, 'print_events');
+                card_count = 2;
             }
 
             if(card_type === 'personas') {
@@ -601,16 +603,21 @@ class ARSINOEGame extends AppBase
                     lookup = [1,0,3,2];
                 }
 
-                for(let i=0;i<4;i++){
+                if (card_count == 2){
+                    lookup = [0,1];
+                }
+
+
+                for(let i=0;i<card_count;i++){
                     let card_id = 'card_'+i.toString();
 
                     if (card_id in widget_list) {
                             widget_list[card_id].init();
-                            widget_list[card_id].visible = (((current_card * 4) + lookup[i]) < max_cards);
+                            widget_list[card_id].visible = (((current_card * card_count) + lookup[i]) < max_cards);
 
                             if (widget_list[card_id].visible) {
                                 widget_list[card_id].set_display(current_side);
-                                widget_list[card_id].set_card_info((current_card * 4) + lookup[i]);
+                                widget_list[card_id].set_card_info((current_card * card_count) + lookup[i]);
 
                             }
                     }
@@ -637,7 +644,7 @@ class ARSINOEGame extends AppBase
                     Canvas.save(card_type + '_' + current_side + '_' + current_card.toString() + '.png');
                     tick_count = 0;
 
-                    if (current_card < Math.floor((max_cards) / 4)) {
+                    if (current_card < Math.floor((max_cards) / card_count)) {
                         current_card += 1;
                     } else {
                         if (current_side == 'front') {
