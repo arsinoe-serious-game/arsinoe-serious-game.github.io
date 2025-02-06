@@ -659,12 +659,12 @@ let layout =
         },
         "screens": {
             "offset": [
-                19,
-                45
+                0,
+                0
             ],
             "size": [
-                1463,
-                832
+                0,
+                0
             ],
             "children": {
                 "screen_intervention_print": {
@@ -793,12 +793,12 @@ let layout =
                 },
                 "screen_intervention_preview": {
                     "offset": [
-                        19,
-                        45
+                        0,
+                        0
                     ],
                     "size": [
-                        1463,
-                        832
+                        0,
+                        0
                     ],
                     "children": {
                         "card_0": {
@@ -2823,8 +2823,8 @@ let layout =
                 0
             ],
             "size": [
-                0,
-                0
+                420,
+                620
             ],
             "children": {
                 "print_events": {
@@ -2902,6 +2902,38 @@ let layout =
                         "card_back": {
                             "offset": [
                                 464,
+                                8
+                            ],
+                            "size": [
+                                400,
+                                600
+                            ]
+                        }
+                    }
+                },
+                "print_single_card": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        420,
+                        620
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                420,
+                                620
+                            ]
+                        },
+                        "card_front": {
+                            "offset": [
+                                11,
                                 8
                             ],
                             "size": [

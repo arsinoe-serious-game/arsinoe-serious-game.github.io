@@ -528,6 +528,8 @@ class ARSINOEGame extends AppBase
         card_type = 'inteventions';
         card_type = 'events';
         //card_type = 'personas';
+        card_type = 'single_intevention';
+
 
         let isDone = false;
         let card_count = 4;
@@ -539,6 +541,11 @@ class ARSINOEGame extends AppBase
 
             if(card_type === 'inteventions') {
                 template = layout_get_by_name(layout, 'print_6x4x4');
+            }
+
+            if(card_type === 'single_intevention') {
+                template = layout_get_by_name(layout, 'print_single_card');
+                card_count = 1;
             }
 
             if(card_type === 'events') {
@@ -580,6 +587,11 @@ class ARSINOEGame extends AppBase
                 widget_list['card_3'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_bottom_right')));
             }
 
+            if(card_type === 'single_intevention') {
+                max_cards = appInst.model.get_intervention_cards().length;
+                widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+            }
+
             widget_list['card_0'].init();
 
             if ('card_1' in widget_list) {
@@ -605,6 +617,10 @@ class ARSINOEGame extends AppBase
 
                 if (card_count == 2){
                     lookup = [0,1];
+                }
+
+                if (card_count == 1){
+                    lookup = [0];
                 }
 
 
