@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARSINOE Serious Game MArtin CS7</title>
+    <script src="game_data.js"></script>
+    <script src="gazlib.js"></script>
+
+    <script src="layout.js"></script>
+    <script src="model.js"></script>
+    <script src="view.js"></script>
+    <script src="view_cards.js"></script>
+    <script src="app.js"></script>
+    <script src="gamestates.js"></script>
+    <script src="app_states.js"></script>
+    <script src="dev_states.js"></script>
+
+    <!--https://fonts.google.com/
+        set allow unsigned requests in Settings | Build, Execution, Deployment | Debugger to make this work in the debugger
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+</html>
+
+<script>
+    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+    document.body.scroll = "no"; // ie only
+    document.body.style.padding = 0;
+    document.body.style.margin = 0;
+
+    appInst.Run();
+</script>
