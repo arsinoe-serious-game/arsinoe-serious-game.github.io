@@ -68,14 +68,19 @@ def do_stuff():
                 record[label] = value
 
             if sheet.title != 'text':
-                record['local_url'] = 'kb/' + sheet.title + '/' + sheet.title + '_' + str(index).zfill(2) + '.html'
+                number_label = str(index).zfill(2)
+
+                if index == 0:
+                    number_label = '0'
+
+                record['local_url'] = 'kb/' + sheet.title + '/' + sheet.title + '_' + number_label + '.html'
                 record['url'] = target_url + record['local_url']
 
 
                 img = qrcode.make(record['url'])
                 type(img)  # qrcode.image.pil.PilImage
 
-                record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'_'+str(index).zfill(2)+'_qr.png'
+                record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'_' + number_label + '_qr.png'
                 img.save('game/'+ record['qr_code'])
 
                 index += 1

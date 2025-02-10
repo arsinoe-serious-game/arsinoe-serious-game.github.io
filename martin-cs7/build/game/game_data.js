@@ -6,9 +6,9 @@ let game_data =
             "name": "Student",
             "desc": "You're a student, living and studying in the town. The local college is great, but you really like all the outdoor amenities in the town. <br>  <br> You like the idea of having money and freedom but are unsure how to get it.\u200b Getting outdoors and doing nice things with your friends and fam. Not having to work that much at the moment. <br>  <br> You hate older people telling you what to do and where to go, were they ever young? The state of the environment, everything seems to be messed up and getting worse.  You worry deeply about your future and the state of the world.",
             "img": "student2.jpg",
-            "local_url": "kb/personas/personas_00.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_00.html",
-            "qr_code": "assets/personas/personas_00_qr.png"
+            "local_url": "kb/personas/personas_0.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_0.html",
+            "qr_code": "assets/personas/personas_0_qr.png"
         },
         {
             "type": "",
@@ -73,9 +73,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the economic event with some knock on business failures and many residents reporting financial hardship. <br> People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their economic resilience planning.",
             "outcome-2": "Whilst there are some impacts to the event,  they tend to be small in nature and there are no major causalities, this is a huge relief for the local businesses and towns people. <br> People feel that the municipality has 'got it right' with their economic resilience planning.",
             "outcome-3": "There appears to be little impact of the economic event in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_00.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_00.html",
-            "qr_code": "assets/events/events_00_qr.png"
+            "local_url": "kb/events/events_0.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_0.html",
+            "qr_code": "assets/events/events_0_qr.png"
         },
         {
             "type": "BP",
@@ -180,9 +180,9 @@ let game_data =
             "outcome-2": "The fish farms are operational and working well, creating jobs and adding fish to the local palette. ",
             "outcome-3": "The fish farming has been a great success! Many more people can afford to have locally supplied fresh fish, saving air miles. The income from the farming has been put back into the local community in educating local fishermen on sustainable fishing practice",
             "img": "fish_farm.jpg",
-            "local_url": "kb/interventions/interventions_00.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/interventions/interventions_00.html",
-            "qr_code": "assets/interventions/interventions_00_qr.png"
+            "local_url": "kb/interventions/interventions_0.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/interventions/interventions_0.html",
+            "qr_code": "assets/interventions/interventions_0_qr.png"
         },
         {
             "type": "BP",
