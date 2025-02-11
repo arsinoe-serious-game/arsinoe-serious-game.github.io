@@ -171,6 +171,150 @@ class LayerWidgetText extends LayerWidgetBase{
         this.max_line_length = Math.floor((this.w*2.0) / this.font_size);
     }
 
+    get_printing_extents(){
+        return this.draw_core(false);
+    }
+
+    draw_core(do_printing){
+        let extents = new Rect(0,0,0,0);
+
+        let text_font_size = this.font_size;
+
+        let pos = new Vector2();
+
+        let r = this.layer_to_rect(this.offset, this.layer);
+
+        pos.x = r.x;
+        pos.y = r.y;
+
+        if(this.font_just == 'center'){
+            pos.x += r.w/2;
+            pos.y += r.h/2;
+        }else{
+            pos.x += text_font_size/2;
+            pos.y += text_font_size;
+        }
+
+        extents.x = pos.x;
+        extents.y = pos.y;
+
+        let current_style = this.font_style;
+
+        if(this.label.length) {
+
+            let words = this.label.replace('\n', ' \n ').split(" ");
+
+            let current_line = '';
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].length) {
+                    if (words[i][0] === '<') {
+                        if (words[i] == '<br>') {
+
+                            if(do_printing) {
+                                GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                                    , this.font_just
+                                    , this.font_family
+                                    , current_style);
+                            }
+                            current_line = '';
+                            pos.y += text_font_size;
+
+                            pos.x = r.x;
+
+                            if (this.font_just == 'center') {
+                                pos.x += r.w / 2;
+                            } else {
+                                pos.x += text_font_size / 2;
+                            }
+
+                            extents.h = pos.y - extents.y;
+                        }
+
+                        if (words[i] == '<b>') {
+                            if (current_style !== 'bold') {
+                                if (current_line.length) {
+                                    if(do_printing) {
+                                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color //this.font_color
+                                            , this.font_just
+                                            , this.font_family
+                                            , current_style);
+                                    }
+                                    current_line = '';
+                                    pos.y += text_font_size;
+                                }
+                                current_style = 'bold';
+
+                                extents.h = pos.y - extents.y;
+
+                            }
+                        }
+                        if (words[i] == '</b>') {
+                            if (current_style === 'bold') {
+
+                                if (current_line.length) {
+                                    if(do_printing) {
+                                        GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                                            , this.font_just
+                                            , this.font_family
+                                            , current_style);
+                                    }
+                                    current_line = '';
+                                    //pos.y += text_font_size;
+                                }
+                                current_style = '';
+
+
+                            }
+                        }
+                    } else {
+                        let text_to_print = current_line + words[i] + ' ';
+
+                        let result = Canvas.MeasureText(text_font_size, text_to_print, pos, this.font_color
+                                , this.font_just
+                                , this.font_family
+                                , current_style);
+
+                        //if( Math.floor(result) > Math.floor(this.w*this.scale.x)){
+                        if( result >= this.w*this.scale.x){
+                        //if( (result+text_font_size*2) >= this.w*this.scale.x){
+
+                            if(do_printing) {
+                                GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                                    , this.font_just
+                                    , this.font_family
+                                    , current_style);
+                            }
+                            current_line = '';
+                            pos.y += text_font_size;
+
+                            extents.h = pos.y - extents.y;
+                        }
+
+                        current_line += words[i] + ' ';
+
+                        if(result > extents.w){
+                            extents.w = result;
+                        }
+                    }
+                }
+            }
+
+            if (current_line.length > 0) {
+                if(do_printing) {
+                    GAZCanvas.Text(text_font_size, current_line, pos, this.font_color
+                        , this.font_just
+                        , this.font_family
+                        , current_style);
+                }
+                pos.y += ((current_line.split('\n').length) * text_font_size);
+
+                extents.h = pos.y - extents.y;
+            }
+        }
+
+        return extents;
+    }
+
     draw(){
         let text_font_size = this.font_size;
 

@@ -358,7 +358,34 @@ class InterventionCardWidget extends  CardWidgetBase{
 
     update() {
         super.update();
+    }
 
+    print_heading_text(template, label, max_width=22){
+        let heading_text = new LayerWidgetText(layout_get_by_name(template, 'header_text'));
+        heading_text.current_color= 'rgb(0,0,0)';
+        heading_text.font_style = 'bold';
+        heading_text.font_just = 'center';
+        heading_text.font_size = this.heading_font_size-1 * this.scale.y;
+        heading_text.set_scale(this.scale);
+        heading_text.set_offset(new Vector2(this.x, this.y));
+
+        heading_text.label = label.toUpperCase();
+
+        let result = heading_text.get_printing_extents();
+
+        if (result.h > this.heading_font_size-1){
+            let lines = result.h /  (this.heading_font_size-1);
+
+            if(lines ===2) {
+                heading_text.offset.y -= ( (this.heading_font_size-1) / 2) * this.scale.y;
+            }
+
+            if(lines ===3) {
+                heading_text.offset.y -= (17) * this.scale.y;
+            }
+        }
+
+        heading_text.draw();
 
     }
 
@@ -372,22 +399,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         this.qr_code_link.draw(loc);
         this.arsinoe_logo.draw(loc);
 
-        let heading_text = new LayerWidgetText(layout_get_by_name(template, 'header_text'));
-        heading_text.current_color= 'rgb(0,0,0)';
-        heading_text.font_style = 'bold';
-        heading_text.font_just = 'center';
-        heading_text.font_size = this.heading_font_size * this.scale.y;
-        heading_text.set_scale(this.scale);
-        heading_text.set_offset(new Vector2(this.x, this.y));
-
-        heading_text.label = this.card_info['name'].toUpperCase();
-
-        if (heading_text.label.length > 22){
-            heading_text.offset.y -= (this.heading_font_size/2) * this.scale.y;
-        }
-
-
-        heading_text.draw();
+        this.print_heading_text(template, this.card_info['name'].toUpperCase());
 
         this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index) );
 
@@ -428,11 +440,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let template = layout_get_by_name(this.template, 'back');
 
         //this.debug_layer(loc, template);
-
-        let title = 'outcomes'.toUpperCase();
-
-        this.debug_text(loc, layout_get_by_name(template, 'header_text'), 28 * this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
-
+        this.print_heading_text(template, this.card_info['outcome-heading'].toUpperCase(),25);
 
         //do description
         let t = template['children']['floating_text'];
@@ -443,8 +451,6 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         pos.y += 10 * this.scale.y;
 
-        let text_font_size = this.content_font_size * this.scale.y;
-
         //do outcomes
         pos.y += 7 * this.scale.y;
         pos.x = loc.x + (t['offset'][0] * this.scale.x);
@@ -454,7 +460,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
         floating_text.current_color= 'rgb(0,0,0)';
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = (this.content_font_size-1) * this.scale.y;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
 
@@ -479,5 +485,40 @@ class InterventionCardWidget extends  CardWidgetBase{
         }
 
         floating_text.draw();
+
+        //h2020 text
+        floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'h2020_text'));
+        floating_text.font_just = 'left';
+        floating_text.font_size = 12 * this.scale.y;
+        floating_text.font_style = '';
+        floating_text.font_family = appInst.view.get_font_family();
+        floating_text.font_color = 'rgb(0,0,0)';
+
+
+        floating_text.set_scale(this.scale);
+        floating_text.set_offset(new Vector2(this.x, this.y));
+
+        floating_text.label = appInst.model.get_game_text('H2020_HEADER');
+        floating_text.draw();
+
+        let eu_flag = new LayerWidgetClickableImage(layout_get_by_name(this.template,'eu_flag'));
+        eu_flag.set_scale(this.scale);
+        eu_flag.set_offset(new Vector2(this.x, this.y));
+        eu_flag.image = appInst.view.get_image('eu_logo');
+
+        eu_flag.draw();
+
+        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        cws_logo.set_scale(this.scale);
+        cws_logo.set_offset(new Vector2(this.x, this.y));
+        cws_logo.image = appInst.view.get_image('cws_logo');
+        cws_logo.draw();
+
+        let cws_qr = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
+        cws_qr.set_scale(this.scale);
+        cws_qr.set_offset(new Vector2(this.x, this.y));
+        cws_qr.image = appInst.view.get_image('cws_qr');
+        cws_qr.draw();
+
     }
 }
