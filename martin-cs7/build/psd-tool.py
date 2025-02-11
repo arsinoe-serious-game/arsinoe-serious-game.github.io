@@ -1,7 +1,7 @@
 from psd_tools import PSDImage
 import json
 
-psd = PSDImage.open('/Users/gareth/Documents/dev/arsinoe/arsinoe-serious-game.github.io/proto-2/build/arsinoe-serious-layout4.psd')
+psd = PSDImage.open('arsinoe-serious-layout4.psd')
 #psd.composite().save('example.png')
 
 def do_layer(layer, indent, data):
@@ -29,7 +29,7 @@ for layer in psd:
 
 print(data)
 
-with open('../game/layout.js', 'w') as fp:
+with open('game/layout.js', 'w') as fp:
     fp.write('let layout = ')
     fp.write('\n')
     json.dump(data, fp, indent=4)
