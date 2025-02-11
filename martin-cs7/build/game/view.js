@@ -596,10 +596,19 @@ class ViewBase extends MVCBase{
             }
         }
 
-        this.image_bank['arsinoe_logo'] = [];
+        this.add_image('arsinoe_logo', 'assets/arsinoe_logo.png');
+        this.add_image('eu_logo', 'assets/eu_flag.png');
+    }
+
+    add_image(name, filename){
+        this.image_bank[name] = [];
         let logo = new Image();
-        logo.src = 'assets/arsinoe_logo.png';
-        this.image_bank['arsinoe_logo'].push(logo);
+        logo.src = filename;
+        this.image_bank[name].push(logo);
+    }
+
+    get_image(name){
+        return this.image_bank[name][0];
     }
 
     get_qrcode(card_set_name, index){

@@ -257,6 +257,28 @@ class EventCardWidget  extends CardWidgetBase {
         }
 
         floating_text.draw();
+
+        //h2020 text
+        floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'h2020_text'));
+        floating_text.font_just = 'left';
+        floating_text.font_size = 12 * this.scale.y;
+        floating_text.font_style = '';
+        floating_text.font_family = appInst.view.get_font_family();
+        floating_text.font_color = 'rgb(0,0,0)';
+
+
+        floating_text.set_scale(this.scale);
+        floating_text.set_offset(new Vector2(this.x, this.y));
+
+        floating_text.label = appInst.model.get_game_text('H2020_HEADER');
+        floating_text.draw();
+
+        let eu_flag = new LayerWidgetClickableImage(layout_get_by_name(this.template,'eu_flag'));
+        eu_flag.set_scale(this.scale);
+        eu_flag.set_offset(new Vector2(this.x, this.y));
+        eu_flag.image = appInst.view.get_image('eu_logo');
+
+        eu_flag.draw();
     }
 }
 

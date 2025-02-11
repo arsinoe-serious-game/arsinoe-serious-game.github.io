@@ -17,8 +17,8 @@ let layout =
                 0
             ],
             "size": [
-                0,
-                0
+                700,
+                500
             ],
             "children": {
                 "template_intervention_card": {
@@ -431,8 +431,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        0,
-                        0
+                        700,
+                        500
                     ],
                     "children": {
                         "bg": {
@@ -519,12 +519,12 @@ let layout =
                         },
                         "back": {
                             "offset": [
-                                0,
-                                0
+                                9,
+                                10
                             ],
                             "size": [
-                                0,
-                                0
+                                682,
+                                487
                             ],
                             "children": {
                                 "header_text": {
@@ -557,14 +557,34 @@ let layout =
                                         56
                                     ]
                                 },
+                                "eu_flag": {
+                                    "offset": [
+                                        14,
+                                        456
+                                    ],
+                                    "size": [
+                                        78,
+                                        41
+                                    ]
+                                },
                                 "floating_text": {
                                     "offset": [
                                         9,
-                                        70
+                                        69
                                     ],
                                     "size": [
                                         682,
-                                        420
+                                        372
+                                    ]
+                                },
+                                "h2020_text": {
+                                    "offset": [
+                                        100,
+                                        459
+                                    ],
+                                    "size": [
+                                        591,
+                                        33
                                     ]
                                 }
                             }
@@ -2823,8 +2843,8 @@ let layout =
                 0
             ],
             "size": [
-                420,
-                620
+                0,
+                0
             ],
             "children": {
                 "print_events": {
@@ -2917,8 +2937,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        420,
-                        620
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
