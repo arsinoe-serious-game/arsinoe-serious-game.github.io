@@ -224,8 +224,21 @@ class EventCardWidget  extends CardWidgetBase {
         let template = layout_get_by_name(this.template,'back');
         //this.debug_layer(loc, template);
 
-        this.qr_code_link.draw(loc);
-        this.arsinoe_logo.draw(loc);
+        //this.qr_code_link.draw(loc);
+        //this.arsinoe_logo.draw(loc);
+
+        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        cws_logo.set_scale(this.scale);
+        cws_logo.set_offset(new Vector2(this.x, this.y));
+        cws_logo.image = appInst.view.get_image('cws_logo');
+        cws_logo.draw();
+
+        let cws_qr = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
+        cws_qr.set_scale(this.scale);
+        cws_qr.set_offset(new Vector2(this.x, this.y));
+        cws_qr.image = appInst.view.get_image('cws_qr');
+        cws_qr.draw();
+
 
         let title = this.card_info['outcome-heading'].toUpperCase();
         this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');

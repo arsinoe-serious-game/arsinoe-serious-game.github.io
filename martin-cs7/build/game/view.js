@@ -598,6 +598,8 @@ class ViewBase extends MVCBase{
 
         this.add_image('arsinoe_logo', 'assets/arsinoe_logo.png');
         this.add_image('eu_logo', 'assets/eu_flag.png');
+        this.add_image('cws_logo', 'assets/unexe.png');
+        this.add_image('cws_qr', 'assets/cws_qr.png');
     }
 
     add_image(name, filename){
