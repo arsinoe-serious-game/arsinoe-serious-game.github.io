@@ -308,7 +308,8 @@ class ARSINOEGame extends AppBase
         let card_list = ['inteventions',
         'events',
         'personas',
-        'single_intevention'];
+        'single_intevention'
+        ];
 
         let isDone = false;
 
@@ -327,7 +328,6 @@ class ARSINOEGame extends AppBase
 
         setInterval(function () {
             if(!isDone) {
-                
                 if (!has_current_cardset) {
 
                     has_current_cardset = true;
@@ -351,7 +351,7 @@ class ARSINOEGame extends AppBase
                         cards_per_page = 4;
                     }
 
-                    if(card_type === 'single_intevention') {
+                    if (card_type === 'single_intevention') {
                         template = layout_get_by_name(layout, 'print_single_card');
                         cards_per_page = 1;
                     }
@@ -385,7 +385,7 @@ class ARSINOEGame extends AppBase
                         widget_list['card_3'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_bottom_right')));
                     }
 
-                    if(card_type === 'single_intevention') {
+                    if (card_type === 'single_intevention') {
                         max_cards = appInst.model.get_intervention_cards().length;
                         widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
                     }
@@ -402,21 +402,21 @@ class ARSINOEGame extends AppBase
 
                     current_side = 'front';
                     current_card = 0;
+                }
 
-                    //set-up mode
-                    lookup = [0, 1, 2, 3];
+                //set-up mode
+                lookup = [0, 1, 2, 3];
 
-                    if (current_side === 'back') {
-                        lookup = [1, 0, 3, 2];
-                    }
+                if (current_side === 'back') {
+                    lookup = [1, 0, 3, 2];
+                }
 
-                    if (cards_per_page == 2) {
-                        lookup = [0, 1];
-                    }
+                if (cards_per_page == 2) {
+                    lookup = [0, 1];
+                }
 
-                    if (cards_per_page == 1) {
-                        lookup = [0];
-                    }
+                if (cards_per_page == 1) {
+                    lookup = [0];
                 }
 
                 for (let i = 0; i < cards_per_page; i++) {
@@ -436,54 +436,54 @@ class ARSINOEGame extends AppBase
                 GAZCanvas.referenceScreenSize.w = widget_list['bg'].w;
                 GAZCanvas.referenceScreenSize.h = widget_list['bg'].h;
 
-                console.log(GAZCanvas.referenceScreenSize.w.toString() + 'x' + GAZCanvas.referenceScreenSize.h.toString());
+                console.log('R:' + GAZCanvas.referenceScreenSize.w.toString() + 'x' + GAZCanvas.referenceScreenSize.h.toString());
 
                 resize_window(GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h);
-    
+                console.log('W:' + window.innerWidth.toString() + 'x' + window.innerHeight.toString());
+
                 GAZCanvas.update();
                 GAZCanvas.Rect(new Rect(0, 0, GAZCanvas.referenceScreenSize.w, GAZCanvas.referenceScreenSize.h), 'rgb(255,255,255)');
-    
+
                 if (widget_list !== undefined) {
                     for (const [key, value] of Object.entries(widget_list)) {
                         value.draw();
                     }
                 }
-    
+
                 if (tick_count > 10) {
                     console.log();
                     Canvas.save(card_type + '_' + current_side + '_' + current_card.toString() + '.png');
                     tick_count = 0;
-    
+
                     if (current_card < Math.floor((max_cards) / cards_per_page)) {
                         current_card += 1;
                     } else {
                         if (current_side === 'front') {
                             current_side = 'back';
                             current_card = 0;
-    
-                            if(card_type === 'personas'){
+
+                            if (card_type === 'personas') {
                                 isDone = true;
                             }
-    
-                        }else{
+
+                        } else {
                             isDone = true;
                         }
                     }
-                    
-                    if (isDone === true){
-                        if( current_cardset_index < card_list.length){
+
+                    if (isDone === true) {
+                        if (current_cardset_index < card_list.length) {
                             // do the next cards
                             isDone = false;
                             has_current_cardset = false;
                             current_card = 0;
-                        }else{
+                        } else {
 
                         }
-                     }
+                    }
                 }
+                tick_count += 1;
             }
-            
-            tick_count += 1;
         }, 17);
     }
 
