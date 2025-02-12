@@ -1,0 +1,4 @@
+psd_tools
+openpyxl
+qrcode[pil]
+shapely
