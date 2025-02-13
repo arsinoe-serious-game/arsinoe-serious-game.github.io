@@ -1,62 +1,62 @@
 let game_data = 
 {
-    "personas": [
+    "persona": [
         {
             "type": "",
             "name": "Student",
             "desc": "You're a student, living and studying in the town. The local college is great, but you really like all the outdoor amenities in the town. <br>  <br> You like the idea of having money and freedom but are unsure how to get it.\u200b Getting outdoors and doing nice things with your friends and fam. Not having to work that much at the moment. <br>  <br> You hate older people telling you what to do and where to go, were they ever young? The state of the environment, everything seems to be messed up and getting worse.  You worry deeply about your future and the state of the world.",
             "img": "student2.jpg",
-            "local_url": "kb/personas/personas_0.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_0.html",
-            "qr_code": "assets/personas/personas_0_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         },
         {
             "type": "",
             "name": "Young Worker",
             "desc": "It's been a couple of years since you left education and have been finding your feet in the adult world of employment and responsibilities. <br>  <br> You like having a stable job with a decent wage and room to grow,\u200b having nice things to do when you're not at work,  being able to get on, buy a nice flat with your partner and start putting down some roots.\u200b <br>  <br> You hate\u200b the lack of work opportunities, you want to get on and build a career. You're struggling to make ends meet and  you seem to pay a lot of tax but not see much for it, given the state of the local environment, every thing looks tired and needs a good clean up.\u200b",
             "img": "single_worker.jpg",
-            "local_url": "kb/personas/personas_01.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_01.html",
-            "qr_code": "assets/personas/personas_01_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         },
         {
             "type": "",
             "name": "Family",
             "desc": "You're a young parent with some rug rats. Life has new levels of complexity and you're still trying to find your feet.\u200b <br>  <br> You like things you can do for and with your family, knowing that your kids have a future in the town\u200b, and being able to unwind with your partner at the end of the day.\u200b <br>  <br> You hate people and policies that hate people with children\u200b,  excessive government intervention\u200b, and pollution that may impact your family.",
             "img": "family.jpg",
-            "local_url": "kb/personas/personas_02.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_02.html",
-            "qr_code": "assets/personas/personas_02_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         },
         {
             "type": "",
             "name": "Retiree",
             "desc": "You are a retired worker. You've spent your lifetime working hard and, at your age, you are entitled to everything you deserve.\u200b <br>  <br> You like activities that meet your needs as an active member of society,  opportunities to shop, socialize and be entertained, and easy transport links so you can get around without any stress\u200b <br>  <br> You hate change that adversely impacts you.\u200b Young people whinging about having it tough as you had it tough when you were young, and it didn't affect you much.\u200b Taxation as you've paid tax all your life and should be done with it now.\u200b",
             "img": "retiree.jpg",
-            "local_url": "kb/personas/personas_03.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_03.html",
-            "qr_code": "assets/personas/personas_03_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         },
         {
             "type": "",
             "name": "Business owner",
             "desc": "You are a local business owner. You've managed your shop for years. It keeps you busy enough and financially secure, but not wealthy.\u200b <br>  <br> You like nice customers that make good purchases\u200b, tourists and holidaymakers that are keen to buy at your shop, and being apart of the local community\u200b <br>  <br> You hate the mall and out of town shopping taking away customers,\u200b high parking charges stopping people coming to town.\u200b The municipality needlessly changing things, you like things the way they are and want to keep them that way.",
             "img": "business_owner.jpg",
-            "local_url": "kb/personas/personas_04.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_04.html",
-            "qr_code": "assets/personas/personas_04_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         },
         {
             "type": "",
             "name": "Politician",
             "desc": "You are a local politician who got into politics to address injustice both locally and in the wider community. <br>  <br> You like being a force for good in the local community, being an agent of change, even if the change is often what people need rather than want, and keeping big businesses and the powerful in check. <br>  <br> You hate people and organisations that don't understand that we are just tenants, not the long term owners of the town. Carpet baggers trying to make a short term profit on the backs of hard working people.",
             "img": "politician.jpg",
-            "local_url": "kb/personas/personas_05.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/personas/personas_05.html",
-            "qr_code": "assets/personas/personas_05_qr.png"
+            "local_url": "kb/persona/personas.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/persona/personas.html",
+            "qr_code": "assets/persona/persona_0_qr.png"
         }
     ],
-    "events": [
+    "resilience": [
         {
             "type": "EP",
             "name": "Economic Resilience Challenge",
@@ -73,9 +73,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the economic event with some knock on business failures and many residents reporting financial hardship. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their economic resilience planning.",
             "outcome-2": "Whilst there are some impacts to the event,  they tend to be small in nature and there are no major causalities, this is a huge relief for the local businesses and towns people. People feel that the municipality has 'got it right' with their economic resilience planning.",
             "outcome-3": "There appears to be little impact of the economic event in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_0.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_0.html",
-            "qr_code": "assets/events/events_0_qr.png"
+            "local_url": "kb/resilience/resilience_0.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/resilience/resilience_0.html",
+            "qr_code": "assets/resilience/resilience_0_qr.png"
         },
         {
             "type": "BP",
@@ -93,9 +93,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the event, with much work to do to recover the town's fauna and flora, and the people and businesses that are involved. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their biodiversity resilience.",
             "outcome-2": "Whilst there are some impacts to the event,  they tend to be small in nature and there are no major causalities, this is a huge relief for the town's fauna and flora and the people and businesses that are involved. People feel that the municipality has 'got it right' with their  biodiversity resilience.",
             "outcome-3": "There appears to be little impact of the event in the town, which is a huge relief for all. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_01.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_01.html",
-            "qr_code": "assets/events/events_01_qr.png"
+            "local_url": "kb/resilience/resilience_01.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/resilience/resilience_01.html",
+            "qr_code": "assets/resilience/resilience_01_qr.png"
         },
         {
             "type": "FP",
@@ -113,9 +113,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the flood, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their flood planning.",
             "outcome-2": "Whilst there are some impacts to the flood,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. People feel that the municipality has 'got it right' with their flood planning.",
             "outcome-3": "There appears to be little impact of the flood in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_02.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_02.html",
-            "qr_code": "assets/events/events_02_qr.png"
+            "local_url": "kb/resilience/resilience_02.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/resilience/resilience_02.html",
+            "qr_code": "assets/resilience/resilience_02_qr.png"
         },
         {
             "type": "DP",
@@ -133,9 +133,9 @@ let game_data =
             "outcome-1": "The town has been clearly impacted by the drought, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their drought planning.",
             "outcome-2": "Whilst there are some impacts to the drought,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. People feel that the municipality has 'got it right' with their drought planning.",
             "outcome-3": "There appears to be little impact of the drought  in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_03.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_03.html",
-            "qr_code": "assets/events/events_03_qr.png"
+            "local_url": "kb/resilience/resilience_03.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/resilience/resilience_03.html",
+            "qr_code": "assets/resilience/resilience_03_qr.png"
         },
         {
             "type": "HP",
@@ -153,9 +153,9 @@ let game_data =
             "outcome-1": "The town has been impacted by the event, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their actions.",
             "outcome-2": "Whilst there are some impacts to the heat wave,  they tend to be small in nature and there are no major causalities. This is a huge relief for the local businesses and towns people. People feel that the municipality has 'got it right' with their actions.",
             "outcome-3": "There appears to be little impact of the event in the town, which is a huge relief for the local businesses and towns people. <br> However, the impact is so small people wonder if the municipality has over prepared for such events and whether the town will be able to overcome over events with such ease.",
-            "local_url": "kb/events/events_04.html",
-            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/events/events_04.html",
-            "qr_code": "assets/events/events_04_qr.png"
+            "local_url": "kb/resilience/resilience_04.html",
+            "url": "https://arsinoe-serious-game.github.io/martin-cs7/kb/resilience/resilience_04.html",
+            "qr_code": "assets/resilience/resilience_04_qr.png"
         }
     ],
     "text": [
@@ -360,7 +360,7 @@ let game_data =
             "DP": "2",
             "HP": "0",
             "outcome-heading": "Water delivery service Outcomes",
-            "outcome-0": "It's a disaster,  the water did not pass quality assurance and con not be consumed.  Instead the costly water is just being used for non-human use. ",
+            "outcome-0": "It's a disaster,  the water did not pass quality assurance and can not be consumed.  Instead the costly water is just being used for non-human use. ",
             "outcome-1": "The effects of a hot and dry summer have been offset through the water. While not a perfect solution, it has had a positive effect.",
             "outcome-2": "Despite a hot and dry summer, there are adequate water reserves and tourism benefits.",
             "outcome-3": "Despite a very hot and dry summer, there's more than enough water bringing in lots of tourists from other drier areas. ",

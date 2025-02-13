@@ -74,16 +74,25 @@ def do_stuff():
                     number_label = '0'
 
                 record['local_url'] = 'kb/' + sheet.title + '/' + sheet.title + '_' + number_label + '.html'
+
+                if sheet.title == 'persona':
+                    record['local_url'] = 'kb/' + sheet.title + '/' + 'personas.html'
+
                 record['url'] = target_url + record['local_url']
 
 
                 img = qrcode.make(record['url'])
                 type(img)  # qrcode.image.pil.PilImage
 
+                if not os.path.exists('game/'+ 'assets/'+sheet.title+'/'):
+                    os.makedirs('game/'+ 'assets/'+sheet.title+'/')
+
                 record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'_' + number_label + '_qr.png'
                 img.save('game/'+ record['qr_code'])
 
-                index += 1
+                #just have 1 persona
+                if sheet.title != 'persona':
+                    index += 1
 
             data[sheet.title].append(record)
 
