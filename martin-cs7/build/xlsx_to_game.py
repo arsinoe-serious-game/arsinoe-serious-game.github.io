@@ -73,7 +73,7 @@ def do_stuff():
                 if index == 0:
                     number_label = '0'
 
-                record['local_url'] = 'kb/' + sheet.title + '/' + sheet.title + '_' + number_label + '.html'
+                record['local_url'] = 'kb/' + sheet.title + '/' + sheet.title + '-' + number_label + '.html'
 
                 if sheet.title == 'persona':
                     record['local_url'] = 'kb/' + sheet.title + '/' + 'personas.html'
@@ -87,7 +87,7 @@ def do_stuff():
                 if not os.path.exists('game/'+ 'assets/'+sheet.title+'/'):
                     os.makedirs('game/'+ 'assets/'+sheet.title+'/')
 
-                record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'_' + number_label + '_qr.png'
+                record['qr_code'] = 'assets/'+sheet.title+'/' + sheet.title+'-' + number_label + '_qr.png'
                 img.save('game/'+ record['qr_code'])
 
                 #just have 1 persona
