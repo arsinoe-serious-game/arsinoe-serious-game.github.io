@@ -113,8 +113,13 @@ class ModelBase extends MVCBase{
     }
 
     get_persona_cards(){
-        return game_data['personas'];
+        return game_data['persona'];
     }
+
+    get_event_cards(){
+        return game_data['resilience'];
+    }
+
 
     get_game_text(ID){
         for(let i=0;i< game_data['text'].length;i++ ){
@@ -124,10 +129,6 @@ class ModelBase extends MVCBase{
         }
 
         return '***NOT IN DB';
-    }
-
-    get_event_cards(){
-        return game_data['events'];
     }
 
     do_cookie_data(b_get){
