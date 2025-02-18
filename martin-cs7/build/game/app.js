@@ -305,10 +305,12 @@ class ARSINOEGame extends AppBase
 
         let card_type = '';
         
-        let card_list = ['inteventions',
+        let card_list = [
+            'inteventions',
         'events',
         'personas',
-        'single_intevention'
+        'single_intevention',
+        'single_event_side'
         ];
 
         let isDone = false;
@@ -356,6 +358,11 @@ class ARSINOEGame extends AppBase
                         cards_per_page = 1;
                     }
 
+                    if (card_type === 'single_event_side') {
+                        template = layout_get_by_name(layout, 'print_event_side');
+                        cards_per_page = 1;
+                    }
+
                     widget_list = {};
                     widget_list['bg'] = new LayerWidgetRect(layout_get_by_name(template, 'bg'));
                     widget_list['bg'].current_color = 'rgb(255,255,255)';
@@ -388,6 +395,11 @@ class ARSINOEGame extends AppBase
                     if (card_type === 'single_intevention') {
                         max_cards = appInst.model.get_intervention_cards().length;
                         widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+                    }
+
+                    if (card_type === 'single_event_side') {
+                        max_cards = appInst.model.get_event_cards().length;
+                        widget_list['card_0'] = new EventCardWidget(layout_get_by_name(template, 'card_front'));
                     }
 
                     widget_list['card_0'].init();

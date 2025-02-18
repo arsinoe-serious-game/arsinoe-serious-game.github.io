@@ -14,21 +14,21 @@ let layout =
         "templates": {
             "offset": [
                 0,
-                -1
+                0
             ],
             "size": [
-                400,
-                601
+                0,
+                0
             ],
             "children": {
                 "template_intervention_card": {
                     "offset": [
                         0,
-                        -1
+                        0
                     ],
                     "size": [
-                        400,
-                        601
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -277,12 +277,12 @@ let layout =
                         },
                         "back": {
                             "offset": [
-                                9,
-                                -1
+                                0,
+                                0
                             ],
                             "size": [
-                                391,
-                                593
+                                0,
+                                0
                             ],
                             "children": {
                                 "eu_flag": {
@@ -2883,8 +2883,8 @@ let layout =
                 0
             ],
             "size": [
-                0,
-                0
+                860,
+                624
             ],
             "children": {
                 "print_events": {
@@ -2921,6 +2921,38 @@ let layout =
                             "offset": [
                                 11,
                                 690
+                            ],
+                            "size": [
+                                840,
+                                600
+                            ]
+                        }
+                    }
+                },
+                "print_event_side": {
+                    "offset": [
+                        0,
+                        0
+                    ],
+                    "size": [
+                        860,
+                        624
+                    ],
+                    "children": {
+                        "bg": {
+                            "offset": [
+                                0,
+                                0
+                            ],
+                            "size": [
+                                860,
+                                624
+                            ]
+                        },
+                        "card_front": {
+                            "offset": [
+                                10,
+                                10
                             ],
                             "size": [
                                 840,
