@@ -33,7 +33,9 @@ def do_stuff():
     data = {}
 
     #workbook = openpyxl.load_workbook('game.xlsx')
-    workbook = openpyxl.load_workbook('.\\dev\\game_my_interventions.xlsx')
+    #gareth - I have set this to the Nav xlsx file and from the same folder as this .py file ;)
+    #workbook = openpyxl.load_workbook('.\\dev\\game_my_interventions.xlsx')
+    workbook = openpyxl.load_workbook(os.path.dirname(__file__) + os.sep + 'game_my_interventions_NM.xlsx')
 
     for sheet in workbook.worksheets:
         print(sheet)
