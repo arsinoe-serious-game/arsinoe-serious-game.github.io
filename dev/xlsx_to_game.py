@@ -33,7 +33,7 @@ def do_stuff():
     data = {}
 
     #workbook = openpyxl.load_workbook('game.xlsx')
-    workbook = openpyxl.load_workbook('game_my_interventions.xlsx')
+    workbook = openpyxl.load_workbook('game_my_interventions_NM.xlsx')
 
     for sheet in workbook.worksheets:
         print(sheet)
