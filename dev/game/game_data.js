@@ -4,7 +4,7 @@ let game_data =
         {
             "type": "",
             "name": "Student",
-            "desc": "You're a student, living and studying in the town. The local college is great, but you really like all the outdoor amenities in the town. <br>  <br> You like the idea of having money and freedom but are unsure how to get it.\u200b Getting outdoors and doing nice things with your friends and fam. Not having to work that much at the moment. <br>  <br> You hate older people telling you what to do and where to go, were they ever young? The state of the environment, everything seems to be messed up and getting worse.  You worry deeply about your future and the state of the world.",
+            "desc": "You're a student who lives in the town and studies at the local college. The college is great, but you especially enjoy all the outdoor places around town. <br>  <br> You would like to have more money and freedom but are unsure how to get them.\u200b You love going outdoors and doing nice things with friends and family, and prefer not to work too hard at the moment. <br>  <br> You hate older people telling you what to do and where to go, were they ever young? The state of the environment, everything seems to be messed up and getting worse. You worry deeply about your future and the state of the world.",
             "img": "student2.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -13,7 +13,7 @@ let game_data =
         {
             "type": "",
             "name": "Young Worker",
-            "desc": "It's been a couple of years since you left education and have been finding your feet in the adult world of employment and responsibilities. <br>  <br> You like having a stable job with a decent wage and room to grow,\u200b having nice things to do when you're not at work,  being able to get on, buy a nice flat with your partner and start putting down some roots.\u200b <br>  <br> You hate\u200b the lack of work opportunities, you want to get on and build a career. You're struggling to make ends meet and  you seem to pay a lot of tax but not see much for it, given the state of the local environment, every thing looks tired and needs a good clean up.\u200b",
+            "desc": "It's been a couple of years since you left education and have been finding your feet in the adult world of employment and responsibilities. <br>  <br> You like having a stable job with a decent wage and room to grow,\u200b having nice things to do when you're not at work, being able to get on, buy a nice flat with your partner and start putting down some roots.\u200b <br>  <br> You hate\u200b the lack of work opportunities, you want to get on and build a career. You're struggling to make ends meet and you seem to pay a lot of tax but not see much for it, given the state of the local environment, every thing looks tired and needs a good clean up.\u200b",
             "img": "single_worker.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -22,7 +22,7 @@ let game_data =
         {
             "type": "",
             "name": "Family",
-            "desc": "You're a young parent with some rug rats. Life has new levels of complexity and you're still trying to find your feet.\u200b <br>  <br> You like things you can do for and with your family, knowing that your kids have a future in the town\u200b, and being able to unwind with your partner at the end of the day.\u200b <br>  <br> You hate people and policies that hate people with children\u200b,  excessive government intervention\u200b, and pollution that may impact your family.",
+            "desc": "You're a young parent with young children. Life is now more complicated and you're still learning how to handle everything.\u200b <br>  <br> You enjoy doing things with your family, knowing that your kids have a future in the town\u200b, and being able to unwind with your partner at the end of the day.\u200b <br>  <br> You dislike people and policies that are family unfriendly. You don't want excessive government intervention or pollution that may impact your family.",
             "img": "family.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -31,7 +31,7 @@ let game_data =
         {
             "type": "",
             "name": "Retiree",
-            "desc": "You are a retired worker. You've spent your lifetime working hard and, at your age, you are entitled to everything you deserve.\u200b <br>  <br> You like activities that meet your needs as an active member of society,  opportunities to shop, socialize and be entertained, and easy transport links so you can get around without any stress\u200b <br>  <br> You hate change that adversely impacts you.\u200b Young people whinging about having it tough as you had it tough when you were young, and it didn't affect you much.\u200b Taxation as you've paid tax all your life and should be done with it now.\u200b",
+            "desc": "You are a retired worker. You've spent your lifetime working hard, so at this age, you are expecting everything that is rightful for you. <br>  <br> You enjoy activities that suit an active senior citizen such as shopping, meeting friends,  entertaining. You like using public transport that is easy and stress-free.\u200b <br>  <br> You don't like changes that hurts you.\u200b You are annoyed when young people complain about \"it's hard now\" while you remember how tough it was when you were young, but it didn't affect you much.\u200b You have paid taxes all your life and think that retirees should not pay for extra taxes.\u200b",
             "img": "retiree.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -40,7 +40,7 @@ let game_data =
         {
             "type": "",
             "name": "Business owner",
-            "desc": "You are a local business owner. You've managed your shop for years. It keeps you busy enough and financially secure, but not wealthy.\u200b <br>  <br> You like nice customers that make good purchases\u200b, tourists and holidaymakers that are keen to buy at your shop, and being apart of the local community\u200b <br>  <br> You hate the mall and out of town shopping taking away customers,\u200b high parking charges stopping people coming to town.\u200b The municipality needlessly changing things, you like things the way they are and want to keep them that way.",
+            "desc": "You are a local business owner and have run it for years. The shop keeps you busy enough and financially secure, but not wealthy.\u200b <br>  <br> You like nice customers who make good purchases\u200b, tourists and holidaymakers who are keen to buy at your shop. You feel proubd to be a part of the local community\u200b. <br>  <br> You hate the mall outside town that takes your customers, high parking charges stopping people coming to town.\u200b The municipality needlessly changing things, you prefer things to stay as they are.",
             "img": "business_owner.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -49,7 +49,7 @@ let game_data =
         {
             "type": "",
             "name": "Politician",
-            "desc": "You are a local politician who got into politics to address injustice both locally and in the wider community. <br>  <br> You like being a force for good in the local community, being an agent of change, even if the change is often what people need rather than want, and keeping big businesses and the powerful in check. <br>  <br> You hate people and organisations that don't understand that we are just tenants, not the long term owners of the town. Carpet baggers trying to make a short term profit on the backs of hard working people.",
+            "desc": "You are a local politician who entered politics to fight injustice both locally and in the wider community. <br>  <br> You enjoy being a positive influence in the community, helping change things even when people do not want it, and keeping big companies and powerful people from abusing their power. <br>  <br> You hate people and organisations that don't understand that we are just tenants, not the permanent owners of the town. You also hate those who try to make quick money at the expense of hardworking citizens.",
             "img": "politician.jpg",
             "local_url": "kb/persona/personas.html",
             "url": "https://arsinoe-serious-game.github.io/kb/persona/personas.html",
@@ -149,8 +149,8 @@ let game_data =
             "desc-2": "The town's hot summer has now extended into a hot autumn and a hot winter. Whilst tourists are enjoying the winter sun, residents have had their fill. Residents and businesses are starting to get nervous about the future.",
             "desc-3": "The town appears to be in a climate change where it's just so hot all the time, resulting in the landscape becoming drier and browner.  Residents and businesses are now looking to move away to areas that are less harsh and have a better quality of life.",
             "outcome-heading": "Resilience Challenge Outcomes",
-            "outcome-0": "The municipality's decisions have made the town highly sensitive to heat waves. As the town suffers in the heat, there appears to be nothing in place for the residents of the town, making a bad situation much worse. People feel that the municipality has 'really dropped the ball' with their heat wave planning, and it's expected that the mayor will resign.",
-            "outcome-1": "The town has been impacted by the event, with much work to do to recover the town's infrastructure with some knock on business failures and many residents reporting  hardships. People feel that things could have been worse, but they could have been a lot better. There's a sense that the  municipality has 'fumbled it' with their actions.",
+            "outcome-0": "The municipality's decisions have left the town highly vulnerable to intense heatwaves.  As record-high temperatures strain daily life, lacking preparedness measures exacerbates the suffering of residents. Public strongly criticizes the perceived failures in the municipality's heatwave strategy, leading to a widespread expectation that the mayor will step down due to this oversight. ",
+            "outcome-1": "The town is experiencing difficulties following the recent event, requiring significant infrastructure repairs and resulting in some business closures and hardships for residents. While acknowledging the situation could be graver, many feel outcomes could have been lessen had the municipality handled things differently. There's a prevailing critic that local leadership mishandled their response to the event. ",
             "outcome-2": "The town experiences only minor effects from the heatwave, with no significant incidents or casualties reported. This outcome is a huge relief for both local businesses and residents. People think that the municipality have managed the heat wave situation adequately.",
             "outcome-3": "Despite its passage with little noticeable impact, the recent heatwave brought a collective sense of relief to the town's residents and businesses. Nonetheless,  some are wondering if the municipality's extensive preparedness measures were perhaps excessive, and questioning its capacity for coping with similar events in the future. ",
             "local_url": "kb/resilience/resilience_04.html",
