@@ -373,15 +373,15 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         let result = heading_text.get_printing_extents();
 
-        if (result.h > this.heading_font_size-1){
-            let lines = result.h /  (this.heading_font_size-1);
+        if (result.h > heading_text.font_size){
+            let lines = Math.floor((result.h+0.5) / heading_text.font_size);
 
             if(lines ===2) {
-                heading_text.offset.y -= ( (this.heading_font_size-1) / 2) * this.scale.y;
+                heading_text.offset.y -= heading_text.font_size/2;
             }
 
             if(lines ===3) {
-                heading_text.offset.y -= (17) * this.scale.y;
+                heading_text.offset.y -= heading_text.font_size * 1.5;
             }
         }
 
