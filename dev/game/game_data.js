@@ -171,7 +171,7 @@ let game_data =
     "interventions": [
         {
             "type": "BP",
-            "name": "Approve a fish farm",
+            "name": "Approve a  <br> fish farm",
             "desc": "An offshore fish farm that optimizes fish yields using modern aquaculture techniques has been proposed, which will create local jobs in both fish cultivation and processing, and offer more high-quality fish at both regional and national levels. <br>  <br> However, fish farms are criticised for promoting monocultures, not only among farmed fish species but also by impacting the biodiversity in the surrounding waters. Additionally, lacking of transparency in some fish farming operations, particularly regarding their husbandry practices, raises concerns.",
             "case_study": "",
             "EP": "4",
@@ -191,7 +191,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Approve a monofarm",
+            "name": "Approve a  <br> monofarm",
             "desc": "A large-scale commercial farm on currently unused farmland has been proposed that utilizes modern agricultural techniques to maximize crop production, focusing on high-yield, disease-resistant varieties. The farm is expected to generate local employment and contribute to regional food supply. <br>  <br> However, the planned use of intensive pesticides and high water consumption raises concerns about potential negative impacts on local biodiversity and water resources. These environmental risks will need to be carefully assessed and managed.",
             "case_study": "",
             "EP": "4",
@@ -211,7 +211,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Citizen biodiversity",
+            "name": "Citizen <br> biodiversity",
             "desc": "A citizen science project aimed at engaging members of the public in observing and recording local flora and fauna using a mobile app has been proposed. <br>  <br> By documenting environmental observations, the project will assist researchers in assessing the current state of local ecosystems and tracking changes over time, helping identify both positive and negative trends in biodiversity.",
             "case_study": "CS9",
             "EP": "0",
@@ -251,7 +251,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Legally protect local crops",
+            "name": "Legally protect  <br> local crops",
             "desc": "A local farming group is seeking legal protection for their regionally produced crops under relevant EU legislation (Geographical Indication or GI tagging of crops). This designation would ensure that only crops grown in this specific area can use the region's name, preventing producers in other regions from marketing similar products under the same label.",
             "case_study": "CS9",
             "EP": "2",
@@ -271,7 +271,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Create a biodiversity knowledge base",
+            "name": "Create a biodiversity <br> knowledge base",
             "desc": "A community website designed to provide residents with practical information and resources to promote local biodiversity is requesting for municipality's support. <br>  <br> Research indicates that poor biodiversity decisions often stem from limited knowledge and guidance. The website aims to empower residents, by offering useful knowledge, to make informed choices that support and enhance the local environment.",
             "case_study": "CS9",
             "EP": "-1",
@@ -291,7 +291,7 @@ let game_data =
         },
         {
             "type": "BP",
-            "name": "Create a biodiversity digital twin ",
+            "name": "Create a biodiversity <br> digital twin ",
             "desc": "The municipality plans to develop a biodiversity modelling digital twin to monitor local biodiversity and assess the potential negative impacts of different human activities that could affect the ecosystem resilience. <br>  <br> This digital twin will integrate real-world data with simulation models to generate actionable insights. Its effectiveness will largely depend on the quality of the data collected and the accuracy of the underlying models.",
             "case_study": "",
             "EP": "-1",
@@ -311,7 +311,7 @@ let game_data =
         },
         {
             "type": "DP",
-            "name": "Approve reservoir construction ",
+            "name": "Approve reservoir <br> construction ",
             "desc": "A local water company proposes to construct a large reservoir in a nearby valley. The reservoir would capture runoffs during the wet seasons, helping establish a more reliable year-round water supply and alleviate water scarcity during the dry seasons. <br>  <br> However, flooding the valley would significantly alter local ecosystem, displacing wildlife and disrupting fish migration along the river affected by the reservoir.",
             "case_study": "",
             "EP": "-2",
@@ -351,7 +351,7 @@ let game_data =
         },
         {
             "type": "DP",
-            "name": "Approve water delivery service",
+            "name": "Approve water <br> delivery service",
             "desc": "The municipality is considering importing bottled water from abroad to address drinking water shortages during drought conditions. This approach would provide a reliable summer water supply and is significantly less expensive in the short term than upgrading the town's aging water distribution infrastructure. <br>  <br> However, regular deliveries of bottled water could contribute to traffic congestion and raise public concerns. There is also a reputational risk that the municipality may be seen as avoiding long-term solutions in favor of quick, externally sourced fixes. <br> ",
             "case_study": "",
             "EP": "-2",
@@ -371,7 +371,7 @@ let game_data =
         },
         {
             "type": "DP",
-            "name": "Install smart water meters",
+            "name": "Install <br> smart water meters",
             "desc": "The municipality plans to install smart domestic water meters that enable residents to monitor their  water usage in real-time and detect potential leaks within their homes. Users can see their  minute-by-minute consumption such as showering, garden irrigation, dishwashing and clothes washing. <br>  <br> While this technology offers valuable insights, user engagement tends to decline over time as the initial novelty of monitoring water usage diminishes.",
             "case_study": "",
             "EP": "2",
@@ -411,7 +411,7 @@ let game_data =
         },
         {
             "type": "DP",
-            "name": "Create a drought dashboard",
+            "name": "Create a drought <br> dashboard",
             "desc": "The municipality plans to develop a community website that will provide residents with practical information and support to help them navigate drought events. <br>  <br> Research indicates that residents often experience greater stress from the anticipation of a drought than from the actual event itself. By offering clear, accessible resources, the website can help alleviate concerns, increase awareness, and empower the community with the knowledge needed to respond effectively.",
             "case_study": "",
             "EP": "-1",
@@ -431,7 +431,7 @@ let game_data =
         },
         {
             "type": "DP",
-            "name": "Create a drought digital twin",
+            "name": "Create a drought <br> digital twin",
             "desc": "The municipality will develop a drought modelling digital twin to assess the likelihood and potential impacts of future drought events. This tool will support improved preparedness and inform long-term planning for drought resilience. <br>  <br> By integrating live data with advanced simulation models, the digital twin will generate valuable insights. Its effectiveness, however, will depend heavily on the quality of the data collected and the accuracy of the underlying models.",
             "case_study": "",
             "EP": "-1",
@@ -451,7 +451,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Approve sea wall construction",
+            "name": "Approve sea wall <br> construction",
             "desc": "The community along the coastal road has been repeatedly impacted by sea flooding, driven by high tides and onshore winds, causing significant disruption of services, costly property damage and extensive clean-up efforts. <br>  <br> Despite the wall cannot fully elimiate the risks of extreme events and could affect the scenic coastal, views, and the construction process will be disruptive, the long-term benefits, including improved safety, reduced damage, and economic stability, may outweigh the drawbacks, supporting the community's growth and resilience.   <br> ",
             "case_study": "",
             "EP": "2",
@@ -471,7 +471,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Approve out-of-town leisure resort",
+            "name": "Approve out-of-town <br> leisure resort",
             "desc": "A retail company proposes to develop a large out-of-town retail and leisure park on currently unused land, which brings long-term employment opportunities to the area and attract a significant number of visitors to the town.  <br>  <br> However, there are concerns that the development could negatively impact the town centre, as shoppers may prefer the convenience of the new retail hub. Additionally, the proposed site is a well-loved local meadow, valued by the community for recreation and green space.",
             "case_study": "",
             "EP": "4",
@@ -491,7 +491,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Approve nature-based flood protection",
+            "name": "Approve nature-based <br> flood protection",
             "desc": "The local university suggests to host a beaver-led land management project as a nature-based solution aimeing at reducing river flooding. The low-cost project positions the municipality as forward-thinking in its approach to climate resilience and environmental sustainability, which could generate valuable insights into natural flood mitigation. <br>  <br> However, as a research initiative, the project may not deliver the intended results. Also the introduction of beavers may have potential impacts on local ecosystems, including native flora and fauna.",
             "case_study": "",
             "EP": "0",
@@ -511,7 +511,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Return seaside golf course to sea",
+            "name": "Return seaside golf <br> course to sea",
             "desc": "The town's seaside golf course is increasingly threatened by rising sea levels and high tides due to global warming despite the municipality has spent huge budget to protect it from natural encroachment. Allowing the course to return to the sea would enable the municipality allocating its limited budget more effectively, support the creation of a wildlife wetland, and reduce traffic along the shoreline. <br>  <br> However, this decision may upset the golfers who regularly use the course and may be perceived by some residents as the municipality abandoning parts of the town to nature.",
             "case_study": "",
             "EP": "0",
@@ -551,7 +551,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Create a flood support website ",
+            "name": "Create a  <br> flood support website ",
             "desc": "The municipality plans to create a community website that offers residents practical information and signposts resources to prepare for floods.  <br>  <br> Research shows that an easy access knowledge hub helps citizens getting knowledge and practical advices for flood preparation, receiving live updates and taking early actions to mitigate flood impacts, and finding support during crisis.  <br> ",
             "case_study": "CS6",
             "EP": "-1",
@@ -571,7 +571,7 @@ let game_data =
         },
         {
             "type": "FP",
-            "name": "Create a flooding digital twin",
+            "name": "Create a flooding  <br> digital twin",
             "desc": "The municipality will develop a flood modelling digital twin topredict flooding and evaulate possible emergency response measures to support flood crisis management. <br>  <br> By integrating real-world data with advanced simulation models, the digital twin will generate valuable insights. Its effectiveness will depend largely on the quality of the data collected and the accuracy of the modelling.",
             "case_study": "CS8",
             "EP": "-1",
@@ -591,7 +591,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Approve installation of cool roofs",
+            "name": "Approve installation of  <br> cool roofs",
             "desc": "Plans have been submitted to apply reflective paint to roofs, aiming to reduce indoor temperatures and mitigate heat in the surrounding environment. <br>  <br> This approach is generally a low-cost and non-invasive method for combating urban heat. However, its benefits are most significant in areas experiencing prolonged hot weather, and it may be counterproductive in locations where solar panels are installed.",
             "case_study": "CS1",
             "EP": "1",
@@ -611,7 +611,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Approve installation of firebreaks",
+            "name": "Approve installation of  <br> firebreaks",
             "desc": "Plans have been submitted to install fire breaks in the dry hinterland to help reduce the long-term damage caused by heat-induced forest and scrub fires. These fire breaks will contain fires and prevent them from spreading, which would reduce pressure on emergency services and help limit biodiversity loss over time. <br>  <br> However, there are costs associated with both the installation and ongoing maintenance of the fire breaks. Additionally, the initial clearing of trees and scrubland may have short-term negative impacts on local biodiversity.",
             "case_study": "",
             "EP": "1",
@@ -631,7 +631,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Approve installation of green walls",
+            "name": "Approve installation of  <br> green walls",
             "desc": "The municipality plans to install green walls on buildings throughout the town to reduce local temperatures by cooling both the buildings and surrounding streets, encouraging greater daytime use of public spaces and increased foot traffic to local shops. <br>  <br> However, green walls require a consistent water supply to keep them green. Without proper maintenance, the plants may die, creating both biological and fire hazards.",
             "case_study": "CS1",
             "EP": "1",
@@ -651,7 +651,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Construct a Miyawaki Forest",
+            "name": "Construct a  <br> Miyawaki Forest",
             "desc": "The municipality plans to install small, densely planted, fast-growing forests in urban areas. Roughly the size of a tennis court, these compact forests can be established in a variety of locations and offer many of the benefits of larger woodlands, helping reduce urban heat, support biodiversity, and strengthen residents' connection with nature. <br>  <br> However, the focus on rapid growth may lead to the selection of tree species that are more vulnerable to pests and disease, potentially affecting the long-term health and resilience of these green spaces.",
             "case_study": "CS1",
             "EP": "0",
@@ -671,7 +671,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Embrace heat tourism",
+            "name": "Embrace  <br> heat tourism",
             "desc": "The municipality is exploring the idea of capitalizing on its annual heatwave by branding the town as a destination for \u201cextreme heat tourism,\u201d aimed at attracting northern European tourists seeking high-temperature holiday experiences. <br>  <br> This strategy has the potential to boost tourism, stimulate the local economy, and create new jobs to support visitor services. However, prioritizing tourist infrastructure could risk shifting development focus away from the long-term needs of local residents.",
             "case_study": "",
             "EP": "4",
@@ -691,7 +691,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Create a heat knowledge base",
+            "name": "Create a heat  <br> knowledge base",
             "desc": "The municipality wants to develop a community website that offers residents practical information and support to help them cope with heatwaves and extreme heat events. <br>  <br> Research indicates that people often make poor decisions when dealing with extreme heat, particularly in cases of heat stress or heatstroke. By providing accessible, reliable information, the website can help residents make better-informed choices and respond more effectively during high-temperature conditions.",
             "case_study": "",
             "EP": "-1",
@@ -711,7 +711,7 @@ let game_data =
         },
         {
             "type": "HP",
-            "name": "Create a heat digital twin",
+            "name": "Create a heat  <br> digital twin",
             "desc": "The municipality will develop a heatwave modelling digital twin to assess the likelihood and potential impacts of extreme heat events. This tool will support improved preparedness and inform long-term planning for heat resilience. <br>  <br> By integrating real-world data with advanced simulation models, the digital twin will generate valuable insights. Its effectiveness, however, will depend heavily on the quality of the data collected and the accuracy of the modelling.",
             "case_study": "",
             "EP": "-1",
