@@ -365,7 +365,7 @@ class InterventionCardWidget extends  CardWidgetBase{
         heading_text.current_color= 'rgb(0,0,0)';
         heading_text.font_style = 'bold';
         heading_text.font_just = 'center';
-        heading_text.font_size = this.heading_font_size-1 * this.scale.y;
+        heading_text.font_size = (this.heading_font_size-1) * this.scale.y;
         heading_text.set_scale(this.scale);
         heading_text.set_offset(new Vector2(this.x, this.y));
 

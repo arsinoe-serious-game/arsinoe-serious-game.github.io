@@ -306,10 +306,10 @@ class ARSINOEGame extends AppBase
         let card_type = '';
         
         let card_list = [
-            'inteventions',
-        'events',
-        'personas',
-        //'single_intevention',
+         //   'inteventions',
+        //'events',
+        //'personas',
+        'single_intevention',
         //'single_event_side'
         ];
 
