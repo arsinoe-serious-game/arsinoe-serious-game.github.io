@@ -129,6 +129,36 @@ class CardWidgetBase extends LayerWidget {
 
         this.debug_layer(loc, layout_get_by_name(this.template, 'back') );
     }
+
+    print_heading_text(template, label, max_width=22){
+        let heading_text = new LayerWidgetText(layout_get_by_name(template, 'header_text'));
+        heading_text.current_color= 'rgb(0,0,0)';
+        heading_text.font_style = 'bold';
+        heading_text.font_just = 'center';
+        heading_text.font_size = (this.heading_font_size-1) * this.scale.y;
+        heading_text.set_scale(this.scale);
+        heading_text.set_offset(new Vector2(this.x, this.y));
+
+        heading_text.label = label.toUpperCase();
+
+        let result = heading_text.get_printing_extents();
+
+        if (result.h > heading_text.font_size){
+            let lines = Math.floor((result.h+0.5) / heading_text.font_size);
+
+            if(lines ===2) {
+                heading_text.offset.y -= heading_text.font_size/2;
+            }
+
+            if(lines ===3) {
+                heading_text.offset.y -= heading_text.font_size * 1.5;
+            }
+        }
+
+        heading_text.draw();
+
+    }
+
 }
 
 class EventCardWidget  extends CardWidgetBase {
@@ -140,7 +170,8 @@ class EventCardWidget  extends CardWidgetBase {
 
     init(){
         super.init();
-        this.content_font_size = 16;
+        this.content_font_size = 14;
+        this.heading_font_size = 22;
 
         this.card_set_name = 'events';
         this.card_set = appInst.model.get_event_cards();
@@ -156,9 +187,7 @@ class EventCardWidget  extends CardWidgetBase {
         this.qr_code_link.draw(loc);
         this.arsinoe_logo.draw(loc);
 
-
-        let title = this.card_info['name'].toUpperCase();
-        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
+        this.print_heading_text(template, this.card_info['name'].toUpperCase());
 
         //right side
         {
@@ -229,7 +258,8 @@ class EventCardWidget  extends CardWidgetBase {
         //this.qr_code_link.draw(loc);
         //this.arsinoe_logo.draw(loc);
 
-        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        let src = layout_get_by_name(template,'arsinoe_logo');
+        let cws_logo = new LayerWidgetClickableImage(src);
         cws_logo.set_scale(this.scale);
         cws_logo.set_offset(new Vector2(this.x, this.y));
         cws_logo.image = appInst.view.get_image('cws_logo');
@@ -241,10 +271,7 @@ class EventCardWidget  extends CardWidgetBase {
         cws_qr.image = appInst.view.get_image('cws_qr');
         cws_qr.draw();
 
-
-        let title = this.card_info['outcome-heading'].toUpperCase();
-        this.debug_text(loc, layout_get_by_name(template,'header_text'), this.heading_font_size*this.scale.y, title, 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
-
+        this.print_heading_text(template, this.card_info['name'].toUpperCase());
 
         let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
         floating_text.font_just = 'left';
@@ -361,36 +388,6 @@ class InterventionCardWidget extends  CardWidgetBase{
     update() {
         super.update();
     }
-
-    print_heading_text(template, label, max_width=22){
-        let heading_text = new LayerWidgetText(layout_get_by_name(template, 'header_text'));
-        heading_text.current_color= 'rgb(0,0,0)';
-        heading_text.font_style = 'bold';
-        heading_text.font_just = 'center';
-        heading_text.font_size = (this.heading_font_size-1) * this.scale.y;
-        heading_text.set_scale(this.scale);
-        heading_text.set_offset(new Vector2(this.x, this.y));
-
-        heading_text.label = label.toUpperCase();
-
-        let result = heading_text.get_printing_extents();
-
-        if (result.h > heading_text.font_size){
-            let lines = Math.floor((result.h+0.5) / heading_text.font_size);
-
-            if(lines ===2) {
-                heading_text.offset.y -= heading_text.font_size/2;
-            }
-
-            if(lines ===3) {
-                heading_text.offset.y -= heading_text.font_size * 1.5;
-            }
-        }
-
-        heading_text.draw();
-
-    }
-
 
     draw_front(){
         let loc = new Vector2(this.x, this.y);

@@ -309,8 +309,9 @@ class ARSINOEGame extends AppBase
          //   'inteventions',
         //'events',
         //'personas',
+        'single_persona',
         //'single_intevention',
-        'single_event_side'
+        //'single_event_side'
         ];
 
         let isDone = false;
@@ -354,6 +355,11 @@ class ARSINOEGame extends AppBase
                     }
 
                     if (card_type === 'single_intevention') {
+                        template = layout_get_by_name(layout, 'print_single_card');
+                        cards_per_page = 1;
+                    }
+
+                    if (card_type === 'single_persona') {
                         template = layout_get_by_name(layout, 'print_single_card');
                         cards_per_page = 1;
                     }
@@ -403,6 +409,11 @@ class ARSINOEGame extends AppBase
                     if (card_type === 'single_intevention') {
                         max_cards = appInst.model.get_intervention_cards().length;
                         widget_list['card_0'] = new InterventionCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
+                    }
+
+                    if (card_type === 'single_persona') {
+                        max_cards = appInst.model.get_persona_cards().length;
+                        widget_list['card_0'] = new PersonaCardWidget(layer_to_rect(layout_get_by_name(template, 'card_front')));
                     }
 
                     if (card_type === 'single_event_side') {
