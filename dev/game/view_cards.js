@@ -29,7 +29,6 @@ class CardWidgetBase extends LayerWidget {
         this.qr_code_link.set_scale(this.scale);
         this.qr_code_link.set_offset(new Vector2(this.x, this.y));
 
-
         this.side = 'front';
 
         this.heading_font_size = 20;
@@ -101,7 +100,10 @@ class CardWidgetBase extends LayerWidget {
     }
 
     draw_bg(loc){
-        this.debug_rect(loc, layout_get_by_name(this.template,'bg'), this.get_bg_col() );
+        let r = layout_get_by_name(this.template,'bg');
+        let c = this.get_bg_col();
+
+        this.debug_rect(loc, r,c);
     }
 
     draw(){
@@ -401,7 +403,7 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         this.print_heading_text(template, this.card_info['name'].toUpperCase());
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index) );
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index),  );
 
 
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
@@ -425,8 +427,8 @@ class InterventionCardWidget extends  CardWidgetBase{
         for(let i=0;i<5;i++) {
             let c = layout_get_by_name(template,'protection_table')['children']['p' + i.toString()];
 
-            this.debug_rect(loc, c['children']['heading'], this.get_type_col(headings[i]));
-            this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)');
+            this.debug_rect(loc, c['children']['heading'], this.get_type_col(headings[i]), '#000000');
+            this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)', '#000000');
 
             this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', appInst.view.get_font_family(), 'bold');
             this.debug_text(pos, c['children']['value'], 20, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');

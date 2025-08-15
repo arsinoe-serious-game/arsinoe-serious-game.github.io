@@ -51,40 +51,10 @@ let layout =
                                 0
                             ],
                             "children": {
-                                "header_text": {
-                                    "offset": [
-                                        70,
-                                        10
-                                    ],
-                                    "size": [
-                                        261,
-                                        56
-                                    ]
-                                },
-                                "arsinoe_logo": {
-                                    "offset": [
-                                        10,
-                                        10
-                                    ],
-                                    "size": [
-                                        56,
-                                        56
-                                    ]
-                                },
-                                "qr_code": {
-                                    "offset": [
-                                        330,
-                                        -1
-                                    ],
-                                    "size": [
-                                        70,
-                                        71
-                                    ]
-                                },
                                 "image_loc": {
                                     "offset": [
                                         9,
-                                        70
+                                        72
                                     ],
                                     "size": [
                                         381,
@@ -94,11 +64,11 @@ let layout =
                                 "floating_text": {
                                     "offset": [
                                         9,
-                                        255
+                                        257
                                     ],
                                     "size": [
                                         381,
-                                        260
+                                        275
                                     ]
                                 },
                                 "protection_table": {
@@ -124,7 +94,7 @@ let layout =
                                                 "heading": {
                                                     "offset": [
                                                         9,
-                                                        535
+                                                        540
                                                     ],
                                                     "size": [
                                                         70,
@@ -134,7 +104,7 @@ let layout =
                                                 "value": {
                                                     "offset": [
                                                         9,
-                                                        569
+                                                        574
                                                     ],
                                                     "size": [
                                                         70,
@@ -156,7 +126,7 @@ let layout =
                                                 "heading": {
                                                     "offset": [
                                                         87,
-                                                        535
+                                                        540
                                                     ],
                                                     "size": [
                                                         70,
@@ -166,7 +136,7 @@ let layout =
                                                 "value": {
                                                     "offset": [
                                                         87,
-                                                        569
+                                                        574
                                                     ],
                                                     "size": [
                                                         70,
@@ -188,7 +158,7 @@ let layout =
                                                 "heading": {
                                                     "offset": [
                                                         165,
-                                                        535
+                                                        540
                                                     ],
                                                     "size": [
                                                         70,
@@ -198,7 +168,7 @@ let layout =
                                                 "value": {
                                                     "offset": [
                                                         165,
-                                                        569
+                                                        574
                                                     ],
                                                     "size": [
                                                         70,
@@ -220,7 +190,7 @@ let layout =
                                                 "heading": {
                                                     "offset": [
                                                         243,
-                                                        535
+                                                        540
                                                     ],
                                                     "size": [
                                                         70,
@@ -230,7 +200,7 @@ let layout =
                                                 "value": {
                                                     "offset": [
                                                         243,
-                                                        569
+                                                        574
                                                     ],
                                                     "size": [
                                                         70,
@@ -252,7 +222,7 @@ let layout =
                                                 "heading": {
                                                     "offset": [
                                                         321,
-                                                        534
+                                                        539
                                                     ],
                                                     "size": [
                                                         69,
@@ -262,7 +232,7 @@ let layout =
                                                 "value": {
                                                     "offset": [
                                                         321,
-                                                        569
+                                                        574
                                                     ],
                                                     "size": [
                                                         69,
@@ -270,6 +240,48 @@ let layout =
                                                     ]
                                                 }
                                             }
+                                        }
+                                    }
+                                },
+                                "heading": {
+                                    "offset": [
+                                        0,
+                                        0
+                                    ],
+                                    "size": [
+                                        0,
+                                        0
+                                    ],
+                                    "children": {
+                                        "qr_code": {
+                                            "offset": [
+                                                330,
+                                                0
+                                            ],
+                                            "size": [
+                                                70,
+                                                70
+                                            ]
+                                        },
+                                        "arsinoe_logo": {
+                                            "offset": [
+                                                0,
+                                                0
+                                            ],
+                                            "size": [
+                                                70,
+                                                70
+                                            ]
+                                        },
+                                        "header_text": {
+                                            "offset": [
+                                                70,
+                                                0
+                                            ],
+                                            "size": [
+                                                261,
+                                                70
+                                            ]
                                         }
                                     }
                                 }
@@ -315,35 +327,47 @@ let layout =
                                         480
                                     ]
                                 },
-                                "header_text": {
+                                "heading": {
                                     "offset": [
-                                        70,
-                                        10
+                                        0,
+                                        0
                                     ],
                                     "size": [
-                                        261,
-                                        56
-                                    ]
-                                },
-                                "arsinoe_logo": {
-                                    "offset": [
-                                        10,
-                                        10
+                                        0,
+                                        0
                                     ],
-                                    "size": [
-                                        56,
-                                        56
-                                    ]
-                                },
-                                "qr_code": {
-                                    "offset": [
-                                        330,
-                                        -1
-                                    ],
-                                    "size": [
-                                        70,
-                                        71
-                                    ]
+                                    "children": {
+                                        "qr_code": {
+                                            "offset": [
+                                                330,
+                                                0
+                                            ],
+                                            "size": [
+                                                70,
+                                                70
+                                            ]
+                                        },
+                                        "arsinoe_logo": {
+                                            "offset": [
+                                                0,
+                                                0
+                                            ],
+                                            "size": [
+                                                70,
+                                                70
+                                            ]
+                                        },
+                                        "header_text": {
+                                            "offset": [
+                                                70,
+                                                0
+                                            ],
+                                            "size": [
+                                                261,
+                                                70
+                                            ]
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -3023,14 +3047,24 @@ let layout =
                                 1200
                             ]
                         },
-                        "card_front": {
+                        "bleed_bg": {
                             "offset": [
-                                50,
-                                50
+                                22,
+                                25
                             ],
                             "size": [
-                                780,
-                                1100
+                                831,
+                                1150
+                            ]
+                        },
+                        "card_front": {
+                            "offset": [
+                                100,
+                                100
+                            ],
+                            "size": [
+                                680,
+                                1000
                             ]
                         }
                     }

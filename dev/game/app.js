@@ -309,8 +309,8 @@ class ARSINOEGame extends AppBase
          //   'inteventions',
         //'events',
         //'personas',
-        'single_intevention',
-        //'single_event_side'
+        //'single_intevention',
+        'single_event_side'
         ];
 
         let isDone = false;
@@ -367,6 +367,14 @@ class ARSINOEGame extends AppBase
                     widget_list['bg'] = new LayerWidgetRect(layout_get_by_name(template, 'bg'));
                     widget_list['bg'].current_color = 'rgb(255,255,255)';
                     widget_list['bg'].draw_outline = false;
+
+                    let bg_bleed = layout_get_by_name(template, 'bleed_bg');
+
+                    if (bg_bleed !== null) {
+                        widget_list['bg2'] = new LayerWidgetRect(bg_bleed);
+                        widget_list['bg2'].current_color = 'rgb(255,0,0)';
+                        widget_list['bg2'].draw_outline = false;
+                    }
 
                     if (card_type === 'inteventions') {
                         max_cards = appInst.model.get_intervention_cards().length;
@@ -441,6 +449,11 @@ class ARSINOEGame extends AppBase
                         if (widget_list[card_id].visible) {
                             widget_list[card_id].set_display(current_side);
                             widget_list[card_id].set_card_info((current_card * cards_per_page) + lookup[i]);
+
+                            if ('bg2' in widget_list) {
+                                widget_list['bg2'].current_color = widget_list[card_id].get_bg_col();
+                                widget_list['bg2'].draw_outline = false;
+                            }
                         }
                     }
                 }
@@ -464,7 +477,7 @@ class ARSINOEGame extends AppBase
 
                 if (tick_count > 10) {
                     console.log();
-                    Canvas.save(card_type + '_' + current_side + '_' + current_card.toString() + '.png');
+                    Canvas.save(card_type + '_' + current_card.toString() + '_' + current_side + '.png');
                     tick_count = 0;
 
                     if (current_card < Math.floor((max_cards) / cards_per_page)) {

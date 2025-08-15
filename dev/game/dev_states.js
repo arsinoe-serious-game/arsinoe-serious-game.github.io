@@ -333,6 +333,7 @@ class GameState_AllInterventionPreview extends GameState_TestModeBase
         super();
 
         this.widget_list = {};
+        this.card_side = 'front';
 
         this.intervention_types = [ 'FP','DP','HP', 'BP'];
         this.current_intervention = 0;
@@ -363,20 +364,40 @@ class GameState_AllInterventionPreview extends GameState_TestModeBase
             }
         }
 
+        this.widget_list['next_intervention'] = new ButtonBase( layer_to_rect(layout_get_by_name(template,'button_next')));
+        this.widget_list['next_intervention'].set_active(true);
+        this.widget_list['next_intervention'].set_label('BACK');
+        this.widget_list['next_intervention'].label.font_size = 24;
+        this.widget_list['next_intervention'].label.font_family = appInst.view.get_font_family();
+        this.widget_list['next_intervention'].on_click = function (d) {
+            if (self.card_side == 'front'){
+                self.card_side = 'back';
+                self.widget_list['next_intervention'].set_label('FRONT');
+            }else {
+                self.card_side = 'front';
+                self.widget_list['next_intervention'].set_label('BACK');
+            }
+        };
+
+
     }
 
     client_update() {
         super.client_update();
     }
 
-    client_draw()
-    {
+    client_draw(){
         GAZCanvas.clip_start();
         //GAZCanvas.clip_rect(GAZCanvas.toScreenSpace(new Rect(10, 20, 800, 900)));
 
         GAZCanvas.clip_end();
 
         for (const [key, value] of Object.entries(this.widget_list)) {
+
+            if( this.widget_list[key] instanceof InterventionCardWidget){
+                this.widget_list[key].set_display(this.card_side);
+            }
+
             this.widget_list[key].draw();
         }
     }

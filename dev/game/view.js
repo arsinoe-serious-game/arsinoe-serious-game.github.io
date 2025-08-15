@@ -39,6 +39,9 @@ class LayerWidget extends  WidgetBase{
         this.card_info = undefined;
         this.scale = new Vector2(1,1);
         this.offset = new Vector2(0,0);
+
+        this.draw_outline = false;
+        this.current_color = 'rgb(255,255,255)';
     }
 
     isInMe(inVal)
@@ -93,10 +96,6 @@ class LayerWidget extends  WidgetBase{
             , layer['size'][1] * this.scale.y);
     }
 
-    debug_rect(loc, layer, col){
-        GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
-        GAZCanvas.Rect(this.layer_to_rect(loc,layer), 'rgb(0,0,0)', false, 1);
-    }
 
     debug_text(loc, layer, font_size, text, color, just, font, font_style){
 
@@ -138,6 +137,22 @@ class LayerWidget extends  WidgetBase{
         GAZCanvas.Sprite(image, r);
     }
 
+    debug_rect(loc, layer, col, outline_col){
+        GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
+
+        if (outline_col !== undefined){
+            GAZCanvas.Rect(this.layer_to_rect(loc, layer), outline_col, false, 1);
+        }
+
+        if(this.draw_outline === true) {
+            GAZCanvas.Rect(this.layer_to_rect(loc, layer), 'rgb(0,0,0)', false, 1);
+        }
+    }
+
+    draw(){
+        this.debug_rect(new Vector2(0,0),this.layer, this.current_color);
+    }
+
 }
 
 class LayerWidgetBase extends LayerWidget{
@@ -148,11 +163,6 @@ class LayerWidgetBase extends LayerWidget{
 
     update(){
         return false;
-    }
-
-    draw(){
-        let loc = new Vector2(0, 0);
-        this.debug_layer(loc, this.layer);
     }
 }
 
@@ -323,21 +333,7 @@ class LayerWidgetText extends LayerWidgetBase{
 class LayerWidgetRect extends LayerWidgetBase{
     constructor(layer) {
         super(layer);
-
-        this.current_color = 'rgb(255,255,255)';
         this.draw_outline = true;
-    }
-
-    debug_rect(loc, layer, col){
-        GAZCanvas.Rect(this.layer_to_rect(loc,layer), col);
-
-        if(this.draw_outline === true) {
-            GAZCanvas.Rect(this.layer_to_rect(loc, layer), 'rgb(0,0,0)', false, 1);
-        }
-    }
-
-    draw(){
-        this.debug_rect(new Vector2(0,0),this.layer, this.current_color);
     }
 }
 
@@ -380,6 +376,7 @@ class LayerWidgetClickableImage extends LayerWidgetClickable{
 
         this.image = undefined;
         this.aspect_correct = false;
+        this.draw_outline = true;
 
     }
 
