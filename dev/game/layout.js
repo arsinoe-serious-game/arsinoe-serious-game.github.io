@@ -14,11 +14,11 @@ let layout =
         "templates": {
             "offset": [
                 0,
-                -1
+                0
             ],
             "size": [
-                400,
-                601
+                700,
+                500
             ],
             "children": {
                 "template_intervention_card": {
@@ -376,11 +376,11 @@ let layout =
                 "template_persona_card": {
                     "offset": [
                         0,
-                        -1
+                        0
                     ],
                     "size": [
-                        400,
-                        601
+                        0,
+                        0
                     ],
                     "children": {
                         "bg": {
@@ -396,11 +396,11 @@ let layout =
                         "front": {
                             "offset": [
                                 0,
-                                -1
+                                0
                             ],
                             "size": [
-                                400,
-                                591
+                                0,
+                                0
                             ],
                             "children": {
                                 "image_loc": {
@@ -495,8 +495,8 @@ let layout =
                         0
                     ],
                     "size": [
-                        0,
-                        0
+                        700,
+                        500
                     ],
                     "children": {
                         "bg": {
@@ -511,18 +511,18 @@ let layout =
                         },
                         "front": {
                             "offset": [
-                                0,
-                                0
+                                29,
+                                87
                             ],
                             "size": [
-                                0,
-                                0
+                                634,
+                                383
                             ],
                             "children": {
                                 "image_loc": {
                                     "offset": [
-                                        29,
-                                        259
+                                        35,
+                                        250
                                     ],
                                     "size": [
                                         316,
@@ -532,7 +532,7 @@ let layout =
                                 "left_floating_text": {
                                     "offset": [
                                         29,
-                                        91
+                                        87
                                     ],
                                     "size": [
                                         316,
@@ -542,54 +542,12 @@ let layout =
                                 "right_floating_text": {
                                     "offset": [
                                         355,
-                                        92
+                                        88
                                     ],
                                     "size": [
-                                        315,
+                                        308,
                                         382
                                     ]
-                                },
-                                "header": {
-                                    "offset": [
-                                        0,
-                                        0
-                                    ],
-                                    "size": [
-                                        0,
-                                        0
-                                    ],
-                                    "children": {
-                                        "header_text": {
-                                            "offset": [
-                                                85,
-                                                31
-                                            ],
-                                            "size": [
-                                                529,
-                                                56
-                                            ]
-                                        },
-                                        "arsinoe_logo": {
-                                            "offset": [
-                                                29,
-                                                31
-                                            ],
-                                            "size": [
-                                                56,
-                                                56
-                                            ]
-                                        },
-                                        "qr_code": {
-                                            "offset": [
-                                                614,
-                                                31
-                                            ],
-                                            "size": [
-                                                56,
-                                                56
-                                            ]
-                                        }
-                                    }
                                 }
                             }
                         },
@@ -605,55 +563,13 @@ let layout =
                             "children": {
                                 "floating_text": {
                                     "offset": [
-                                        40,
-                                        108
+                                        30,
+                                        90
                                     ],
                                     "size": [
-                                        610,
+                                        641,
                                         305
                                     ]
-                                },
-                                "header": {
-                                    "offset": [
-                                        0,
-                                        0
-                                    ],
-                                    "size": [
-                                        0,
-                                        0
-                                    ],
-                                    "children": {
-                                        "header_text": {
-                                            "offset": [
-                                                116,
-                                                31
-                                            ],
-                                            "size": [
-                                                460,
-                                                70
-                                            ]
-                                        },
-                                        "arsinoe_logo": {
-                                            "offset": [
-                                                40,
-                                                31
-                                            ],
-                                            "size": [
-                                                70,
-                                                70
-                                            ]
-                                        },
-                                        "qr_code": {
-                                            "offset": [
-                                                580,
-                                                31
-                                            ],
-                                            "size": [
-                                                71,
-                                                71
-                                            ]
-                                        }
-                                    }
                                 },
                                 "footer": {
                                     "offset": [
@@ -667,18 +583,18 @@ let layout =
                                     "children": {
                                         "h2020_text": {
                                             "offset": [
-                                                120,
-                                                423
+                                                116,
+                                                422
                                             ],
                                             "size": [
-                                                530,
+                                                557,
                                                 42
                                             ]
                                         },
                                         "eu_flag": {
                                             "offset": [
-                                                40,
-                                                422
+                                                35,
+                                                421
                                             ],
                                             "size": [
                                                 80,
@@ -686,6 +602,48 @@ let layout =
                                             ]
                                         }
                                     }
+                                }
+                            }
+                        },
+                        "header": {
+                            "offset": [
+                                35,
+                                34
+                            ],
+                            "size": [
+                                631,
+                                56
+                            ],
+                            "children": {
+                                "header_text": {
+                                    "offset": [
+                                        89,
+                                        34
+                                    ],
+                                    "size": [
+                                        521,
+                                        56
+                                    ]
+                                },
+                                "arsinoe_logo": {
+                                    "offset": [
+                                        35,
+                                        34
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
+                                },
+                                "qr_code": {
+                                    "offset": [
+                                        610,
+                                        34
+                                    ],
+                                    "size": [
+                                        56,
+                                        56
+                                    ]
                                 }
                             }
                         }

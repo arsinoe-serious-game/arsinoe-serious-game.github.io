@@ -488,7 +488,11 @@ class ARSINOEGame extends AppBase
 
                 if (tick_count > 10) {
                     console.log();
-                    Canvas.save(card_type + '_' + current_card.toString() + '_' + current_side + '.png');
+                    let filename = 'serious_town_'+(card_type + '_' + current_card.toString() + '_' + current_side + '.png');
+                    filename = filename.replace('single_','');
+                    filename = filename.replace('_side','');
+
+                    Canvas.save(filename);
                     tick_count = 0;
 
                     if (current_card < Math.floor((max_cards) / cards_per_page)) {

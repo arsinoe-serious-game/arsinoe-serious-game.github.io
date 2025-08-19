@@ -187,7 +187,7 @@ class EventCardWidget  extends CardWidgetBase {
         this.qr_code_link.draw(loc);
         this.arsinoe_logo.draw(loc);
 
-        this.print_heading_text(template, this.card_info['name'].toUpperCase());
+        this.print_heading_text(this.template, this.card_info['name'].toUpperCase());
 
         //right side
         {
@@ -258,8 +258,7 @@ class EventCardWidget  extends CardWidgetBase {
         //this.qr_code_link.draw(loc);
         //this.arsinoe_logo.draw(loc);
 
-        let src = layout_get_by_name(template,'arsinoe_logo');
-        let cws_logo = new LayerWidgetClickableImage(src);
+        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
         cws_logo.set_scale(this.scale);
         cws_logo.set_offset(new Vector2(this.x, this.y));
         cws_logo.image = appInst.view.get_image('cws_logo');
@@ -271,11 +270,11 @@ class EventCardWidget  extends CardWidgetBase {
         cws_qr.image = appInst.view.get_image('cws_qr');
         cws_qr.draw();
 
-        this.print_heading_text(template, this.card_info['name'].toUpperCase());
+        this.print_heading_text(this.template, this.card_info['name'].toUpperCase());
 
         let floating_text = new LayerWidgetText(layout_get_by_name(this.template, 'floating_text'));
         floating_text.font_just = 'left';
-        floating_text.font_size = this.content_font_size * this.scale.y;
+        floating_text.font_size = (this.content_font_size-1) * this.scale.y;
         floating_text.font_style = '';
         floating_text.font_family = appInst.view.get_font_family();
         floating_text.font_color = 'rgb(0,0,0)';
