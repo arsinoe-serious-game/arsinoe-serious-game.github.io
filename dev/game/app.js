@@ -310,8 +310,8 @@ class ARSINOEGame extends AppBase
         //'events',
         //'personas',
         'single_persona',
-        //'single_intevention',
-        //'single_event_side'
+        'single_intevention',
+        'single_event_side'
         ];
 
         let isDone = false;

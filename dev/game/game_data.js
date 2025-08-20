@@ -492,7 +492,7 @@ let game_data =
         {
             "type": "FP",
             "name": "Approve nature-based <br> flood protection",
-            "desc": "The local university suggests to host a beaver-led land management project as a nature-based solution aimeing at reducing river flooding. The low-cost project positions the municipality as forward-thinking in its approach to climate resilience and environmental sustainability, which could generate valuable insights into natural flood mitigation. <br>  <br> However, as a research initiative, the project may not deliver the intended results. Also the introduction of beavers may have potential impacts on local ecosystems, including native flora and fauna.",
+            "desc": "The local university suggests to host a beaver-led land management project as a nature-based solution aimed at reducing river flooding. The low-cost project positions the municipality as forward-thinking in its approach to climate resilience and environmental sustainability, which could generate valuable insights into natural flood mitigation. <br>  <br> However, the beavers may dig burrows and channels that affect the stability of river banks, leading to erosions, damage to crops and property.",
             "case_study": "",
             "EP": "0",
             "BP": "3",
