@@ -26,6 +26,8 @@ class GameState_Testbed extends StateMachineState
             {'label':'View Event cards for printing', 'mode':GameState_EventPrint.label()},
             {'label':'View intervention cards by type', 'mode':GameState_InterventionPreview.label()},
             {'label':'View all intervention cards', 'mode':GameState_AllInterventionPreview.label()},
+            {'label':'View all rules cards', 'mode':GameState_AllRulesPreview.label()},
+
             {'label':'Play Game', 'mode':GameState_SelectPlayers.label()},
             {'label':'Print Cards', 'mode':undefined}
         ];

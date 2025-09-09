@@ -46,6 +46,8 @@ class ARSINOEGame extends AppBase
         this.stateMachine.addState(GameState_InterventionPreview.label(), new GameState_InterventionPreview());
         this.stateMachine.addState(GameState_AllInterventionPreview.label(), new GameState_AllInterventionPreview());
 
+         this.stateMachine.addState(GameState_AllRulesPreview.label(), new GameState_AllRulesPreview());
+
         //print cards
         this.stateMachine.addState(GameState_InterventionPrint.label(), new GameState_InterventionPrint());
         this.stateMachine.addState(GameState_PersonaPrint.label(), new GameState_PersonaPrint());

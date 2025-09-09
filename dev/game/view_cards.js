@@ -32,7 +32,7 @@ class CardWidgetBase extends LayerWidget {
         this.side = 'front';
 
         this.heading_font_size = 20;
-        this.content_font_size = 18;
+        this.content_font_size = 19;
 
         this.arsinoe_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
         this.arsinoe_logo.set_scale(this.scale);
@@ -438,7 +438,8 @@ class InterventionCardWidget extends  CardWidgetBase{
         let template = layout_get_by_name(this.template, 'back');
 
         //this.debug_layer(loc, template);
-        this.print_heading_text(template, this.card_info['outcome-heading'].toUpperCase(),25);
+        //this.heading_font_size = 18;
+        this.print_heading_text(template, this.card_info['outcome-heading'].toUpperCase(),1);
 
         //do description
         let t = template['children']['floating_text'];
@@ -506,13 +507,13 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         eu_flag.draw();
 
-        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
+        let cws_logo = new LayerWidgetClickableImage(layout_get_by_name(template,'arsinoe_logo'));
         cws_logo.set_scale(this.scale);
         cws_logo.set_offset(new Vector2(this.x, this.y));
         cws_logo.image = appInst.view.get_image('cws_logo');
         cws_logo.draw();
 
-        let cws_qr = new LayerWidgetClickableImage(layout_get_by_name(this.template,'qr_code'));
+        let cws_qr = new LayerWidgetClickableImage(layout_get_by_name(template,'qr_code'));
         cws_qr.set_scale(this.scale);
         cws_qr.set_offset(new Vector2(this.x, this.y));
         cws_qr.image = appInst.view.get_image('cws_qr');
