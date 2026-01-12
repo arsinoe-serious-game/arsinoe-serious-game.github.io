@@ -32,7 +32,7 @@ class CardWidgetBase extends LayerWidget {
         this.side = 'front';
 
         this.heading_font_size = 20;
-        this.content_font_size = 19;
+        this.content_font_size = 18;
 
         this.arsinoe_logo = new LayerWidgetClickableImage(layout_get_by_name(this.template,'arsinoe_logo'));
         this.arsinoe_logo.set_scale(this.scale);
@@ -378,6 +378,8 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         this.card_set = appInst.model.get_intervention_cards();
         this.card_set_name = 'interventions';
+
+        this.width_fudge = 10;
     }
 
     init(){
@@ -410,6 +412,9 @@ class InterventionCardWidget extends  CardWidgetBase{
         floating_text.font_size = this.content_font_size * this.scale.y;
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
+
+        //gareth - bring right edge in for last minute printing ;)
+        floating_text.w = floating_text.w - this.width_fudge;
 
 
         floating_text.draw();
@@ -463,6 +468,8 @@ class InterventionCardWidget extends  CardWidgetBase{
         floating_text.set_scale(this.scale);
         floating_text.set_offset(new Vector2(this.x, this.y));
 
+        //gareth - bring right edge in for last minute printing ;)
+        floating_text.w = floating_text.w - this.width_fudge;
 
         floating_text.label = '';
         for (let p = 0; p < 4; p++) {
