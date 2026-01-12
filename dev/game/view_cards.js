@@ -401,7 +401,7 @@ class InterventionCardWidget extends  CardWidgetBase{
 
         this.print_heading_text(template, this.card_info['name'].toUpperCase());
 
-        this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index),  );
+        this.debug_image(loc, layout_get_by_name(template,'image_loc'), appInst.view.get_card_image(this.card_set_name,this.card_index)  );
 
 
         let floating_text = new LayerWidgetText(layout_get_by_name(template, 'floating_text'));
@@ -422,14 +422,16 @@ class InterventionCardWidget extends  CardWidgetBase{
         //do protection racket
         let headings = ['EP','BP','FP','DP','HP'];
 
-        let pos = loc.clone();
-        pos.y +=1*this.scale.y;
+        let new_loc = loc.clone();
+        new_loc.y -=5;
+        let pos = new_loc.clone();
+        pos.y +=2*this.scale.y;
 
         for(let i=0;i<5;i++) {
             let c = layout_get_by_name(template,'protection_table')['children']['p' + i.toString()];
 
-            this.debug_rect(loc, c['children']['heading'], this.get_type_col(headings[i]), '#000000');
-            this.debug_rect(loc, c['children']['value'], 'rgb(210,210,210)', '#000000');
+            this.debug_rect(new_loc, c['children']['heading'], this.get_type_col(headings[i]), '#000000');
+            this.debug_rect(new_loc, c['children']['value'], 'rgb(210,210,210)', '#000000');
 
             this.debug_text(pos, c['children']['heading'], 20, headings[i], 'rgba(255,255,255)', 'center', appInst.view.get_font_family(), 'bold');
             this.debug_text(pos, c['children']['value'], 20, this.card_info[headings[i]], 'rgba(0,0,0)', 'center', appInst.view.get_font_family(), 'bold');
